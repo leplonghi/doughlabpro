@@ -10,6 +10,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Clock, FileText } from 'lucide-react';
+import { PizzaStyle } from "./PizzaStyleSelect";
 
 type FermentationMethod = 'direct' | 'poolish' | 'biga';
 
@@ -18,6 +19,7 @@ interface DoughRecipe {
   water: number;
   salt: number;
   yeast: number;
+  oil?: number; // azeite só na new york style
   poolish?: {
     flour: number;
     water: number;
@@ -33,9 +35,10 @@ interface DoughRecipe {
 interface DoughResultsProps {
   recipe: DoughRecipe;
   fermentationMethod: FermentationMethod;
+  pizzaStyle: PizzaStyle;
 }
 
-const DoughResults: React.FC<DoughResultsProps> = ({ recipe, fermentationMethod }) => {
+const DoughResults: React.FC<DoughResultsProps> = ({ recipe, fermentationMethod, pizzaStyle }) => {
   const formatValue = (value: number): string => {
     return value.toFixed(1).replace(/\.0$/, '');
   };
@@ -43,7 +46,9 @@ const DoughResults: React.FC<DoughResultsProps> = ({ recipe, fermentationMethod 
   return (
     <Card className="mb-8">
       <CardHeader className="bg-pizza-light bg-opacity-30">
-        <CardTitle>Sua Receita de Pizza Napolitana</CardTitle>
+        <CardTitle>
+          {pizzaStyle === "newyork" ? "Sua Receita de Pizza New York Style" : "Sua Receita de Pizza Napolitana"}
+        </CardTitle>
         <CardDescription>
           {fermentationMethod === 'direct'
             ? 'Método Direto'
@@ -125,6 +130,12 @@ const DoughResults: React.FC<DoughResultsProps> = ({ recipe, fermentationMethod 
                 <span className="result-label">Sal:</span>
                 <span className="result-value">{formatValue(recipe.salt)}g</span>
               </li>
+              {pizzaStyle === "newyork" && recipe.oil !== undefined && (
+                <li className="flex justify-between">
+                  <span className="result-label">Azeite:</span>
+                  <span className="result-value">{formatValue(recipe.oil)}g</span>
+                </li>
+              )}
               {fermentationMethod === 'direct' && (
                 <li className="flex justify-between">
                   <span className="result-label">Fermento:</span>

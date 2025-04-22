@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { 
   Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter 
@@ -17,6 +18,7 @@ interface DoughRecipe {
   water: number;
   salt: number;
   yeast: number;
+  oil?: number; // azeite só para newyork
   poolish?: {
     flour: number;
     water: number;
@@ -81,11 +83,15 @@ const DoughCalculator: React.FC = () => {
       yeast = (flour * 0.1) / 100;
     }
 
+    // calcular azeite somente para New York Style
+    const oil = pizzaStyle === "newyork" ? (flour * 2.5) / 100 : undefined;
+
     let newRecipe: DoughRecipe = {
       flour,
       water,
       salt,
-      yeast
+      yeast,
+      oil
     };
 
     if (fermentationMethod === 'poolish') {
@@ -98,6 +104,7 @@ const DoughCalculator: React.FC = () => {
         water: water - poolishWater,
         salt,
         yeast: 0,
+        oil,
         poolish: {
           flour: poolishFlour,
           water: poolishWater,
@@ -114,6 +121,7 @@ const DoughCalculator: React.FC = () => {
         water: water - bigaWater,
         salt,
         yeast: 0,
+        oil,
         biga: {
           flour: bigaFlour,
           water: bigaWater,
@@ -126,7 +134,10 @@ const DoughCalculator: React.FC = () => {
 
     toast({
       title: "Receita calculada",
-      description: "Sua receita de pizza napolitana foi calculada com sucesso!",
+      description:
+        pizzaStyle === "napoletana"
+          ? "Sua receita de pizza napolitana foi calculada com sucesso!"
+          : "Sua receita de pizza New York Style foi calculada com sucesso!",
     });
   };
 
@@ -174,7 +185,13 @@ const DoughCalculator: React.FC = () => {
         </CardFooter>
       </Card>
 
-      {recipe && <DoughResults recipe={recipe} fermentationMethod={fermentationMethod} />}
+      {recipe && (
+        <DoughResults 
+          recipe={recipe} 
+          fermentationMethod={fermentationMethod}
+          pizzaStyle={pizzaStyle}
+        />
+      )}
     </div>
   );
 };
