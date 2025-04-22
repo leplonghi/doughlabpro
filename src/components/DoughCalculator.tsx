@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { 
   Card, 
@@ -43,13 +44,20 @@ interface DoughRecipe {
 }
 
 const DoughCalculator: React.FC = () => {
+  const [fermentationMethod, setFermentationMethod] = useState<FermentationMethod>('direct');
   const [flour, setFlour] = useState<number>(1000);
+  // Sal ajustável: padrão 2,5% da farinha
+  const [salt, setSalt] = useState<number>(Math.round(1000 * 2.5 / 100));
   const [hydration, setHydration] = useState<number>(65);
   const [yeastType, setYeastType] = useState<YeastType>('dry');
-  const [fermentationMethod, setFermentationMethod] = useState<FermentationMethod>('direct');
   const [recipe, setRecipe] = useState<DoughRecipe | null>(null);
 
   const { toast } = useToast();
+
+  // Atualizar sal automaticamente ao mudar a farinha se o usuário ainda não mexeu
+  React.useEffect(() => {
+    setSalt(Math.round(flour * 2.5 / 100));
+  }, [flour]);
 
   const calculateRecipe = () => {
     if (!flour || flour <= 0) {
@@ -70,10 +78,18 @@ const DoughCalculator: React.FC = () => {
       return;
     }
 
+    if (!salt || salt < 1) {
+      toast({
+        title: "Sal inválido",
+        description: "Por favor, insira uma quantidade válida de sal.",
+        variant: "destructive"
+      });
+      return;
+    }
+
     const water = (flour * hydration) / 100;
-    const salt = (flour * 2.5) / 100;
     let yeast = 0;
-    
+
     if (yeastType === 'fresh') {
       yeast = (flour * 0.3) / 100;
     } else {
@@ -89,9 +105,9 @@ const DoughCalculator: React.FC = () => {
 
     if (fermentationMethod === 'poolish') {
       const poolishFlour = (flour * 30) / 100;
-      const poolishWater = poolishFlour; // 100% hydration
+      const poolishWater = poolishFlour; // 100% hidratação
       const poolishYeast = (poolishFlour * 0.1) / 100;
-      
+
       newRecipe = {
         flour: flour - poolishFlour,
         water: water - poolishWater,
@@ -107,7 +123,7 @@ const DoughCalculator: React.FC = () => {
       const bigaFlour = (flour * 50) / 100;
       const bigaWater = (bigaFlour * 50) / 100;
       const bigaYeast = (bigaFlour * 0.1) / 100;
-      
+
       newRecipe = {
         flour: flour - bigaFlour,
         water: water - bigaWater,
@@ -122,12 +138,15 @@ const DoughCalculator: React.FC = () => {
     }
 
     setRecipe(newRecipe);
-    
+
     toast({
       title: "Receita calculada",
       description: "Sua receita de pizza napolitana foi calculada com sucesso!",
     });
   };
+
+  // Percentual de sal
+  const saltPercent = flour > 0 ? ((salt / flour) * 100).toFixed(2) : "0.00";
 
   return (
     <div className="max-w-3xl mx-auto px-4">
@@ -135,24 +154,14 @@ const DoughCalculator: React.FC = () => {
         <CardHeader className="bg-pizza-light bg-opacity-40">
           <CardTitle className="text-2xl text-gray-800">Calculadora de Massa</CardTitle>
           <CardDescription>
-            Insira a quantidade de farinha e escolha seu método de fermentação preferido
+            Insira os ingredientes e escolha o método preferido de fermentação
           </CardDescription>
         </CardHeader>
         
         <CardContent className="pt-6">
           <div className="space-y-6">
-            <div className="space-y-2">
-              <Label htmlFor="flour">Quantidade de Farinha (gramas)</Label>
-              <Input 
-                id="flour" 
-                type="number" 
-                value={flour} 
-                onChange={(e) => setFlour(Number(e.target.value))}
-                min="0"
-                placeholder="Ex: 1000"
-              />
-            </div>
-            
+
+            {/* FERMENTAÇÃO -- AGORA PRIMEIRO ITEM */}
             <div className="space-y-3">
               <Label htmlFor="fermentation-method" className="text-lg font-semibold">
                 Método de Fermentação
@@ -221,6 +230,37 @@ const DoughCalculator: React.FC = () => {
               </div>
             </div>
 
+            {/* FARINHA */}
+            <div className="space-y-2">
+              <Label htmlFor="flour">Quantidade de Farinha (gramas)</Label>
+              <Input 
+                id="flour" 
+                type="number" 
+                value={flour} 
+                onChange={(e) => {
+                  setFlour(Number(e.target.value));
+                }}
+                min="0"
+                placeholder="Ex: 1000"
+              />
+            </div>
+            
+            {/* SAL */}
+            <div className="space-y-2">
+              <Label htmlFor="salt">Sal (gramas)
+                <span className="ml-2 text-xs text-gray-500">({saltPercent}% do peso da farinha)</span>
+              </Label>
+              <Input
+                id="salt"
+                type="number"
+                value={salt}
+                onChange={e => setSalt(Number(e.target.value))}
+                min="1"
+                className="w-32"
+              />
+            </div>
+
+            {/* HIDRATAÇÃO */}
             <div className="space-y-2">
               <Label htmlFor="hydration">Hidratação (%)</Label>
               <div className="flex items-center gap-4">
