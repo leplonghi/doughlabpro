@@ -8,7 +8,10 @@ import { useToast } from '@/hooks/use-toast';
 import DoughResults from './DoughResults';
 import FermentationMethodSelect from './FermentationMethodSelect';
 import DoughInputs from './DoughInputs';
-import PizzaStyleSelect, { PizzaStyle } from "./PizzaStyleSelect";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import { PizzaStyle } from "./PizzaStyleSelect";
+import { Wheat, Salt, OliveOil } from "lucide-react";
 
 type FermentationMethod = 'direct' | 'poolish' | 'biga';
 type YeastType = 'fresh' | 'dry';
@@ -154,14 +157,34 @@ const DoughCalculator: React.FC = () => {
         </CardHeader>
         
         <CardContent className="pt-6 space-y-6">
-          <PizzaStyleSelect
-            style={pizzaStyle}
-            onChange={setPizzaStyle}
-          />
+          <div className="space-y-2 mb-2">
+            <div className="flex items-center justify-between">
+              <div className="space-y-0.5">
+                <Label htmlFor="pizza-style" className="text-lg font-semibold">Estilo da Pizza</Label>
+                <p className="text-sm text-muted-foreground">
+                  {pizzaStyle === "napoletana" 
+                    ? "Massa macia, leve e assada em alta temperatura"
+                    : "Massa mais grossa, elástica, com crosta crocante"
+                  }
+                </p>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Label htmlFor="pizza-style" className="text-sm">Napolitana</Label>
+                <Switch
+                  id="pizza-style"
+                  checked={pizzaStyle === "newyork"}
+                  onCheckedChange={(checked) => setPizzaStyle(checked ? "newyork" : "napoletana")}
+                />
+                <Label htmlFor="pizza-style" className="text-sm">New York</Label>
+              </div>
+            </div>
+          </div>
+          
           <FermentationMethodSelect
             fermentationMethod={fermentationMethod}
             onChange={setFermentationMethod}
           />
+          
           <DoughInputs
             flour={flour}
             setFlour={setFlour}
