@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { 
   Card, 
@@ -9,7 +8,7 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { Clock, FileText, Wheat, Droplet, Flask } from 'lucide-react';
+import { Clock, FileText, Wheat, Droplet, FlaskConical } from 'lucide-react';
 import { PizzaStyle } from "./PizzaStyleSelect";
 
 type FermentationMethod = 'direct' | 'poolish' | 'biga';
@@ -76,7 +75,7 @@ const DoughResults: React.FC<DoughResultsProps> = ({ recipe, fermentationMethod,
                   <span className="result-value">{formatValue(recipe.poolish.water)}g</span>
                 </li>
                 <li className="flex justify-between">
-                  <span className="result-label flex items-center gap-2"><Flask size={16} /> Fermento:</span>
+                  <span className="result-label flex items-center gap-2"><FlaskConical size={16} /> Fermento:</span>
                   <span className="result-value">{formatValue(recipe.poolish.yeast)}g</span>
                 </li>
               </ul>
@@ -102,7 +101,7 @@ const DoughResults: React.FC<DoughResultsProps> = ({ recipe, fermentationMethod,
                   <span className="result-value">{formatValue(recipe.biga.water)}g</span>
                 </li>
                 <li className="flex justify-between">
-                  <span className="result-label flex items-center gap-2"><Flask size={16} /> Fermento:</span>
+                  <span className="result-label flex items-center gap-2"><FlaskConical size={16} /> Fermento:</span>
                   <span className="result-value">{formatValue(recipe.biga.yeast)}g</span>
                 </li>
               </ul>
@@ -136,9 +135,9 @@ const DoughResults: React.FC<DoughResultsProps> = ({ recipe, fermentationMethod,
                   <span className="result-value">{formatValue(recipe.oil)}g</span>
                 </li>
               )}
-              {fermentationMethod === 'direct' && (
+              {(fermentationMethod === 'direct') && (
                 <li className="flex justify-between">
-                  <span className="result-label flex items-center gap-2"><Flask size={16} /> Fermento:</span>
+                  <span className="result-label flex items-center gap-2"><FlaskConical size={16} /> Fermento:</span>
                   <span className="result-value">{formatValue(recipe.yeast)}g</span>
                 </li>
               )}

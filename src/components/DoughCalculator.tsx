@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { 
   Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter 
@@ -11,7 +10,7 @@ import DoughInputs from './DoughInputs';
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { PizzaStyle } from "./PizzaStyleSelect";
-import { Wheat, Droplet, Flask } from "lucide-react";
+import { Wheat, Droplet, FlaskConical } from "lucide-react";
 
 type FermentationMethod = 'direct' | 'poolish' | 'biga';
 type YeastType = 'fresh' | 'dry';
