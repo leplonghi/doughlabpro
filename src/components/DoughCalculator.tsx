@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { 
   Card, 
@@ -154,6 +153,37 @@ const DoughCalculator: React.FC = () => {
               />
             </div>
             
+            <div className="space-y-3">
+              <Label htmlFor="fermentation-method" className="text-lg font-semibold">
+                Método de Fermentação
+              </Label>
+              <Select 
+                value={fermentationMethod}
+                onValueChange={(value) => setFermentationMethod(value as FermentationMethod)}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Selecione um método" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="direct">Direto</SelectItem>
+                  <SelectItem value="poolish">Poolish</SelectItem>
+                  <SelectItem value="biga">Biga</SelectItem>
+                </SelectContent>
+              </Select>
+              
+              <div className="p-3 bg-gray-50 rounded-md text-sm mt-2">
+                {fermentationMethod === 'direct' && (
+                  <p>Método direto: todos os ingredientes são misturados de uma só vez. Tempo de fermentação: 8-24h.</p>
+                )}
+                {fermentationMethod === 'poolish' && (
+                  <p>Poolish: pré-fermento líquido (100% hidratação) usando 30% da farinha. Fermentação prévia: 8-16h.</p>
+                )}
+                {fermentationMethod === 'biga' && (
+                  <p>Biga: pré-fermento firme (50% hidratação) usando 50% da farinha. Fermentação prévia: 12-24h.</p>
+                )}
+              </div>
+            </div>
+
             <div className="space-y-2">
               <Label htmlFor="hydration">Hidratação (%)</Label>
               <div className="flex items-center gap-4">
@@ -203,37 +233,6 @@ const DoughCalculator: React.FC = () => {
                   <Label htmlFor="dry">Fermento Seco (0,1%)</Label>
                 </div>
               </RadioGroup>
-            </div>
-
-            <Separator className="my-4" />
-            
-            <div className="space-y-3">
-              <Label htmlFor="fermentation-method">Método de Fermentação</Label>
-              <Select 
-                value={fermentationMethod}
-                onValueChange={(value) => setFermentationMethod(value as FermentationMethod)}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Selecione um método" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="direct">Direto</SelectItem>
-                  <SelectItem value="poolish">Poolish</SelectItem>
-                  <SelectItem value="biga">Biga</SelectItem>
-                </SelectContent>
-              </Select>
-              
-              <div className="p-3 bg-gray-50 rounded-md text-sm mt-2">
-                {fermentationMethod === 'direct' && (
-                  <p>Método direto: todos os ingredientes são misturados de uma só vez. Tempo de fermentação: 8-24h.</p>
-                )}
-                {fermentationMethod === 'poolish' && (
-                  <p>Poolish: pré-fermento líquido (100% hidratação) usando 30% da farinha. Fermentação prévia: 8-16h.</p>
-                )}
-                {fermentationMethod === 'biga' && (
-                  <p>Biga: pré-fermento firme (50% hidratação) usando 50% da farinha. Fermentação prévia: 12-24h.</p>
-                )}
-              </div>
             </div>
           </div>
         </CardContent>
