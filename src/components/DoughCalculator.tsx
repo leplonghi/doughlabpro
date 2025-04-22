@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { 
   Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter 
@@ -12,6 +11,9 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { PizzaStyle } from "./PizzaStyleSelect";
 import { Wheat, Droplet, FlaskConical } from "lucide-react";
+import DoughCalculatorHeader from './DoughCalculatorHeader';
+import DoughCalculateButton from './DoughCalculateButton';
+import PizzaStyleSwitch from './PizzaStyleSwitch';
 
 type FermentationMethod = 'direct' | 'poolish' | 'biga';
 type YeastType = 'fresh' | 'dry';
@@ -150,42 +152,16 @@ const DoughCalculator: React.FC = () => {
   return (
     <div className="max-w-3xl mx-auto px-4">
       <Card className="mb-8">
-        <CardHeader className="bg-pizza-light bg-opacity-40">
-          <CardTitle className="text-2xl text-gray-800">Calculadora de Massa</CardTitle>
-          <CardDescription>
-            Insira os ingredientes e escolha o método preferido de fermentação
-          </CardDescription>
-        </CardHeader>
-        
+        <DoughCalculatorHeader />
         <CardContent className="pt-6 space-y-6">
-          <div className="space-y-2 mb-2">
-            <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <Label htmlFor="pizza-style" className="text-lg font-semibold">Estilo da Pizza</Label>
-                <p className="text-sm text-muted-foreground">
-                  {pizzaStyle === "napoletana" 
-                    ? "Massa macia, leve e assada em alta temperatura"
-                    : "Massa mais grossa, elástica, com crosta crocante"
-                  }
-                </p>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Label htmlFor="pizza-style" className="text-sm">Napolitana</Label>
-                <Switch
-                  id="pizza-style"
-                  checked={pizzaStyle === "newyork"}
-                  onCheckedChange={(checked) => setPizzaStyle(checked ? "newyork" : "napoletana")}
-                />
-                <Label htmlFor="pizza-style" className="text-sm">New York</Label>
-              </div>
-            </div>
-          </div>
-          
+          <PizzaStyleSwitch
+            pizzaStyle={pizzaStyle}
+            setPizzaStyle={setPizzaStyle}
+          />
           <FermentationMethodSelect
             fermentationMethod={fermentationMethod}
             onChange={setFermentationMethod}
           />
-          
           <DoughInputs
             flour={flour}
             setFlour={setFlour}
@@ -198,15 +174,7 @@ const DoughCalculator: React.FC = () => {
             setYeastType={setYeastType}
           />
         </CardContent>
-        
-        <CardFooter className="bg-gray-50">
-          <Button 
-            onClick={calculateRecipe} 
-            className="w-full bg-pizza hover:bg-pizza-dark"
-          >
-            Calcular Receita
-          </Button>
-        </CardFooter>
+        <DoughCalculateButton onClick={calculateRecipe} />
       </Card>
 
       {recipe && (
