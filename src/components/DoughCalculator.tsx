@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { 
   Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter 
@@ -8,6 +7,7 @@ import { useToast } from '@/hooks/use-toast';
 import DoughResults from './DoughResults';
 import FermentationMethodSelect from './FermentationMethodSelect';
 import DoughInputs from './DoughInputs';
+import PizzaStyleSelect, { PizzaStyle } from "./PizzaStyleSelect";
 
 type FermentationMethod = 'direct' | 'poolish' | 'biga';
 type YeastType = 'fresh' | 'dry';
@@ -30,11 +30,12 @@ interface DoughRecipe {
 }
 
 const DoughCalculator: React.FC = () => {
-  const [fermentationMethod, setFermentationMethod] = useState<FermentationMethod>('direct');
+  const [pizzaStyle, setPizzaStyle] = useState<PizzaStyle>("napoletana");
+  const [fermentationMethod, setFermentationMethod] = useState<FermentationMethod>("direct");
   const [flour, setFlour] = useState<number>(1000);
   const [salt, setSalt] = useState<number>(Math.round(1000 * 2.5 / 100));
   const [hydration, setHydration] = useState<number>(65);
-  const [yeastType, setYeastType] = useState<YeastType>('dry');
+  const [yeastType, setYeastType] = useState<YeastType>("dry");
   const [recipe, setRecipe] = useState<DoughRecipe | null>(null);
 
   const { toast } = useToast();
@@ -142,6 +143,10 @@ const DoughCalculator: React.FC = () => {
         </CardHeader>
         
         <CardContent className="pt-6 space-y-6">
+          <PizzaStyleSelect
+            style={pizzaStyle}
+            onChange={setPizzaStyle}
+          />
           <FermentationMethodSelect
             fermentationMethod={fermentationMethod}
             onChange={setFermentationMethod}
