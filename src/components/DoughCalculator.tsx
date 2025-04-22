@@ -173,13 +173,50 @@ const DoughCalculator: React.FC = () => {
               
               <div className="p-3 bg-gray-50 rounded-md text-sm mt-2">
                 {fermentationMethod === 'direct' && (
-                  <p>Método direto: todos os ingredientes são misturados de uma só vez. Tempo de fermentação: 8-24h.</p>
+                  <>
+                    <p><b>Método Direto</b>: todos os ingredientes são misturados de uma só vez.</p>
+                    <ul className="list-disc ml-5 mt-2 text-gray-600">
+                      <li>Tempo de fermentação: 8-24h (ambiente).</li>
+                      <li>Massa desenvolve sabor suave.</li>
+                    </ul>
+                  </>
                 )}
                 {fermentationMethod === 'poolish' && (
-                  <p>Poolish: pré-fermento líquido (100% hidratação) usando 30% da farinha. Fermentação prévia: 8-16h.</p>
+                  <>
+                    <p><b>Poolish</b>: faz-se um pré-fermento líquido usando 30% da farinha total (100% hidratação).</p>
+                    <ul className="list-disc ml-5 mt-2 text-gray-600">
+                      <li>Prepare o poolish 8-16h antes.</li>
+                      <li>Adicione o poolish à massa final.</li>
+                      <li>Massa ganha leveza, aroma e textura especial.</li>
+                    </ul>
+                  </>
                 )}
                 {fermentationMethod === 'biga' && (
-                  <p>Biga: pré-fermento firme (50% hidratação) usando 50% da farinha. Fermentação prévia: 12-24h.</p>
+                  <>
+                    <p><b>Biga</b>: faz-se um pré-fermento firme usando 50% da farinha (50% hidratação).</p>
+                    <ul className="list-disc ml-5 mt-2 text-gray-600">
+                      <li>Prepare a biga 12-24h antes.</li>
+                      <li>Adicione a biga à massa final.</li>
+                      <li>Massa mais resistente e com aroma intenso.</li>
+                    </ul>
+                  </>
+                )}
+              </div>
+
+              <div>
+                {fermentationMethod === 'poolish' && (
+                  <div className="mt-2 p-3 bg-yellow-50 rounded">
+                    <b>Poolish:</b> Utilize fermento seco (0,1%) ou fresco (0,3%) apenas no pré-fermento.<br />
+                    Misture 30% da farinha + mesma quantidade de água + fermento.<br />
+                    <span className="text-xs text-gray-500">Depois de pronto, adicione o poolish à massa final.</span>
+                  </div>
+                )}
+                {fermentationMethod === 'biga' && (
+                  <div className="mt-2 p-3 bg-yellow-50 rounded">
+                    <b>Biga:</b> Misture 50% da farinha + 50% de água + fermento.<br />
+                    Sove e deixe fermentar antes de usar na massa final.<br />
+                    <span className="text-xs text-gray-500">Ideal para quem busca textura mais rústica e sabor profundo.</span>
+                  </div>
                 )}
               </div>
             </div>
