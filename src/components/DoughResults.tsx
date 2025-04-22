@@ -130,12 +130,11 @@ const DoughResults: React.FC<DoughResultsProps> = ({ recipe, fermentationMethod,
                 <span className="result-label flex items-center gap-2">🧂 Sal:</span>
                 <span className="result-value">{formatValue(recipe.salt)}g</span>
               </li>
-              {pizzaStyle === "newyork" && recipe.oil !== undefined && (
-                <li className="flex justify-between">
-                  <span className="result-label flex items-center gap-2">🫒 Azeite:</span>
-                  <span className="result-value">{formatValue(recipe.oil)}g</span>
-                </li>
-              )}
+              {/* Exibe azeite sempre, mesmo para napolitana (valor será 0) */}
+              <li className="flex justify-between">
+                <span className="result-label flex items-center gap-2">🫒 Azeite:</span>
+                <span className="result-value">{formatValue(recipe.oil ?? 0)}g</span>
+              </li>
               {(fermentationMethod === 'direct') && (
                 <li className="flex justify-between">
                   <span className="result-label flex items-center gap-2"><FlaskConical size={16} /> Fermento:</span>
@@ -192,3 +191,4 @@ const DoughResults: React.FC<DoughResultsProps> = ({ recipe, fermentationMethod,
 };
 
 export default DoughResults;
+

@@ -88,8 +88,7 @@ const DoughCalculator: React.FC = () => {
       yeast = (flour * 0.1) / 100;
     }
 
-    // calcular azeite somente para New York Style
-    const oil = pizzaStyle === "newyork" ? (flour * 2.5) / 100 : undefined;
+    const oil = pizzaStyle === "napoletana" ? 0 : (flour * 2.5) / 100;
     console.log("Pizza style:", pizzaStyle, "Oil calculated:", oil);
 
     let newRecipe: DoughRecipe = {
