@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,18 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				pizza: {
+					DEFAULT: '#ea384d',
+					light: '#fef7cd',
+					dark: '#8B0000',
+					accent: '#3A5311',
+					cream: '#FFF8E1',
+				},
+			},
+			fontFamily: {
+				serif: ['Playfair Display', 'serif'],
+				sans: ['Nunito Sans', 'sans-serif'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -89,7 +101,10 @@ export default {
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out'
-			}
+			},
+			backgroundImage: {
+				'flour-texture': "url('/flour-texture.jpg')",
+			},
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
