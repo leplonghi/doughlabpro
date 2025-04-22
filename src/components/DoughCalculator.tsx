@@ -11,7 +11,7 @@ import DoughInputs from './DoughInputs';
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { PizzaStyle } from "./PizzaStyleSelect";
-import { Wheat, Salt, OliveOil } from "lucide-react";
+import { Wheat, Droplet, Flask } from "lucide-react";
 
 type FermentationMethod = 'direct' | 'poolish' | 'biga';
 type YeastType = 'fresh' | 'dry';
