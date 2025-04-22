@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { 
   Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter 
@@ -87,6 +88,7 @@ const DoughCalculator: React.FC = () => {
 
     // calcular azeite somente para New York Style
     const oil = pizzaStyle === "newyork" ? (flour * 2.5) / 100 : undefined;
+    console.log("Pizza style:", pizzaStyle, "Oil calculated:", oil);
 
     let newRecipe: DoughRecipe = {
       flour,
