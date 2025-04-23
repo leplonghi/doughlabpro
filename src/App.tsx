@@ -35,54 +35,55 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   return <>{children}</>;
 };
 
-// Separate the routes into their own component to avoid the React context issues
-const AppRoutes = () => {
+// AppContent component to use the AuthProvider context
+const AppContent = () => {
   return (
-    <AuthProvider>
-      <>
-        <Navigation />
-        <Toaster />
-        <Sonner />
-        <Routes>
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/" element={
-            <ProtectedRoute>
-              <Index />
-            </ProtectedRoute>
-          } />
-          <Route path="/sauce" element={
-            <ProtectedRoute>
-              <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
-                <Sauce />
-              </Suspense>
-            </ProtectedRoute>
-          } />
-          <Route path="/toppings" element={
-            <ProtectedRoute>
-              <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
-                <Toppings />
-              </Suspense>
-            </ProtectedRoute>
-          } />
-          <Route path="/privacy" element={
+    <>
+      <Navigation />
+      <Toaster />
+      <Sonner />
+      <Routes>
+        <Route path="/auth" element={<Auth />} />
+        <Route path="/" element={
+          <ProtectedRoute>
+            <Index />
+          </ProtectedRoute>
+        } />
+        <Route path="/sauce" element={
+          <ProtectedRoute>
             <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
-              <Privacy />
+              <Sauce />
             </Suspense>
-          } />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </>
-    </AuthProvider>
+          </ProtectedRoute>
+        } />
+        <Route path="/toppings" element={
+          <ProtectedRoute>
+            <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
+              <Toppings />
+            </Suspense>
+          </ProtectedRoute>
+        } />
+        <Route path="/privacy" element={
+          <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
+            <Privacy />
+          </Suspense>
+        } />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
   );
 };
 
+// Main App component
 const App = () => (
   <React.StrictMode>
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider attribute="class" defaultTheme="light">
           <TooltipProvider>
-            <AppRoutes />
+            <AuthProvider>
+              <AppContent />
+            </AuthProvider>
           </TooltipProvider>
         </ThemeProvider>
       </QueryClientProvider>
