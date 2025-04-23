@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import * as React from "react";
@@ -10,6 +11,7 @@ import Navigation from "./components/Navigation";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Auth from "./pages/Auth";
+import { AuthProvider } from "./context/AuthContext";
 
 const Sauce = lazy(() => import("./pages/Sauce"));
 const Toppings = lazy(() => import("./pages/Toppings"));
@@ -18,36 +20,40 @@ const Privacy = lazy(() => import("./pages/Privacy"));
 const queryClient = new QueryClient();
 
 const App = () => (
-  <ThemeProvider attribute="class" defaultTheme="light">
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
+  <React.StrictMode>
+    <ThemeProvider attribute="class" defaultTheme="light">
+      <QueryClientProvider client={queryClient}>
         <BrowserRouter>
-          <Toaster />
-          <Sonner />
-          <Routes>
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/" element={<Index />} />
-            <Route path="/sauce" element={
-              <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
-                <Sauce />
-              </Suspense>
-            } />
-            <Route path="/toppings" element={
-              <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
-                <Toppings />
-              </Suspense>
-            } />
-            <Route path="/privacy" element={
-              <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
-                <Privacy />
-              </Suspense>
-            } />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <AuthProvider>
+            <TooltipProvider>
+              <Toaster />
+              <Sonner />
+              <Routes>
+                <Route path="/auth" element={<Auth />} />
+                <Route path="/" element={<Index />} />
+                <Route path="/sauce" element={
+                  <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
+                    <Sauce />
+                  </Suspense>
+                } />
+                <Route path="/toppings" element={
+                  <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
+                    <Toppings />
+                  </Suspense>
+                } />
+                <Route path="/privacy" element={
+                  <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
+                    <Privacy />
+                  </Suspense>
+                } />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </TooltipProvider>
+          </AuthProvider>
         </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
-  </ThemeProvider>
+      </QueryClientProvider>
+    </ThemeProvider>
+  </React.StrictMode>
 );
 
 export default App;

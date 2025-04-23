@@ -45,11 +45,17 @@ export function AuthForm({ onSuccess }: AuthFormProps) {
     setIsLoading(true);
     try {
       if (isLogin) {
-        const { error } = await supabase.auth.signInWithPassword(data);
+        const { error } = await supabase.auth.signInWithPassword({
+          email: data.email,
+          password: data.password,
+        });
         if (error) throw error;
         toast.success('Welcome back!');
       } else {
-        const { error } = await supabase.auth.signUp(data);
+        const { error } = await supabase.auth.signUp({
+          email: data.email,
+          password: data.password,
+        });
         if (error) throw error;
         toast.success('Account created successfully!');
       }
