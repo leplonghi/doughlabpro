@@ -24,17 +24,17 @@ const FermentationMethodSelect: React.FC<FermentationMethodSelectProps> = ({
 }) => (
   <div className="space-y-3">
     <Label htmlFor="fermentation-method" className="text-lg font-semibold">
-      Método de Fermentação
+      Fermentation Method
     </Label>
     <Select
       value={fermentationMethod}
       onValueChange={val => onChange(val as FermentationMethod)}
     >
       <SelectTrigger>
-        <SelectValue placeholder="Selecione um método" />
+        <SelectValue placeholder="Select a method" />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="direct">Direto</SelectItem>
+        <SelectItem value="direct">Direct</SelectItem>
         <SelectItem value="poolish">Poolish</SelectItem>
         <SelectItem value="biga">Biga</SelectItem>
       </SelectContent>
@@ -43,30 +43,30 @@ const FermentationMethodSelect: React.FC<FermentationMethodSelectProps> = ({
     <div className="p-3 bg-gray-50 rounded-md text-sm mt-2">
       {fermentationMethod === 'direct' && (
         <>
-          <p><b>Método Direto</b>: todos os ingredientes são misturados de uma só vez.</p>
+          <p><b>Direct Method</b>: all ingredients are mixed at once.</p>
           <ul className="list-disc ml-5 mt-2 text-gray-600">
-            <li>Tempo de fermentação: 8-24h (ambiente).</li>
-            <li>Massa desenvolve sabor suave.</li>
+            <li>Fermentation time: 8-24h (room temperature).</li>
+            <li>Dough develops mild flavor.</li>
           </ul>
         </>
       )}
       {fermentationMethod === 'poolish' && (
         <>
-          <p><b>Poolish</b>: faz-se um pré-fermento líquido usando 30% da farinha total (100% hidratação).</p>
+          <p><b>Poolish</b>: make a liquid pre-ferment using 30% of total flour (100% hydration).</p>
           <ul className="list-disc ml-5 mt-2 text-gray-600">
-            <li>Prepare o poolish 8-16h antes.</li>
-            <li>Adicione o poolish à massa final.</li>
-            <li>Massa ganha leveza, aroma e textura especial.</li>
+            <li>Prepare poolish 8-16h before.</li>
+            <li>Add poolish to final dough.</li>
+            <li>Dough gains lightness, aroma and special texture.</li>
           </ul>
         </>
       )}
       {fermentationMethod === 'biga' && (
         <>
-          <p><b>Biga</b>: faz-se um pré-fermento firme usando 50% da farinha (50% hidratação).</p>
+          <p><b>Biga</b>: make a firm pre-ferment using 50% of flour (50% hydration).</p>
           <ul className="list-disc ml-5 mt-2 text-gray-600">
-            <li>Prepare a biga 12-24h antes.</li>
-            <li>Adicione a biga à massa final.</li>
-            <li>Massa mais resistente e com aroma intenso.</li>
+            <li>Prepare biga 12-24h before.</li>
+            <li>Add biga to final dough.</li>
+            <li>More resistant dough with intense aroma.</li>
           </ul>
         </>
       )}
@@ -75,16 +75,16 @@ const FermentationMethodSelect: React.FC<FermentationMethodSelectProps> = ({
     <div>
       {fermentationMethod === 'poolish' && (
         <div className="mt-2 p-3 bg-yellow-50 rounded">
-          <b>Poolish:</b> Utilize fermento seco (0,1%) ou fresco (0,3%) apenas no pré-fermento.<br />
-          Misture 30% da farinha + mesma quantidade de água + fermento.<br />
-          <span className="text-xs text-gray-500">Depois de pronto, adicione o poolish à massa final.</span>
+          <b>Poolish:</b> Use dry yeast (0.1%) or fresh yeast (0.3%) only in pre-ferment.<br />
+          Mix 30% flour + same amount of water + yeast.<br />
+          <span className="text-xs text-gray-500">After ready, add poolish to final dough.</span>
         </div>
       )}
       {fermentationMethod === 'biga' && (
         <div className="mt-2 p-3 bg-yellow-50 rounded">
-          <b>Biga:</b> Misture 50% da farinha + 50% de água + fermento.<br />
-          Sove e deixe fermentar antes de usar na massa final.<br />
-          <span className="text-xs text-gray-500">Ideal para quem busca textura mais rústica e sabor profundo.</span>
+          <b>Biga:</b> Mix 50% flour + 50% water + yeast.<br />
+          Knead and let ferment before using in final dough.<br />
+          <span className="text-xs text-gray-500">Ideal for rustic texture and deep flavor.</span>
         </div>
       )}
     </div>
