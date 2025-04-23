@@ -17,7 +17,7 @@ const DoughCalculateButton: React.FC<DoughCalculateButtonProps> = ({ onClick }) 
         onClick={onClick}
         className="w-full bg-pizza hover:bg-pizza-dark focus-visible:ring-pizza-dark"
       >
-        {t('calculator.calculate', 'Calculate Recipe')}
+        {t('calculator.calculate')}
       </Button>
     </CardFooter>
   );

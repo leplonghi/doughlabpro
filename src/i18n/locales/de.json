@@ -4,15 +4,28 @@
     "calculator": "Pizza-Rechner",
     "login": "Anmelden",
     "logout": "Abmelden",
+    "signUp": "Registrieren",
+    "welcome": "Willkommen",
+    "signIn": "Anmelden",
+    "orContinueWith": "Oder fortfahren mit",
+    "forgotPassword": "Passwort vergessen?",
+    "noAccount": "Noch kein Konto?",
+    "hasAccount": "Bereits ein Konto?",
     "menu": {
+      "shop": "Shop",
       "sauce": "Sauce",
       "toppings": "Beläge",
+      "tips": "Tipps",
       "privacy": "Datenschutz"
+    },
+    "footer": {
+      "tagline": "Mit Liebe für Pizza-Enthusiasten erstellt"
     }
   },
   "calculator": {
     "title": "Pizza-Teig-Rechner",
     "subtitle": "Erstellen Sie den perfekten Pizzateig mit Präzision",
+    "calculate": "Rezept berechnen",
     "ballWeight": "Teigkugelgewicht",
     "flour": "Mehl",
     "salt": "Salz",
@@ -20,5 +33,41 @@
     "oil": "Olivenöl",
     "sugar": "Zucker",
     "hydration": "Hydratation"
+  },
+  "recipe": {
+    "authRequired": "Authentifizierung erforderlich",
+    "loginToSave": "Bitte melden Sie sich an, um Ihre Rezepte zu speichern.",
+    "proFeature": "Pro-Funktion",
+    "upgradeToSave": "Das Speichern von Rezepten ist eine Pro-Funktion. Bitte aktualisieren Sie Ihr Konto.",
+    "saved": "Rezept gespeichert",
+    "savedSuccess": "Ihr Rezept wurde erfolgreich gespeichert!",
+    "shareTitle": "Mein Pizza-Teig-Rezept",
+    "shareText": "Schauen Sie sich dieses Pizza-Teig-Rezept an, das ich erstellt habe!",
+    "sharingNotSupported": "Teilen nicht unterstützt",
+    "browserSharingError": "Ihr Browser unterstützt die Web Share API nicht.",
+    "saving": "Speichern...",
+    "saveRecipe": "Rezept speichern",
+    "newRecipe": "Neues Rezept",
+    "print": "Drucken",
+    "share": "Teilen"
+  },
+  "profile": {
+    "title": "Mein Profil",
+    "personalInfo": "Persönliche Informationen",
+    "personalInfoDescription": "Aktualisieren Sie hier Ihr Foto und Ihre persönlichen Daten.",
+    "username": "Benutzername",
+    "email": "E-Mail-Adresse",
+    "fullName": "Vollständiger Name",
+    "enterUsername": "Geben Sie Ihren Benutzernamen ein",
+    "enterFullName": "Geben Sie Ihren vollständigen Namen ein",
+    "saveChanges": "Änderungen speichern",
+    "saving": "Speichern...",
+    "success": "Erfolg",
+    "error": "Fehler",
+    "profileUpdated": "Ihr Profil wurde erfolgreich aktualisiert.",
+    "errorUpdatingProfile": "Beim Aktualisieren Ihres Profils ist ein Fehler aufgetreten.",
+    "avatarUpdated": "Ihr Avatar wurde erfolgreich aktualisiert.",
+    "errorUploadingAvatar": "Beim Hochladen Ihres Avatars ist ein Fehler aufgetreten.",
+    "errorFetchingProfile": "Beim Abrufen Ihres Profils ist ein Fehler aufgetreten."
   }
 }

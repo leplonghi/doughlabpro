@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
           © {new Date().getFullYear()} {t('common.calculator')}
         </p>
         <p className="text-xs text-muted-foreground/80 mt-2">
-          {t('common.footer.tagline', 'Crafted with love for pizza enthusiasts')}
+          {t('common.footer.tagline')}
         </p>
       </div>
     </footer>

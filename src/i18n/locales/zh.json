@@ -4,15 +4,28 @@
     "calculator": "披萨计算器",
     "login": "登录",
     "logout": "登出",
+    "signUp": "注册",
+    "welcome": "欢迎",
+    "signIn": "登录",
+    "orContinueWith": "或继续使用",
+    "forgotPassword": "忘记密码？",
+    "noAccount": "还没有账户？",
+    "hasAccount": "已经有账户？",
     "menu": {
+      "shop": "商店",
       "sauce": "酱料",
       "toppings": "配料",
+      "tips": "提示",
       "privacy": "隐私"
+    },
+    "footer": {
+      "tagline": "为披萨爱好者精心打造"
     }
   },
   "calculator": {
     "title": "披萨面团计算器",
     "subtitle": "精确创建完美的披萨面团",
+    "calculate": "计算配方",
     "ballWeight": "面团球重量",
     "flour": "面粉",
     "salt": "盐",
@@ -20,5 +33,41 @@
     "oil": "橄榄油",
     "sugar": "糖",
     "hydration": "水合度"
+  },
+  "recipe": {
+    "authRequired": "需要认证",
+    "loginToSave": "请登录以保存您的配方。",
+    "proFeature": "专业功能",
+    "upgradeToSave": "保存配方是专业功能。请升级您的账户。",
+    "saved": "配方已保存",
+    "savedSuccess": "您的配方已成功保存！",
+    "shareTitle": "我的披萨面团配方",
+    "shareText": "看看我创建的这个披萨面团配方！",
+    "sharingNotSupported": "不支持分享",
+    "browserSharingError": "您的浏览器不支持网络分享API。",
+    "saving": "保存中...",
+    "saveRecipe": "保存配方",
+    "newRecipe": "新配方",
+    "print": "打印",
+    "share": "分享"
+  },
+  "profile": {
+    "title": "我的个人资料",
+    "personalInfo": "个人信息",
+    "personalInfoDescription": "在此更新您的照片和个人详细信息。",
+    "username": "用户名",
+    "email": "电子邮件地址",
+    "fullName": "全名",
+    "enterUsername": "输入您的用户名",
+    "enterFullName": "输入您的全名",
+    "saveChanges": "保存更改",
+    "saving": "保存中...",
+    "success": "成功",
+    "error": "错误",
+    "profileUpdated": "您的个人资料已成功更新。",
+    "errorUpdatingProfile": "更新个人资料时出错。",
+    "avatarUpdated": "您的头像已成功更新。",
+    "errorUploadingAvatar": "上传头像时出错。",
+    "errorFetchingProfile": "获取个人资料时出错。"
   }
 }

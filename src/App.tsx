@@ -8,9 +8,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import AuthProvider from "./components/AuthProvider";
-import Header from "./components/Header";
-import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import Index from "./pages/Index";
 import '@/i18n/i18n';
 
 const Sauce = lazy(() => import("./pages/Sauce"));
@@ -28,7 +27,6 @@ const App = () => (
         <BrowserRouter>
           <AuthProvider>
             <TooltipProvider>
-              <Header />
               <Toaster />
               <Sonner />
               <Routes>
