@@ -8,8 +8,4 @@ import registerServiceWorker from './serviceWorker'
 // Register service worker for PWA support
 registerServiceWorker();
 
-createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+createRoot(document.getElementById("root")!).render(<App />);
