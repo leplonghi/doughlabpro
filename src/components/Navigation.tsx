@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { ShoppingCart, Lightbulb, Calendar, Utensils, Pizza, Menu } from 'lucide-react';
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from '@/components/ui/navigation-menu';
@@ -12,62 +13,67 @@ const Navigation: React.FC = () => {
 
   const NavItems = () => (
     <NavigationMenuList className={cn(
-      "flex-col space-y-2 md:flex-row md:space-y-0",
-      isMobile ? "w-full" : ""
+      "flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-1 w-full",
+      isMobile ? "items-start" : "items-center justify-center"
     )}>
       <NavigationMenuItem>
         <NavigationMenuLink
           className={cn(
-            "group inline-flex h-10 w-full items-center justify-start rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+            "group inline-flex h-10 w-full md:w-max items-center justify-start md:justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50",
+            isMobile ? "gap-3" : "gap-2"
           )}
           href="/shop"
         >
-          <ShoppingCart className="mr-2 h-4 w-4" />
-          Shop
+          <ShoppingCart className={cn("h-5 w-5", isMobile ? "mr-2" : "")} />
+          <span className={isMobile ? "flex-1" : ""}>{isMobile ? "Shop" : ""}</span>
         </NavigationMenuLink>
       </NavigationMenuItem>
       <NavigationMenuItem>
         <NavigationMenuLink
           className={cn(
-            "group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+            "group inline-flex h-10 w-full md:w-max items-center justify-start md:justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50",
+            isMobile ? "gap-3" : "gap-2"
           )}
           href="/sauce"
         >
-          <Utensils className="mr-2 h-4 w-4" />
-          Sauce
+          <Utensils className={cn("h-5 w-5", isMobile ? "mr-2" : "")} />
+          <span className={isMobile ? "flex-1" : ""}>{isMobile ? "Sauce" : ""}</span>
         </NavigationMenuLink>
       </NavigationMenuItem>
       <NavigationMenuItem>
         <NavigationMenuLink
           className={cn(
-            "group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+            "group inline-flex h-10 w-full md:w-max items-center justify-start md:justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50",
+            isMobile ? "gap-3" : "gap-2"
           )}
           href="/toppings"
         >
-          <Pizza className="mr-2 h-4 w-4" />
-          Toppings
+          <Pizza className={cn("h-5 w-5", isMobile ? "mr-2" : "")} />
+          <span className={isMobile ? "flex-1" : ""}>{isMobile ? "Toppings" : ""}</span>
         </NavigationMenuLink>
       </NavigationMenuItem>
       <NavigationMenuItem>
         <NavigationMenuLink
           className={cn(
-            "group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+            "group inline-flex h-10 w-full md:w-max items-center justify-start md:justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50",
+            isMobile ? "gap-3" : "gap-2"
           )}
           href="/tips"
         >
-          <Lightbulb className="mr-2 h-4 w-4" />
-          Tips
+          <Lightbulb className={cn("h-5 w-5", isMobile ? "mr-2" : "")} />
+          <span className={isMobile ? "flex-1" : ""}>{isMobile ? "Tips" : ""}</span>
         </NavigationMenuLink>
       </NavigationMenuItem>
       <NavigationMenuItem>
         <NavigationMenuLink
           className={cn(
-            "group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+            "group inline-flex h-10 w-full md:w-max items-center justify-start md:justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50",
+            isMobile ? "gap-3" : "gap-2"
           )}
           href="/plans"
         >
-          <Calendar className="mr-2 h-4 w-4" />
-          Plans
+          <Calendar className={cn("h-5 w-5", isMobile ? "mr-2" : "")} />
+          <span className={isMobile ? "flex-1" : ""}>{isMobile ? "Plans" : ""}</span>
         </NavigationMenuLink>
       </NavigationMenuItem>
     </NavigationMenuList>
@@ -90,11 +96,10 @@ const Navigation: React.FC = () => {
               </NavigationMenu>
             </SheetContent>
           </Sheet>
-        ) : (
-          <NavigationMenu>
-            <NavItems />
-          </NavigationMenu>
-        )}
+        ) : null}
+        <NavigationMenu className={cn("w-full", isMobile ? "hidden md:block" : "")}>
+          <NavItems />
+        </NavigationMenu>
       </div>
     </nav>
   );
