@@ -5,12 +5,12 @@ import { ThemeToggle } from './ThemeToggle';
 
 const Header: React.FC = () => {
   return (
-    <header className="bg-background border-b shadow-sm py-4 px-4 md:px-6 mb-8">
-      <div className="container mx-auto flex justify-between items-center">
-        <div className="flex items-center gap-2 md:gap-3">
-          <Pizza size={28} className="text-pizza shrink-0" />
-          <h1 className="text-xl md:text-2xl font-serif font-bold text-foreground truncate">
-            Pizza Dough Calculator PRO
+    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b py-3">
+      <div className="container mx-auto flex justify-between items-center px-4">
+        <div className="flex items-center gap-2.5">
+          <Pizza size={32} className="text-pizza" />
+          <h1 className="text-xl md:text-2xl font-serif font-bold bg-gradient-to-r from-pizza to-pizza-dark bg-clip-text text-transparent">
+            Pizza Dough Calculator
           </h1>
         </div>
         <ThemeToggle />
