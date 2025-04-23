@@ -1,12 +1,13 @@
 
 import React from 'react';
-import { Pizza, LogIn, LogOut } from 'lucide-react';
+import { Pizza, LogIn, LogOut, UserRoundCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ThemeToggle } from './ThemeToggle';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
 import { useTranslation } from 'react-i18next';
 import LanguageSelector from './LanguageSelector';
+import { Avatar, AvatarFallback } from './ui/avatar';
 
 const Header: React.FC = () => {
   const { user, signOut } = useAuth();
@@ -26,15 +27,22 @@ const Header: React.FC = () => {
         <div className="flex items-center gap-3">
           <LanguageSelector />
           {user ? (
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              className="flex items-center gap-1"
-              onClick={() => signOut()}
-            >
-              <LogOut size={18} />
-              <span className="hidden md:inline">{t('common.logout')}</span>
-            </Button>
+            <div className="flex items-center gap-2">
+              <Avatar className="h-8 w-8">
+                <AvatarFallback className="bg-pizza text-white">
+                  <UserRoundCheck size={16} />
+                </AvatarFallback>
+              </Avatar>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="flex items-center gap-1"
+                onClick={() => signOut()}
+              >
+                <LogOut size={18} />
+                <span className="hidden md:inline">{t('common.logout')}</span>
+              </Button>
+            </div>
           ) : (
             <Link to="/auth">
               <Button variant="ghost" size="sm" className="flex items-center gap-1">
