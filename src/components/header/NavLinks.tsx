@@ -9,13 +9,13 @@ const NavLinks: React.FC = () => {
   
   return (
     <div className="hidden md:flex items-center gap-4">
-      <Link to="/shop" className="text-muted-foreground hover:text-foreground transition-colors" title={t('common.shop')}>
+      <Link to="/shop" className="text-muted-foreground hover:text-foreground transition-colors" title={t('common.menu.shop', 'Shop')}>
         <ShoppingCart size={20} />
       </Link>
-      <Link to="/toppings" className="text-muted-foreground hover:text-foreground transition-colors" title={t('common.toppings')}>
+      <Link to="/toppings" className="text-muted-foreground hover:text-foreground transition-colors" title={t('common.menu.toppings', 'Toppings')}>
         <Utensils size={20} />
       </Link>
-      <Link to="/tips" className="text-muted-foreground hover:text-foreground transition-colors" title={t('common.tips')}>
+      <Link to="/tips" className="text-muted-foreground hover:text-foreground transition-colors" title={t('common.menu.tips', 'Tips')}>
         <Lightbulb size={20} />
       </Link>
     </div>

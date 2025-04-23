@@ -5,14 +5,20 @@
     "login": "Se Connecter",
     "logout": "Se Déconnecter",
     "menu": {
+      "shop": "Boutique",
       "sauce": "Sauce",
       "toppings": "Garnitures",
+      "tips": "Conseils",
       "privacy": "Confidentialité"
+    },
+    "footer": {
+      "tagline": "Créé avec passion pour les amateurs de pizza"
     }
   },
   "calculator": {
     "title": "Calculateur de Pâte à Pizza",
     "subtitle": "Créez la pâte à pizza parfaite avec précision",
+    "calculate": "Calculer la Recette",
     "ballWeight": "Poids de la Boule",
     "flour": "Farine",
     "salt": "Sel",
@@ -20,5 +26,22 @@
     "oil": "Huile d'Olive",
     "sugar": "Sucre",
     "hydration": "Hydratation"
+  },
+  "recipe": {
+    "authRequired": "Authentification Requise",
+    "loginToSave": "Veuillez vous connecter pour sauvegarder vos recettes.",
+    "proFeature": "Fonctionnalité Pro",
+    "upgradeToSave": "La sauvegarde des recettes est une fonctionnalité Pro. Veuillez mettre à niveau votre compte.",
+    "saved": "Recette Sauvegardée",
+    "savedSuccess": "Votre recette a été sauvegardée avec succès!",
+    "shareTitle": "Ma Recette de Pâte à Pizza",
+    "shareText": "Découvrez cette recette de pâte à pizza que j'ai créée!",
+    "sharingNotSupported": "Partage non supporté",
+    "browserSharingError": "Votre navigateur ne prend pas en charge l'API Web Share.",
+    "saving": "Enregistrement...",
+    "saveRecipe": "Sauvegarder la Recette",
+    "newRecipe": "Nouvelle Recette",
+    "print": "Imprimer",
+    "share": "Partager"
   }
 }

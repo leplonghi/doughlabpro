@@ -1,5 +1,24 @@
 
 {
-  "common": {},
-  "calculator": {}
+  "common": {
+    "calculator": "Calcolatore per Pizza",
+    "login": "Accedi",
+    "logout": "Esci",
+    "menu": {
+      "sauce": "Salsa",
+      "toppings": "Condimenti",
+      "privacy": "Privacy"
+    }
+  },
+  "calculator": {
+    "title": "Calcolatore per Impasto Pizza",
+    "subtitle": "Crea l'impasto perfetto per la pizza con precisione",
+    "ballWeight": "Peso della Pallina",
+    "flour": "Farina",
+    "salt": "Sale",
+    "yeast": "Lievito",
+    "oil": "Olio d'Oliva",
+    "sugar": "Zucchero",
+    "hydration": "Idratazione"
+  }
 }

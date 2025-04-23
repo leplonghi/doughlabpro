@@ -5,14 +5,20 @@
     "login": "Entrar",
     "logout": "Sair",
     "menu": {
+      "shop": "Loja",
       "sauce": "Molho",
       "toppings": "Coberturas",
+      "tips": "Dicas",
       "privacy": "Privacidade"
+    },
+    "footer": {
+      "tagline": "Criado com amor para entusiastas de pizza"
     }
   },
   "calculator": {
     "title": "Calculadora de Massa para Pizza",
     "subtitle": "Crie a massa de pizza perfeita com precisão",
+    "calculate": "Calcular Receita",
     "ballWeight": "Peso da Bola",
     "flour": "Farinha",
     "salt": "Sal",
@@ -20,5 +26,22 @@
     "oil": "Azeite",
     "sugar": "Açúcar",
     "hydration": "Hidratação"
+  },
+  "recipe": {
+    "authRequired": "Autenticação Necessária",
+    "loginToSave": "Por favor, faça login para salvar suas receitas.",
+    "proFeature": "Recurso Pro",
+    "upgradeToSave": "Salvar receitas é um recurso Pro. Por favor, atualize sua conta.",
+    "saved": "Receita Salva",
+    "savedSuccess": "Sua receita foi salva com sucesso!",
+    "shareTitle": "Minha Receita de Massa de Pizza",
+    "shareText": "Confira esta receita de massa de pizza que eu criei!",
+    "sharingNotSupported": "Compartilhamento não suportado",
+    "browserSharingError": "Seu navegador não suporta a API de Compartilhamento da Web.",
+    "saving": "Salvando...",
+    "saveRecipe": "Salvar Receita",
+    "newRecipe": "Nova Receita",
+    "print": "Imprimir",
+    "share": "Compartilhar"
   }
 }

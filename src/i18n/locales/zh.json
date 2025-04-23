@@ -1,5 +1,24 @@
 
 {
-  "common": {},
-  "calculator": {}
+  "common": {
+    "calculator": "披萨计算器",
+    "login": "登录",
+    "logout": "登出",
+    "menu": {
+      "sauce": "酱料",
+      "toppings": "配料",
+      "privacy": "隐私"
+    }
+  },
+  "calculator": {
+    "title": "披萨面团计算器",
+    "subtitle": "精确创建完美的披萨面团",
+    "ballWeight": "面团球重量",
+    "flour": "面粉",
+    "salt": "盐",
+    "yeast": "酵母",
+    "oil": "橄榄油",
+    "sugar": "糖",
+    "hydration": "水合度"
+  }
 }

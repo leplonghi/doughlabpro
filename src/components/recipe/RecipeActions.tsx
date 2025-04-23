@@ -5,6 +5,7 @@ import { Separator } from '@/components/ui/separator';
 import { Save, Share, Printer, RotateCcw } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/context/AuthContext';
+import { useTranslation } from 'react-i18next';
 
 // Check if user is a pro subscriber
 const isPro = () => {
@@ -16,13 +17,14 @@ const RecipeActions: React.FC = () => {
   const { toast } = useToast();
   const [saving, setSaving] = React.useState(false);
   const { user } = useAuth(); // Use the Auth context to get the current user
+  const { t } = useTranslation();
   
   const handleSaveRecipe = () => {
     if (!user) {
       // Redirect to authentication page or show login modal
       toast({
-        title: "Authentication Required",
-        description: "Please log in to save your recipes.",
+        title: t('recipe.authRequired', 'Authentication Required'),
+        description: t('recipe.loginToSave', 'Please log in to save your recipes.'),
         variant: "destructive"
       });
       return;
@@ -30,8 +32,8 @@ const RecipeActions: React.FC = () => {
     
     if (!isPro()) {
       toast({
-        title: "Pro Feature",
-        description: "Saving recipes is a Pro feature. Please upgrade your account.",
+        title: t('recipe.proFeature', 'Pro Feature'),
+        description: t('recipe.upgradeToSave', 'Saving recipes is a Pro feature. Please upgrade your account.'),
         variant: "destructive"
       });
       return;
@@ -43,8 +45,8 @@ const RecipeActions: React.FC = () => {
     setTimeout(() => {
       setSaving(false);
       toast({
-        title: "Recipe Saved",
-        description: "Your recipe has been saved successfully!",
+        title: t('recipe.saved', 'Recipe Saved'),
+        description: t('recipe.savedSuccess', 'Your recipe has been saved successfully!'),
       });
     }, 1000);
   };
@@ -56,15 +58,15 @@ const RecipeActions: React.FC = () => {
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
-        title: 'My Pizza Dough Recipe',
-        text: 'Check out this pizza dough recipe I created!',
+        title: t('recipe.shareTitle', 'My Pizza Dough Recipe'),
+        text: t('recipe.shareText', 'Check out this pizza dough recipe I created!'),
         url: window.location.href,
       })
       .catch((error) => console.log('Error sharing', error));
     } else {
       toast({
-        title: "Sharing not supported",
-        description: "Your browser doesn't support the Web Share API.",
+        title: t('recipe.sharingNotSupported', 'Sharing not supported'),
+        description: t('recipe.browserSharingError', 'Your browser doesn\'t support the Web Share API.'),
         variant: "destructive"
       });
     }
@@ -81,19 +83,19 @@ const RecipeActions: React.FC = () => {
       <div className="flex flex-wrap justify-center gap-4">
         <Button variant="outline" onClick={handleSaveRecipe} disabled={saving}>
           <Save className="mr-2 h-4 w-4" />
-          {saving ? 'Saving...' : 'Save Recipe'}
+          {saving ? t('recipe.saving', 'Saving...') : t('recipe.saveRecipe', 'Save Recipe')}
         </Button>
         <Button onClick={handleReset}>
           <RotateCcw className="mr-2 h-4 w-4" />
-          New Recipe
+          {t('recipe.newRecipe', 'New Recipe')}
         </Button>
         <Button variant="outline" onClick={handlePrint}>
           <Printer className="mr-2 h-4 w-4" />
-          Print
+          {t('recipe.print', 'Print')}
         </Button>
         <Button variant="outline" onClick={handleShare}>
           <Share className="mr-2 h-4 w-4" />
-          Share
+          {t('recipe.share', 'Share')}
         </Button>
       </div>
     </>

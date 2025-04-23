@@ -10,7 +10,46 @@
     "orContinueWith": "Or continue with",
     "forgotPassword": "Forgot Password?",
     "noAccount": "Don't have an account?",
-    "hasAccount": "Already have an account?"
+    "hasAccount": "Already have an account?",
+    "menu": {
+      "shop": "Shop",
+      "sauce": "Sauce",
+      "toppings": "Toppings",
+      "tips": "Tips",
+      "privacy": "Privacy"
+    },
+    "footer": {
+      "tagline": "Crafted with love for pizza enthusiasts"
+    }
+  },
+  "calculator": {
+    "title": "DoughLab Pro",
+    "subtitle": "Create the perfect pizza dough with precision",
+    "calculate": "Calculate Recipe",
+    "ballWeight": "Ball Weight",
+    "flour": "Flour",
+    "salt": "Salt",
+    "yeast": "Yeast",
+    "oil": "Olive Oil",
+    "sugar": "Sugar",
+    "hydration": "Hydration"
+  },
+  "recipe": {
+    "authRequired": "Authentication Required",
+    "loginToSave": "Please log in to save your recipes.",
+    "proFeature": "Pro Feature",
+    "upgradeToSave": "Saving recipes is a Pro feature. Please upgrade your account.",
+    "saved": "Recipe Saved",
+    "savedSuccess": "Your recipe has been saved successfully!",
+    "shareTitle": "My Pizza Dough Recipe",
+    "shareText": "Check out this pizza dough recipe I created!",
+    "sharingNotSupported": "Sharing not supported",
+    "browserSharingError": "Your browser doesn't support the Web Share API.",
+    "saving": "Saving...",
+    "saveRecipe": "Save Recipe",
+    "newRecipe": "New Recipe",
+    "print": "Print",
+    "share": "Share"
   },
   "profile": {
     "title": "My Profile",

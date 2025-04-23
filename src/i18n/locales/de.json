@@ -1,5 +1,24 @@
 
 {
-  "common": {},
-  "calculator": {}
+  "common": {
+    "calculator": "Pizza-Rechner",
+    "login": "Anmelden",
+    "logout": "Abmelden",
+    "menu": {
+      "sauce": "Sauce",
+      "toppings": "Beläge",
+      "privacy": "Datenschutz"
+    }
+  },
+  "calculator": {
+    "title": "Pizza-Teig-Rechner",
+    "subtitle": "Erstellen Sie den perfekten Pizzateig mit Präzision",
+    "ballWeight": "Teigkugelgewicht",
+    "flour": "Mehl",
+    "salt": "Salz",
+    "yeast": "Hefe",
+    "oil": "Olivenöl",
+    "sugar": "Zucker",
+    "hydration": "Hydratation"
+  }
 }

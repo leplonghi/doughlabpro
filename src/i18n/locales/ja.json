@@ -5,14 +5,20 @@
     "login": "ログイン",
     "logout": "ログアウト",
     "menu": {
+      "shop": "ショップ",
       "sauce": "ソース",
       "toppings": "トッピング",
+      "tips": "ヒント",
       "privacy": "プライバシー"
+    },
+    "footer": {
+      "tagline": "ピザ愛好家のために愛情を込めて作られました"
     }
   },
   "calculator": {
     "title": "ピザ生地計算機",
     "subtitle": "完璧なピザ生地を正確に作成",
+    "calculate": "レシピを計算",
     "ballWeight": "ボールの重さ",
     "flour": "小麦粉",
     "salt": "塩",
@@ -20,5 +26,22 @@
     "oil": "オリーブオイル",
     "sugar": "砂糖",
     "hydration": "水分量"
+  },
+  "recipe": {
+    "authRequired": "認証が必要",
+    "loginToSave": "レシピを保存するにはログインしてください。",
+    "proFeature": "プロ機能",
+    "upgradeToSave": "レシピの保存はプロ機能です。アカウントをアップグレードしてください。",
+    "saved": "レシピが保存されました",
+    "savedSuccess": "レシピが正常に保存されました！",
+    "shareTitle": "私のピザ生地レシピ",
+    "shareText": "私が作成したこのピザ生地レシピをチェックしてください！",
+    "sharingNotSupported": "共有がサポートされていません",
+    "browserSharingError": "お使いのブラウザはWeb共有APIをサポートしていません。",
+    "saving": "保存中...",
+    "saveRecipe": "レシピを保存",
+    "newRecipe": "新しいレシピ",
+    "print": "印刷",
+    "share": "共有"
   }
 }
