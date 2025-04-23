@@ -3,7 +3,7 @@ import React from 'react';
 import { Pizza } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from './ThemeToggle';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 import LanguageSelector from './LanguageSelector';
 import { useIsMobile } from '@/hooks/use-mobile';
 

@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { Clock, Wheat, Droplet, FlaskConical } from 'lucide-react';
-import { useLanguage } from '../../contexts/LanguageContext';
+import { useLanguage } from '../../hooks/useLanguage';
 
 interface RecipePreMixProps {
   type: 'poolish' | 'biga';

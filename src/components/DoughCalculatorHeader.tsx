@@ -1,7 +1,6 @@
-
 import React from "react";
 import { CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 
 const DoughCalculatorHeader: React.FC = () => {
   const { t } = useLanguage();

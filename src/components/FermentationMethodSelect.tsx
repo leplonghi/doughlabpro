@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Label } from '@/components/ui/label';
 import {
@@ -8,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 
 type FermentationMethod = 'direct' | 'poolish' | 'biga';
 

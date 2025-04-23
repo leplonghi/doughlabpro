@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 import { useIsMobile } from '../hooks/use-mobile';
 
 // Export the Language type

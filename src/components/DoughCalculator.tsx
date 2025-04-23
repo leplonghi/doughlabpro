@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { 
   Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter 
@@ -12,7 +11,7 @@ import DoughCalculateButton from './DoughCalculateButton';
 import PizzaStyleSwitch from './PizzaStyleSwitch';
 import UnitSelect, { Unit } from './UnitSelect';
 import { PizzaStyle } from './PizzaStyleSelect';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 
 type FermentationMethod = 'direct' | 'poolish' | 'biga';
 type YeastType = 'fresh' | 'dry';
