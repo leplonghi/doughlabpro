@@ -44,6 +44,8 @@ const DoughCalculator: React.FC = () => {
   const [hydration, setHydration] = useState<number>(60);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isLiveCalculation, setIsLiveCalculation] = useState<boolean>(false);
+  const [ballWeight, setBallWeight] = useState<number>(250);
+  const [numberOfBalls, setNumberOfBalls] = useState<number>(0);
 
   const { toast } = useToast();
 
@@ -80,6 +82,27 @@ const DoughCalculator: React.FC = () => {
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
+  };
+
+  // Calculate number of dough balls
+  const calculateNumberOfBalls = () => {
+    if (flour && ballWeight && ballWeight > 0) {
+      // Account for water, salt, etc. in total dough weight
+      // Total weight is approximately flour + water + salt + oil + yeast
+      const water = (flour * hydration) / 100;
+      const salt = (flour * 2.5) / 100;
+      const yeast = yeastType === 'fresh' ? (flour * 0.3) / 100 : (flour * 0.1) / 100;
+      const oil = pizzaStyle === "napoletana" ? 0 : (flour * 2.5) / 100;
+      const sugar = pizzaStyle === "napoletana" ? 0 : (flour * 2.5) / 100;
+      
+      const totalDoughWeight = flour + water + salt + yeast + oil + (sugar || 0);
+      const balls = Math.floor(totalDoughWeight / ballWeight);
+      
+      setNumberOfBalls(balls);
+      return balls;
+    }
+    setNumberOfBalls(0);
+    return 0;
   };
 
   // Validate all fields
@@ -154,6 +177,7 @@ const DoughCalculator: React.FC = () => {
     }
 
     setRecipe(newRecipe);
+    calculateNumberOfBalls();
 
     if (!isLiveCalculation) {
       toast({
@@ -166,13 +190,21 @@ const DoughCalculator: React.FC = () => {
     }
   };
 
+  // Handle ball weight change
+  const handleBallWeightChange = (weight: number) => {
+    setBallWeight(weight);
+    if (recipe) {
+      calculateNumberOfBalls();
+    }
+  };
+
   // Effect for live calculation
   useEffect(() => {
     // Only run calculation if set to live mode and there are no errors
     if (isLiveCalculation && Object.keys(errors).length === 0 && flour > 0) {
       calculateRecipe();
     }
-  }, [flour, hydration, yeastType, pizzaStyle, fermentationMethod, isLiveCalculation]);
+  }, [flour, hydration, yeastType, pizzaStyle, fermentationMethod, isLiveCalculation, ballWeight]);
 
   // Enable live calculation after initial manual calculation
   useEffect(() => {
@@ -180,6 +212,36 @@ const DoughCalculator: React.FC = () => {
       setIsLiveCalculation(true);
     }
   }, [recipe]);
+
+  // Add print-specific CSS
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.innerHTML = `
+      @media print {
+        body * {
+          visibility: hidden;
+        }
+        .print-component, .print-component * {
+          visibility: visible;
+        }
+        .print-component {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+        }
+        .print-component button, 
+        .print-component .ad-banner {
+          display: none !important;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
 
   return (
     <div className="w-full max-w-3xl mx-auto px-4 md:px-6">
@@ -205,6 +267,8 @@ const DoughCalculator: React.FC = () => {
             pizzaStyle={pizzaStyle}
             errors={errors}
             validateField={validateField}
+            ballWeight={ballWeight}
+            onBallWeightChange={handleBallWeightChange}
           />
         </CardContent>
         <DoughCalculateButton onClick={calculateRecipe} />
@@ -217,6 +281,7 @@ const DoughCalculator: React.FC = () => {
             fermentationMethod={fermentationMethod}
             pizzaStyle={pizzaStyle}
             unit="grams"
+            numberOfBalls={numberOfBalls}
           />
         )}
       </div>

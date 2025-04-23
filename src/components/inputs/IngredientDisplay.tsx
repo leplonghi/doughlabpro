@@ -13,7 +13,7 @@ const IngredientDisplay: React.FC<IngredientDisplayProps> = ({ label, value }) =
     <div className="space-y-2">
       <Label>{label}</Label>
       <Input
-        value={value.toFixed(1)}
+        value={value.toFixed(2)}
         readOnly
         className="bg-gray-50"
       />

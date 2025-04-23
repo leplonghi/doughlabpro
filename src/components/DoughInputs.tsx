@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Separator } from '@/components/ui/separator';
 import BallWeightInput from './inputs/BallWeightInput';
 import FlourInput from './inputs/FlourInput';
@@ -20,6 +20,8 @@ interface DoughInputsProps {
   pizzaStyle: PizzaStyle;
   errors: Record<string, string>;
   validateField: (field: string, value: any) => void;
+  ballWeight: number;
+  onBallWeightChange: (weight: number) => void;
 }
 
 const DoughInputs: React.FC<DoughInputsProps> = ({
@@ -31,10 +33,10 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
   setYeastType,
   pizzaStyle,
   errors,
-  validateField
+  validateField,
+  ballWeight,
+  onBallWeightChange
 }) => {
-  const [ballWeight, setBallWeight] = useState<number>(250);
-  
   const salt = (flour * 2.5) / 100;
   const yeast = yeastType === 'fresh' ? (flour * 0.3) / 100 : (flour * 0.1) / 100;
   const oil = pizzaStyle === "napoletana" ? 0 : (flour * 2.5) / 100;
@@ -67,7 +69,7 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
     if (value === '' || /^\d+$/.test(value)) {
       const newWeight = Number(value);
       if (newWeight >= 100 && newWeight <= 500) {
-        setBallWeight(newWeight);
+        onBallWeightChange(newWeight);
       }
     }
   };

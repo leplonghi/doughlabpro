@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Wheat, Droplet, FlaskConical, FileText } from 'lucide-react';
+import { Wheat, Droplet, FlaskConical, FileText, DivideCircle } from 'lucide-react';
 
 interface RecipeFinalProps {
   flour: number;
@@ -13,6 +13,7 @@ interface RecipeFinalProps {
   fermentationMethod: 'direct' | 'poolish' | 'biga';
   formatValue: (value: number) => string;
   getUnitLabel: () => string;
+  numberOfBalls?: number;
 }
 
 const RecipeFinal: React.FC<RecipeFinalProps> = ({
@@ -25,7 +26,8 @@ const RecipeFinal: React.FC<RecipeFinalProps> = ({
   isNewYorkStyle,
   fermentationMethod,
   formatValue,
-  getUnitLabel
+  getUnitLabel,
+  numberOfBalls
 }) => (
   <div className="recipe-section">
     <h3 className="font-medium text-gray-900 flex items-center gap-2 mb-3">
@@ -67,6 +69,12 @@ const RecipeFinal: React.FC<RecipeFinalProps> = ({
             {fermentationMethod === 'poolish' ? '🧊 Prepared Poolish:' : '🧊 Prepared Biga:'}
           </span>
           <span className="result-value">All</span>
+        </li>
+      )}
+      {numberOfBalls !== undefined && (
+        <li className="flex justify-between">
+          <span className="result-label flex items-center gap-2"><DivideCircle size={16} /> Dough Balls:</span>
+          <span className="result-value">{numberOfBalls}</span>
         </li>
       )}
     </ul>

@@ -42,9 +42,16 @@ interface DoughResultsProps {
   fermentationMethod: FermentationMethod;
   pizzaStyle: PizzaStyle;
   unit: Unit;
+  numberOfBalls?: number;
 }
 
-const DoughResults: React.FC<DoughResultsProps> = ({ recipe, fermentationMethod, pizzaStyle, unit }) => {
+const DoughResults: React.FC<DoughResultsProps> = ({ 
+  recipe, 
+  fermentationMethod, 
+  pizzaStyle, 
+  unit,
+  numberOfBalls 
+}) => {
   const convertToUnit = (grams: number): number => {
     switch(unit) {
       case 'ounces':
@@ -73,7 +80,7 @@ const DoughResults: React.FC<DoughResultsProps> = ({ recipe, fermentationMethod,
   };
 
   return (
-    <Card className="mb-8">
+    <Card className="mb-8 print-component">
       <CardHeader className="bg-pizza-light bg-opacity-30">
         <CardTitle>
           {pizzaStyle === "newyork" ? "Your New York Style Pizza Recipe" : "Your Neapolitan Pizza Recipe"}
@@ -85,6 +92,11 @@ const DoughResults: React.FC<DoughResultsProps> = ({ recipe, fermentationMethod,
               ? 'Poolish Method'
               : 'Biga Method'}
         </CardDescription>
+        {numberOfBalls !== undefined && (
+          <CardDescription className="mt-1">
+            Makes approximately {numberOfBalls} {numberOfBalls === 1 ? 'dough ball' : 'dough balls'}
+          </CardDescription>
+        )}
       </CardHeader>
       
       <CardContent className="pt-6">
@@ -123,6 +135,7 @@ const DoughResults: React.FC<DoughResultsProps> = ({ recipe, fermentationMethod,
               fermentationMethod={fermentationMethod}
               formatValue={formatValue}
               getUnitLabel={getUnitLabel}
+              numberOfBalls={numberOfBalls}
             />
 
             <FermentationTips method={fermentationMethod} />
