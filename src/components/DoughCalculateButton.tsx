@@ -1,23 +1,21 @@
 
 import React from "react";
+import { CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { useLanguage } from '../hooks/useLanguage';
 
 interface DoughCalculateButtonProps {
   onClick: () => void;
 }
 
-const DoughCalculateButton: React.FC<DoughCalculateButtonProps> = ({ onClick }) => {
-  const { t } = useLanguage();
-  
-  return (
+const DoughCalculateButton: React.FC<DoughCalculateButtonProps> = ({ onClick }) => (
+  <CardFooter className="bg-gray-50">
     <Button 
       onClick={onClick}
-      className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
+      className="w-full bg-pizza hover:bg-pizza-dark"
     >
-      {t('button.calculate')}
+      Calcular Receita
     </Button>
-  );
-};
+  </CardFooter>
+);
 
 export default DoughCalculateButton;

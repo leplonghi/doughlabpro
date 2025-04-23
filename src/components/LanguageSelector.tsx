@@ -1,49 +1,33 @@
 
 import React from "react";
-import { Globe } from 'lucide-react';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { useLanguage } from '../hooks/useLanguage';
-import { useIsMobile } from '../hooks/use-mobile';
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
-// Export the Language type
-export type Language = 'en' | 'pt' | 'es' | 'fr' | 'zh' | 'ja';
+export type Language = "pt" | "en";
 
-const languages = [
-  { value: 'en', label: 'English' },
-  { value: 'pt', label: 'Português' },
-  { value: 'es', label: 'Español' },
-  { value: 'fr', label: 'Français' },
-  { value: 'zh', label: '中文' },
-  { value: 'ja', label: '日本語' },
-];
+interface LanguageSelectorProps {
+  language: Language;
+  onChange: (value: Language) => void;
+}
 
-const LanguageSelector: React.FC = () => {
-  const { language, setLanguage, t } = useLanguage();
-  const isMobile = useIsMobile();
-
-  return (
-    <div className="flex items-center gap-2">
-      <Globe className="h-4 w-4 text-muted-foreground" />
-      <Select value={language} onValueChange={(value: Language) => setLanguage(value)}>
-        <SelectTrigger className={`${isMobile ? 'w-[140px]' : 'w-[180px]'} bg-background`}>
-          <SelectValue placeholder={t('language.label')} />
-        </SelectTrigger>
-        <SelectContent className="bg-popover">
-          {languages.map((lang) => (
-            <SelectItem key={lang.value} value={lang.value as Language}>
-              {lang.label}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-    </div>
-  );
-};
+const LanguageSelector: React.FC<LanguageSelectorProps> = ({ language, onChange }) => (
+  <div className="space-y-3">
+    <Label>Idioma / Language</Label>
+    <RadioGroup 
+      value={language} 
+      onValueChange={(value) => onChange(value as Language)}
+      className="flex gap-4"
+    >
+      <div className="flex items-center space-x-2">
+        <RadioGroupItem value="pt" id="pt" />
+        <Label htmlFor="pt">Português</Label>
+      </div>
+      <div className="flex items-center space-x-2">
+        <RadioGroupItem value="en" id="en" />
+        <Label htmlFor="en">English</Label>
+      </div>
+    </RadioGroup>
+  </div>
+);
 
 export default LanguageSelector;
