@@ -11,7 +11,7 @@ const IntroSection: React.FC = () => {
             Neapolitan Pizza Calculator
           </h1>
           <p className="text-gray-600 text-lg md:text-xl font-light">
-            Create authentic Neapolitan pizza dough with precision
+            Create pizza dough with precision
           </p>
         </div>
         <CardContent className="p-8">
