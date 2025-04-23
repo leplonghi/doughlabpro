@@ -37,49 +37,47 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 
 // Main App component with correct provider hierarchy
 const App = () => (
-  <BrowserRouter>
-    <React.StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider attribute="class" defaultTheme="light">
+  <QueryClientProvider client={queryClient}>
+    <BrowserRouter>
+      <ThemeProvider attribute="class" defaultTheme="light">
+        <AuthProvider>
           <TooltipProvider>
-            <AuthProvider>
-              <Navigation />
-              <Toaster />
-              <Sonner />
-              <Routes>
-                <Route path="/auth" element={<Auth />} />
-                <Route path="/" element={
-                  <ProtectedRoute>
-                    <Index />
-                  </ProtectedRoute>
-                } />
-                <Route path="/sauce" element={
-                  <ProtectedRoute>
-                    <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
-                      <Sauce />
-                    </Suspense>
-                  </ProtectedRoute>
-                } />
-                <Route path="/toppings" element={
-                  <ProtectedRoute>
-                    <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
-                      <Toppings />
-                    </Suspense>
-                  </ProtectedRoute>
-                } />
-                <Route path="/privacy" element={
+            <Navigation />
+            <Routes>
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/" element={
+                <ProtectedRoute>
+                  <Index />
+                </ProtectedRoute>
+              } />
+              <Route path="/sauce" element={
+                <ProtectedRoute>
                   <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
-                    <Privacy />
+                    <Sauce />
                   </Suspense>
-                } />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </AuthProvider>
+                </ProtectedRoute>
+              } />
+              <Route path="/toppings" element={
+                <ProtectedRoute>
+                  <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
+                    <Toppings />
+                  </Suspense>
+                </ProtectedRoute>
+              } />
+              <Route path="/privacy" element={
+                <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
+                  <Privacy />
+                </Suspense>
+              } />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            <Toaster />
+            <Sonner />
           </TooltipProvider>
-        </ThemeProvider>
-      </QueryClientProvider>
-    </React.StrictMode>
-  </BrowserRouter>
+        </AuthProvider>
+      </ThemeProvider>
+    </BrowserRouter>
+  </QueryClientProvider>
 );
 
 export default App;
