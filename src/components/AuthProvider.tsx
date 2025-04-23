@@ -3,7 +3,7 @@ import React from 'react';
 import { AuthProvider as ContextAuthProvider } from '../context/AuthContext';
 
 // Re-export the AuthProvider from context
-const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const AuthProvider = ({ children }) => {
   return <ContextAuthProvider>{children}</ContextAuthProvider>;
 };
 
