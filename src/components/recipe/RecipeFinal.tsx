@@ -30,43 +30,43 @@ const RecipeFinal: React.FC<RecipeFinalProps> = ({
   <div className="recipe-section">
     <h3 className="font-medium text-gray-900 flex items-center gap-2 mb-3">
       <FileText size={18} />
-      Massa Final
+      Final Dough
     </h3>
     <ul className="space-y-2 text-gray-700">
       <li className="flex justify-between">
-        <span className="result-label flex items-center gap-2"><Wheat size={16} /> Farinha:</span>
+        <span className="result-label flex items-center gap-2"><Wheat size={16} /> Flour:</span>
         <span className="result-value">{formatValue(flour)}{getUnitLabel()}</span>
       </li>
       <li className="flex justify-between">
-        <span className="result-label flex items-center gap-2"><Droplet size={16} /> Água:</span>
+        <span className="result-label flex items-center gap-2"><Droplet size={16} /> Water:</span>
         <span className="result-value">{formatValue(water)}{getUnitLabel()}</span>
       </li>
       <li className="flex justify-between">
-        <span className="result-label flex items-center gap-2">🧂 Sal:</span>
+        <span className="result-label flex items-center gap-2">🧂 Salt:</span>
         <span className="result-value">{formatValue(salt)}{getUnitLabel()}</span>
       </li>
       <li className="flex justify-between">
-        <span className="result-label flex items-center gap-2">🫒 Azeite:</span>
+        <span className="result-label flex items-center gap-2">🫒 Olive Oil:</span>
         <span className="result-value">{formatValue(oil)}{getUnitLabel()}</span>
       </li>
       {isNewYorkStyle && (
         <li className="flex justify-between">
-          <span className="result-label flex items-center gap-2">🍯 Açúcar:</span>
+          <span className="result-label flex items-center gap-2">🍯 Sugar:</span>
           <span className="result-value">{formatValue(sugar || 0)}{getUnitLabel()}</span>
         </li>
       )}
       {fermentationMethod === 'direct' && (
         <li className="flex justify-between">
-          <span className="result-label flex items-center gap-2"><FlaskConical size={16} /> Fermento:</span>
+          <span className="result-label flex items-center gap-2"><FlaskConical size={16} /> Yeast:</span>
           <span className="result-value">{formatValue(yeast)}{getUnitLabel()}</span>
         </li>
       )}
       {(fermentationMethod === 'poolish' || fermentationMethod === 'biga') && (
         <li className="flex justify-between">
           <span className="result-label flex items-center gap-2">
-            {fermentationMethod === 'poolish' ? '🧊 Poolish preparado:' : '🧊 Biga preparada:'}
+            {fermentationMethod === 'poolish' ? '🧊 Prepared Poolish:' : '🧊 Prepared Biga:'}
           </span>
-          <span className="result-value">Toda</span>
+          <span className="result-value">All</span>
         </li>
       )}
     </ul>
