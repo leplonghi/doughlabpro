@@ -1,3 +1,4 @@
+
 import { TranslationsModule } from './types';
 
 export const pt: TranslationsModule = {
