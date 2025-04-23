@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
@@ -42,6 +41,9 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
   const yeast = yeastType === 'fresh' ? (flour * 0.3) / 100 : (flour * 0.1) / 100;
   const oil = pizzaStyle === "napoletana" ? 0 : (flour * 2.5) / 100;
   const sugar = pizzaStyle === "napoletana" ? 0 : (flour * 2.5) / 100;
+  
+  const [ballWeight, setBallWeight] = useState<number>(250);
+  const numberOfBalls = Math.floor(flour / ballWeight) || 0;
 
   // Handle flour input change with validation
   const handleFlourChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,8 +69,47 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
     validateField('hydration', value);
   };
 
+  const handleBallWeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (value === '' || /^\d+$/.test(value)) {
+      const newWeight = Number(value);
+      if (newWeight >= 100 && newWeight <= 500) {
+        setBallWeight(newWeight);
+      }
+    }
+  };
+
   return (
     <div className="space-y-6">
+      <div className="space-y-2">
+        <div className="flex items-center gap-2">
+          <Label htmlFor="ballWeight">Dough Ball Weight (g)</Label>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span className="cursor-help"><InfoCircledIcon className="h-4 w-4 text-muted-foreground" /></span>
+              </TooltipTrigger>
+              <TooltipContent className="max-w-xs">
+                <p>Enter the desired weight for each dough ball (100g-500g). This will help calculate how many balls you can make.</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
+        <Input
+          id="ballWeight"
+          type="number"
+          value={ballWeight || ''}
+          onChange={handleBallWeightChange}
+          min="100"
+          max="500"
+          placeholder="Ex: 250g"
+          className="w-full"
+        />
+        <div className="text-sm text-muted-foreground mt-1">
+          This will make approximately {numberOfBalls} dough {numberOfBalls === 1 ? 'ball' : 'balls'}
+        </div>
+      </div>
+
       <div className="space-y-2">
         <div className="flex items-center gap-2">
           <Label htmlFor="flour">Amount of Flour (g)</Label>
