@@ -1,6 +1,6 @@
 
 import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
+import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 import * as React from "react";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "next-themes";
@@ -72,7 +72,7 @@ const App = () => (
               <Route path="*" element={<NotFound />} />
             </Routes>
             <Toaster />
-            <Sonner />
+            <SonnerToaster />
           </TooltipProvider>
         </AuthProvider>
       </ThemeProvider>

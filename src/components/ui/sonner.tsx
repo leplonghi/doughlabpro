@@ -27,5 +27,5 @@ const Toaster = ({ ...props }: ToasterProps) => {
   )
 }
 
-export { Toaster, toast } from "sonner"
+export { toast } from "sonner"
 export { Toaster }
