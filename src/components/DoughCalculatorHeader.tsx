@@ -8,9 +8,9 @@ const DoughCalculatorHeader: React.FC = () => {
   
   return (
     <CardHeader className="space-y-1.5 bg-gradient-to-r from-pizza-light/30 to-background p-6 rounded-t-lg border-b">
-      <CardTitle className="text-2xl font-serif">{t('calculator.title', 'DoughLab Pro')}</CardTitle>
+      <CardTitle className="text-2xl font-serif">DoughLab Pro</CardTitle>
       <CardDescription className="text-base text-muted-foreground">
-        {t('calculator.subtitle', 'Create the perfect pizza dough with precision')}
+        {t('calculator.subtitle')}
       </CardDescription>
     </CardHeader>
   );

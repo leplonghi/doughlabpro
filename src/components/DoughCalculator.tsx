@@ -62,28 +62,48 @@ const DoughCalculator: React.FC = () => {
       <SkipToContent />
       <Card className="mb-8">
         <DoughCalculatorHeader />
-        <CardContent className="pt-6 space-y-6">
-          <PizzaStyleSwitch
-            pizzaStyle={pizzaStyle}
-            setPizzaStyle={setPizzaStyle}
-          />
-          <FermentationMethodSelect
-            fermentationMethod={fermentationMethod}
-            onChange={setFermentationMethod}
-          />
-          <DoughInputs
-            flour={state.flour}
-            setFlour={(flour) => setState(prev => ({ ...prev, flour }))}
-            hydration={state.hydration}
-            setHydration={(hydration) => setState(prev => ({ ...prev, hydration }))}
-            yeastType={state.yeastType}
-            setYeastType={(yeastType) => setState(prev => ({ ...prev, yeastType }))}
-            pizzaStyle={pizzaStyle}
-            errors={state.errors}
-            validateField={validateField}
-            ballWeight={state.ballWeight}
-            onBallWeightChange={handleBallWeightChange}
-          />
+        <CardContent className="pt-6 space-y-8">
+          <div className="space-y-6">
+            <div className="flex items-center gap-2 text-lg font-semibold text-foreground">
+              <span className="flex items-center justify-center w-6 h-6 rounded-full bg-pizza text-white text-sm">1</span>
+              <h2>Estilo de Pizza</h2>
+            </div>
+            <PizzaStyleSwitch
+              pizzaStyle={pizzaStyle}
+              setPizzaStyle={setPizzaStyle}
+            />
+          </div>
+
+          <div className="space-y-6">
+            <div className="flex items-center gap-2 text-lg font-semibold text-foreground">
+              <span className="flex items-center justify-center w-6 h-6 rounded-full bg-pizza text-white text-sm">2</span>
+              <h2>Método de Fermentação</h2>
+            </div>
+            <FermentationMethodSelect
+              fermentationMethod={fermentationMethod}
+              onChange={setFermentationMethod}
+            />
+          </div>
+
+          <div className="space-y-6">
+            <div className="flex items-center gap-2 text-lg font-semibold text-foreground">
+              <span className="flex items-center justify-center w-6 h-6 rounded-full bg-pizza text-white text-sm">3</span>
+              <h2>Ingredientes</h2>
+            </div>
+            <DoughInputs
+              flour={state.flour}
+              setFlour={(flour) => setState(prev => ({ ...prev, flour }))}
+              hydration={state.hydration}
+              setHydration={(hydration) => setState(prev => ({ ...prev, hydration }))}
+              yeastType={state.yeastType}
+              setYeastType={(yeastType) => setState(prev => ({ ...prev, yeastType }))}
+              pizzaStyle={pizzaStyle}
+              errors={state.errors}
+              validateField={validateField}
+              ballWeight={state.ballWeight}
+              onBallWeightChange={handleBallWeightChange}
+            />
+          </div>
         </CardContent>
         <DoughCalculateButton onClick={calculateRecipe} />
       </Card>
