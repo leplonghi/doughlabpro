@@ -81,7 +81,7 @@ const BallWeightInput: React.FC<BallWeightInputProps> = ({
         </div>
       </div>
       <div className="text-sm text-muted-foreground mt-1">
-        This will make approximately {numberOfBalls} dough {numberOfBalls === 1 ? 'ball' : 'balls'}
+        This will make approximately {numberOfBalls} dough {numberOfBalls === 1.5 ? 'ball' : 'balls'}
       </div>
     </div>
   );
