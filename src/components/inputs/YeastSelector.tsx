@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { InfoCircledIcon } from '@radix-ui/react-icons';
+import { useTranslation } from 'react-i18next';
 import { 
   Tooltip,
   TooltipContent,
@@ -21,17 +22,19 @@ const YeastSelector: React.FC<YeastSelectorProps> = ({
   yeastType,
   onYeastTypeChange
 }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="space-y-3">
       <div className="flex items-center gap-2">
-        <Label>Yeast Type</Label>
+        <Label>{t('calculator.ingredients.yeastType')}</Label>
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
               <span className="cursor-help"><InfoCircledIcon className="h-4 w-4 text-muted-foreground" /></span>
             </TooltipTrigger>
             <TooltipContent>
-              <p>Fresh yeast is more perishable but adds better flavor. Dry yeast has longer shelf life and is more widely available.</p>
+              <p>{t('calculator.ingredients.yeastDescription')}</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
@@ -43,11 +46,11 @@ const YeastSelector: React.FC<YeastSelectorProps> = ({
       >
         <div className="flex items-center space-x-2">
           <RadioGroupItem value="fresh" id="fresh" />
-          <Label htmlFor="fresh">Fresh Yeast (0.3%)</Label>
+          <Label htmlFor="fresh">{t('calculator.ingredients.freshYeast')}</Label>
         </div>
         <div className="flex items-center space-x-2">
           <RadioGroupItem value="dry" id="dry" />
-          <Label htmlFor="dry">Dry Yeast (0.1%)</Label>
+          <Label htmlFor="dry">{t('calculator.ingredients.dryYeast')}</Label>
         </div>
       </RadioGroup>
     </div>

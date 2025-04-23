@@ -1,4 +1,3 @@
-
 {
   "common": {
     "calculator": "Calculadora de Masa para Pizza",
@@ -25,7 +24,18 @@
     "yeast": "Levadura",
     "oil": "Aceite de Oliva",
     "sugar": "Azúcar",
-    "hydration": "Hidratación"
+    "hydration": "Hidratación",
+    "ingredients": {
+      "ballWeight": "Peso de la Bola (g)",
+      "ballWeightDescription": "Peso de una bola de masa. Recomendado: 250g para una pizza de 30cm",
+      "amount": "Cantidad",
+      "amountDescription": "Ingrese la cantidad total para su masa",
+      "yeastType": "Tipo de Levadura",
+      "yeastDescription": "La levadura fresca añade mejor sabor. La levadura seca tiene mayor vida útil",
+      "freshYeast": "Levadura Fresca (0.3%)",
+      "dryYeast": "Levadura Seca (0.1%)",
+      "hydrationDescription": "Menor (50-60%) hace masa más firme; mayor (65-75%) crea corteza más abierta y aireada"
+    }
   },
   "recipe": {
     "authRequired": "Autenticación Requerida",

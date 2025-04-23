@@ -1,4 +1,3 @@
-
 {
   "common": {
     "calculator": "Pizza-Rechner",
@@ -32,7 +31,18 @@
     "yeast": "Hefe",
     "oil": "Olivenöl",
     "sugar": "Zucker",
-    "hydration": "Hydratation"
+    "hydration": "Hydratation",
+    "ingredients": {
+      "ballWeight": "Teigkugelgewicht (g)",
+      "ballWeightDescription": "Gewicht einer Teigkugel. Empfohlen: 250g für eine 30cm Pizza",
+      "amount": "Menge",
+      "amountDescription": "Geben Sie die Gesamtmenge für Ihren Teig ein",
+      "yeastType": "Hefetyp",
+      "yeastDescription": "Frische Hefe gibt besseren Geschmack. Trockenhefe hat längere Haltbarkeit",
+      "freshYeast": "Frische Hefe (0.3%)",
+      "dryYeast": "Trockenhefe (0.1%)",
+      "hydrationDescription": "Niedriger (50-60%) macht festeren Teig; höher (65-75%) ergibt luftigere Kruste"
+    }
   },
   "recipe": {
     "authRequired": "Authentifizierung erforderlich",

@@ -1,4 +1,3 @@
-
 {
   "common": {
     "calculator": "Calcolatore per Pizza",
@@ -32,7 +31,18 @@
     "yeast": "Lievito",
     "oil": "Olio d'Oliva",
     "sugar": "Zucchero",
-    "hydration": "Idratazione"
+    "hydration": "Idratazione",
+    "ingredients": {
+      "ballWeight": "Peso della Pallina (g)",
+      "ballWeightDescription": "Peso di una pallina di impasto. Consigliato: 250g per una pizza da 30cm",
+      "amount": "Quantità",
+      "amountDescription": "Inserisci la quantità totale per il tuo impasto",
+      "yeastType": "Tipo di Lievito",
+      "yeastDescription": "Il lievito fresco dà più sapore. Il lievito secco ha una durata maggiore",
+      "freshYeast": "Lievito Fresco (0.3%)",
+      "dryYeast": "Lievito Secco (0.1%)",
+      "hydrationDescription": "Più bassa (50-60%) rende l'impasto più sodo; più alta (65-75%) crea una crosta più aperta e areata"
+    }
   },
   "recipe": {
     "authRequired": "Autenticazione Richiesta",

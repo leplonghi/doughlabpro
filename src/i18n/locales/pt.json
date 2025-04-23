@@ -1,4 +1,3 @@
-
 {
   "common": {
     "calculator": "Calculadora de Massa para Pizza",
@@ -25,7 +24,18 @@
     "yeast": "Fermento",
     "oil": "Azeite",
     "sugar": "Açúcar",
-    "hydration": "Hidratação"
+    "hydration": "Hidratação",
+    "ingredients": {
+      "ballWeight": "Peso da Bola (g)",
+      "ballWeightDescription": "Peso de uma bola de massa. Recomendado: 250g para uma pizza de 30cm",
+      "amount": "Quantidade",
+      "amountDescription": "Digite a quantidade total para sua massa",
+      "yeastType": "Tipo de Fermento",
+      "yeastDescription": "Fermento fresco adiciona melhor sabor. Fermento seco tem maior durabilidade",
+      "freshYeast": "Fermento Fresco (0.3%)",
+      "dryYeast": "Fermento Seco (0.1%)",
+      "hydrationDescription": "Menor (50-60%) deixa a massa mais firme; maior (65-75%) cria crosta mais aberta e aerada"
+    }
   },
   "recipe": {
     "authRequired": "Autenticação Necessária",

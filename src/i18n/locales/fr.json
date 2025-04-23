@@ -1,4 +1,3 @@
-
 {
   "common": {
     "calculator": "Calculateur de Pâte à Pizza",
@@ -25,7 +24,18 @@
     "yeast": "Levure",
     "oil": "Huile d'Olive",
     "sugar": "Sucre",
-    "hydration": "Hydratation"
+    "hydration": "Hydratation",
+    "ingredients": {
+      "ballWeight": "Poids de la Boule (g)",
+      "ballWeightDescription": "Poids d'une boule de pâte. Recommandé: 250g pour une pizza de 30cm",
+      "amount": "Quantité",
+      "amountDescription": "Entrez la quantité totale pour votre pâte",
+      "yeastType": "Type de Levure",
+      "yeastDescription": "La levure fraîche ajoute une meilleure saveur. La levure sèche a une durée de vie plus longue",
+      "freshYeast": "Levure Fraîche (0.3%)",
+      "dryYeast": "Levure Sèche (0.1%)",
+      "hydrationDescription": "Plus basse (50-60%) rend la pâte plus ferme; plus haute (65-75%) crée une croûte plus ouverte et aérée"
+    }
   },
   "recipe": {
     "authRequired": "Authentification Requise",

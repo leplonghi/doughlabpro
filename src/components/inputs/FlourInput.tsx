@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { InfoCircledIcon } from '@radix-ui/react-icons';
+import { useTranslation } from 'react-i18next';
 import { 
   Tooltip,
   TooltipContent,
@@ -17,17 +18,19 @@ interface FlourInputProps {
 }
 
 const FlourInput: React.FC<FlourInputProps> = ({ flour, onChange, error }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="space-y-2">
       <div className="flex items-center gap-2">
-        <Label htmlFor="flour">Amount of Flour (g)</Label>
+        <Label htmlFor="flour">{t('calculator.flour')}</Label>
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
               <span className="cursor-help"><InfoCircledIcon className="h-4 w-4 text-muted-foreground" /></span>
             </TooltipTrigger>
             <TooltipContent className="max-w-xs">
-              <p>Enter the total amount of flour for your dough in grams. Recommended starting point: 1000g.</p>
+              <p>{t('calculator.ingredients.amountDescription')}</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>

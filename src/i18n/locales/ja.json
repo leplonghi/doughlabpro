@@ -1,4 +1,3 @@
-
 {
   "common": {
     "calculator": "ピザ生地計算機",
@@ -25,7 +24,18 @@
     "yeast": "酵母",
     "oil": "オリーブオイル",
     "sugar": "砂糖",
-    "hydration": "水分量"
+    "hydration": "水分量",
+    "ingredients": {
+      "ballWeight": "生地ボールの重さ (g)",
+      "ballWeightDescription": "1個の生地ボールの重さ。推奨：30cmのピザに250g",
+      "amount": "量",
+      "amountDescription": "生地の総量を入力してください",
+      "yeastType": "イースト種類",
+      "yeastDescription": "生イーストは風味が良い。ドライイーストは保存期間が長い",
+      "freshYeast": "生イースト (0.3%)",
+      "dryYeast": "ドライイースト (0.1%)",
+      "hydrationDescription": "低め (50-60%) でより固い生地に。高め (65-75%) でより空気の多い軽い生地に"
+    }
   },
   "recipe": {
     "authRequired": "認証が必要",

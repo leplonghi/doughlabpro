@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { InfoCircledIcon } from '@radix-ui/react-icons';
+import { useTranslation } from 'react-i18next';
 import { 
   Tooltip,
   TooltipContent,
@@ -23,17 +24,19 @@ const HydrationInput: React.FC<HydrationInputProps> = ({
   onRangeChange,
   error
 }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="space-y-2">
       <div className="flex items-center gap-2">
-        <Label htmlFor="hydration">Hydration (%)</Label>
+        <Label htmlFor="hydration">{t('calculator.hydration')}</Label>
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
               <span className="cursor-help"><InfoCircledIcon className="h-4 w-4 text-muted-foreground" /></span>
             </TooltipTrigger>
             <TooltipContent className="max-w-xs">
-              <p>Hydration is the water-to-flour ratio. Lower (50-60%) makes firmer dough; higher (65-75%) creates more open, airy crust.</p>
+              <p>{t('calculator.ingredients.hydrationDescription')}</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
