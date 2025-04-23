@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { 
   Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter 
@@ -134,10 +133,7 @@ const DoughCalculator: React.FC = () => {
       <Card className="mb-8">
         <DoughCalculatorHeader />
         <CardContent className="pt-6 space-y-6">
-          <LanguageSelector
-            language={language}
-            onChange={setLanguage}
-          />
+          <LanguageSelector />
           <PizzaStyleSwitch
             pizzaStyle={pizzaStyle}
             setPizzaStyle={setPizzaStyle}

@@ -35,54 +35,55 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <Label htmlFor="flour">Quantidade de Farinha (g)</Label>
+        <Label htmlFor="flour" className="text-foreground">Quantidade de Farinha (g)</Label>
         <Input 
           id="flour" 
           type="number" 
-          value={flour} 
+          value={flour || ''}
           onChange={(e) => setFlour(Number(e.target.value))}
           min="0"
           placeholder="Ex: 1000"
+          className="text-foreground"
         />
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label>Sal (g)</Label>
+          <Label className="text-foreground">Sal (g)</Label>
           <Input
             value={salt.toFixed(1)}
             readOnly
-            className="bg-gray-50"
+            className="bg-muted text-muted-foreground"
           />
         </div>
         <div className="space-y-2">
-          <Label>Fermento (g)</Label>
+          <Label className="text-foreground">Fermento (g)</Label>
           <Input
             value={yeast.toFixed(2)}
             readOnly
-            className="bg-gray-50"
+            className="bg-muted text-muted-foreground"
           />
         </div>
         <div className="space-y-2">
-          <Label>Azeite (g)</Label>
+          <Label className="text-foreground">Azeite (g)</Label>
           <Input
             value={oil.toFixed(1)}
             readOnly
-            className="bg-gray-50"
+            className="bg-muted text-muted-foreground"
           />
         </div>
         <div className="space-y-2">
-          <Label>Açúcar (g)</Label>
+          <Label className="text-foreground">Açúcar (g)</Label>
           <Input
             value={sugar.toFixed(1)}
             readOnly
-            className="bg-gray-50"
+            className="bg-muted text-muted-foreground"
           />
         </div>
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="hydration">Hidratação (%)</Label>
+        <Label htmlFor="hydration" className="text-foreground">Hidratação (%)</Label>
         <div className="flex items-center gap-4">
           <Input 
             id="hydration" 
@@ -91,7 +92,7 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
             onChange={(e) => setHydration(Number(e.target.value))}
             min="50"
             max="90"
-            className="w-24"
+            className="w-24 text-foreground"
           />
           <div className="flex-1">
             <input
@@ -102,7 +103,7 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
               onChange={(e) => setHydration(Number(e.target.value))}
               className="w-full"
             />
-            <div className="flex justify-between text-xs text-gray-500 mt-1">
+            <div className="flex justify-between text-xs text-muted-foreground mt-1">
               <span>50%</span>
               <span>60%</span>
               <span>75%</span>
@@ -115,7 +116,7 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
       <Separator className="my-4" />
 
       <div className="space-y-3">
-        <Label>Tipo de Fermento</Label>
+        <Label className="text-foreground">Tipo de Fermento</Label>
         <RadioGroup 
           value={yeastType} 
           onValueChange={(value) => setYeastType(value as YeastType)}
@@ -123,11 +124,11 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
         >
           <div className="flex items-center space-x-2">
             <RadioGroupItem value="fresh" id="fresh" />
-            <Label htmlFor="fresh">Fermento Fresco (0,3%)</Label>
+            <Label htmlFor="fresh" className="text-foreground">Fermento Fresco (0,3%)</Label>
           </div>
           <div className="flex items-center space-x-2">
             <RadioGroupItem value="dry" id="dry" />
-            <Label htmlFor="dry">Fermento Seco (0,1%)</Label>
+            <Label htmlFor="dry" className="text-foreground">Fermento Seco (0,1%)</Label>
           </div>
         </RadioGroup>
       </div>
