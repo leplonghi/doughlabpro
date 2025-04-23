@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import * as React from 'react';
 import { ShoppingCart, Lightbulb, Calendar, Utensils, Pizza, Menu } from 'lucide-react';
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from '@/components/ui/navigation-menu';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -9,7 +9,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 
 const Navigation: React.FC = () => {
   const isMobile = useIsMobile();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
 
   const NavItems = () => (
     <NavigationMenuList className={cn(
