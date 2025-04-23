@@ -1,3 +1,4 @@
+
 {
   "common": {
     "calculator": "Pizza-Rechner",
@@ -10,6 +11,7 @@
     "forgotPassword": "Passwort vergessen?",
     "noAccount": "Noch kein Konto?",
     "hasAccount": "Bereits ein Konto?",
+    "toggleMenu": "Menü umschalten",
     "menu": {
       "shop": "Shop",
       "sauce": "Sauce",
@@ -32,6 +34,41 @@
     "oil": "Olivenöl",
     "sugar": "Zucker",
     "hydration": "Hydratation",
+    "pizzaStyle": {
+      "title": "Pizza-Stil",
+      "napoletana": "Neapolitanisch",
+      "newyork": "New York Stil",
+      "napoletanaDescription": "Weicher, leichter Teig, bei hoher Temperatur kurz gebacken, typisch für Neapel.",
+      "newyorkDescription": "Dickerer, elastischer Teig mit knuspriger Kruste und größeren Stücken, traditioneller New York Stil."
+    },
+    "fermentation": {
+      "title": "Fermentationsmethode",
+      "selectMethod": "Methode auswählen",
+      "direct": "Direkt",
+      "poolish": "Poolish",
+      "biga": "Biga",
+      "directDescription": "alle Zutaten werden auf einmal gemischt.",
+      "directTime": "Fermentationszeit: 8-24h (Raumtemperatur).",
+      "directFlavor": "Teig entwickelt milden Geschmack.",
+      "poolishDescription": "Stellen Sie einen flüssigen Vorteig mit 30% des Gesamtmehls her (100% Hydratation).",
+      "poolishPrepare": "Poolish 8-16h vorher zubereiten.",
+      "poolishAdd": "Poolish zum endgültigen Teig hinzufügen.",
+      "poolishResult": "Teig gewinnt Leichtigkeit, Aroma und spezielle Textur.",
+      "poolishInstruction": "Verwenden Sie Trockenhefe (0,1%) oder frische Hefe (0,3%) nur im Vorteig.",
+      "poolishMix": "Mischen Sie 30% Mehl + gleiche Menge Wasser + Hefe.",
+      "poolishNote": "Nach der Fermentation zum endgültigen Teig hinzufügen.",
+      "bigaDescription": "Stellen Sie einen festen Vorteig mit 50% des Mehls her (50% Hydratation).",
+      "bigaPrepare": "Biga 12-24h vorher zubereiten.",
+      "bigaAdd": "Biga zum endgültigen Teig hinzufügen.",
+      "bigaResult": "Widerstandsfähigerer Teig mit intensivem Aroma.",
+      "bigaInstruction": "Mischen Sie 50% Mehl + 50% Wasser + Hefe.",
+      "bigaMix": "Kneten und fermentieren lassen, bevor Sie es im endgültigen Teig verwenden.",
+      "bigaNote": "Ideal für rustikale Textur und tiefes Aroma.",
+      "tips": "Fermentationstipps",
+      "directTips": "Lassen Sie den Teig 8-12 Stunden bei Raumtemperatur (20-22°C) oder länger im Kühlschrank fermentieren. Der Teig sollte sein Volumen verdoppeln und ein charakteristisches Aroma entwickeln.",
+      "poolishTips": "Nach dem Einarbeiten des Poolish in den endgültigen Teig, lassen Sie ihn 4-8 Stunden bei Raumtemperatur fermentieren. Diese Methode verleiht dem Teig Leichtigkeit und komplexes Aroma.",
+      "bigaTips": "Nach dem Einarbeiten der Biga, lassen Sie den Teig 4-8 Stunden fermentieren. Diese Methode verleiht dem Teig Stärke und ein intensiveres Aroma. Ideal für Teige mit größerer Widerstandsfähigkeit."
+    },
     "ingredients": {
       "ballWeight": "Teigkugelgewicht (g)",
       "ballWeightDescription": "Gewicht einer Teigkugel. Empfohlen: 250g für eine 30cm Pizza",

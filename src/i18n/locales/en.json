@@ -1,3 +1,4 @@
+
 {
   "common": {
     "calculator": "Pizza Calculator",
@@ -10,6 +11,7 @@
     "forgotPassword": "Forgot Password?",
     "noAccount": "Don't have an account?",
     "hasAccount": "Already have an account?",
+    "toggleMenu": "Toggle menu",
     "menu": {
       "shop": "Shop",
       "sauce": "Sauce",
@@ -32,6 +34,41 @@
     "oil": "Olive Oil",
     "sugar": "Sugar",
     "hydration": "Hydration",
+    "pizzaStyle": {
+      "title": "Pizza Style",
+      "napoletana": "Neapolitan",
+      "newyork": "New York Style",
+      "napoletanaDescription": "Soft, light dough baked at high temperature for a short time, typical of Naples.",
+      "newyorkDescription": "Thicker, elastic dough with crispy crust and larger slices, traditional New York style."
+    },
+    "fermentation": {
+      "title": "Fermentation Method",
+      "selectMethod": "Select a method",
+      "direct": "Direct",
+      "poolish": "Poolish",
+      "biga": "Biga",
+      "directDescription": "all ingredients are mixed at once.",
+      "directTime": "Fermentation time: 8-24h (room temperature).",
+      "directFlavor": "Dough develops mild flavor.",
+      "poolishDescription": "make a liquid pre-ferment using 30% of total flour (100% hydration).",
+      "poolishPrepare": "Prepare poolish 8-16h before.",
+      "poolishAdd": "Add poolish to final dough.",
+      "poolishResult": "Dough gains lightness, aroma and special texture.",
+      "poolishInstruction": "Use dry yeast (0.1%) or fresh yeast (0.3%) only in pre-ferment.",
+      "poolishMix": "Mix 30% flour + same amount of water + yeast.",
+      "poolishNote": "After ready, add poolish to final dough.",
+      "bigaDescription": "make a firm pre-ferment using 50% of flour (50% hydration).",
+      "bigaPrepare": "Prepare biga 12-24h before.",
+      "bigaAdd": "Add biga to final dough.",
+      "bigaResult": "More resistant dough with intense aroma.",
+      "bigaInstruction": "Mix 50% flour + 50% water + yeast.",
+      "bigaMix": "Knead and let ferment before using in final dough.",
+      "bigaNote": "Ideal for rustic texture and deep flavor.",
+      "tips": "Fermentation Tips",
+      "directTips": "Allow the dough to ferment for 8-12 hours at room temperature (20-22°C) or in the refrigerator for longer. The dough should double in volume and develop a characteristic aroma.",
+      "poolishTips": "After incorporating the poolish into the final dough, allow to ferment for 4-8 hours at room temperature. This method gives lightness and complex flavor to the dough.",
+      "bigaTips": "After incorporating the biga, allow to ferment for 4-8 hours. This method provides strength to the dough and a more intense flavor. Ideal for doughs with greater resistance."
+    },
     "ingredients": {
       "ballWeight": "Ball Weight (g)",
       "ballWeightDescription": "Single dough ball weight. Recommended: 250g for a 12-inch pizza",

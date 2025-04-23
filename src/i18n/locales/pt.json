@@ -1,8 +1,10 @@
+
 {
   "common": {
     "calculator": "Calculadora de Massa para Pizza",
     "login": "Entrar",
     "logout": "Sair",
+    "toggleMenu": "Alternar menu",
     "menu": {
       "shop": "Loja",
       "sauce": "Molho",
@@ -25,6 +27,41 @@
     "oil": "Azeite",
     "sugar": "Açúcar",
     "hydration": "Hidratação",
+    "pizzaStyle": {
+      "title": "Estilo de Pizza",
+      "napoletana": "Napolitana",
+      "newyork": "Estilo Nova York",
+      "napoletanaDescription": "Massa macia e leve assada em alta temperatura por pouco tempo, típica de Nápoles.",
+      "newyorkDescription": "Massa mais grossa e elástica com crosta crocante e fatias maiores, estilo tradicional de Nova York."
+    },
+    "fermentation": {
+      "title": "Método de Fermentação",
+      "selectMethod": "Selecionar um método",
+      "direct": "Direto",
+      "poolish": "Poolish",
+      "biga": "Biga",
+      "directDescription": "todos os ingredientes são misturados de uma vez.",
+      "directTime": "Tempo de fermentação: 8-24h (temperatura ambiente).",
+      "directFlavor": "A massa desenvolve um sabor suave.",
+      "poolishDescription": "fazer um pré-fermento líquido usando 30% da farinha total (100% hidratação).",
+      "poolishPrepare": "Preparar poolish 8-16h antes.",
+      "poolishAdd": "Adicionar poolish à massa final.",
+      "poolishResult": "A massa ganha leveza, aroma e textura especial.",
+      "poolishInstruction": "Usar fermento seco (0.1%) ou fresco (0.3%) apenas no pré-fermento.",
+      "poolishMix": "Misturar 30% farinha + mesma quantidade de água + fermento.",
+      "poolishNote": "Depois de pronto, adicionar poolish à massa final.",
+      "bigaDescription": "fazer um pré-fermento firme usando 50% da farinha (50% hidratação).",
+      "bigaPrepare": "Preparar biga 12-24h antes.",
+      "bigaAdd": "Adicionar biga à massa final.",
+      "bigaResult": "Massa mais resistente com aroma intenso.",
+      "bigaInstruction": "Misturar 50% farinha + 50% água + fermento.",
+      "bigaMix": "Amassar e deixar fermentar antes de usar na massa final.",
+      "bigaNote": "Ideal para textura rústica e sabor profundo.",
+      "tips": "Dicas de Fermentação",
+      "directTips": "Deixe a massa fermentar por 8-12 horas em temperatura ambiente (20-22°C) ou por mais tempo na geladeira. A massa deve dobrar de volume e desenvolver um aroma característico.",
+      "poolishTips": "Depois de incorporar o poolish na massa final, deixe fermentar por 4-8 horas em temperatura ambiente. Este método dá leveza e sabor complexo à massa.",
+      "bigaTips": "Depois de incorporar a biga, deixe fermentar por 4-8 horas. Este método proporciona força à massa e um sabor mais intenso. Ideal para massas com maior resistência."
+    },
     "ingredients": {
       "ballWeight": "Peso da Bola (g)",
       "ballWeightDescription": "Peso de uma bola de massa. Recomendado: 250g para uma pizza de 30cm",

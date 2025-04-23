@@ -6,10 +6,12 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useTranslation } from 'react-i18next';
 
 const Navigation: React.FC = () => {
   const isMobile = useIsMobile();
   const [open, setOpen] = React.useState(false);
+  const { t } = useTranslation();
 
   const NavItems = () => (
     <NavigationMenuList className={cn(
@@ -25,7 +27,7 @@ const Navigation: React.FC = () => {
           href="/shop"
         >
           <ShoppingCart className={cn("h-5 w-5", isMobile ? "mr-2" : "")} />
-          <span className={isMobile ? "flex-1" : ""}>{isMobile ? "Shop" : ""}</span>
+          <span className={isMobile ? "flex-1" : ""}>{isMobile ? t('common.menu.shop') : ""}</span>
         </NavigationMenuLink>
       </NavigationMenuItem>
       <NavigationMenuItem>
@@ -37,7 +39,7 @@ const Navigation: React.FC = () => {
           href="/toppings"
         >
           <Utensils className={cn("h-5 w-5", isMobile ? "mr-2" : "")} />
-          <span className={isMobile ? "flex-1" : ""}>{isMobile ? "Toppings" : ""}</span>
+          <span className={isMobile ? "flex-1" : ""}>{isMobile ? t('common.menu.toppings') : ""}</span>
         </NavigationMenuLink>
       </NavigationMenuItem>
       <NavigationMenuItem>
@@ -49,7 +51,7 @@ const Navigation: React.FC = () => {
           href="/tips"
         >
           <Lightbulb className={cn("h-5 w-5", isMobile ? "mr-2" : "")} />
-          <span className={isMobile ? "flex-1" : ""}>{isMobile ? "Tips" : ""}</span>
+          <span className={isMobile ? "flex-1" : ""}>{isMobile ? t('common.menu.tips') : ""}</span>
         </NavigationMenuLink>
       </NavigationMenuItem>
     </NavigationMenuList>
@@ -63,7 +65,7 @@ const Navigation: React.FC = () => {
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="md:hidden">
                 <MenuIcon className="h-5 w-5" />
-                <span className="sr-only">Toggle menu</span>
+                <span className="sr-only">{t('common.toggleMenu')}</span>
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="w-[80%] max-w-sm pt-10">
@@ -82,4 +84,3 @@ const Navigation: React.FC = () => {
 };
 
 export default Navigation;
-

@@ -1,3 +1,4 @@
+
 {
   "common": {
     "calculator": "披萨计算器",
@@ -10,6 +11,7 @@
     "forgotPassword": "忘记密码？",
     "noAccount": "还没有账户？",
     "hasAccount": "已经有账户？",
+    "toggleMenu": "切换菜单",
     "menu": {
       "shop": "商店",
       "sauce": "酱料",
@@ -32,6 +34,41 @@
     "oil": "橄榄油",
     "sugar": "糖",
     "hydration": "水合度",
+    "pizzaStyle": {
+      "title": "披萨风格",
+      "napoletana": "那不勒斯式",
+      "newyork": "纽约式",
+      "napoletanaDescription": "在高温下短时间烘焙的柔软轻盈面团，那不勒斯的典型特色。",
+      "newyorkDescription": "更厚、更有弹性的面团，带有酥脆的外皮和更大的切片，传统纽约风格。"
+    },
+    "fermentation": {
+      "title": "发酵方法",
+      "selectMethod": "选择方法",
+      "direct": "直接法",
+      "poolish": "液种法",
+      "biga": "硬种法",
+      "directDescription": "所有材料一次性混合。",
+      "directTime": "发酵时间：8-24小时（室温）。",
+      "directFlavor": "面团形成温和的风味。",
+      "poolishDescription": "使用总面粉的30%制作液态预发酵物（100%水合度）。",
+      "poolishPrepare": "提前8-16小时准备液种。",
+      "poolishAdd": "将液种添加到最终面团中。",
+      "poolishResult": "面团获得轻盈度、香气和特殊质地。",
+      "poolishInstruction": "在预发酵物中只使用干酵母（0.1%）或鲜酵母（0.3%）。",
+      "poolishMix": "混合30%面粉 + 相同量的水 + 酵母。",
+      "poolishNote": "准备好后，将液种添加到最终面团中。",
+      "bigaDescription": "使用50%的面粉制作坚实的预发酵物（50%水合度）。",
+      "bigaPrepare": "提前12-24小时准备硬种。",
+      "bigaAdd": "将硬种添加到最终面团中。",
+      "bigaResult": "更有弹性的面团，具有强烈香气。",
+      "bigaInstruction": "混合50%面粉 + 50%水 + 酵母。",
+      "bigaMix": "揉捏并在用于最终面团前进行发酵。",
+      "bigaNote": "适合乡村质感和深层风味。",
+      "tips": "发酵提示",
+      "directTips": "让面团在室温下（20-22°C）发酵8-12小时，或在冰箱中发酵更长时间。面团应该体积增加一倍并形成特有香气。",
+      "poolishTips": "将液种掺入最终面团后，在室温下发酵4-8小时。此方法为面团提供轻盈感和复杂风味。",
+      "bigaTips": "添加硬种后，发酵4-8小时。此方法为面团提供强度和更浓郁的风味。适合需要更大弹性的面团。"
+    },
     "ingredients": {
       "ballWeight": "面团球重量 (g)",
       "ballWeightDescription": "单个面团球的重量。建议：30厘米披萨用250克",

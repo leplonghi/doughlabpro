@@ -1,3 +1,4 @@
+
 {
   "common": {
     "calculator": "Calcolatore per Pizza",
@@ -10,6 +11,7 @@
     "forgotPassword": "Password dimenticata?",
     "noAccount": "Non hai un account?",
     "hasAccount": "Hai già un account?",
+    "toggleMenu": "Attiva/disattiva menu",
     "menu": {
       "shop": "Negozio",
       "sauce": "Salsa",
@@ -32,6 +34,41 @@
     "oil": "Olio d'Oliva",
     "sugar": "Zucchero",
     "hydration": "Idratazione",
+    "pizzaStyle": {
+      "title": "Stile della Pizza",
+      "napoletana": "Napoletana",
+      "newyork": "Stile New York",
+      "napoletanaDescription": "Impasto morbido e leggero cotto ad alta temperatura per un breve periodo, tipico di Napoli.",
+      "newyorkDescription": "Impasto più spesso ed elastico con crosta croccante e fette più grandi, stile tradizionale di New York."
+    },
+    "fermentation": {
+      "title": "Metodo di Fermentazione",
+      "selectMethod": "Seleziona un metodo",
+      "direct": "Diretto",
+      "poolish": "Poolish",
+      "biga": "Biga",
+      "directDescription": "tutti gli ingredienti vengono mescolati in una volta.",
+      "directTime": "Tempo di fermentazione: 8-24h (temperatura ambiente).",
+      "directFlavor": "L'impasto sviluppa un sapore delicato.",
+      "poolishDescription": "creare un pre-fermento liquido usando il 30% della farina totale (100% idratazione).",
+      "poolishPrepare": "Preparare il poolish 8-16h prima.",
+      "poolishAdd": "Aggiungere il poolish all'impasto finale.",
+      "poolishResult": "L'impasto guadagna leggerezza, aroma e texture speciale.",
+      "poolishInstruction": "Usare lievito secco (0,1%) o fresco (0,3%) solo nel pre-fermento.",
+      "poolishMix": "Mescolare 30% farina + stessa quantità di acqua + lievito.",
+      "poolishNote": "Una volta pronto, aggiungere il poolish all'impasto finale.",
+      "bigaDescription": "creare un pre-fermento solido usando il 50% della farina (50% idratazione).",
+      "bigaPrepare": "Preparare la biga 12-24h prima.",
+      "bigaAdd": "Aggiungere la biga all'impasto finale.",
+      "bigaResult": "Impasto più resistente con aroma intenso.",
+      "bigaInstruction": "Mescolare 50% farina + 50% acqua + lievito.",
+      "bigaMix": "Impastare e lasciare fermentare prima di usare nell'impasto finale.",
+      "bigaNote": "Ideale per texture rustica e sapore profondo.",
+      "tips": "Consigli per la Fermentazione",
+      "directTips": "Lasciare fermentare l'impasto per 8-12 ore a temperatura ambiente (20-22°C) o più a lungo in frigorifero. L'impasto dovrebbe raddoppiare di volume e sviluppare un aroma caratteristico.",
+      "poolishTips": "Dopo aver incorporato il poolish nell'impasto finale, lasciare fermentare per 4-8 ore a temperatura ambiente. Questo metodo dona leggerezza e sapore complesso all'impasto.",
+      "bigaTips": "Dopo aver incorporato la biga, lasciare fermentare per 4-8 ore. Questo metodo fornisce forza all'impasto e un sapore più intenso. Ideale per impasti con maggiore resistenza."
+    },
     "ingredients": {
       "ballWeight": "Peso della Pallina (g)",
       "ballWeightDescription": "Peso di una pallina di impasto. Consigliato: 250g per una pizza da 30cm",

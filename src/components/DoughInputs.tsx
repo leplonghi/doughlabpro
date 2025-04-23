@@ -7,6 +7,7 @@ import HydrationInput from './inputs/HydrationInput';
 import YeastSelector from './inputs/YeastSelector';
 import IngredientDisplay from './inputs/IngredientDisplay';
 import { PizzaStyle } from './PizzaStyleSelect';
+import { useTranslation } from 'react-i18next';
 
 type YeastType = 'fresh' | 'dry';
 
@@ -37,6 +38,8 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
   ballWeight,
   onBallWeightChange
 }) => {
+  const { t } = useTranslation();
+  
   const salt = (flour * 2.5) / 100;
   const yeast = yeastType === 'fresh' ? (flour * 0.3) / 100 : (flour * 0.15) / 100;
   const oil = pizzaStyle === "napoletana" ? 0 : (flour * 2.5) / 100;
@@ -91,10 +94,10 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
       />
 
       <div className="grid grid-cols-2 gap-4">
-        <IngredientDisplay label="Salt (g)" value={salt} />
-        <IngredientDisplay label="Yeast (g)" value={yeast} />
-        <IngredientDisplay label="Olive Oil (g)" value={oil} />
-        <IngredientDisplay label="Sugar (g)" value={sugar} />
+        <IngredientDisplay label={t('calculator.salt')} value={salt} translationKey="calculator.salt" />
+        <IngredientDisplay label={t('calculator.yeast')} value={yeast} translationKey="calculator.yeast" />
+        <IngredientDisplay label={t('calculator.oil')} value={oil} translationKey="calculator.oil" />
+        <IngredientDisplay label={t('calculator.sugar')} value={sugar} translationKey="calculator.sugar" />
       </div>
 
       <HydrationInput

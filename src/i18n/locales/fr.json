@@ -1,8 +1,10 @@
+
 {
   "common": {
     "calculator": "Calculateur de Pâte à Pizza",
     "login": "Se Connecter",
     "logout": "Se Déconnecter",
+    "toggleMenu": "Basculer le menu",
     "menu": {
       "shop": "Boutique",
       "sauce": "Sauce",
@@ -25,6 +27,41 @@
     "oil": "Huile d'Olive",
     "sugar": "Sucre",
     "hydration": "Hydratation",
+    "pizzaStyle": {
+      "title": "Style de Pizza",
+      "napoletana": "Napolitaine",
+      "newyork": "Style New York",
+      "napoletanaDescription": "Pâte douce et légère, cuite à haute température pendant un court instant, typique de Naples.",
+      "newyorkDescription": "Pâte plus épaisse et élastique avec une croûte croustillante et de plus grandes parts, style traditionnel de New York."
+    },
+    "fermentation": {
+      "title": "Méthode de Fermentation",
+      "selectMethod": "Sélectionner une méthode",
+      "direct": "Directe",
+      "poolish": "Poolish",
+      "biga": "Biga",
+      "directDescription": "tous les ingrédients sont mélangés en une fois.",
+      "directTime": "Temps de fermentation: 8-24h (température ambiante).",
+      "directFlavor": "La pâte développe une saveur douce.",
+      "poolishDescription": "faire un pré-ferment liquide utilisant 30% de la farine totale (100% hydratation).",
+      "poolishPrepare": "Préparer le poolish 8-16h avant.",
+      "poolishAdd": "Ajouter le poolish à la pâte finale.",
+      "poolishResult": "La pâte gagne en légèreté, arôme et texture spéciale.",
+      "poolishInstruction": "Utiliser de la levure sèche (0.1%) ou fraîche (0.3%) uniquement dans le pré-ferment.",
+      "poolishMix": "Mélanger 30% de farine + même quantité d'eau + levure.",
+      "poolishNote": "Une fois prêt, ajouter le poolish à la pâte finale.",
+      "bigaDescription": "faire un pré-ferment ferme utilisant 50% de la farine (50% hydratation).",
+      "bigaPrepare": "Préparer la biga 12-24h avant.",
+      "bigaAdd": "Ajouter la biga à la pâte finale.",
+      "bigaResult": "Pâte plus résistante avec un arôme intense.",
+      "bigaInstruction": "Mélanger 50% de farine + 50% d'eau + levure.",
+      "bigaMix": "Pétrir et laisser fermenter avant d'utiliser dans la pâte finale.",
+      "bigaNote": "Idéal pour une texture rustique et une saveur profonde.",
+      "tips": "Conseils de Fermentation",
+      "directTips": "Laisser la pâte fermenter pendant 8-12 heures à température ambiante (20-22°C) ou plus longtemps au réfrigérateur. La pâte devrait doubler de volume et développer un arôme caractéristique.",
+      "poolishTips": "Après avoir incorporé le poolish dans la pâte finale, laisser fermenter pendant 4-8 heures à température ambiante. Cette méthode donne légèreté et saveur complexe à la pâte.",
+      "bigaTips": "Après avoir incorporé la biga, laisser fermenter pendant 4-8 heures. Cette méthode donne de la force à la pâte et une saveur plus intense. Idéal pour les pâtes avec plus de résistance."
+    },
     "ingredients": {
       "ballWeight": "Poids de la Boule (g)",
       "ballWeightDescription": "Poids d'une boule de pâte. Recommandé: 250g pour une pizza de 30cm",
