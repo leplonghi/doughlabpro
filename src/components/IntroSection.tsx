@@ -15,7 +15,7 @@ const IntroSection: React.FC = () => {
       <Card className="overflow-hidden">
         <div className="bg-gradient-to-r from-pizza-light to-pizza-cream p-6 text-center">
           <h1 className="text-4xl md:text-5xl font-serif font-bold text-gray-800 mb-3">
-            Neapolitan Pizza Calculator
+            Pizza Dough Calculator
           </h1>
           <p className="text-gray-600 text-lg md:text-xl font-light">
             Create pizza dough with precision
@@ -26,7 +26,7 @@ const IntroSection: React.FC = () => {
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem value="item-1">
               <AccordionTrigger className="text-gray-700">
-                About Neapolitan Pizza
+                About Pizza
               </AccordionTrigger>
               <AccordionContent>
                 <p className="text-gray-700 text-lg leading-relaxed">
