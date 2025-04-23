@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Wheat, Droplet, FlaskConical } from 'lucide-react';
+import { Wheat, Droplet, FlaskConical, FileText } from 'lucide-react';
 
 interface RecipeFinalProps {
   flour: number;
