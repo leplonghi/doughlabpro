@@ -1,15 +1,9 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Save, Share, Printer, RotateCcw } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-
-// Check if user is authenticated
-const isAuthenticated = () => {
-  // This would be replaced with actual authentication check
-  return false;
-};
+import { useAuth } from '@/context/AuthContext';
 
 // Check if user is a pro subscriber
 const isPro = () => {
@@ -20,9 +14,10 @@ const isPro = () => {
 const RecipeActions: React.FC = () => {
   const { toast } = useToast();
   const [saving, setSaving] = useState(false);
-
+  const { user } = useAuth(); // Use the Auth context to get the current user
+  
   const handleSaveRecipe = () => {
-    if (!isAuthenticated()) {
+    if (!user) {
       // Redirect to authentication page or show login modal
       toast({
         title: "Authentication Required",
