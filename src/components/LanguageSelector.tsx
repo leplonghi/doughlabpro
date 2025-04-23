@@ -2,32 +2,41 @@
 import React from "react";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { useLanguage } from '../contexts/LanguageContext';
+import { Globe } from 'lucide-react';
 
-export type Language = "pt" | "en";
+const languages = [
+  { value: 'en', label: 'English' },
+  { value: 'pt', label: 'Português' },
+  { value: 'es', label: 'Español' },
+  { value: 'fr', label: 'Français' },
+  { value: 'zh', label: '中文' },
+  { value: 'ja', label: '日本語' },
+];
 
-interface LanguageSelectorProps {
-  language: Language;
-  onChange: (value: Language) => void;
-}
+const LanguageSelector: React.FC = () => {
+  const { language, setLanguage, t } = useLanguage();
 
-const LanguageSelector: React.FC<LanguageSelectorProps> = ({ language, onChange }) => (
-  <div className="space-y-3">
-    <Label>Idioma / Language</Label>
-    <RadioGroup 
-      value={language} 
-      onValueChange={(value) => onChange(value as Language)}
-      className="flex gap-4"
-    >
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="pt" id="pt" />
-        <Label htmlFor="pt">Português</Label>
+  return (
+    <div className="space-y-3">
+      <div className="flex items-center gap-2">
+        <Globe className="h-4 w-4" />
+        <Label>{t('language.label')}</Label>
       </div>
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="en" id="en" />
-        <Label htmlFor="en">English</Label>
-      </div>
-    </RadioGroup>
-  </div>
-);
+      <RadioGroup 
+        value={language} 
+        onValueChange={(value) => setLanguage(value as any)}
+        className="flex flex-wrap gap-4"
+      >
+        {languages.map((lang) => (
+          <div key={lang.value} className="flex items-center space-x-2">
+            <RadioGroupItem value={lang.value} id={lang.value} />
+            <Label htmlFor={lang.value}>{lang.label}</Label>
+          </div>
+        ))}
+      </RadioGroup>
+    </div>
+  );
+};
 
 export default LanguageSelector;
