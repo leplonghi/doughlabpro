@@ -7,7 +7,7 @@ import { ThemeProvider } from "next-themes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
-import AuthProvider from "./components/AuthProvider"; 
+import AuthProvider from "./components/AuthProvider";
 import Navigation from "./components/Navigation";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
