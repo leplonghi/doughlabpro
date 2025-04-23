@@ -22,56 +22,55 @@ const IntroSection: React.FC = () => {
                 Create pizza dough with precision
               </p>
             </div>
-            <CollapsibleTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="shrink-0 ml-4"
-                onClick={() => setIsOpen(!isOpen)}
-              >
-                {isOpen ? (
-                  <Minus className="h-4 w-4" />
-                ) : (
-                  <Plus className="h-4 w-4" />
-                )}
-              </Button>
-            </CollapsibleTrigger>
+            <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+              <CollapsibleTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="shrink-0 ml-4"
+                >
+                  {isOpen ? (
+                    <Minus className="h-4 w-4" />
+                  ) : (
+                    <Plus className="h-4 w-4" />
+                  )}
+                </Button>
+              </CollapsibleTrigger>
+              <CollapsibleContent className="animate-accordion-down">
+                <CardContent className="p-8">
+                  <div className="prose prose-slate mx-auto">
+                    <p className="text-gray-700 text-lg leading-relaxed">
+                      True Neapolitan pizza follows centuries-old traditions, with precise proportions that result in a light, airy dough with flavorful crispy edges.
+                    </p>
+                    
+                    <p className="text-gray-700 mt-6 font-medium">
+                      Our calculator helps you:
+                    </p>
+                    
+                    <ul className="list-none space-y-3 mt-4">
+                      <li className="flex items-center text-gray-700">
+                        <span className="inline-block w-2 h-2 bg-pizza mr-3 rounded-full"></span>
+                        Calculate ingredients precisely based on flour quantity
+                      </li>
+                      <li className="flex items-center text-gray-700">
+                        <span className="inline-block w-2 h-2 bg-pizza mr-3 rounded-full"></span>
+                        Choose between direct, poolish, or biga fermentation
+                      </li>
+                      <li className="flex items-center text-gray-700">
+                        <span className="inline-block w-2 h-2 bg-pizza mr-3 rounded-full"></span>
+                        Adjust hydration to match your technique
+                      </li>
+                      <li className="flex items-center text-gray-700">
+                        <span className="inline-block w-2 h-2 bg-pizza mr-3 rounded-full"></span>
+                        Use fresh or dry yeast with correct proportions
+                      </li>
+                    </ul>
+                  </div>
+                </CardContent>
+              </CollapsibleContent>
+            </Collapsible>
           </div>
         </div>
-        <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-          <CollapsibleContent className="animate-accordion-down">
-            <CardContent className="p-8">
-              <div className="prose prose-slate mx-auto">
-                <p className="text-gray-700 text-lg leading-relaxed">
-                  True Neapolitan pizza follows centuries-old traditions, with precise proportions that result in a light, airy dough with flavorful crispy edges.
-                </p>
-                
-                <p className="text-gray-700 mt-6 font-medium">
-                  Our calculator helps you:
-                </p>
-                
-                <ul className="list-none space-y-3 mt-4">
-                  <li className="flex items-center text-gray-700">
-                    <span className="inline-block w-2 h-2 bg-pizza mr-3 rounded-full"></span>
-                    Calculate ingredients precisely based on flour quantity
-                  </li>
-                  <li className="flex items-center text-gray-700">
-                    <span className="inline-block w-2 h-2 bg-pizza mr-3 rounded-full"></span>
-                    Choose between direct, poolish, or biga fermentation
-                  </li>
-                  <li className="flex items-center text-gray-700">
-                    <span className="inline-block w-2 h-2 bg-pizza mr-3 rounded-full"></span>
-                    Adjust hydration to match your technique
-                  </li>
-                  <li className="flex items-center text-gray-700">
-                    <span className="inline-block w-2 h-2 bg-pizza mr-3 rounded-full"></span>
-                    Use fresh or dry yeast with correct proportions
-                  </li>
-                </ul>
-              </div>
-            </CardContent>
-          </CollapsibleContent>
-        </Collapsible>
       </Card>
     </div>
   );
