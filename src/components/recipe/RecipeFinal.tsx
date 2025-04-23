@@ -1,6 +1,11 @@
-
 import React from 'react';
-import { Wheat, Droplet, FlaskConical, FileText, DivideCircle } from 'lucide-react';
+import { Wheat, Droplet, FlaskConical, FileText, DivideCircle, Info } from 'lucide-react';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface RecipeFinalProps {
   flour: number;
@@ -48,12 +53,36 @@ const RecipeFinal: React.FC<RecipeFinalProps> = ({
         <span className="result-value">{formatValue(salt)}{getUnitLabel()}</span>
       </li>
       <li className="flex justify-between">
-        <span className="result-label flex items-center gap-2">🫒 Olive Oil:</span>
+        <span className="result-label flex items-center gap-2">
+          🫒 Olive Oil:
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+                <Info size={14} className="text-muted-foreground cursor-help" />
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Olive oil amount is fixed based on the pizza style. Neapolitan style doesn't use oil, while New York style uses 2.5% of flour weight.</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </span>
         <span className="result-value">{formatValue(oil)}{getUnitLabel()}</span>
       </li>
       {isNewYorkStyle && (
         <li className="flex justify-between">
-          <span className="result-label flex items-center gap-2">🍯 Sugar:</span>
+          <span className="result-label flex items-center gap-2">
+            🍯 Sugar:
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger>
+                  <Info size={14} className="text-muted-foreground cursor-help" />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Sugar amount is fixed based on the pizza style. Only New York style uses sugar at 2.5% of flour weight.</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </span>
           <span className="result-value">{formatValue(sugar || 0)}{getUnitLabel()}</span>
         </li>
       )}
