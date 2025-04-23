@@ -23,13 +23,13 @@ const Header: React.FC = () => {
             </h1>
           </Link>
           <div className="hidden md:flex items-center gap-4">
-            <Link to="/shop" className="flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors">
+            <Link to="/shop" className="text-muted-foreground hover:text-foreground transition-colors">
               <ShoppingCart size={20} />
             </Link>
-            <Link to="/toppings" className="flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors">
+            <Link to="/toppings" className="text-muted-foreground hover:text-foreground transition-colors">
               <Utensils size={20} />
             </Link>
-            <Link to="/tips" className="flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors">
+            <Link to="/tips" className="text-muted-foreground hover:text-foreground transition-colors">
               <Lightbulb size={20} />
             </Link>
           </div>
