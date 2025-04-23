@@ -35,7 +35,7 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <Label htmlFor="flour">Quantidade de Farinha (g)</Label>
+        <Label htmlFor="flour">Amount of Flour (g)</Label>
         <Input 
           id="flour" 
           type="number" 
@@ -48,7 +48,7 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
 
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label>Sal (g)</Label>
+          <Label>Salt (g)</Label>
           <Input
             value={salt.toFixed(1)}
             readOnly
@@ -56,7 +56,7 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
           />
         </div>
         <div className="space-y-2">
-          <Label>Fermento (g)</Label>
+          <Label>Yeast (g)</Label>
           <Input
             value={yeast.toFixed(2)}
             readOnly
@@ -64,7 +64,7 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
           />
         </div>
         <div className="space-y-2">
-          <Label>Azeite (g)</Label>
+          <Label>Olive Oil (g)</Label>
           <Input
             value={oil.toFixed(1)}
             readOnly
@@ -72,7 +72,7 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
           />
         </div>
         <div className="space-y-2">
-          <Label>Açúcar (g)</Label>
+          <Label>Sugar (g)</Label>
           <Input
             value={sugar.toFixed(1)}
             readOnly
@@ -82,7 +82,7 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="hydration">Hidratação (%)</Label>
+        <Label htmlFor="hydration">Hydration (%)</Label>
         <div className="flex items-center gap-4">
           <Input 
             id="hydration" 
@@ -115,7 +115,7 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
       <Separator className="my-4" />
 
       <div className="space-y-3">
-        <Label>Tipo de Fermento</Label>
+        <Label>Yeast Type</Label>
         <RadioGroup 
           value={yeastType} 
           onValueChange={(value) => setYeastType(value as YeastType)}
@@ -123,11 +123,11 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
         >
           <div className="flex items-center space-x-2">
             <RadioGroupItem value="fresh" id="fresh" />
-            <Label htmlFor="fresh">Fermento Fresco (0,3%)</Label>
+            <Label htmlFor="fresh">Fresh Yeast (0.3%)</Label>
           </div>
           <div className="flex items-center space-x-2">
             <RadioGroupItem value="dry" id="dry" />
-            <Label htmlFor="dry">Fermento Seco (0,1%)</Label>
+            <Label htmlFor="dry">Dry Yeast (0.1%)</Label>
           </div>
         </RadioGroup>
       </div>
