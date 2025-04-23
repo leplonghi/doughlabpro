@@ -1,6 +1,6 @@
 
 import * as React from 'react';
-import { ShoppingCart, Lightbulb, Calendar, Utensils, Pizza, Menu } from 'lucide-react';
+import { ShoppingCart, Lightbulb, Utensils } from 'lucide-react';
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from '@/components/ui/navigation-menu';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -34,21 +34,9 @@ const Navigation: React.FC = () => {
             "group inline-flex h-10 w-full md:w-max items-center justify-start md:justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50",
             isMobile ? "gap-3" : "gap-2"
           )}
-          href="/sauce"
-        >
-          <Utensils className={cn("h-5 w-5", isMobile ? "mr-2" : "")} />
-          <span className={isMobile ? "flex-1" : ""}>{isMobile ? "Sauce" : ""}</span>
-        </NavigationMenuLink>
-      </NavigationMenuItem>
-      <NavigationMenuItem>
-        <NavigationMenuLink
-          className={cn(
-            "group inline-flex h-10 w-full md:w-max items-center justify-start md:justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50",
-            isMobile ? "gap-3" : "gap-2"
-          )}
           href="/toppings"
         >
-          <Pizza className={cn("h-5 w-5", isMobile ? "mr-2" : "")} />
+          <Utensils className={cn("h-5 w-5", isMobile ? "mr-2" : "")} />
           <span className={isMobile ? "flex-1" : ""}>{isMobile ? "Toppings" : ""}</span>
         </NavigationMenuLink>
       </NavigationMenuItem>
@@ -62,18 +50,6 @@ const Navigation: React.FC = () => {
         >
           <Lightbulb className={cn("h-5 w-5", isMobile ? "mr-2" : "")} />
           <span className={isMobile ? "flex-1" : ""}>{isMobile ? "Tips" : ""}</span>
-        </NavigationMenuLink>
-      </NavigationMenuItem>
-      <NavigationMenuItem>
-        <NavigationMenuLink
-          className={cn(
-            "group inline-flex h-10 w-full md:w-max items-center justify-start md:justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50",
-            isMobile ? "gap-3" : "gap-2"
-          )}
-          href="/plans"
-        >
-          <Calendar className={cn("h-5 w-5", isMobile ? "mr-2" : "")} />
-          <span className={isMobile ? "flex-1" : ""}>{isMobile ? "Plans" : ""}</span>
         </NavigationMenuLink>
       </NavigationMenuItem>
     </NavigationMenuList>
