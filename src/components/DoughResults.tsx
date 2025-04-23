@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { 
   Card, 
@@ -11,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Clock, FileText, Wheat, Droplet, FlaskConical } from 'lucide-react';
 import { PizzaStyle } from "./PizzaStyleSelect";
+import { Unit } from './UnitSelect';
 
 type FermentationMethod = 'direct' | 'poolish' | 'biga';
 
@@ -19,7 +19,8 @@ interface DoughRecipe {
   water: number;
   salt: number;
   yeast: number;
-  oil?: number; // azeite só na new york style
+  oil: number;
+  sugar?: number;
   poolish?: {
     flour: number;
     water: number;
@@ -36,11 +37,35 @@ interface DoughResultsProps {
   recipe: DoughRecipe;
   fermentationMethod: FermentationMethod;
   pizzaStyle: PizzaStyle;
+  unit: Unit;
 }
 
-const DoughResults: React.FC<DoughResultsProps> = ({ recipe, fermentationMethod, pizzaStyle }) => {
+const DoughResults: React.FC<DoughResultsProps> = ({ recipe, fermentationMethod, pizzaStyle, unit }) => {
+  const convertToUnit = (grams: number): number => {
+    switch(unit) {
+      case 'ounces':
+        return grams / 28.35;
+      case 'cups':
+        return grams / 120;
+      default:
+        return grams;
+    }
+  };
+
+  const getUnitLabel = () => {
+    switch(unit) {
+      case 'ounces':
+        return 'oz';
+      case 'cups':
+        return 'xíc';
+      default:
+        return 'g';
+    }
+  };
+
   const formatValue = (value: number): string => {
-    return value.toFixed(1).replace(/\.0$/, '');
+    const converted = convertToUnit(value);
+    return converted.toFixed(unit === 'grams' ? 1 : 2).replace(/\.0$/, '');
   };
 
   return (
@@ -69,15 +94,15 @@ const DoughResults: React.FC<DoughResultsProps> = ({ recipe, fermentationMethod,
               <ul className="space-y-2 text-gray-700">
                 <li className="flex justify-between">
                   <span className="result-label flex items-center gap-2"><Wheat size={16} /> Farinha:</span>
-                  <span className="result-value">{formatValue(recipe.poolish.flour)}g</span>
+                  <span className="result-value">{formatValue(recipe.poolish.flour)}{getUnitLabel()}</span>
                 </li>
                 <li className="flex justify-between">
                   <span className="result-label flex items-center gap-2"><Droplet size={16} /> Água:</span>
-                  <span className="result-value">{formatValue(recipe.poolish.water)}g</span>
+                  <span className="result-value">{formatValue(recipe.poolish.water)}{getUnitLabel()}</span>
                 </li>
                 <li className="flex justify-between">
                   <span className="result-label flex items-center gap-2"><FlaskConical size={16} /> Fermento:</span>
-                  <span className="result-value">{formatValue(recipe.poolish.yeast)}g</span>
+                  <span className="result-value">{formatValue(recipe.poolish.yeast)}{getUnitLabel()}</span>
                 </li>
               </ul>
               <p className="text-sm text-gray-500 mt-3">
@@ -95,15 +120,15 @@ const DoughResults: React.FC<DoughResultsProps> = ({ recipe, fermentationMethod,
               <ul className="space-y-2 text-gray-700">
                 <li className="flex justify-between">
                   <span className="result-label flex items-center gap-2"><Wheat size={16} /> Farinha:</span>
-                  <span className="result-value">{formatValue(recipe.biga.flour)}g</span>
+                  <span className="result-value">{formatValue(recipe.biga.flour)}{getUnitLabel()}</span>
                 </li>
                 <li className="flex justify-between">
                   <span className="result-label flex items-center gap-2"><Droplet size={16} /> Água:</span>
-                  <span className="result-value">{formatValue(recipe.biga.water)}g</span>
+                  <span className="result-value">{formatValue(recipe.biga.water)}{getUnitLabel()}</span>
                 </li>
                 <li className="flex justify-between">
                   <span className="result-label flex items-center gap-2"><FlaskConical size={16} /> Fermento:</span>
-                  <span className="result-value">{formatValue(recipe.biga.yeast)}g</span>
+                  <span className="result-value">{formatValue(recipe.biga.yeast)}{getUnitLabel()}</span>
                 </li>
               </ul>
               <p className="text-sm text-gray-500 mt-3">
@@ -120,25 +145,30 @@ const DoughResults: React.FC<DoughResultsProps> = ({ recipe, fermentationMethod,
             <ul className="space-y-2 text-gray-700">
               <li className="flex justify-between">
                 <span className="result-label flex items-center gap-2"><Wheat size={16} /> Farinha:</span>
-                <span className="result-value">{formatValue(recipe.flour)}g</span>
+                <span className="result-value">{formatValue(recipe.flour)}{getUnitLabel()}</span>
               </li>
               <li className="flex justify-between">
                 <span className="result-label flex items-center gap-2"><Droplet size={16} /> Água:</span>
-                <span className="result-value">{formatValue(recipe.water)}g</span>
+                <span className="result-value">{formatValue(recipe.water)}{getUnitLabel()}</span>
               </li>
               <li className="flex justify-between">
                 <span className="result-label flex items-center gap-2">🧂 Sal:</span>
-                <span className="result-value">{formatValue(recipe.salt)}g</span>
+                <span className="result-value">{formatValue(recipe.salt)}{getUnitLabel()}</span>
               </li>
-              {/* Exibe azeite sempre, mesmo para napolitana (valor será 0) */}
               <li className="flex justify-between">
                 <span className="result-label flex items-center gap-2">🫒 Azeite:</span>
-                <span className="result-value">{formatValue(recipe.oil ?? 0)}g</span>
+                <span className="result-value">{formatValue(recipe.oil)}{getUnitLabel()}</span>
               </li>
+              {pizzaStyle === "newyork" && (
+                <li className="flex justify-between">
+                  <span className="result-label flex items-center gap-2">🍯 Açúcar:</span>
+                  <span className="result-value">{formatValue(recipe.sugar || 0)}{getUnitLabel()}</span>
+                </li>
+              )}
               {(fermentationMethod === 'direct') && (
                 <li className="flex justify-between">
                   <span className="result-label flex items-center gap-2"><FlaskConical size={16} /> Fermento:</span>
-                  <span className="result-value">{formatValue(recipe.yeast)}g</span>
+                  <span className="result-value">{formatValue(recipe.yeast)}{getUnitLabel()}</span>
                 </li>
               )}
               {(fermentationMethod === 'poolish' || fermentationMethod === 'biga') && (
@@ -191,4 +221,3 @@ const DoughResults: React.FC<DoughResultsProps> = ({ recipe, fermentationMethod,
 };
 
 export default DoughResults;
-
