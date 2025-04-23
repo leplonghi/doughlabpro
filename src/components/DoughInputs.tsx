@@ -41,6 +41,8 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
   const yeast = yeastType === 'fresh' ? (flour * 0.3) / 100 : (flour * 0.15) / 100;
   const oil = pizzaStyle === "napoletana" ? 0 : (flour * 2.5) / 100;
   const sugar = pizzaStyle === "napoletana" ? 0 : (flour * 2.5) / 100;
+  const water = (flour * hydration) / 100;
+  const totalDoughWeight = flour + water + salt + yeast + oil + sugar;
 
   const handleFlourChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -78,7 +80,7 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
     <div className="space-y-6">
       <BallWeightInput
         ballWeight={ballWeight}
-        flour={flour}
+        totalDoughWeight={totalDoughWeight}
         onBallWeightChange={handleBallWeightChange}
       />
 

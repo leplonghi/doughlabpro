@@ -12,16 +12,16 @@ import {
 
 interface BallWeightInputProps {
   ballWeight: number;
-  flour: number;
+  totalDoughWeight: number;
   onBallWeightChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const BallWeightInput: React.FC<BallWeightInputProps> = ({
   ballWeight,
-  flour,
+  totalDoughWeight,
   onBallWeightChange
 }) => {
-  const numberOfBalls = Math.floor(flour / ballWeight) || 0;
+  const numberOfBalls = Math.floor(totalDoughWeight / ballWeight) || 0;
 
   const handleRangeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newEvent = {
@@ -81,7 +81,7 @@ const BallWeightInput: React.FC<BallWeightInputProps> = ({
         </div>
       </div>
       <div className="text-sm text-muted-foreground mt-1">
-        This will make approximately {numberOfBalls} dough {numberOfBalls === 1.5 ? 'ball' : 'balls'}
+        This will make approximately {numberOfBalls} dough {numberOfBalls === 1 ? 'ball' : 'balls'}
       </div>
     </div>
   );
