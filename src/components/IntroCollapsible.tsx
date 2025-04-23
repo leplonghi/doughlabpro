@@ -14,7 +14,7 @@ const IntroCollapsible: React.FC = () => {
       <Card className="p-4">
         <CollapsibleTrigger className="flex items-center justify-between w-full">
           <h2 className="text-lg font-serif font-semibold">
-            {t('calculator.description')}
+            {t('calculator.title')}
           </h2>
           {isOpen ? (
             <ChevronUp className="h-5 w-5 text-gray-500" />
@@ -26,15 +26,19 @@ const IntroCollapsible: React.FC = () => {
         <CollapsibleContent className="mt-4">
           <div className="prose prose-slate">
             <p className="text-sm text-gray-700">
-              A verdadeira pizza napolitana segue tradições de séculos, com proporções precisas que resultam em uma massa leve e aerada por dentro, mas com bordas crocantes cheias de sabor.
+              {t('calculator.introText')}
             </p>
             
             <div className="mt-4">
               <ul className="list-disc pl-5 space-y-1 text-sm text-gray-700">
-                <li>Calcule os ingredientes com precisão baseando-se na quantidade de farinha</li>
-                <li>Escolha entre fermentação direta, poolish ou biga</li>
-                <li>Ajuste hidratação para adaptar à sua técnica</li>
-                <li>Utilize fermento fresco ou seco com as proporções corretas</li>
+                {[
+                  'calculator.introPoint1',
+                  'calculator.introPoint2', 
+                  'calculator.introPoint3', 
+                  'calculator.introPoint4'
+                ].map((key, index) => (
+                  <li key={index}>{t(key)}</li>
+                ))}
               </ul>
             </div>
           </div>

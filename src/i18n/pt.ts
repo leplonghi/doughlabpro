@@ -1,4 +1,3 @@
-
 import { TranslationsModule } from './types';
 
 export const pt: TranslationsModule = {
@@ -28,6 +27,11 @@ export const pt: TranslationsModule = {
       biga: 'Biga (Preparar 12-24h antes)'
     },
     'recipe.tips': 'Dicas de Fermentação',
-    'button.calculate': 'Calcular Receita'
+    'button.calculate': 'Calcular Receita',
+    'calculator.introText': 'A verdadeira pizza napolitana segue tradições de séculos, com proporções precisas que resultam em uma massa leve e aerada por dentro, mas com bordas crocantes cheias de sabor.',
+    'calculator.introPoint1': 'Calcule os ingredientes com precisão baseando-se na quantidade de farinha',
+    'calculator.introPoint2': 'Escolha entre fermentação direta, poolish ou biga',
+    'calculator.introPoint3': 'Ajuste hidratação para adaptar à sua técnica',
+    'calculator.introPoint4': 'Utilize fermento fresco ou seco com as proporções corretas',
   }
 };
