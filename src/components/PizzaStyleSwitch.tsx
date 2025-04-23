@@ -11,8 +11,8 @@ interface PizzaStyleSwitchProps {
 
 const PizzaStyleSwitch: React.FC<PizzaStyleSwitchProps> = ({ pizzaStyle, setPizzaStyle }) => (
   <div className="space-y-2 mb-2">
-    <div className="flex items-center justify-between">
-      <div className="space-y-0.5">
+    <div className="flex flex-col space-y-4">
+      <div>
         <Label htmlFor="pizza-style" className="text-lg font-semibold">Pizza Style</Label>
         <p className="text-sm text-muted-foreground">
           {pizzaStyle === "napoletana" 
@@ -21,14 +21,14 @@ const PizzaStyleSwitch: React.FC<PizzaStyleSwitchProps> = ({ pizzaStyle, setPizz
           }
         </p>
       </div>
-      <div className="flex items-center space-x-2">
-        <Label htmlFor="pizza-style" className="text-sm">Neapolitan</Label>
+      <div className="flex items-center space-x-4">
+        <Label htmlFor="pizza-style" className={`text-sm ${pizzaStyle === "napoletana" ? "font-medium" : ""}`}>Neapolitan</Label>
         <Switch
           id="pizza-style"
           checked={pizzaStyle === "newyork"}
           onCheckedChange={(checked) => setPizzaStyle(checked ? "newyork" : "napoletana")}
         />
-        <Label htmlFor="pizza-style" className="text-sm">New York</Label>
+        <Label htmlFor="pizza-style" className={`text-sm ${pizzaStyle === "newyork" ? "font-medium" : ""}`}>New York</Label>
       </div>
     </div>
   </div>

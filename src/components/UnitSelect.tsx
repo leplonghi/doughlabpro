@@ -12,7 +12,7 @@ interface UnitSelectProps {
 
 const UnitSelect: React.FC<UnitSelectProps> = ({ unit, onChange }) => (
   <div className="space-y-3">
-    <Label>Unidade de Medida</Label>
+    <Label>Measurement Units</Label>
     <RadioGroup 
       value={unit} 
       onValueChange={(value) => onChange(value as Unit)}
@@ -20,15 +20,15 @@ const UnitSelect: React.FC<UnitSelectProps> = ({ unit, onChange }) => (
     >
       <div className="flex items-center space-x-2">
         <RadioGroupItem value="grams" id="grams" />
-        <Label htmlFor="grams">Gramas</Label>
+        <Label htmlFor="grams">Grams</Label>
       </div>
       <div className="flex items-center space-x-2">
         <RadioGroupItem value="ounces" id="ounces" />
-        <Label htmlFor="ounces">Onças</Label>
+        <Label htmlFor="ounces">Ounces</Label>
       </div>
       <div className="flex items-center space-x-2">
         <RadioGroupItem value="cups" id="cups" />
-        <Label htmlFor="cups">Xícaras/Colheres</Label>
+        <Label htmlFor="cups">Cups/Spoons</Label>
       </div>
     </RadioGroup>
   </div>
