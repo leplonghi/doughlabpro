@@ -6,34 +6,42 @@ const IntroSection: React.FC = () => {
   return (
     <div className="max-w-3xl mx-auto mb-10 px-4">
       <Card className="overflow-hidden">
-        <div className="bg-pizza-light bg-opacity-40 p-6 text-center">
-          <h1 className="text-3xl md:text-4xl font-serif font-bold text-gray-800 mb-2">
-            Calculadora de Pizza Napolitana
+        <div className="bg-gradient-to-r from-pizza-light to-pizza-cream p-8 text-center">
+          <h1 className="text-4xl md:text-5xl font-serif font-bold text-gray-800 mb-3">
+            Neapolitan Pizza Calculator
           </h1>
-          <p className="text-gray-600 md:text-lg">
-            Crie autênticas massas napolitanas com precisão
+          <p className="text-gray-600 text-lg md:text-xl font-light">
+            Create authentic Neapolitan pizza dough with precision
           </p>
         </div>
-        <CardContent className="p-6 md:p-8">
+        <CardContent className="p-8">
           <div className="prose prose-slate mx-auto">
-            <p className="text-gray-700">
-              A verdadeira pizza napolitana segue tradições de séculos, com proporções precisas que resultam em uma massa leve e aerada por dentro, mas com bordas crocantes cheias de sabor.
+            <p className="text-gray-700 text-lg leading-relaxed">
+              True Neapolitan pizza follows centuries-old traditions, with precise proportions that result in a light, airy dough with flavorful crispy edges.
             </p>
             
-            <p className="text-gray-700 mt-4">
-              Nossa calculadora permite que você:
+            <p className="text-gray-700 mt-6 font-medium">
+              Our calculator helps you:
             </p>
             
-            <ul className="list-disc pl-5 space-y-1 text-gray-700 mt-2">
-              <li>Calcule os ingredientes com precisão baseando-se na quantidade de farinha</li>
-              <li>Escolha entre fermentação direta, poolish ou biga</li>
-              <li>Ajuste hidratação para adaptar à sua técnica</li>
-              <li>Utilize fermento fresco ou seco com as proporções corretas</li>
+            <ul className="list-none space-y-3 mt-4">
+              <li className="flex items-center text-gray-700">
+                <span className="inline-block w-2 h-2 bg-pizza mr-3 rounded-full"></span>
+                Calculate ingredients precisely based on flour quantity
+              </li>
+              <li className="flex items-center text-gray-700">
+                <span className="inline-block w-2 h-2 bg-pizza mr-3 rounded-full"></span>
+                Choose between direct, poolish, or biga fermentation
+              </li>
+              <li className="flex items-center text-gray-700">
+                <span className="inline-block w-2 h-2 bg-pizza mr-3 rounded-full"></span>
+                Adjust hydration to match your technique
+              </li>
+              <li className="flex items-center text-gray-700">
+                <span className="inline-block w-2 h-2 bg-pizza mr-3 rounded-full"></span>
+                Use fresh or dry yeast with correct proportions
+              </li>
             </ul>
-            
-            <p className="text-gray-700 mt-4">
-              Comece inserindo a quantidade de farinha desejada e personalize sua receita!
-            </p>
           </div>
         </CardContent>
       </Card>
