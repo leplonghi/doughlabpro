@@ -1,15 +1,11 @@
+
 import React, { useState } from 'react';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { 
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { InfoCircledIcon } from '@radix-ui/react-icons';
+import BallWeightInput from './inputs/BallWeightInput';
+import FlourInput from './inputs/FlourInput';
+import HydrationInput from './inputs/HydrationInput';
+import YeastSelector from './inputs/YeastSelector';
+import IngredientDisplay from './inputs/IngredientDisplay';
 import { PizzaStyle } from './PizzaStyleSelect';
 
 type YeastType = 'fresh' | 'dry';
@@ -37,15 +33,13 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
   errors,
   validateField
 }) => {
+  const [ballWeight, setBallWeight] = useState<number>(250);
+  
   const salt = (flour * 2.5) / 100;
   const yeast = yeastType === 'fresh' ? (flour * 0.3) / 100 : (flour * 0.1) / 100;
   const oil = pizzaStyle === "napoletana" ? 0 : (flour * 2.5) / 100;
   const sugar = pizzaStyle === "napoletana" ? 0 : (flour * 2.5) / 100;
-  
-  const [ballWeight, setBallWeight] = useState<number>(250);
-  const numberOfBalls = Math.floor(flour / ballWeight) || 0;
 
-  // Handle flour input change with validation
   const handleFlourChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (value === '' || /^\d+$/.test(value)) {
@@ -54,7 +48,6 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
     }
   };
 
-  // Handle hydration input change with validation
   const handleHydrationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (value === '' || (/^\d+$/.test(value) && Number(value) >= 50 && Number(value) <= 90)) {
@@ -81,191 +74,38 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
 
   return (
     <div className="space-y-6">
-      <div className="space-y-2">
-        <div className="flex items-center gap-2">
-          <Label htmlFor="ballWeight">Dough Ball Weight (g)</Label>
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <span className="cursor-help"><InfoCircledIcon className="h-4 w-4 text-muted-foreground" /></span>
-              </TooltipTrigger>
-              <TooltipContent className="max-w-xs">
-                <p>Enter the desired weight for each dough ball (100g-500g). This will help calculate how many balls you can make.</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        </div>
-        <Input
-          id="ballWeight"
-          type="number"
-          value={ballWeight || ''}
-          onChange={handleBallWeightChange}
-          min="100"
-          max="500"
-          placeholder="Ex: 250g"
-          className="w-full"
-        />
-        <div className="text-sm text-muted-foreground mt-1">
-          This will make approximately {numberOfBalls} dough {numberOfBalls === 1 ? 'ball' : 'balls'}
-        </div>
-      </div>
+      <BallWeightInput
+        ballWeight={ballWeight}
+        flour={flour}
+        onBallWeightChange={handleBallWeightChange}
+      />
 
-      <div className="space-y-2">
-        <div className="flex items-center gap-2">
-          <Label htmlFor="flour">Amount of Flour (g)</Label>
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <span className="cursor-help"><InfoCircledIcon className="h-4 w-4 text-muted-foreground" /></span>
-              </TooltipTrigger>
-              <TooltipContent className="max-w-xs">
-                <p>Enter the total amount of flour for your dough in grams. Recommended starting point: 1000g.</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        </div>
-        <Input 
-          id="flour" 
-          type="number" 
-          value={flour || ''} 
-          onChange={handleFlourChange}
-          min="100"
-          max="10000"
-          placeholder="Ex: 1000g"
-          aria-describedby={errors.flour ? "flour-error" : undefined}
-          className={errors.flour ? "border-red-500 focus-visible:ring-red-500" : ""}
-        />
-        {errors.flour && (
-          <div id="flour-error" className="text-red-500 text-sm" aria-live="assertive">{errors.flour}</div>
-        )}
-      </div>
+      <FlourInput
+        flour={flour}
+        onChange={handleFlourChange}
+        error={errors.flour}
+      />
 
       <div className="grid grid-cols-2 gap-4">
-        <div className="space-y-2">
-          <Label>Salt (g)</Label>
-          <Input
-            value={salt.toFixed(1)}
-            readOnly
-            className="bg-gray-50"
-          />
-        </div>
-        <div className="space-y-2">
-          <div className="flex items-center gap-2">
-            <Label>Yeast (g)</Label>
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <span className="cursor-help"><InfoCircledIcon className="h-4 w-4 text-muted-foreground" /></span>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Fresh yeast (0.3%) is more active but shorter shelf life. Dry yeast (0.1%) is more stable and commonly available.</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          </div>
-          <Input
-            value={yeast.toFixed(2)}
-            readOnly
-            className="bg-gray-50"
-          />
-        </div>
-        <div className="space-y-2">
-          <Label>Olive Oil (g)</Label>
-          <Input
-            value={oil.toFixed(1)}
-            readOnly
-            className="bg-gray-50"
-          />
-        </div>
-        <div className="space-y-2">
-          <Label>Sugar (g)</Label>
-          <Input
-            value={sugar.toFixed(1)}
-            readOnly
-            className="bg-gray-50"
-          />
-        </div>
+        <IngredientDisplay label="Salt (g)" value={salt} />
+        <IngredientDisplay label="Yeast (g)" value={yeast} />
+        <IngredientDisplay label="Olive Oil (g)" value={oil} />
+        <IngredientDisplay label="Sugar (g)" value={sugar} />
       </div>
 
-      <div className="space-y-2">
-        <div className="flex items-center gap-2">
-          <Label htmlFor="hydration">Hydration (%)</Label>
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <span className="cursor-help"><InfoCircledIcon className="h-4 w-4 text-muted-foreground" /></span>
-              </TooltipTrigger>
-              <TooltipContent className="max-w-xs">
-                <p>Hydration is the water-to-flour ratio. Lower (50-60%) makes firmer dough; higher (65-75%) creates more open, airy crust.</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        </div>
-        <div className="flex items-center gap-4">
-          <Input 
-            id="hydration" 
-            type="number" 
-            value={hydration || ''} 
-            onChange={handleHydrationChange}
-            min="50"
-            max="90"
-            placeholder="60%"
-            className={`w-24 ${errors.hydration ? "border-red-500 focus-visible:ring-red-500" : ""}`}
-            aria-describedby={errors.hydration ? "hydration-error" : undefined}
-          />
-          <div className="flex-1">
-            <input
-              type="range"
-              min="50"
-              max="90"
-              value={hydration}
-              onChange={handleHydrationRangeChange}
-              className="w-full"
-            />
-            <div className="flex justify-between text-xs text-gray-500 mt-1">
-              <span>50%</span>
-              <span>60%</span>
-              <span>75%</span>
-              <span>90%</span>
-            </div>
-          </div>
-        </div>
-        {errors.hydration && (
-          <div id="hydration-error" className="text-red-500 text-sm" aria-live="assertive">{errors.hydration}</div>
-        )}
-      </div>
+      <HydrationInput
+        hydration={hydration}
+        onInputChange={handleHydrationChange}
+        onRangeChange={handleHydrationRangeChange}
+        error={errors.hydration}
+      />
 
       <Separator className="my-4" />
 
-      <div className="space-y-3">
-        <div className="flex items-center gap-2">
-          <Label>Yeast Type</Label>
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <span className="cursor-help"><InfoCircledIcon className="h-4 w-4 text-muted-foreground" /></span>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Fresh yeast is more perishable but adds better flavor. Dry yeast has longer shelf life and is more widely available.</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        </div>
-        <RadioGroup 
-          value={yeastType} 
-          onValueChange={(value) => setYeastType(value as YeastType)}
-          className="flex flex-col space-y-2"
-        >
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="fresh" id="fresh" />
-            <Label htmlFor="fresh">Fresh Yeast (0.3%)</Label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="dry" id="dry" />
-            <Label htmlFor="dry">Dry Yeast (0.1%)</Label>
-          </div>
-        </RadioGroup>
-      </div>
+      <YeastSelector
+        yeastType={yeastType}
+        onYeastTypeChange={setYeastType}
+      />
     </div>
   );
 };
