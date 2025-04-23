@@ -11,6 +11,7 @@ import ptTranslations from './locales/pt.json';
 import jaTranslations from './locales/ja.json';
 import zhTranslations from './locales/zh.json';
 
+// Initialize i18next with the language detector and React bindings
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)

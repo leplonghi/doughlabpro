@@ -1,5 +1,24 @@
 
 {
-  "common": {},
-  "calculator": {}
+  "common": {
+    "calculator": "ピザ生地計算機",
+    "login": "ログイン",
+    "logout": "ログアウト",
+    "menu": {
+      "sauce": "ソース",
+      "toppings": "トッピング",
+      "privacy": "プライバシー"
+    }
+  },
+  "calculator": {
+    "title": "ピザ生地計算機",
+    "subtitle": "完璧なピザ生地を正確に作成",
+    "ballWeight": "ボールの重さ",
+    "flour": "小麦粉",
+    "salt": "塩",
+    "yeast": "酵母",
+    "oil": "オリーブオイル",
+    "sugar": "砂糖",
+    "hydration": "水分量"
+  }
 }

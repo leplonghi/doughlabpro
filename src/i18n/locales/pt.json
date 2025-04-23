@@ -1,5 +1,24 @@
 
 {
-  "common": {},
-  "calculator": {}
+  "common": {
+    "calculator": "Calculadora de Massa para Pizza",
+    "login": "Entrar",
+    "logout": "Sair",
+    "menu": {
+      "sauce": "Molho",
+      "toppings": "Coberturas",
+      "privacy": "Privacidade"
+    }
+  },
+  "calculator": {
+    "title": "Calculadora de Massa para Pizza",
+    "subtitle": "Crie a massa de pizza perfeita com precisão",
+    "ballWeight": "Peso da Bola",
+    "flour": "Farinha",
+    "salt": "Sal",
+    "yeast": "Fermento",
+    "oil": "Azeite",
+    "sugar": "Açúcar",
+    "hydration": "Hidratação"
+  }
 }
