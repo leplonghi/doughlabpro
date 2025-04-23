@@ -35,10 +35,10 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   return <>{children}</>;
 };
 
-// Main App component with correct order of providers
+// Main App component with correct provider hierarchy
 const App = () => (
-  <React.StrictMode>
-    <BrowserRouter>
+  <BrowserRouter>
+    <React.StrictMode>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider attribute="class" defaultTheme="light">
           <TooltipProvider>
@@ -78,8 +78,8 @@ const App = () => (
           </TooltipProvider>
         </ThemeProvider>
       </QueryClientProvider>
-    </BrowserRouter>
-  </React.StrictMode>
+    </React.StrictMode>
+  </BrowserRouter>
 );
 
 export default App;
