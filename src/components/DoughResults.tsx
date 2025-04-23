@@ -54,7 +54,7 @@ const DoughResults: React.FC<DoughResultsProps> = ({ recipe, fermentationMethod,
       case 'ounces':
         return 'oz';
       case 'cups':
-        return 'xíc';
+        return 'cups';
       default:
         return 'g';
     }
@@ -69,14 +69,14 @@ const DoughResults: React.FC<DoughResultsProps> = ({ recipe, fermentationMethod,
     <Card className="mb-8">
       <CardHeader className="bg-pizza-light bg-opacity-30">
         <CardTitle>
-          {pizzaStyle === "newyork" ? "Sua Receita de Pizza New York Style" : "Sua Receita de Pizza Napolitana"}
+          {pizzaStyle === "newyork" ? "Your New York Style Pizza Recipe" : "Your Neapolitan Pizza Recipe"}
         </CardTitle>
         <CardDescription>
           {fermentationMethod === 'direct'
-            ? 'Método Direto'
+            ? 'Direct Method'
             : fermentationMethod === 'poolish'
-              ? 'Método Poolish'
-              : 'Método Biga'}
+              ? 'Poolish Method'
+              : 'Biga Method'}
         </CardDescription>
       </CardHeader>
       

@@ -13,16 +13,16 @@ const PizzaStyleSwitch: React.FC<PizzaStyleSwitchProps> = ({ pizzaStyle, setPizz
   <div className="space-y-2 mb-2">
     <div className="flex items-center justify-between">
       <div className="space-y-0.5">
-        <Label htmlFor="pizza-style" className="text-lg font-semibold">Estilo da Pizza</Label>
+        <Label htmlFor="pizza-style" className="text-lg font-semibold">Pizza Style</Label>
         <p className="text-sm text-muted-foreground">
           {pizzaStyle === "napoletana" 
-            ? "Massa macia, leve e assada em alta temperatura"
-            : "Massa mais grossa, elástica, com crosta crocante"
+            ? "Soft, light dough baked at high temperature"
+            : "Thicker dough with crispy crust and larger slices"
           }
         </p>
       </div>
       <div className="flex items-center space-x-2">
-        <Label htmlFor="pizza-style" className="text-sm">Napolitana</Label>
+        <Label htmlFor="pizza-style" className="text-sm">Neapolitan</Label>
         <Switch
           id="pizza-style"
           checked={pizzaStyle === "newyork"}
