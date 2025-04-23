@@ -38,7 +38,7 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
   onBallWeightChange
 }) => {
   const salt = (flour * 2.5) / 100;
-  const yeast = yeastType === 'fresh' ? (flour * 0.3) / 100 : (flour * 0.1.5) / 100;
+  const yeast = yeastType === 'fresh' ? (flour * 0.3) / 100 : (flour * 0.15) / 100;
   const oil = pizzaStyle === "napoletana" ? 0 : (flour * 2.5) / 100;
   const sugar = pizzaStyle === "napoletana" ? 0 : (flour * 2.5) / 100;
 
