@@ -4,7 +4,7 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Unit } from './UnitSelect';
+import { PizzaStyle } from './PizzaStyleSelect';
 
 type YeastType = 'fresh' | 'dry';
 
@@ -15,58 +15,32 @@ interface DoughInputsProps {
   setHydration: (v: number) => void;
   yeastType: YeastType;
   setYeastType: (v: YeastType) => void;
-  unit: Unit;
+  pizzaStyle: PizzaStyle;
 }
 
 const DoughInputs: React.FC<DoughInputsProps> = ({
-  flour, setFlour,
-  hydration, setHydration,
-  yeastType, setYeastType,
-  unit
+  flour,
+  setFlour,
+  hydration,
+  setHydration,
+  yeastType,
+  setYeastType,
+  pizzaStyle
 }) => {
   const salt = (flour * 2.5) / 100;
   const yeast = yeastType === 'fresh' ? (flour * 0.3) / 100 : (flour * 0.1) / 100;
-
-  const getUnitLabel = () => {
-    switch(unit) {
-      case 'ounces':
-        return 'oz';
-      case 'cups':
-        return 'xíc';
-      default:
-        return 'g';
-    }
-  };
-
-  const convertToUnit = (grams: number): number => {
-    switch(unit) {
-      case 'ounces':
-        return grams / 28.35;
-      case 'cups':
-        return grams / 120;
-      default:
-        return grams;
-    }
-  };
+  const oil = pizzaStyle === "napoletana" ? 0 : (flour * 2.5) / 100;
+  const sugar = pizzaStyle === "napoletana" ? 0 : (flour * 2.5) / 100;
 
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <Label htmlFor="flour">Quantidade de Farinha ({getUnitLabel()})</Label>
+        <Label htmlFor="flour">Quantidade de Farinha (g)</Label>
         <Input 
           id="flour" 
           type="number" 
-          value={convertToUnit(flour)} 
-          onChange={(e) => {
-            const value = parseFloat(e.target.value);
-            if (unit === 'ounces') {
-              setFlour(value * 28.35);
-            } else if (unit === 'cups') {
-              setFlour(value * 120);
-            } else {
-              setFlour(value);
-            }
-          }}
+          value={flour} 
+          onChange={(e) => setFlour(Number(e.target.value))}
           min="0"
           placeholder="Ex: 1000"
         />
@@ -74,17 +48,33 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
 
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label>Sal ({getUnitLabel()})</Label>
+          <Label>Sal (g)</Label>
           <Input
-            value={convertToUnit(salt).toFixed(1)}
+            value={salt.toFixed(1)}
             readOnly
             className="bg-gray-50"
           />
         </div>
         <div className="space-y-2">
-          <Label>Fermento ({getUnitLabel()})</Label>
+          <Label>Fermento (g)</Label>
           <Input
-            value={convertToUnit(yeast).toFixed(2)}
+            value={yeast.toFixed(2)}
+            readOnly
+            className="bg-gray-50"
+          />
+        </div>
+        <div className="space-y-2">
+          <Label>Azeite (g)</Label>
+          <Input
+            value={oil.toFixed(1)}
+            readOnly
+            className="bg-gray-50"
+          />
+        </div>
+        <div className="space-y-2">
+          <Label>Açúcar (g)</Label>
+          <Input
+            value={sugar.toFixed(1)}
             readOnly
             className="bg-gray-50"
           />

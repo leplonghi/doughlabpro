@@ -10,7 +10,7 @@ import DoughInputs from './DoughInputs';
 import DoughCalculatorHeader from './DoughCalculatorHeader';
 import DoughCalculateButton from './DoughCalculateButton';
 import PizzaStyleSwitch from './PizzaStyleSwitch';
-import UnitSelect, { Unit } from './UnitSelect';
+import LanguageSelector, { Language } from './LanguageSelector';
 import { PizzaStyle } from './PizzaStyleSelect';
 
 type FermentationMethod = 'direct' | 'poolish' | 'biga';
@@ -41,8 +41,8 @@ const DoughCalculator: React.FC = () => {
   const [flour, setFlour] = useState<number>(1000);
   const [yeastType, setYeastType] = useState<YeastType>("dry");
   const [recipe, setRecipe] = useState<DoughRecipe | null>(null);
-  const [unit, setUnit] = useState<Unit>("grams");
   const [hydration, setHydration] = useState<number>(60);
+  const [language, setLanguage] = useState<Language>("pt");
 
   const { toast } = useToast();
 
@@ -134,11 +134,14 @@ const DoughCalculator: React.FC = () => {
       <Card className="mb-8">
         <DoughCalculatorHeader />
         <CardContent className="pt-6 space-y-6">
+          <LanguageSelector
+            language={language}
+            onChange={setLanguage}
+          />
           <PizzaStyleSwitch
             pizzaStyle={pizzaStyle}
             setPizzaStyle={setPizzaStyle}
           />
-          <UnitSelect unit={unit} onChange={setUnit} />
           <FermentationMethodSelect
             fermentationMethod={fermentationMethod}
             onChange={setFermentationMethod}
@@ -150,7 +153,7 @@ const DoughCalculator: React.FC = () => {
             setHydration={setHydration}
             yeastType={yeastType}
             setYeastType={setYeastType}
-            unit={unit}
+            pizzaStyle={pizzaStyle}
           />
         </CardContent>
         <DoughCalculateButton onClick={calculateRecipe} />
@@ -161,7 +164,7 @@ const DoughCalculator: React.FC = () => {
           recipe={recipe} 
           fermentationMethod={fermentationMethod}
           pizzaStyle={pizzaStyle}
-          unit={unit}
+          unit="grams"
         />
       )}
     </div>
