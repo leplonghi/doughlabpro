@@ -3,7 +3,7 @@ import React from 'react';
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from 'react-router-dom';
-import { FaGoogle } from "react-icons/fa";
+import { Google } from "lucide-react";
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ const Auth = () => {
           className="w-full flex items-center justify-center gap-2"
           variant="outline"
         >
-          <FaGoogle className="w-4 h-4" />
+          <Google className="w-4 h-4" />
           Continue with Google
         </Button>
       </div>
