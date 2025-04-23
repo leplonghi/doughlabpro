@@ -12,11 +12,11 @@ interface PizzaStyleSelectProps {
 
 const PizzaStyleSelect: React.FC<PizzaStyleSelectProps> = ({ style, onChange }) => (
   <div className="space-y-2 mb-2">
-    <Label className="text-lg font-semibold">Estilo da Pizza</Label>
+    <Label className="text-lg font-semibold block mb-2">Estilo da Pizza</Label>
     <RadioGroup
       value={style}
       onValueChange={(value) => onChange(value as PizzaStyle)}
-      className="flex flex-row gap-6 mt-2"
+      className="flex flex-row gap-6 mb-2"
     >
       <div className="flex items-center space-x-2">
         <RadioGroupItem value="napoletana" id="pizza-napoletana" />
@@ -31,7 +31,7 @@ const PizzaStyleSelect: React.FC<PizzaStyleSelectProps> = ({ style, onChange }) 
         </Label>
       </div>
     </RadioGroup>
-    <div className="p-2 mt-2 rounded bg-gray-50 text-xs text-gray-600">
+    <div className="p-2 rounded bg-gray-50 text-xs text-gray-600">
       {style === "napoletana"
         ? "Massa macia, leve e assada em alta temperatura por pouco tempo, típica de Nápoles."
         : "Massa mais grossa, elástica, com crosta crocante e fatias maiores, tradicional de Nova York."}
