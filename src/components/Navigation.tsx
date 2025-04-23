@@ -27,7 +27,7 @@ const Navigation: React.FC = () => {
           href="/shop"
         >
           <ShoppingCart className={cn("h-5 w-5", isMobile ? "mr-2" : "")} />
-          <span className={isMobile ? "flex-1" : ""}>{isMobile ? t('common.menu.shop') : ""}</span>
+          <span className={isMobile ? "flex-1" : ""}>{t('common.menu.shop')}</span>
         </NavigationMenuLink>
       </NavigationMenuItem>
       <NavigationMenuItem>
@@ -39,7 +39,7 @@ const Navigation: React.FC = () => {
           href="/toppings"
         >
           <Utensils className={cn("h-5 w-5", isMobile ? "mr-2" : "")} />
-          <span className={isMobile ? "flex-1" : ""}>{isMobile ? t('common.menu.toppings') : ""}</span>
+          <span className={isMobile ? "flex-1" : ""}>{t('common.menu.toppings')}</span>
         </NavigationMenuLink>
       </NavigationMenuItem>
       <NavigationMenuItem>
@@ -51,7 +51,7 @@ const Navigation: React.FC = () => {
           href="/tips"
         >
           <Lightbulb className={cn("h-5 w-5", isMobile ? "mr-2" : "")} />
-          <span className={isMobile ? "flex-1" : ""}>{isMobile ? t('common.menu.tips') : ""}</span>
+          <span className={isMobile ? "flex-1" : ""}>{t('common.menu.tips')}</span>
         </NavigationMenuLink>
       </NavigationMenuItem>
     </NavigationMenuList>

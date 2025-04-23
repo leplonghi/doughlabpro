@@ -9,6 +9,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useTranslation } from 'react-i18next';
 
 interface BallWeightInputProps {
   ballWeight: number;
@@ -21,6 +22,7 @@ const BallWeightInput: React.FC<BallWeightInputProps> = ({
   totalDoughWeight,
   onBallWeightChange
 }) => {
+  const { t } = useTranslation();
   const numberOfBalls = Math.floor(totalDoughWeight / ballWeight) || 0;
 
   const handleRangeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,14 +39,14 @@ const BallWeightInput: React.FC<BallWeightInputProps> = ({
   return (
     <div className="space-y-2">
       <div className="flex items-center gap-2">
-        <Label htmlFor="ballWeight">Dough Ball Weight (g)</Label>
+        <Label htmlFor="ballWeight">{t('calculator.ingredients.ballWeight')}</Label>
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
               <span className="cursor-help"><InfoCircledIcon className="h-4 w-4 text-muted-foreground" /></span>
             </TooltipTrigger>
             <TooltipContent className="max-w-xs">
-              <p>Enter the desired weight for each dough ball (250g-400g). This will help calculate how many balls you can make.</p>
+              <p>{t('calculator.ingredients.ballWeightDescription')}</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
@@ -81,7 +83,7 @@ const BallWeightInput: React.FC<BallWeightInputProps> = ({
         </div>
       </div>
       <div className="text-sm text-muted-foreground mt-1">
-        This will make approximately {numberOfBalls} dough {numberOfBalls === 1 ? 'ball' : 'balls'}
+        {t('calculator.ingredients.ballCountResult', { count: numberOfBalls })}
       </div>
     </div>
   );

@@ -65,6 +65,8 @@
     "ingredients": {
       "ballWeight": "Peso de la Bola (g)",
       "ballWeightDescription": "Peso de una bola de masa. Recomendado: 250g para una pizza de 30cm",
+      "ballCountResult": "Esto hará aproximadamente {{count}} bola de masa",
+      "ballCountResult_plural": "Esto hará aproximadamente {{count}} bolas de masa",
       "amount": "Cantidad",
       "amountDescription": "Ingrese la cantidad total para su masa",
       "yeastType": "Tipo de Levadura",
@@ -73,6 +75,16 @@
       "dryYeast": "Levadura Seca (0.1%)",
       "hydrationDescription": "Menor (50-60%) hace masa más firme; mayor (65-75%) crea corteza más abierta y aireada"
     }
+  },
+  "intro": {
+    "aboutPizza": "Acerca de la Pizza",
+    "aboutPizzaContent": "La verdadera pizza napolitana sigue tradiciones centenarias, con proporciones precisas que resultan en una masa ligera y aireada con bordes crujientes y sabrosos.",
+    "calculatorFeatures": "Características de la Calculadora",
+    "feature1": "Calcular ingredientes con precisión basados en la cantidad de harina",
+    "feature2": "Elegir entre fermentación directa, poolish o biga",
+    "feature3": "Ajustar la hidratación para adaptarse a su técnica",
+    "feature4": "Usar levadura fresca o seca con proporciones correctas",
+    "feature5": "¡Ver cuántas bolas de masa tendrá!"
   },
   "recipe": {
     "authRequired": "Autenticación Requerida",

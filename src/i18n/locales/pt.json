@@ -65,6 +65,8 @@
     "ingredients": {
       "ballWeight": "Peso da Bola (g)",
       "ballWeightDescription": "Peso de uma bola de massa. Recomendado: 250g para uma pizza de 30cm",
+      "ballCountResult": "Isto fará aproximadamente {{count}} bola de massa",
+      "ballCountResult_plural": "Isto fará aproximadamente {{count}} bolas de massa",
       "amount": "Quantidade",
       "amountDescription": "Digite a quantidade total para sua massa",
       "yeastType": "Tipo de Fermento",
@@ -73,6 +75,16 @@
       "dryYeast": "Fermento Seco (0.1%)",
       "hydrationDescription": "Menor (50-60%) deixa a massa mais firme; maior (65-75%) cria crosta mais aberta e aerada"
     }
+  },
+  "intro": {
+    "aboutPizza": "Sobre a Pizza",
+    "aboutPizzaContent": "A verdadeira pizza napolitana segue tradições centenárias, com proporções precisas que resultam em uma massa leve e aerada com bordas crocantes e saborosas.",
+    "calculatorFeatures": "Recursos da Calculadora",
+    "feature1": "Calcule os ingredientes com precisão baseado na quantidade de farinha",
+    "feature2": "Escolha entre fermentação direta, poolish ou biga",
+    "feature3": "Ajuste a hidratação para combinar com sua técnica",
+    "feature4": "Use fermento fresco ou seco com proporções corretas",
+    "feature5": "Veja quantas bolas de massa você terá!"
   },
   "recipe": {
     "authRequired": "Autenticação Necessária",

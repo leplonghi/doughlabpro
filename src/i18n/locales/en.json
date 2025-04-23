@@ -72,6 +72,8 @@
     "ingredients": {
       "ballWeight": "Ball Weight (g)",
       "ballWeightDescription": "Single dough ball weight. Recommended: 250g for a 12-inch pizza",
+      "ballCountResult": "This will make approximately {{count}} dough ball",
+      "ballCountResult_plural": "This will make approximately {{count}} dough balls",
       "amount": "Amount",
       "amountDescription": "Enter the total amount for your dough",
       "yeastType": "Yeast Type",
@@ -80,6 +82,16 @@
       "dryYeast": "Dry Yeast (0.1%)",
       "hydrationDescription": "Lower (50-60%) makes firmer dough; higher (65-75%) creates more open, airy crust"
     }
+  },
+  "intro": {
+    "aboutPizza": "About Pizza",
+    "aboutPizzaContent": "True Neapolitan pizza follows centuries-old traditions, with precise proportions that result in a light, airy dough with flavorful crispy edges.",
+    "calculatorFeatures": "Calculator Features",
+    "feature1": "Calculate ingredients precisely based on flour quantity",
+    "feature2": "Choose between direct, poolish, or biga fermentation",
+    "feature3": "Adjust hydration to match your technique",
+    "feature4": "Use fresh or dry yeast with correct proportions",
+    "feature5": "See how many doughballs you will have!"
   },
   "recipe": {
     "authRequired": "Authentication Required",
