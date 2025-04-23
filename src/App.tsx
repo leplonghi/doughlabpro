@@ -68,7 +68,7 @@ const AppRoutes = () => (
       } />
       <Route path="*" element={<NotFound />} />
     </Routes>
-  </>;
+  </>
 );
 
 const App = () => (
