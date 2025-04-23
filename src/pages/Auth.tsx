@@ -3,7 +3,7 @@ import React from 'react';
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from 'react-router-dom';
-import { Google } from "lucide-react";
+import { LogIn } from 'lucide-react';  // Replacing Google with a generic icon
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ const Auth = () => {
           className="w-full flex items-center justify-center gap-2"
           variant="outline"
         >
-          <Google className="w-4 h-4" />
+          <LogIn className="w-4 h-4" />
           Continue with Google
         </Button>
       </div>
