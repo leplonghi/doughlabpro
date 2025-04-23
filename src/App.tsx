@@ -35,46 +35,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   return <>{children}</>;
 };
 
-// AppContent component to use the AuthProvider context
-const AppContent = () => {
-  return (
-    <>
-      <Navigation />
-      <Toaster />
-      <Sonner />
-      <Routes>
-        <Route path="/auth" element={<Auth />} />
-        <Route path="/" element={
-          <ProtectedRoute>
-            <Index />
-          </ProtectedRoute>
-        } />
-        <Route path="/sauce" element={
-          <ProtectedRoute>
-            <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
-              <Sauce />
-            </Suspense>
-          </ProtectedRoute>
-        } />
-        <Route path="/toppings" element={
-          <ProtectedRoute>
-            <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
-              <Toppings />
-            </Suspense>
-          </ProtectedRoute>
-        } />
-        <Route path="/privacy" element={
-          <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
-            <Privacy />
-          </Suspense>
-        } />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </>
-  );
-};
-
-// Main App component
+// Main App component with correct order of providers
 const App = () => (
   <React.StrictMode>
     <BrowserRouter>
@@ -82,7 +43,37 @@ const App = () => (
         <ThemeProvider attribute="class" defaultTheme="light">
           <TooltipProvider>
             <AuthProvider>
-              <AppContent />
+              <Navigation />
+              <Toaster />
+              <Sonner />
+              <Routes>
+                <Route path="/auth" element={<Auth />} />
+                <Route path="/" element={
+                  <ProtectedRoute>
+                    <Index />
+                  </ProtectedRoute>
+                } />
+                <Route path="/sauce" element={
+                  <ProtectedRoute>
+                    <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
+                      <Sauce />
+                    </Suspense>
+                  </ProtectedRoute>
+                } />
+                <Route path="/toppings" element={
+                  <ProtectedRoute>
+                    <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
+                      <Toppings />
+                    </Suspense>
+                  </ProtectedRoute>
+                } />
+                <Route path="/privacy" element={
+                  <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
+                    <Privacy />
+                  </Suspense>
+                } />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
             </AuthProvider>
           </TooltipProvider>
         </ThemeProvider>
