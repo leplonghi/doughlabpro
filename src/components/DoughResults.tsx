@@ -1,16 +1,13 @@
+
 import React from 'react';
-import { 
-  Card, 
-  CardContent, 
-  CardHeader, 
-  CardTitle, 
-  CardDescription 
-} from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
-import { Clock, FileText, Wheat, Droplet, FlaskConical } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { FileText } from 'lucide-react';
 import { PizzaStyle } from "./PizzaStyleSelect";
 import { Unit } from './UnitSelect';
+import RecipePreliminary from './recipe/RecipePreliminary';
+import RecipeFinal from './recipe/RecipeFinal';
+import FermentationTips from './recipe/FermentationTips';
+import RecipeActions from './recipe/RecipeActions';
 
 type FermentationMethod = 'direct' | 'poolish' | 'biga';
 
@@ -85,135 +82,43 @@ const DoughResults: React.FC<DoughResultsProps> = ({ recipe, fermentationMethod,
       
       <CardContent className="pt-6">
         <div className="space-y-6">
-          {(fermentationMethod === 'poolish' && recipe.poolish) && (
-            <div className="recipe-section bg-yellow-50 p-4 rounded-md">
-              <h3 className="font-medium text-gray-900 flex items-center gap-2 mb-3">
-                <Clock size={18} />
-                Poolish (Preparar 8-16h antes)
-              </h3>
-              <ul className="space-y-2 text-gray-700">
-                <li className="flex justify-between">
-                  <span className="result-label flex items-center gap-2"><Wheat size={16} /> Farinha:</span>
-                  <span className="result-value">{formatValue(recipe.poolish.flour)}{getUnitLabel()}</span>
-                </li>
-                <li className="flex justify-between">
-                  <span className="result-label flex items-center gap-2"><Droplet size={16} /> Água:</span>
-                  <span className="result-value">{formatValue(recipe.poolish.water)}{getUnitLabel()}</span>
-                </li>
-                <li className="flex justify-between">
-                  <span className="result-label flex items-center gap-2"><FlaskConical size={16} /> Fermento:</span>
-                  <span className="result-value">{formatValue(recipe.poolish.yeast)}{getUnitLabel()}</span>
-                </li>
-              </ul>
-              <p className="text-sm text-gray-500 mt-3">
-                Misture e deixe fermentar em temperatura ambiente por 8-16h antes de incorporar à massa final.
-              </p>
-            </div>
+          {fermentationMethod === 'poolish' && recipe.poolish && (
+            <RecipePreliminary
+              type="poolish"
+              flour={recipe.poolish.flour}
+              water={recipe.poolish.water}
+              yeast={recipe.poolish.yeast}
+              formatValue={formatValue}
+              getUnitLabel={getUnitLabel}
+            />
           )}
           
-          {(fermentationMethod === 'biga' && recipe.biga) && (
-            <div className="recipe-section bg-yellow-50 p-4 rounded-md">
-              <h3 className="font-medium text-gray-900 flex items-center gap-2 mb-3">
-                <Clock size={18} />
-                Biga (Preparar 12-24h antes)
-              </h3>
-              <ul className="space-y-2 text-gray-700">
-                <li className="flex justify-between">
-                  <span className="result-label flex items-center gap-2"><Wheat size={16} /> Farinha:</span>
-                  <span className="result-value">{formatValue(recipe.biga.flour)}{getUnitLabel()}</span>
-                </li>
-                <li className="flex justify-between">
-                  <span className="result-label flex items-center gap-2"><Droplet size={16} /> Água:</span>
-                  <span className="result-value">{formatValue(recipe.biga.water)}{getUnitLabel()}</span>
-                </li>
-                <li className="flex justify-between">
-                  <span className="result-label flex items-center gap-2"><FlaskConical size={16} /> Fermento:</span>
-                  <span className="result-value">{formatValue(recipe.biga.yeast)}{getUnitLabel()}</span>
-                </li>
-              </ul>
-              <p className="text-sm text-gray-500 mt-3">
-                Misture e deixe fermentar em temperatura ambiente por 12-24h antes de incorporar à massa final.
-              </p>
-            </div>
+          {fermentationMethod === 'biga' && recipe.biga && (
+            <RecipePreliminary
+              type="biga"
+              flour={recipe.biga.flour}
+              water={recipe.biga.water}
+              yeast={recipe.biga.yeast}
+              formatValue={formatValue}
+              getUnitLabel={getUnitLabel}
+            />
           )}
 
-          <div className="recipe-section">
-            <h3 className="font-medium text-gray-900 flex items-center gap-2 mb-3">
-              <FileText size={18} />
-              Massa Final
-            </h3>
-            <ul className="space-y-2 text-gray-700">
-              <li className="flex justify-between">
-                <span className="result-label flex items-center gap-2"><Wheat size={16} /> Farinha:</span>
-                <span className="result-value">{formatValue(recipe.flour)}{getUnitLabel()}</span>
-              </li>
-              <li className="flex justify-between">
-                <span className="result-label flex items-center gap-2"><Droplet size={16} /> Água:</span>
-                <span className="result-value">{formatValue(recipe.water)}{getUnitLabel()}</span>
-              </li>
-              <li className="flex justify-between">
-                <span className="result-label flex items-center gap-2">🧂 Sal:</span>
-                <span className="result-value">{formatValue(recipe.salt)}{getUnitLabel()}</span>
-              </li>
-              <li className="flex justify-between">
-                <span className="result-label flex items-center gap-2">🫒 Azeite:</span>
-                <span className="result-value">{formatValue(recipe.oil)}{getUnitLabel()}</span>
-              </li>
-              {pizzaStyle === "newyork" && (
-                <li className="flex justify-between">
-                  <span className="result-label flex items-center gap-2">🍯 Açúcar:</span>
-                  <span className="result-value">{formatValue(recipe.sugar || 0)}{getUnitLabel()}</span>
-                </li>
-              )}
-              {(fermentationMethod === 'direct') && (
-                <li className="flex justify-between">
-                  <span className="result-label flex items-center gap-2"><FlaskConical size={16} /> Fermento:</span>
-                  <span className="result-value">{formatValue(recipe.yeast)}{getUnitLabel()}</span>
-                </li>
-              )}
-              {(fermentationMethod === 'poolish' || fermentationMethod === 'biga') && (
-                <li className="flex justify-between">
-                  <span className="result-label flex items-center gap-2">
-                    {fermentationMethod === 'poolish' ? '🧊 Poolish preparado:' : '🧊 Biga preparada:'}
-                  </span>
-                  <span className="result-value">Toda</span>
-                </li>
-              )}
-            </ul>
-          </div>
+          <RecipeFinal
+            flour={recipe.flour}
+            water={recipe.water}
+            salt={recipe.salt}
+            yeast={recipe.yeast}
+            oil={recipe.oil}
+            sugar={recipe.sugar}
+            isNewYorkStyle={pizzaStyle === 'newyork'}
+            fermentationMethod={fermentationMethod}
+            formatValue={formatValue}
+            getUnitLabel={getUnitLabel}
+          />
 
-          <div className="bg-pizza-light bg-opacity-30 p-4 rounded-lg">
-            <h3 className="font-medium text-gray-900 mb-2">Dicas de Fermentação</h3>
-            {fermentationMethod === 'direct' && (
-              <p className="text-sm text-gray-700">
-                Deixe a massa fermentar por 8-24 horas em temperatura ambiente (20-22°C) ou na geladeira por mais tempo. 
-                A massa deve dobrar de volume e desenvolver um aroma característico.
-              </p>
-            )}
-            {fermentationMethod === 'poolish' && (
-              <p className="text-sm text-gray-700">
-                Após incorporar o poolish à massa final, deixe fermentar por 4-6 horas em temperatura ambiente.
-                Este método confere leveza e sabor complexo à massa.
-              </p>
-            )}
-            {fermentationMethod === 'biga' && (
-              <p className="text-sm text-gray-700">
-                Após incorporar a biga, deixe fermentar por 3-5 horas. Este método proporciona força à massa e sabor mais intenso.
-                Ideal para massas com maior resistência.
-              </p>
-            )}
-          </div>
-
-          <Separator />
-
-          <div className="flex justify-center gap-4">
-            <Button variant="outline">
-              Salvar Receita
-            </Button>
-            <Button>
-              Nova Receita
-            </Button>
-          </div>
+          <FermentationTips method={fermentationMethod} />
+          <RecipeActions />
         </div>
       </CardContent>
     </Card>
