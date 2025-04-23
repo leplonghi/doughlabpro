@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+
+import * as React from 'react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Save, Share, Printer, RotateCcw } from 'lucide-react';
@@ -13,7 +14,7 @@ const isPro = () => {
 
 const RecipeActions: React.FC = () => {
   const { toast } = useToast();
-  const [saving, setSaving] = useState(false);
+  const [saving, setSaving] = React.useState(false);
   const { user } = useAuth(); // Use the Auth context to get the current user
   
   const handleSaveRecipe = () => {
