@@ -23,6 +23,17 @@ const BallWeightInput: React.FC<BallWeightInputProps> = ({
 }) => {
   const numberOfBalls = Math.floor(flour / ballWeight) || 0;
 
+  const handleRangeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newEvent = {
+      ...e,
+      target: {
+        ...e.target,
+        value: e.target.value
+      }
+    };
+    onBallWeightChange(newEvent);
+  };
+
   return (
     <div className="space-y-2">
       <div className="flex items-center gap-2">
@@ -33,23 +44,42 @@ const BallWeightInput: React.FC<BallWeightInputProps> = ({
               <span className="cursor-help"><InfoCircledIcon className="h-4 w-4 text-muted-foreground" /></span>
             </TooltipTrigger>
             <TooltipContent className="max-w-xs">
-              <p>Enter the desired weight for each dough ball (100g-500g). This will help calculate how many balls you can make.</p>
+              <p>Enter the desired weight for each dough ball (250g-400g). This will help calculate how many balls you can make.</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
       </div>
-      <Input
-        id="ballWeight"
-        type="number"
-        inputMode="numeric" // Add inputMode for better mobile keyboard
-        pattern="[0-9]*" // Ensure numeric input on mobile browsers
-        value={ballWeight || ''}
-        onChange={onBallWeightChange}
-        min="100"
-        max="500"
-        placeholder="Ex: 250g"
-        className="w-full"
-      />
+      <div className="flex items-center gap-4">
+        <Input
+          id="ballWeight"
+          type="number"
+          inputMode="numeric"
+          pattern="[0-9]*"
+          value={ballWeight || ''}
+          onChange={onBallWeightChange}
+          min="250"
+          max="400"
+          placeholder="Ex: 250g"
+          className="w-24"
+        />
+        <div className="flex-1">
+          <input
+            type="range"
+            min="250"
+            max="400"
+            step="50"
+            value={ballWeight}
+            onChange={handleRangeChange}
+            className="w-full"
+          />
+          <div className="flex justify-between text-xs text-gray-500 mt-1">
+            <span>250g</span>
+            <span>300g</span>
+            <span>350g</span>
+            <span>400g</span>
+          </div>
+        </div>
+      </div>
       <div className="text-sm text-muted-foreground mt-1">
         This will make approximately {numberOfBalls} dough {numberOfBalls === 1 ? 'ball' : 'balls'}
       </div>
