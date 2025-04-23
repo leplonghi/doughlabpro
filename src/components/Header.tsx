@@ -1,13 +1,16 @@
 
 import React from 'react';
-import { Pizza, LogIn, LogOut, User } from 'lucide-react';
+import { Pizza, LogIn, LogOut } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ThemeToggle } from './ThemeToggle';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
+import { useTranslation } from 'react-i18next';
+import LanguageSelector from './LanguageSelector';
 
 const Header: React.FC = () => {
   const { user, signOut } = useAuth();
+  const { t } = useTranslation();
 
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b py-3">
@@ -17,10 +20,11 @@ const Header: React.FC = () => {
             <Pizza size={32} className="text-pizza" />
           </Link>
           <h1 className="text-xl md:text-2xl font-serif font-bold bg-gradient-to-r from-pizza to-pizza-dark bg-clip-text text-transparent">
-            Pizza Dough Calculator
+            {t('common.calculator')}
           </h1>
         </div>
         <div className="flex items-center gap-3">
+          <LanguageSelector />
           {user ? (
             <Button 
               variant="ghost" 
@@ -29,13 +33,13 @@ const Header: React.FC = () => {
               onClick={() => signOut()}
             >
               <LogOut size={18} />
-              <span className="hidden md:inline">Log Out</span>
+              <span className="hidden md:inline">{t('common.logout')}</span>
             </Button>
           ) : (
             <Link to="/auth">
               <Button variant="ghost" size="sm" className="flex items-center gap-1">
                 <LogIn size={18} />
-                <span className="hidden md:inline">Log In</span>
+                <span className="hidden md:inline">{t('common.login')}</span>
               </Button>
             </Link>
           )}

@@ -1,0 +1,24 @@
+
+{
+  "common": {
+    "calculator": "Pizza Dough Calculator",
+    "login": "Log In",
+    "logout": "Log Out",
+    "menu": {
+      "sauce": "Sauce",
+      "toppings": "Toppings",
+      "privacy": "Privacy"
+    }
+  },
+  "calculator": {
+    "title": "Pizza Dough Calculator",
+    "subtitle": "Create the perfect pizza dough with precision",
+    "ballWeight": "Ball Weight",
+    "flour": "Flour",
+    "salt": "Salt",
+    "yeast": "Yeast",
+    "oil": "Olive Oil",
+    "sugar": "Sugar",
+    "hydration": "Hydration"
+  }
+}

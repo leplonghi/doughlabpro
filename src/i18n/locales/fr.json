@@ -1,0 +1,24 @@
+
+{
+  "common": {
+    "calculator": "Calculateur de Pâte à Pizza",
+    "login": "Se Connecter",
+    "logout": "Se Déconnecter",
+    "menu": {
+      "sauce": "Sauce",
+      "toppings": "Garnitures",
+      "privacy": "Confidentialité"
+    }
+  },
+  "calculator": {
+    "title": "Calculateur de Pâte à Pizza",
+    "subtitle": "Créez la pâte à pizza parfaite avec précision",
+    "ballWeight": "Poids de la Boule",
+    "flour": "Farine",
+    "salt": "Sel",
+    "yeast": "Levure",
+    "oil": "Huile d'Olive",
+    "sugar": "Sucre",
+    "hydration": "Hydratation"
+  }
+}

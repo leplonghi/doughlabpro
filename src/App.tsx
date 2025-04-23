@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import * as React from "react";
@@ -11,6 +10,7 @@ import AuthProvider from "./components/AuthProvider";
 import Navigation from "./components/Navigation";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import '@/i18n/i18n';
 
 const Sauce = lazy(() => import("./pages/Sauce"));
 const Toppings = lazy(() => import("./pages/Toppings"));
