@@ -8,6 +8,13 @@ import RecipePreliminary from './recipe/RecipePreliminary';
 import RecipeFinal from './recipe/RecipeFinal';
 import FermentationTips from './recipe/FermentationTips';
 import RecipeActions from './recipe/RecipeActions';
+import AdBanner from './monetization/AdBanner';
+
+// Check if user is a pro subscriber
+const isPro = () => {
+  // This would be replaced with actual authentication check
+  return localStorage.getItem('subscription_tier') === 'pro';
+};
 
 type FermentationMethod = 'direct' | 'poolish' | 'biga';
 
@@ -82,45 +89,51 @@ const DoughResults: React.FC<DoughResultsProps> = ({ recipe, fermentationMethod,
       
       <CardContent className="pt-6">
         <div className="space-y-6">
-          {fermentationMethod === 'poolish' && recipe.poolish && (
-            <RecipePreliminary
-              type="poolish"
-              flour={recipe.poolish.flour}
-              water={recipe.poolish.water}
-              yeast={recipe.poolish.yeast}
+          <div className="overflow-x-auto">
+            {fermentationMethod === 'poolish' && recipe.poolish && (
+              <RecipePreliminary
+                type="poolish"
+                flour={recipe.poolish.flour}
+                water={recipe.poolish.water}
+                yeast={recipe.poolish.yeast}
+                formatValue={formatValue}
+                getUnitLabel={getUnitLabel}
+              />
+            )}
+            
+            {fermentationMethod === 'biga' && recipe.biga && (
+              <RecipePreliminary
+                type="biga"
+                flour={recipe.biga.flour}
+                water={recipe.biga.water}
+                yeast={recipe.biga.yeast}
+                formatValue={formatValue}
+                getUnitLabel={getUnitLabel}
+              />
+            )}
+
+            <RecipeFinal
+              flour={recipe.flour}
+              water={recipe.water}
+              salt={recipe.salt}
+              yeast={recipe.yeast}
+              oil={recipe.oil}
+              sugar={recipe.sugar}
+              isNewYorkStyle={pizzaStyle === 'newyork'}
+              fermentationMethod={fermentationMethod}
               formatValue={formatValue}
               getUnitLabel={getUnitLabel}
             />
-          )}
-          
-          {fermentationMethod === 'biga' && recipe.biga && (
-            <RecipePreliminary
-              type="biga"
-              flour={recipe.biga.flour}
-              water={recipe.biga.water}
-              yeast={recipe.biga.yeast}
-              formatValue={formatValue}
-              getUnitLabel={getUnitLabel}
-            />
-          )}
 
-          <RecipeFinal
-            flour={recipe.flour}
-            water={recipe.water}
-            salt={recipe.salt}
-            yeast={recipe.yeast}
-            oil={recipe.oil}
-            sugar={recipe.sugar}
-            isNewYorkStyle={pizzaStyle === 'newyork'}
-            fermentationMethod={fermentationMethod}
-            formatValue={formatValue}
-            getUnitLabel={getUnitLabel}
-          />
+            <FermentationTips method={fermentationMethod} />
+          </div>
 
-          <FermentationTips method={fermentationMethod} />
           <RecipeActions />
         </div>
       </CardContent>
+
+      {/* Show ad banner for free users */}
+      {!isPro() && <AdBanner />}
     </Card>
   );
 };

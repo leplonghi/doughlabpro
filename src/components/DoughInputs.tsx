@@ -4,6 +4,13 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { 
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { InfoCircledIcon } from '@radix-ui/react-icons';
 import { PizzaStyle } from './PizzaStyleSelect';
 
 type YeastType = 'fresh' | 'dry';
@@ -16,6 +23,8 @@ interface DoughInputsProps {
   yeastType: YeastType;
   setYeastType: (v: YeastType) => void;
   pizzaStyle: PizzaStyle;
+  errors: Record<string, string>;
+  validateField: (field: string, value: any) => void;
 }
 
 const DoughInputs: React.FC<DoughInputsProps> = ({
@@ -25,25 +34,69 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
   setHydration,
   yeastType,
   setYeastType,
-  pizzaStyle
+  pizzaStyle,
+  errors,
+  validateField
 }) => {
   const salt = (flour * 2.5) / 100;
   const yeast = yeastType === 'fresh' ? (flour * 0.3) / 100 : (flour * 0.1) / 100;
   const oil = pizzaStyle === "napoletana" ? 0 : (flour * 2.5) / 100;
   const sugar = pizzaStyle === "napoletana" ? 0 : (flour * 2.5) / 100;
 
+  // Handle flour input change with validation
+  const handleFlourChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (value === '' || /^\d+$/.test(value)) {
+      setFlour(Number(value));
+      validateField('flour', Number(value));
+    }
+  };
+
+  // Handle hydration input change with validation
+  const handleHydrationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (value === '' || (/^\d+$/.test(value) && Number(value) >= 50 && Number(value) <= 90)) {
+      setHydration(Number(value));
+      validateField('hydration', Number(value));
+    }
+  };
+
+  const handleHydrationRangeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = Number(e.target.value);
+    setHydration(value);
+    validateField('hydration', value);
+  };
+
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <Label htmlFor="flour">Amount of Flour (g)</Label>
+        <div className="flex items-center gap-2">
+          <Label htmlFor="flour">Amount of Flour (g)</Label>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span className="cursor-help"><InfoCircledIcon className="h-4 w-4 text-muted-foreground" /></span>
+              </TooltipTrigger>
+              <TooltipContent className="max-w-xs">
+                <p>Enter the total amount of flour for your dough in grams. Recommended starting point: 1000g.</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
         <Input 
           id="flour" 
           type="number" 
-          value={flour} 
-          onChange={(e) => setFlour(Number(e.target.value))}
-          min="0"
-          placeholder="Ex: 1000"
+          value={flour || ''} 
+          onChange={handleFlourChange}
+          min="100"
+          max="10000"
+          placeholder="Ex: 1000g"
+          aria-describedby={errors.flour ? "flour-error" : undefined}
+          className={errors.flour ? "border-red-500 focus-visible:ring-red-500" : ""}
         />
+        {errors.flour && (
+          <div id="flour-error" className="text-red-500 text-sm" aria-live="assertive">{errors.flour}</div>
+        )}
       </div>
 
       <div className="grid grid-cols-2 gap-4">
@@ -56,7 +109,19 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
           />
         </div>
         <div className="space-y-2">
-          <Label>Yeast (g)</Label>
+          <div className="flex items-center gap-2">
+            <Label>Yeast (g)</Label>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <span className="cursor-help"><InfoCircledIcon className="h-4 w-4 text-muted-foreground" /></span>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Fresh yeast (0.3%) is more active but shorter shelf life. Dry yeast (0.1%) is more stable and commonly available.</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </div>
           <Input
             value={yeast.toFixed(2)}
             readOnly
@@ -82,16 +147,30 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="hydration">Hydration (%)</Label>
+        <div className="flex items-center gap-2">
+          <Label htmlFor="hydration">Hydration (%)</Label>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span className="cursor-help"><InfoCircledIcon className="h-4 w-4 text-muted-foreground" /></span>
+              </TooltipTrigger>
+              <TooltipContent className="max-w-xs">
+                <p>Hydration is the water-to-flour ratio. Lower (50-60%) makes firmer dough; higher (65-75%) creates more open, airy crust.</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
         <div className="flex items-center gap-4">
           <Input 
             id="hydration" 
             type="number" 
-            value={hydration} 
-            onChange={(e) => setHydration(Number(e.target.value))}
+            value={hydration || ''} 
+            onChange={handleHydrationChange}
             min="50"
             max="90"
-            className="w-24"
+            placeholder="60%"
+            className={`w-24 ${errors.hydration ? "border-red-500 focus-visible:ring-red-500" : ""}`}
+            aria-describedby={errors.hydration ? "hydration-error" : undefined}
           />
           <div className="flex-1">
             <input
@@ -99,7 +178,7 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
               min="50"
               max="90"
               value={hydration}
-              onChange={(e) => setHydration(Number(e.target.value))}
+              onChange={handleHydrationRangeChange}
               className="w-full"
             />
             <div className="flex justify-between text-xs text-gray-500 mt-1">
@@ -110,12 +189,27 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
             </div>
           </div>
         </div>
+        {errors.hydration && (
+          <div id="hydration-error" className="text-red-500 text-sm" aria-live="assertive">{errors.hydration}</div>
+        )}
       </div>
 
       <Separator className="my-4" />
 
       <div className="space-y-3">
-        <Label>Yeast Type</Label>
+        <div className="flex items-center gap-2">
+          <Label>Yeast Type</Label>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span className="cursor-help"><InfoCircledIcon className="h-4 w-4 text-muted-foreground" /></span>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Fresh yeast is more perishable but adds better flavor. Dry yeast has longer shelf life and is more widely available.</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
         <RadioGroup 
           value={yeastType} 
           onValueChange={(value) => setYeastType(value as YeastType)}

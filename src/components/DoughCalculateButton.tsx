@@ -8,12 +8,12 @@ interface DoughCalculateButtonProps {
 }
 
 const DoughCalculateButton: React.FC<DoughCalculateButtonProps> = ({ onClick }) => (
-  <CardFooter className="bg-gray-50">
+  <CardFooter className="bg-gray-50 pb-12 sm:pb-6">
     <Button 
       onClick={onClick}
-      className="w-full bg-pizza hover:bg-pizza-dark"
+      className="w-full bg-pizza hover:bg-pizza-dark focus-visible:ring-pizza-dark"
     >
-      Calculate Receipe
+      Calculate Recipe
     </Button>
   </CardFooter>
 );

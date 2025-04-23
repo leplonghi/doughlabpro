@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { 
   Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter 
 } from '@/components/ui/card';
@@ -10,6 +11,7 @@ import DoughCalculatorHeader from './DoughCalculatorHeader';
 import DoughCalculateButton from './DoughCalculateButton';
 import PizzaStyleSwitch from './PizzaStyleSwitch';
 import { PizzaStyle } from './PizzaStyleSelect';
+import SkipToContent from './SkipToContent';
 
 type FermentationMethod = 'direct' | 'poolish' | 'biga';
 type YeastType = 'fresh' | 'dry';
@@ -40,23 +42,59 @@ const DoughCalculator: React.FC = () => {
   const [yeastType, setYeastType] = useState<YeastType>("dry");
   const [recipe, setRecipe] = useState<DoughRecipe | null>(null);
   const [hydration, setHydration] = useState<number>(60);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isLiveCalculation, setIsLiveCalculation] = useState<boolean>(false);
 
   const { toast } = useToast();
 
-  const calculateRecipe = () => {
-    if (!flour || flour <= 0) {
-      toast({
-        title: "Invalid flour amount",
-        description: "Please enter a valid flour amount.",
-        variant: "destructive"
-      });
-      return;
+  // Form validation
+  const validateField = (field: string, value: any) => {
+    const newErrors = {...errors};
+    
+    switch (field) {
+      case 'flour':
+        if (!value) {
+          newErrors.flour = 'Flour amount is required';
+        } else if (value < 100) {
+          newErrors.flour = 'Minimum amount is 100g';
+        } else if (value > 10000) {
+          newErrors.flour = 'Maximum amount is 10,000g';
+        } else {
+          delete newErrors.flour;
+        }
+        break;
+      case 'hydration':
+        if (!value) {
+          newErrors.hydration = 'Hydration percentage is required';
+        } else if (value < 50) {
+          newErrors.hydration = 'Minimum hydration is 50%';
+        } else if (value > 90) {
+          newErrors.hydration = 'Maximum hydration is 90%';
+        } else {
+          delete newErrors.hydration;
+        }
+        break;
+      default:
+        break;
     }
 
-    if (hydration < 50 || hydration > 90) {
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  // Validate all fields
+  const validateForm = () => {
+    const flourValid = validateField('flour', flour);
+    const hydrationValid = validateField('hydration', hydration);
+    return flourValid && hydrationValid;
+  };
+
+  // Calculate recipe function
+  const calculateRecipe = () => {
+    if (!validateForm()) {
       toast({
-        title: "Invalid hydration",
-        description: "Please enter a hydration between 50% and 90%.",
+        title: "Validation Error",
+        description: "Please fix the errors in the form.",
         variant: "destructive"
       });
       return;
@@ -117,17 +155,35 @@ const DoughCalculator: React.FC = () => {
 
     setRecipe(newRecipe);
 
-    toast({
-      title: "Recipe calculated",
-      description:
-        pizzaStyle === "napoletana"
-          ? "Your Neapolitan pizza recipe has been calculated successfully!"
-          : "Your New York Style pizza recipe has been calculated successfully!",
-    });
+    if (!isLiveCalculation) {
+      toast({
+        title: "Recipe calculated",
+        description:
+          pizzaStyle === "napoletana"
+            ? "Your Neapolitan pizza recipe has been calculated successfully!"
+            : "Your New York Style pizza recipe has been calculated successfully!",
+      });
+    }
   };
+
+  // Effect for live calculation
+  useEffect(() => {
+    // Only run calculation if set to live mode and there are no errors
+    if (isLiveCalculation && Object.keys(errors).length === 0 && flour > 0) {
+      calculateRecipe();
+    }
+  }, [flour, hydration, yeastType, pizzaStyle, fermentationMethod, isLiveCalculation]);
+
+  // Enable live calculation after initial manual calculation
+  useEffect(() => {
+    if (recipe && !isLiveCalculation) {
+      setIsLiveCalculation(true);
+    }
+  }, [recipe]);
 
   return (
     <div className="w-full max-w-3xl mx-auto px-4 md:px-6">
+      <SkipToContent />
       <Card className="mb-8">
         <DoughCalculatorHeader />
         <CardContent className="pt-6 space-y-6">
@@ -147,19 +203,23 @@ const DoughCalculator: React.FC = () => {
             yeastType={yeastType}
             setYeastType={setYeastType}
             pizzaStyle={pizzaStyle}
+            errors={errors}
+            validateField={validateField}
           />
         </CardContent>
         <DoughCalculateButton onClick={calculateRecipe} />
       </Card>
 
-      {recipe && (
-        <DoughResults 
-          recipe={recipe} 
-          fermentationMethod={fermentationMethod}
-          pizzaStyle={pizzaStyle}
-          unit="grams"
-        />
-      )}
+      <div id="results" tabIndex={-1}>
+        {recipe && (
+          <DoughResults 
+            recipe={recipe} 
+            fermentationMethod={fermentationMethod}
+            pizzaStyle={pizzaStyle}
+            unit="grams"
+          />
+        )}
+      </div>
     </div>
   );
 };
