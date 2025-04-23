@@ -9,7 +9,6 @@ import DoughInputs from './DoughInputs';
 import DoughCalculatorHeader from './DoughCalculatorHeader';
 import DoughCalculateButton from './DoughCalculateButton';
 import PizzaStyleSwitch from './PizzaStyleSwitch';
-import LanguageSelector, { Language } from './LanguageSelector';
 import { PizzaStyle } from './PizzaStyleSelect';
 
 type FermentationMethod = 'direct' | 'poolish' | 'biga';
@@ -41,15 +40,14 @@ const DoughCalculator: React.FC = () => {
   const [yeastType, setYeastType] = useState<YeastType>("dry");
   const [recipe, setRecipe] = useState<DoughRecipe | null>(null);
   const [hydration, setHydration] = useState<number>(60);
-  const [language, setLanguage] = useState<Language>("pt");
 
   const { toast } = useToast();
 
   const calculateRecipe = () => {
     if (!flour || flour <= 0) {
       toast({
-        title: "Quantidade de farinha inválida",
-        description: "Por favor, insira uma quantidade válida de farinha.",
+        title: "Invalid flour amount",
+        description: "Please enter a valid flour amount.",
         variant: "destructive"
       });
       return;
@@ -57,8 +55,8 @@ const DoughCalculator: React.FC = () => {
 
     if (hydration < 50 || hydration > 90) {
       toast({
-        title: "Hidratação inválida",
-        description: "Por favor, insira uma hidratação entre 50% e 90%.",
+        title: "Invalid hydration",
+        description: "Please enter a hydration between 50% and 90%.",
         variant: "destructive"
       });
       return;
@@ -120,27 +118,19 @@ const DoughCalculator: React.FC = () => {
     setRecipe(newRecipe);
 
     toast({
-      title: "Receita calculada",
+      title: "Recipe calculated",
       description:
         pizzaStyle === "napoletana"
-          ? "Sua receita de pizza napolitana foi calculada com sucesso!"
-          : "Sua receita de pizza New York Style foi calculada com sucesso!",
+          ? "Your Neapolitan pizza recipe has been calculated successfully!"
+          : "Your New York Style pizza recipe has been calculated successfully!",
     });
   };
 
-  const handleLanguageChange = (newLanguage: Language) => {
-    setLanguage(newLanguage);
-  };
-
   return (
-    <div className="max-w-3xl mx-auto px-4">
+    <div className="w-full max-w-3xl mx-auto px-4 md:px-6">
       <Card className="mb-8">
         <DoughCalculatorHeader />
         <CardContent className="pt-6 space-y-6">
-          <LanguageSelector
-            language={language}
-            onChange={handleLanguageChange}
-          />
           <PizzaStyleSwitch
             pizzaStyle={pizzaStyle}
             setPizzaStyle={setPizzaStyle}

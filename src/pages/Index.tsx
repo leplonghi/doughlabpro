@@ -10,7 +10,7 @@ const Index: React.FC = () => {
     <div className="flex flex-col min-h-screen bg-gradient-to-br from-white to-pizza-cream/30">
       <Header />
       
-      <main className="flex-grow py-8">
+      <main className="flex-grow py-4 md:py-8">
         <IntroSection />
         <DoughCalculator />
       </main>
