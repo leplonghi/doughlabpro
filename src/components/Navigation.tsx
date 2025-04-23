@@ -1,6 +1,6 @@
 
 import * as React from 'react';
-import { ShoppingCart, Lightbulb, Utensils } from 'lucide-react';
+import { ShoppingCart, Lightbulb, Utensils, Menu as MenuIcon } from 'lucide-react';
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from '@/components/ui/navigation-menu';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -56,13 +56,13 @@ const Navigation: React.FC = () => {
   );
 
   return (
-    <nav className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b">
+    <nav className="fixed top-0 left-0 right-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b z-50">
       <div className="container flex h-14 max-w-screen-2xl items-center">
         {isMobile ? (
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="md:hidden">
-                <Menu className="h-5 w-5" />
+                <MenuIcon className="h-5 w-5" />
                 <span className="sr-only">Toggle menu</span>
               </Button>
             </SheetTrigger>
@@ -82,3 +82,4 @@ const Navigation: React.FC = () => {
 };
 
 export default Navigation;
+
