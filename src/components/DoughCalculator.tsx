@@ -11,6 +11,7 @@ import DoughCalculatorHeader from './DoughCalculatorHeader';
 import DoughCalculateButton from './DoughCalculateButton';
 import PizzaStyleSwitch from './PizzaStyleSwitch';
 import UnitSelect, { Unit } from './UnitSelect';
+import { PizzaStyle } from './PizzaStyleSelect';
 
 type FermentationMethod = 'direct' | 'poolish' | 'biga';
 type YeastType = 'fresh' | 'dry';
