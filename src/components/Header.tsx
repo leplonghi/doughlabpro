@@ -1,16 +1,49 @@
 
-import React from 'react';
-import { Pizza, LogIn, LogOut, UserRoundCheck, ShoppingCart, Lightbulb, Utensils, User } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Pizza, LogIn, LogOut, ShoppingCart, Lightbulb, Utensils, User } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
 import { useTranslation } from 'react-i18next';
 import LanguageSelector from './LanguageSelector';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
+import { supabase } from '@/lib/supabase';
+
+interface Profile {
+  avatar_url: string | null;
+}
 
 const Header: React.FC = () => {
   const { user, signOut } = useAuth();
   const { t } = useTranslation();
+  const [profile, setProfile] = useState<Profile | null>(null);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      if (!user) return;
+      
+      try {
+        const { data, error } = await supabase
+          .from('profiles')
+          .select('avatar_url')
+          .eq('id', user.id)
+          .single();
+        
+        if (error) {
+          console.error('Error fetching profile:', error);
+          return;
+        }
+        
+        if (data) {
+          setProfile(data);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+    
+    fetchProfile();
+  }, [user]);
 
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b py-3">
@@ -40,7 +73,7 @@ const Header: React.FC = () => {
             <div className="flex items-center gap-2">
               <Link to="/profile">
                 <Avatar className="h-8 w-8 cursor-pointer">
-                  <AvatarImage src={user.user_metadata?.avatar_url || undefined} />
+                  <AvatarImage src={profile?.avatar_url || undefined} />
                   <AvatarFallback className="bg-pizza text-white">
                     <User size={16} />
                   </AvatarFallback>

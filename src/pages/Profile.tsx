@@ -21,7 +21,7 @@ interface Profile {
 }
 
 const ProfilePage = () => {
-  const { user } = useAuth();
+  const { user, session } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
   const { t } = useTranslation();
@@ -43,12 +43,14 @@ const ProfilePage = () => {
   }, [user, navigate]);
 
   const fetchProfile = async () => {
+    if (!user) return;
+    
     setLoading(true);
     try {
       const { data, error } = await supabase
         .from('profiles')
         .select('*')
-        .eq('id', user?.id)
+        .eq('id', user.id)
         .single();
 
       if (error) {
@@ -73,16 +75,18 @@ const ProfilePage = () => {
   };
 
   const handleAvatarUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!event.target.files || event.target.files.length === 0) {
+    if (!event.target.files || event.target.files.length === 0 || !user) {
       return;
     }
 
     setUploading(true);
     const file = event.target.files[0];
     const fileExt = file.name.split('.').pop();
-    const filePath = `${user?.id}/avatar.${fileExt}`;
+    const filePath = `${user.id}/avatar.${fileExt}`;
 
     try {
+      console.log('Uploading file to path:', filePath);
+      
       // Upload to Storage
       const { error: uploadError } = await supabase.storage
         .from('avatars')
@@ -97,11 +101,13 @@ const ProfilePage = () => {
         .from('avatars')
         .getPublicUrl(filePath);
 
+      console.log('Uploaded successfully, public URL:', urlData.publicUrl);
+
       // Update profile
       const { error: updateError } = await supabase
         .from('profiles')
         .update({ avatar_url: urlData.publicUrl })
-        .eq('id', user?.id);
+        .eq('id', user.id);
 
       if (updateError) {
         throw updateError;
@@ -130,6 +136,8 @@ const ProfilePage = () => {
   };
 
   const updateProfile = async () => {
+    if (!user) return;
+    
     setLoading(true);
     try {
       const { error } = await supabase
@@ -139,7 +147,7 @@ const ProfilePage = () => {
           full_name: fullName,
           updated_at: new Date().toISOString(),
         })
-        .eq('id', user?.id);
+        .eq('id', user.id);
 
       if (error) {
         throw error;
