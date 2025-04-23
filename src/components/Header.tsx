@@ -4,8 +4,11 @@ import BrandLogo from './header/BrandLogo';
 import NavLinks from './header/NavLinks';
 import LanguageSelector from './LanguageSelector';
 import AuthActions from './header/AuthActions';
+import { useTranslation } from 'react-i18next';
 
 const Header: React.FC = () => {
+  const { t } = useTranslation();
+  
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b py-3">
       <div className="container mx-auto flex justify-between items-center px-4">
