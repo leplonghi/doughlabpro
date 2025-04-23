@@ -1,32 +1,26 @@
 
 import React from 'react';
+import { Clock } from 'lucide-react';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 interface FermentationTipsProps {
   method: 'direct' | 'poolish' | 'biga';
 }
 
-const FermentationTips: React.FC<FermentationTipsProps> = ({ method }) => (
-  <div className="bg-pizza-light bg-opacity-30 p-4 rounded-lg">
-    <h3 className="font-medium text-gray-900 mb-2">Dicas de Fermentação</h3>
-    {method === 'direct' && (
-      <p className="text-sm text-gray-700">
-        Deixe a massa fermentar por 8-24 horas em temperatura ambiente (20-22°C) ou na geladeira por mais tempo. 
-        A massa deve dobrar de volume e desenvolver um aroma característico.
+const FermentationTips: React.FC<FermentationTipsProps> = ({ method }) => {
+  const { t } = useLanguage();
+  
+  return (
+    <div className="bg-muted/30 p-4 rounded-lg border border-border/50">
+      <h3 className="font-medium text-foreground flex items-center gap-2 mb-2">
+        <Clock size={18} />
+        {t('recipe.tips')}
+      </h3>
+      <p className="text-sm text-muted-foreground">
+        {t(`fermentation.tips.${method}`)}
       </p>
-    )}
-    {method === 'poolish' && (
-      <p className="text-sm text-gray-700">
-        Após incorporar o poolish à massa final, deixe fermentar por 4-6 horas em temperatura ambiente.
-        Este método confere leveza e sabor complexo à massa.
-      </p>
-    )}
-    {method === 'biga' && (
-      <p className="text-sm text-gray-700">
-        Após incorporar a biga, deixe fermentar por 3-5 horas. Este método proporciona força à massa e sabor mais intenso.
-        Ideal para massas com maior resistência.
-      </p>
-    )}
-  </div>
-);
+    </div>
+  );
+};
 
 export default FermentationTips;
