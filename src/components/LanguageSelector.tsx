@@ -9,6 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useLanguage } from '../contexts/LanguageContext';
+import { useIsMobile } from '../hooks/use-mobile';
 
 // Export the Language type
 export type Language = 'en' | 'pt' | 'es' | 'fr' | 'zh' | 'ja';
@@ -24,15 +25,16 @@ const languages = [
 
 const LanguageSelector: React.FC = () => {
   const { language, setLanguage, t } = useLanguage();
+  const isMobile = useIsMobile();
 
   return (
     <div className="flex items-center gap-2">
       <Globe className="h-4 w-4 text-muted-foreground" />
       <Select value={language} onValueChange={(value: Language) => setLanguage(value)}>
-        <SelectTrigger className="w-[180px]">
+        <SelectTrigger className={`${isMobile ? 'w-[140px]' : 'w-[180px]'} bg-background`}>
           <SelectValue placeholder={t('language.label')} />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent className="bg-popover">
           {languages.map((lang) => (
             <SelectItem key={lang.value} value={lang.value as Language}>
               {lang.label}

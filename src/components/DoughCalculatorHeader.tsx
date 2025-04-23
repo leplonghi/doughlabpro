@@ -1,14 +1,19 @@
 
 import React from "react";
 import { CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { useLanguage } from '../contexts/LanguageContext';
 
-const DoughCalculatorHeader: React.FC = () => (
-  <CardHeader className="bg-pizza-light bg-opacity-40">
-    <CardTitle className="text-2xl text-gray-800">Calculadora de Massa</CardTitle>
-    <CardDescription>
-      Insira os ingredientes e escolha o método preferido de fermentação
-    </CardDescription>
-  </CardHeader>
-);
+const DoughCalculatorHeader: React.FC = () => {
+  const { t } = useLanguage();
+  
+  return (
+    <CardHeader className="bg-pizza-light bg-opacity-40">
+      <CardTitle className="text-2xl text-gray-800">{t('calculator.title')}</CardTitle>
+      <CardDescription>
+        {t('calculator.description')}
+      </CardDescription>
+    </CardHeader>
+  );
+};
 
 export default DoughCalculatorHeader;

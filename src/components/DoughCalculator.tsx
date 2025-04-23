@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { 
   Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter 
@@ -9,8 +10,9 @@ import DoughInputs from './DoughInputs';
 import DoughCalculatorHeader from './DoughCalculatorHeader';
 import DoughCalculateButton from './DoughCalculateButton';
 import PizzaStyleSwitch from './PizzaStyleSwitch';
-import LanguageSelector, { Language } from './LanguageSelector';
+import UnitSelect, { Unit } from './UnitSelect';
 import { PizzaStyle } from './PizzaStyleSelect';
+import { useLanguage } from '../contexts/LanguageContext';
 
 type FermentationMethod = 'direct' | 'poolish' | 'biga';
 type YeastType = 'fresh' | 'dry';
@@ -41,15 +43,16 @@ const DoughCalculator: React.FC = () => {
   const [yeastType, setYeastType] = useState<YeastType>("dry");
   const [recipe, setRecipe] = useState<DoughRecipe | null>(null);
   const [hydration, setHydration] = useState<number>(60);
-  const [language, setLanguage] = useState<Language>("pt");
+  const [unit, setUnit] = useState<Unit>("grams");
+  const { t } = useLanguage();
 
   const { toast } = useToast();
 
   const calculateRecipe = () => {
     if (!flour || flour <= 0) {
       toast({
-        title: "Quantidade de farinha inválida",
-        description: "Por favor, insira uma quantidade válida de farinha.",
+        title: t('error.flour.title'),
+        description: t('error.flour.description'),
         variant: "destructive"
       });
       return;
@@ -57,8 +60,8 @@ const DoughCalculator: React.FC = () => {
 
     if (hydration < 50 || hydration > 90) {
       toast({
-        title: "Hidratação inválida",
-        description: "Por favor, insira uma hidratação entre 50% e 90%.",
+        title: t('error.hydration.title'),
+        description: t('error.hydration.description'),
         variant: "destructive"
       });
       return;
@@ -120,28 +123,27 @@ const DoughCalculator: React.FC = () => {
     setRecipe(newRecipe);
 
     toast({
-      title: "Receita calculada",
-      description:
-        pizzaStyle === "napoletana"
-          ? "Sua receita de pizza napolitana foi calculada com sucesso!"
-          : "Sua receita de pizza New York Style foi calculada com sucesso!",
+      title: t('recipe.success.title'),
+      description: t('recipe.success.description'),
     });
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-4">
+    <div className="max-w-3xl mx-auto px-4 mb-8">
       <Card className="mb-8">
         <DoughCalculatorHeader />
         <CardContent className="pt-6 space-y-6">
-          <LanguageSelector />
-          <PizzaStyleSwitch
-            pizzaStyle={pizzaStyle}
-            setPizzaStyle={setPizzaStyle}
-          />
-          <FermentationMethodSelect
-            fermentationMethod={fermentationMethod}
-            onChange={setFermentationMethod}
-          />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <PizzaStyleSwitch
+              pizzaStyle={pizzaStyle}
+              setPizzaStyle={setPizzaStyle}
+            />
+            <FermentationMethodSelect
+              fermentationMethod={fermentationMethod}
+              onChange={setFermentationMethod}
+            />
+          </div>
+          
           <DoughInputs
             flour={flour}
             setFlour={setFlour}
@@ -151,8 +153,14 @@ const DoughCalculator: React.FC = () => {
             setYeastType={setYeastType}
             pizzaStyle={pizzaStyle}
           />
+          
+          <div className="flex justify-end">
+            <UnitSelect value={unit} onChange={setUnit} />
+          </div>
         </CardContent>
-        <DoughCalculateButton onClick={calculateRecipe} />
+        <CardFooter>
+          <DoughCalculateButton onClick={calculateRecipe} />
+        </CardFooter>
       </Card>
 
       {recipe && (
@@ -160,7 +168,7 @@ const DoughCalculator: React.FC = () => {
           recipe={recipe} 
           fermentationMethod={fermentationMethod}
           pizzaStyle={pizzaStyle}
-          unit="grams"
+          unit={unit}
         />
       )}
     </div>
