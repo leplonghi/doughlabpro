@@ -1,102 +1,21 @@
 
-import React, { useState, useEffect } from 'react';
-import { Pizza, LogIn, LogOut, ShoppingCart, Lightbulb, Utensils, User } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { useAuth } from '@/context/AuthContext';
-import { Button } from '@/components/ui/button';
-import { useTranslation } from 'react-i18next';
+import React from 'react';
+import BrandLogo from './header/BrandLogo';
+import NavLinks from './header/NavLinks';
 import LanguageSelector from './LanguageSelector';
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
-import { supabase } from '@/lib/supabase';
-
-interface Profile {
-  avatar_url: string | null;
-}
+import AuthActions from './header/AuthActions';
 
 const Header: React.FC = () => {
-  const { user, signOut } = useAuth();
-  const { t } = useTranslation();
-  const [profile, setProfile] = useState<Profile | null>(null);
-
-  useEffect(() => {
-    const fetchProfile = async () => {
-      if (!user) return;
-      
-      try {
-        const { data, error } = await supabase
-          .from('profiles')
-          .select('avatar_url')
-          .eq('id', user.id)
-          .single();
-        
-        if (error) {
-          console.error('Error fetching profile:', error);
-          return;
-        }
-        
-        if (data) {
-          setProfile(data);
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };
-    
-    fetchProfile();
-  }, [user]);
-
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b py-3">
       <div className="container mx-auto flex justify-between items-center px-4">
         <div className="flex items-center gap-4">
-          <Link to="/" className="flex items-center gap-2.5">
-            <Pizza size={32} className="text-pizza" />
-            <h1 className="text-xl md:text-2xl font-serif font-bold bg-gradient-to-r from-pizza to-pizza-dark bg-clip-text text-transparent">
-              {t('common.calculator')}
-            </h1>
-          </Link>
-          <div className="hidden md:flex items-center gap-4">
-            <Link to="/shop" className="text-muted-foreground hover:text-foreground transition-colors">
-              <ShoppingCart size={20} />
-            </Link>
-            <Link to="/toppings" className="text-muted-foreground hover:text-foreground transition-colors">
-              <Utensils size={20} />
-            </Link>
-            <Link to="/tips" className="text-muted-foreground hover:text-foreground transition-colors">
-              <Lightbulb size={20} />
-            </Link>
-          </div>
+          <BrandLogo />
+          <NavLinks />
         </div>
         <div className="flex items-center gap-3">
           <LanguageSelector />
-          {user ? (
-            <div className="flex items-center gap-2">
-              <Link to="/profile">
-                <Avatar className="h-8 w-8 cursor-pointer">
-                  <AvatarImage src={profile?.avatar_url || undefined} />
-                  <AvatarFallback className="bg-pizza text-white">
-                    <User size={16} />
-                  </AvatarFallback>
-                </Avatar>
-              </Link>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                className="flex items-center gap-1"
-                onClick={() => signOut()}
-              >
-                <LogOut size={18} />
-                <span className="hidden md:inline">{t('common.logout')}</span>
-              </Button>
-            </div>
-          ) : (
-            <Link to="/auth">
-              <Button variant="ghost" size="sm" className="flex items-center gap-1">
-                <LogIn size={18} />
-                <span className="hidden md:inline">{t('common.login')}</span>
-              </Button>
-            </Link>
-          )}
+          <AuthActions />
         </div>
       </div>
     </header>
