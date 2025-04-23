@@ -1,24 +1,34 @@
 
 {
   "common": {
-    "calculator": "Pizza Dough Calculator",
-    "login": "Log In",
-    "logout": "Log Out",
-    "menu": {
-      "sauce": "Sauce",
-      "toppings": "Toppings",
-      "privacy": "Privacy"
-    }
+    "calculator": "Pizza Calculator",
+    "login": "Login",
+    "logout": "Logout",
+    "signUp": "Sign Up",
+    "welcome": "Welcome",
+    "signIn": "Sign In",
+    "orContinueWith": "Or continue with",
+    "forgotPassword": "Forgot Password?",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?"
   },
-  "calculator": {
-    "title": "Pizza Dough Calculator",
-    "subtitle": "Create the perfect pizza dough with precision",
-    "ballWeight": "Ball Weight",
-    "flour": "Flour",
-    "salt": "Salt",
-    "yeast": "Yeast",
-    "oil": "Olive Oil",
-    "sugar": "Sugar",
-    "hydration": "Hydration"
+  "profile": {
+    "title": "My Profile",
+    "personalInfo": "Personal Information",
+    "personalInfoDescription": "Update your photo and personal details here.",
+    "username": "Username",
+    "email": "Email Address",
+    "fullName": "Full Name",
+    "enterUsername": "Enter your username",
+    "enterFullName": "Enter your full name",
+    "saveChanges": "Save Changes",
+    "saving": "Saving...",
+    "success": "Success",
+    "error": "Error",
+    "profileUpdated": "Your profile has been updated successfully.",
+    "errorUpdatingProfile": "There was an error updating your profile.",
+    "avatarUpdated": "Your avatar has been updated successfully.",
+    "errorUploadingAvatar": "There was an error uploading your avatar.",
+    "errorFetchingProfile": "There was an error fetching your profile."
   }
 }

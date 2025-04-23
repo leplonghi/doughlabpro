@@ -17,6 +17,7 @@ const Sauce = lazy(() => import("./pages/Sauce"));
 const Toppings = lazy(() => import("./pages/Toppings"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const Auth = lazy(() => import("./pages/Auth"));
+const Profile = lazy(() => import("./pages/Profile"));
 
 const queryClient = new QueryClient();
 
@@ -50,6 +51,11 @@ const App = () => (
                 <Route path="/privacy" element={
                   <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
                     <Privacy />
+                  </Suspense>
+                } />
+                <Route path="/profile" element={
+                  <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
+                    <Profile />
                   </Suspense>
                 } />
                 <Route path="*" element={<NotFound />} />
