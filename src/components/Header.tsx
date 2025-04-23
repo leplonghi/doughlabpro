@@ -10,7 +10,7 @@ const Header: React.FC = () => {
         <div className="flex items-center gap-2 md:gap-3">
           <Pizza size={28} className="text-pizza shrink-0" />
           <h1 className="text-xl md:text-2xl font-serif font-bold text-foreground truncate">
-            Pizza Calculator
+            Pizza Dough Calculator PRO
           </h1>
         </div>
         <ThemeToggle />

@@ -15,7 +15,7 @@ const IntroSection: React.FC = () => {
       <Card className="overflow-hidden">
         <div className="bg-gradient-to-r from-pizza-light to-pizza-cream p-6 text-center">
           <h1 className="text-4xl md:text-5xl font-serif font-bold text-gray-800 mb-3">
-            Pizza Dough Calculator
+            Pizza Dough Calculator Pro
           </h1>
           <p className="text-gray-600 text-lg md:text-xl font-light">
             Create pizza dough with precision
@@ -56,6 +56,10 @@ const IntroSection: React.FC = () => {
                   <li className="flex items-center text-gray-700">
                     <span className="inline-block w-2 h-2 bg-pizza mr-3 rounded-full"></span>
                     Use fresh or dry yeast with correct proportions
+                  </li>
+                  <li className="flex items-center text-gray-700">
+                    <span className="inline-block w-2 h-2 bg-pizza mr-3 rounded-full"></span>
+                    See how many doughball you will have!
                   </li>
                 </ul>
               </AccordionContent>

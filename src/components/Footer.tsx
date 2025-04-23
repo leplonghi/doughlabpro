@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
           © {new Date().getFullYear()} Pizza Dough Calculator
         </p>
         <p className="text-xs mt-2">
-          Inspired by authentic Neapolitan pizza tradition
+          Inspired by Pizza lovers!
         </p>
       </div>
     </footer>
