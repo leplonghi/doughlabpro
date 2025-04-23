@@ -128,8 +128,8 @@ const DoughCalculator: React.FC = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-4 mb-8">
-      <Card className="mb-8">
+    <div className="max-w-3xl mx-auto">
+      <Card>
         <DoughCalculatorHeader />
         <CardContent className="pt-6 space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
