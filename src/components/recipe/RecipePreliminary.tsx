@@ -26,22 +26,22 @@ const RecipePreliminary: React.FC<RecipePreMixProps> = ({
     </h3>
     <ul className="space-y-2 text-gray-700">
       <li className="flex justify-between">
-        <span className="result-label flex items-center gap-2"><Wheat size={16} /> Farinha:</span>
+        <span className="result-label flex items-center gap-2"><Wheat size={16} /> Wheat:</span>
         <span className="result-value">{formatValue(flour)}{getUnitLabel()}</span>
       </li>
       <li className="flex justify-between">
-        <span className="result-label flex items-center gap-2"><Droplet size={16} /> Água:</span>
+        <span className="result-label flex items-center gap-2"><Droplet size={16} /> Water:</span>
         <span className="result-value">{formatValue(water)}{getUnitLabel()}</span>
       </li>
       <li className="flex justify-between">
-        <span className="result-label flex items-center gap-2"><FlaskConical size={16} /> Fermento:</span>
+        <span className="result-label flex items-center gap-2"><FlaskConical size={16} /> Yeast:</span>
         <span className="result-value">{formatValue(yeast)}{getUnitLabel()}</span>
       </li>
     </ul>
     <p className="text-sm text-gray-500 mt-3">
       {type === 'poolish'
-        ? 'Misture e deixe fermentar em temperatura ambiente por 8-16h antes de incorporar à massa final.'
-        : 'Misture e deixe fermentar em temperatura ambiente por 12-24h antes de incorporar à massa final.'}
+        ? 'Mix and let ferment at room temperature for 8-16 hours before incorporating into the final dough.'
+        : 'Mix and let ferment at room temperature for 12-24 hours before incorporating into the final dough.'}
     </p>
   </div>
 );

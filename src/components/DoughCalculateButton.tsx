@@ -13,7 +13,7 @@ const DoughCalculateButton: React.FC<DoughCalculateButtonProps> = ({ onClick }) 
       onClick={onClick}
       className="w-full bg-pizza hover:bg-pizza-dark"
     >
-      Calcular Receita
+      Calculate Receipe
     </Button>
   </CardFooter>
 );

@@ -8,10 +8,10 @@ const RecipeActions: React.FC = () => (
     <Separator />
     <div className="flex justify-center gap-4">
       <Button variant="outline">
-        Salvar Receita
+        Save Recepie
       </Button>
       <Button>
-        Nova Receita
+        New Recepie
       </Button>
     </div>
   </>
