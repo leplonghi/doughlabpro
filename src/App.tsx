@@ -38,39 +38,41 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 // Separate the routes into their own component to avoid the React context issues
 const AppRoutes = () => {
   return (
-    <>
-      <Navigation />
-      <Toaster />
-      <Sonner />
-      <Routes>
-        <Route path="/auth" element={<Auth />} />
-        <Route path="/" element={
-          <ProtectedRoute>
-            <Index />
-          </ProtectedRoute>
-        } />
-        <Route path="/sauce" element={
-          <ProtectedRoute>
+    <AuthProvider>
+      <>
+        <Navigation />
+        <Toaster />
+        <Sonner />
+        <Routes>
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/" element={
+            <ProtectedRoute>
+              <Index />
+            </ProtectedRoute>
+          } />
+          <Route path="/sauce" element={
+            <ProtectedRoute>
+              <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
+                <Sauce />
+              </Suspense>
+            </ProtectedRoute>
+          } />
+          <Route path="/toppings" element={
+            <ProtectedRoute>
+              <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
+                <Toppings />
+              </Suspense>
+            </ProtectedRoute>
+          } />
+          <Route path="/privacy" element={
             <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
-              <Sauce />
+              <Privacy />
             </Suspense>
-          </ProtectedRoute>
-        } />
-        <Route path="/toppings" element={
-          <ProtectedRoute>
-            <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
-              <Toppings />
-            </Suspense>
-          </ProtectedRoute>
-        } />
-        <Route path="/privacy" element={
-          <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
-            <Privacy />
-          </Suspense>
-        } />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </>
+          } />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </>
+    </AuthProvider>
   );
 };
 
@@ -80,9 +82,7 @@ const App = () => (
       <QueryClientProvider client={queryClient}>
         <ThemeProvider attribute="class" defaultTheme="light">
           <TooltipProvider>
-            <AuthProvider>
-              <AppRoutes />
-            </AuthProvider>
+            <AppRoutes />
           </TooltipProvider>
         </ThemeProvider>
       </QueryClientProvider>
