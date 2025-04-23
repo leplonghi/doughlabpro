@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { supabase } from '@/lib/supabase';
+import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -29,6 +29,7 @@ interface AuthFormProps {
 }
 
 export function AuthForm({ onSuccess }: AuthFormProps) {
+  const { signIn, signUp } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
@@ -45,17 +46,11 @@ export function AuthForm({ onSuccess }: AuthFormProps) {
     setIsLoading(true);
     try {
       if (isLogin) {
-        const { error } = await supabase.auth.signInWithPassword({
-          email: data.email,
-          password: data.password,
-        });
+        const { error } = await signIn(data.email, data.password);
         if (error) throw error;
         toast.success('Welcome back!');
       } else {
-        const { error } = await supabase.auth.signUp({
-          email: data.email,
-          password: data.password,
-        });
+        const { error } = await signUp(data.email, data.password);
         if (error) throw error;
         toast.success('Account created successfully!');
       }
