@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
@@ -20,8 +21,6 @@ const BallWeightInput: React.FC<BallWeightInputProps> = ({
   flour,
   onBallWeightChange
 }) => {
-  // We'll calculate this in DoughCalculator now to avoid out-of-sync issues
-  // but keep displaying it here for user feedback
   const numberOfBalls = Math.floor(flour / ballWeight) || 0;
 
   return (
@@ -42,6 +41,8 @@ const BallWeightInput: React.FC<BallWeightInputProps> = ({
       <Input
         id="ballWeight"
         type="number"
+        inputMode="numeric" // Add inputMode for better mobile keyboard
+        pattern="[0-9]*" // Ensure numeric input on mobile browsers
         value={ballWeight || ''}
         onChange={onBallWeightChange}
         min="100"
