@@ -6,10 +6,10 @@ const IntroSection: React.FC = () => {
   const {
     t
   } = useTranslation();
-  return <div className="max-w-3xl mx-auto mb-10 px-4 bg-orange-500">
-      <Card className="overflow-hidden">
-        <div className="bg-gradient-to-r from-pizza-light to-pizza-cream p-6 text-center">
-          <h1 className="text-4xl md:text-5xl font-serif font-bold text-gray-800 mb-3">
+  return <div className="max-w-3xl mx-auto mb-10 px-4 bg-white">
+      <Card className="overflow-hidden bg-slate-50">
+        <div className="bg-gradient-to-r from-pizza-light to-pizza-cream p-6 text-center bg-gray-950 py-0 px-[11px]">
+          <h1 className="text-4xl md:text-5xl font-serif font-bold text-gray-800 mb-3 text-center">
             {t('calculator.title')}
           </h1>
           <p className="text-gray-600 text-lg md:text-xl font-light">
