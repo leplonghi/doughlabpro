@@ -6,18 +6,25 @@ import { useAuth } from '@/context/AuthContext';
 import { Card, CardContent } from '@/components/ui/card';
 
 const Auth: React.FC = () => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const navigate = useNavigate();
   
   useEffect(() => {
     if (user) {
+      console.log("User authenticated, redirecting to home");
       navigate('/home');
     }
   }, [user, navigate]);
   
   const handleSuccess = () => {
+    console.log("Login successful, redirecting to home");
     navigate('/home');
   };
+
+  // Don't render the auth form if we're already authenticated and loading is complete
+  if (user && !loading) {
+    return null; // Return nothing while redirecting
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-background to-pizza-light/10">

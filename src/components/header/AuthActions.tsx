@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { LogIn, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/context/AuthContext';
@@ -10,6 +10,12 @@ import UserAvatar from './UserAvatar';
 const AuthActions: React.FC = () => {
   const { user, signOut } = useAuth();
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate('/auth');
+  };
 
   if (user) {
     return (
@@ -19,7 +25,7 @@ const AuthActions: React.FC = () => {
           variant="ghost" 
           size="sm" 
           className="flex items-center gap-1"
-          onClick={() => signOut()}
+          onClick={handleSignOut}
         >
           <LogOut size={18} />
           <span className="hidden md:inline">{t('common.logout')}</span>
