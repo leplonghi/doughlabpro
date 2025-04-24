@@ -9,18 +9,29 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import AuthProvider from "./components/AuthProvider";
 import { AuthGuard } from "./components/auth/AuthGuard";
+import LoadingSpinner from "./components/ui/loading-spinner";
 import NotFound from "./pages/NotFound";
 import Index from "./pages/Index";
 import '@/i18n/i18n';
 import Header from "./components/Header";
 
+// Lazy-loaded components
 const Sauce = lazy(() => import("./pages/Sauce"));
 const Toppings = lazy(() => import("./pages/Toppings"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const Auth = lazy(() => import("./pages/Auth"));
 const Profile = lazy(() => import("./pages/Profile"));
 
-const queryClient = new QueryClient();
+// Create query client with optimized settings
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: 1,
+      staleTime: 5 * 60 * 1000, // 5 minutes
+    },
+  },
+});
 
 const App = () => (
   <React.StrictMode>
@@ -33,43 +44,61 @@ const App = () => (
               <Toaster />
               <Sonner />
               <Routes>
-                <Route path="/" element={<Navigate to="/auth" replace />} />
-                <Route path="/auth" element={
-                  <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
-                    <Auth />
-                  </Suspense>
-                } />
-                <Route path="/privacy" element={
-                  <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
-                    <Privacy />
-                  </Suspense>
-                } />
-                <Route path="/home" element={
-                  <AuthGuard>
-                    <Index />
-                  </AuthGuard>
-                } />
-                <Route path="/sauce" element={
-                  <AuthGuard>
-                    <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
-                      <Sauce />
+                <Route path="/" element={<Navigate to="/home" replace />} />
+                <Route 
+                  path="/auth" 
+                  element={
+                    <Suspense fallback={<LoadingSpinner />}>
+                      <Auth />
                     </Suspense>
-                  </AuthGuard>
-                } />
-                <Route path="/toppings" element={
-                  <AuthGuard>
-                    <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
-                      <Toppings />
+                  } 
+                />
+                <Route 
+                  path="/privacy" 
+                  element={
+                    <Suspense fallback={<LoadingSpinner />}>
+                      <Privacy />
                     </Suspense>
-                  </AuthGuard>
-                } />
-                <Route path="/profile" element={
-                  <AuthGuard>
-                    <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
-                      <Profile />
-                    </Suspense>
-                  </AuthGuard>
-                } />
+                  } 
+                />
+                <Route 
+                  path="/home" 
+                  element={
+                    <AuthGuard>
+                      <Index />
+                    </AuthGuard>
+                  } 
+                />
+                <Route 
+                  path="/sauce" 
+                  element={
+                    <AuthGuard>
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <Sauce />
+                      </Suspense>
+                    </AuthGuard>
+                  } 
+                />
+                <Route 
+                  path="/toppings" 
+                  element={
+                    <AuthGuard>
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <Toppings />
+                      </Suspense>
+                    </AuthGuard>
+                  } 
+                />
+                <Route 
+                  path="/profile" 
+                  element={
+                    <AuthGuard>
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <Profile />
+                      </Suspense>
+                    </AuthGuard>
+                  } 
+                />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </TooltipProvider>

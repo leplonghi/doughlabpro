@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
+import LoadingSpinner from '@/components/ui/loading-spinner';
 
 export function AuthGuard({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
@@ -16,11 +17,7 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
   }, [user, loading, navigate]);
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-pulse text-muted-foreground">Loading...</div>
-      </div>
-    );
+    return <LoadingSpinner />;
   }
 
   // Only render children if we have a user

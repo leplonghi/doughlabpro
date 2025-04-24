@@ -1,7 +1,6 @@
 
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useToast } from "@/components/ui/use-toast";
+import { useState, useCallback } from 'react';
+import { useToast } from "@/hooks/use-toast";
 import { useAuth } from '@/context/AuthContext';
 import { supabase } from '@/lib/supabase';
 import { useTranslation } from 'react-i18next';
@@ -16,14 +15,13 @@ export interface Profile {
 
 export const useProfile = () => {
   const { user } = useAuth();
-  const navigate = useNavigate();
   const { toast } = useToast();
   const { t } = useTranslation();
   
   const [loading, setLoading] = useState(false);
   const [profile, setProfile] = useState<Profile | null>(null);
 
-  const fetchProfile = async () => {
+  const fetchProfile = useCallback(async () => {
     if (!user) return;
     
     setLoading(true);
@@ -32,7 +30,7 @@ export const useProfile = () => {
         .from('profiles')
         .select('*')
         .eq('id', user.id)
-        .single();
+        .maybeSingle();
 
       if (error) {
         throw error;
@@ -41,19 +39,19 @@ export const useProfile = () => {
       if (data) {
         setProfile(data);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error fetching profile:', error);
       toast({
         title: t('profile.error'),
-        description: t('profile.errorFetchingProfile'),
+        description: error.message || t('profile.errorFetchingProfile'),
         variant: "destructive",
       });
     } finally {
       setLoading(false);
     }
-  };
+  }, [user, toast, t]);
 
-  const updateProfile = async (updates: Partial<Profile>) => {
+  const updateProfile = useCallback(async (updates: Partial<Profile>) => {
     if (!user) return;
     
     setLoading(true);
@@ -75,18 +73,18 @@ export const useProfile = () => {
         description: t('profile.profileUpdated'),
       });
       
-      fetchProfile();
-    } catch (error) {
+      await fetchProfile();
+    } catch (error: any) {
       console.error('Error updating profile:', error);
       toast({
         title: t('profile.error'),
-        description: t('profile.errorUpdatingProfile'),
+        description: error.message || t('profile.errorUpdatingProfile'),
         variant: "destructive",
       });
     } finally {
       setLoading(false);
     }
-  };
+  }, [user, toast, t, fetchProfile]);
 
   return {
     profile,
@@ -95,4 +93,3 @@ export const useProfile = () => {
     updateProfile
   };
 };
-

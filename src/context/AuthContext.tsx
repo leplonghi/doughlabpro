@@ -2,6 +2,8 @@
 import * as React from 'react';
 import { Session, User } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabase';
+import { toast } from '@/components/ui/sonner';
+import { useTranslation } from 'react-i18next';
 
 type AuthContextType = {
   session: Session | null;
@@ -34,19 +36,34 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = React.useState<User | null>(null);
   const [session, setSession] = React.useState<Session | null>(null);
   const [loading, setLoading] = React.useState(true);
+  const { t } = useTranslation();
 
   React.useEffect(() => {
-    // Set up auth state change listener
+    // Set up auth state change listener first
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, currentSession) => {
-        setSession(currentSession);
-        setUser(currentSession?.user ?? null);
-        setLoading(false);
+        if (event === 'SIGNED_OUT') {
+          setSession(null);
+          setUser(null);
+        } else if (currentSession && event === 'SIGNED_IN') {
+          setSession(currentSession);
+          setUser(currentSession.user);
+        }
+        
+        if (loading && (event === 'SIGNED_IN' || event === 'SIGNED_OUT')) {
+          setLoading(false);
+        }
       }
     );
 
-    // Check for existing session
-    supabase.auth.getSession().then(({ data: { session: currentSession } }) => {
+    // Then check for existing session
+    supabase.auth.getSession().then(({ data: { session: currentSession }, error }) => {
+      if (error) {
+        console.error("Error getting session:", error);
+        setLoading(false);
+        return;
+      }
+      
       setSession(currentSession);
       setUser(currentSession?.user ?? null);
       setLoading(false);
@@ -65,15 +82,35 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           redirectTo: window.location.origin,
         }
       });
-      return { error };
+      
+      if (error) {
+        console.error("Google sign-in error:", error);
+        toast.error(t('auth.googleSignInError', 'Failed to sign in with Google'));
+        return { error };
+      }
+      
+      return { error: null };
     } catch (error) {
+      console.error("Unexpected error during Google sign-in:", error);
+      toast.error(t('auth.unexpectedError', 'An unexpected error occurred'));
       return { error };
     }
   };
 
   // Sign out
   const signOut = async () => {
-    await supabase.auth.signOut();
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        console.error("Sign out error:", error);
+        toast.error(t('auth.signOutError', 'Failed to sign out'));
+      } else {
+        toast.success(t('auth.signedOut', 'Successfully signed out'));
+      }
+    } catch (error) {
+      console.error("Unexpected error during sign out:", error);
+      toast.error(t('auth.unexpectedError', 'An unexpected error occurred'));
+    }
   };
 
   const value = {

@@ -1,6 +1,5 @@
 
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -12,7 +11,6 @@ import ProfileForm from '@/components/profile/ProfileForm';
 
 const ProfilePage = () => {
   const { user } = useAuth();
-  const navigate = useNavigate();
   const { t } = useTranslation();
   const { profile, loading, fetchProfile, updateProfile } = useProfile();
   
@@ -20,13 +18,10 @@ const ProfilePage = () => {
   const [fullName, setFullName] = useState('');
 
   useEffect(() => {
-    if (!user) {
-      navigate('/auth');
-      return;
+    if (user) {
+      fetchProfile();
     }
-
-    fetchProfile();
-  }, [user, navigate]);
+  }, [user, fetchProfile]);
 
   useEffect(() => {
     if (profile) {
@@ -83,4 +78,3 @@ const ProfilePage = () => {
 };
 
 export default ProfilePage;
-

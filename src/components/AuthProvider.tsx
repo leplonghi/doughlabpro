@@ -1,8 +1,8 @@
 
 import React from 'react';
-import { AuthProvider as ContextAuthProvider } from '../context/AuthContext';
+import { AuthProvider as ContextAuthProvider } from '@/context/AuthContext';
 
-// Re-export the AuthProvider from context with proper React import
+// This component is just a re-export of the main AuthProvider from context
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   return <ContextAuthProvider>{children}</ContextAuthProvider>;
 };

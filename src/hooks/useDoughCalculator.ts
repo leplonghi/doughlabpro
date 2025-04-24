@@ -1,10 +1,11 @@
 
-import { useState, useEffect } from 'react';
-import { useToast } from '@/hooks/use-toast';
+import { useState, useEffect, useCallback } from 'react';
+import { toast } from '@/components/ui/sonner';
 import { DoughRecipe, DoughState, FermentationMethod, YeastType } from '@/types/dough';
 import { PizzaStyle } from '@/components/PizzaStyleSelect';
 
 export const useDoughCalculator = (pizzaStyle: PizzaStyle, fermentationMethod: FermentationMethod) => {
+  // State initialization
   const [state, setState] = useState<DoughState>({
     flour: 1000,
     hydration: 60,
@@ -16,9 +17,8 @@ export const useDoughCalculator = (pizzaStyle: PizzaStyle, fermentationMethod: F
     isLiveCalculation: false,
   });
 
-  const { toast } = useToast();
-
-  const validateField = (field: string, value: any) => {
+  // Memoized validation function
+  const validateField = useCallback((field: string, value: any) => {
     const newErrors = { ...state.errors };
     
     switch (field) {
@@ -48,9 +48,10 @@ export const useDoughCalculator = (pizzaStyle: PizzaStyle, fermentationMethod: F
 
     setState(prev => ({ ...prev, errors: newErrors }));
     return Object.keys(newErrors).length === 0;
-  };
+  }, [state.errors]);
 
-  const calculateNumberOfBalls = () => {
+  // Memoized calculate number of balls function
+  const calculateNumberOfBalls = useCallback(() => {
     if (state.flour && state.ballWeight && state.ballWeight > 0) {
       const water = (state.flour * state.hydration) / 100;
       const salt = (state.flour * 2.5) / 100;
@@ -66,15 +67,17 @@ export const useDoughCalculator = (pizzaStyle: PizzaStyle, fermentationMethod: F
     }
     setState(prev => ({ ...prev, numberOfBalls: 0 }));
     return 0;
-  };
+  }, [state.flour, state.hydration, state.yeastType, state.ballWeight, pizzaStyle]);
 
-  const validateForm = () => {
+  // Form validation
+  const validateForm = useCallback(() => {
     const flourValid = validateField('flour', state.flour);
     const hydrationValid = validateField('hydration', state.hydration);
     return flourValid && hydrationValid;
-  };
+  }, [state.flour, state.hydration, validateField]);
 
-  const calculateRecipe = () => {
+  // Recipe calculation
+  const calculateRecipe = useCallback(() => {
     if (!validateForm()) {
       toast({
         title: "Validation Error",
@@ -149,21 +152,21 @@ export const useDoughCalculator = (pizzaStyle: PizzaStyle, fermentationMethod: F
             : "Your New York Style pizza recipe has been calculated successfully!",
       });
     }
-  };
+  }, [state, pizzaStyle, fermentationMethod, calculateNumberOfBalls, validateForm]);
 
   // Effect for live calculation
   useEffect(() => {
     if (state.isLiveCalculation && Object.keys(state.errors).length === 0 && state.flour > 0) {
       calculateRecipe();
     }
-  }, [state.flour, state.hydration, state.yeastType, pizzaStyle, fermentationMethod, state.isLiveCalculation, state.ballWeight]);
+  }, [state.isLiveCalculation, state.flour, state.hydration, state.yeastType, pizzaStyle, fermentationMethod, state.ballWeight, state.errors, calculateRecipe]);
 
   // Enable live calculation after initial manual calculation
   useEffect(() => {
     if (state.recipe && !state.isLiveCalculation) {
       setState(prev => ({ ...prev, isLiveCalculation: true }));
     }
-  }, [state.recipe]);
+  }, [state.recipe, state.isLiveCalculation]);
 
   return {
     state,

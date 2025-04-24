@@ -1,25 +1,28 @@
 
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/sonner';
+import { useTranslation } from 'react-i18next';
 
-interface AuthFormProps {
-  onSuccess: () => void;
-}
-
-export function AuthForm({ onSuccess }: AuthFormProps) {
+export function AuthForm() {
   const { signInWithGoogle } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleGoogleSignIn = async () => {
     try {
       setIsLoading(true);
       const { error } = await signInWithGoogle();
+      
       if (error) throw error;
-      onSuccess();
-    } catch (error) {
-      toast.error(error.message);
+      
+      // Success will be handled by auth state change
+      // which will redirect to home page
+    } catch (error: any) {
+      toast.error(error.message || t('auth.unexpectedError', 'An unexpected error occurred'));
     } finally {
       setIsLoading(false);
     }
@@ -29,10 +32,10 @@ export function AuthForm({ onSuccess }: AuthFormProps) {
     <div className="space-y-6">
       <div className="text-center">
         <h2 className="text-xl font-semibold tracking-tight">
-          Welcome to DoughLab Pro
+          {t('auth.welcome', 'Welcome to DoughLab Pro')}
         </h2>
         <p className="text-sm text-muted-foreground mt-2">
-          Access your personalized pizza recipe calculator
+          {t('auth.accessDescription', 'Access your personalized pizza recipe calculator')}
         </p>
       </div>
 
@@ -49,7 +52,7 @@ export function AuthForm({ onSuccess }: AuthFormProps) {
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
             </svg>
-            Please wait...
+            {t('common.pleaseWait', 'Please wait...')}
           </span>
         ) : (
           <span className="flex items-center gap-2">
@@ -71,7 +74,7 @@ export function AuthForm({ onSuccess }: AuthFormProps) {
                 fill="#EA4335"
               />
             </svg>
-            Continue with Google
+            {t('auth.continueWithGoogle', 'Continue with Google')}
           </span>
         )}
       </Button>

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthForm } from '@/components/auth/AuthForm';
 import { useAuth } from '@/context/AuthContext';
 import { Card, CardContent } from '@/components/ui/card';
+import LoadingSpinner from '@/components/ui/loading-spinner';
 
 const Auth: React.FC = () => {
   const { user, loading } = useAuth();
@@ -11,19 +12,18 @@ const Auth: React.FC = () => {
   
   useEffect(() => {
     if (user) {
-      console.log("User authenticated, redirecting to home");
       navigate('/home');
     }
   }, [user, navigate]);
   
-  const handleSuccess = () => {
-    console.log("Login successful, redirecting to home");
-    navigate('/home');
-  };
+  // Don't render the auth form if we're already authenticated
+  if (user) {
+    return <LoadingSpinner />;
+  }
 
-  // Don't render the auth form if we're already authenticated and loading is complete
-  if (user && !loading) {
-    return null; // Return nothing while redirecting
+  // Show a loading spinner while checking authentication
+  if (loading) {
+    return <LoadingSpinner />;
   }
 
   return (
@@ -38,7 +38,7 @@ const Auth: React.FC = () => {
           </div>
           <Card className="border shadow-lg">
             <CardContent className="pt-6">
-              <AuthForm onSuccess={handleSuccess} />
+              <AuthForm />
             </CardContent>
           </Card>
         </div>
