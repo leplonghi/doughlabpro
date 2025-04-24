@@ -1,4 +1,3 @@
-
 {
   "common": {
     "calculator": "披萨计算器",
@@ -24,7 +23,7 @@
     }
   },
   "calculator": {
-    "title": "披萨面团计算器",
+    "title": "披萨计算器",
     "subtitle": "精确创建完美的披萨面团",
     "calculate": "计算配方",
     "ballWeight": "面团球重量",
@@ -70,6 +69,7 @@
       "bigaTips": "添加硬种后，发酵4-8小时。此方法为面团提供强度和更浓郁的风味。适合需要更大弹性的面团。"
     },
     "ingredients": {
+      "title": "配料",
       "ballWeight": "面团球重量 (g)",
       "ballWeightDescription": "单个面团球的重量。建议：30厘米披萨用250克",
       "amount": "数量",

@@ -1,4 +1,3 @@
-
 {
   "common": {
     "calculator": "Calculadora de Masa para Pizza",
@@ -63,6 +62,7 @@
       "bigaTips": "Después de incorporar la biga, permitir fermentar durante 4-8 horas. Este método proporciona fuerza a la masa y un sabor más intenso. Ideal para masas con mayor resistencia."
     },
     "ingredients": {
+      "title": "Ingredientes",
       "ballWeight": "Peso de la Bola (g)",
       "ballWeightDescription": "Peso de una bola de masa. Recomendado: 250g para una pizza de 30cm",
       "ballCountResult": "Esto hará aproximadamente {{count}} bola de masa",

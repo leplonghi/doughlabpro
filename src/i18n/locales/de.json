@@ -1,4 +1,3 @@
-
 {
   "common": {
     "calculator": "Pizza-Rechner",
@@ -70,6 +69,7 @@
       "bigaTips": "Nach dem Einarbeiten der Biga, lassen Sie den Teig 4-8 Stunden fermentieren. Diese Methode verleiht dem Teig Stärke und ein intensiveres Aroma. Ideal für Teige mit größerer Widerstandsfähigkeit."
     },
     "ingredients": {
+      "title": "Zutaten",
       "ballWeight": "Teigkugelgewicht (g)",
       "ballWeightDescription": "Gewicht einer Teigkugel. Empfohlen: 250g für eine 30cm Pizza",
       "amount": "Menge",

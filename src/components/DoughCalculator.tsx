@@ -11,10 +11,12 @@ import { PizzaStyle } from './PizzaStyleSelect';
 import SkipToContent from './SkipToContent';
 import { useDoughCalculator } from '@/hooks/useDoughCalculator';
 import { FermentationMethod } from '@/types/dough';
+import { useTranslation } from 'react-i18next';
 
 const DoughCalculator: React.FC = () => {
   const [pizzaStyle, setPizzaStyle] = React.useState<PizzaStyle>("napoletana");
   const [fermentationMethod, setFermentationMethod] = React.useState<FermentationMethod>("direct");
+  const { t } = useTranslation();
   
   const {
     state,
@@ -66,7 +68,7 @@ const DoughCalculator: React.FC = () => {
           <div className="space-y-6">
             <div className="flex items-center gap-2 text-lg font-semibold text-foreground">
               <span className="flex items-center justify-center w-6 h-6 rounded-full bg-pizza text-white text-sm">1</span>
-              <h2>Estilo de Pizza</h2>
+              <h2>{t('calculator.pizzaStyle.title')}</h2>
             </div>
             <PizzaStyleSwitch
               pizzaStyle={pizzaStyle}
@@ -77,7 +79,7 @@ const DoughCalculator: React.FC = () => {
           <div className="space-y-6">
             <div className="flex items-center gap-2 text-lg font-semibold text-foreground">
               <span className="flex items-center justify-center w-6 h-6 rounded-full bg-pizza text-white text-sm">2</span>
-              <h2>Método de Fermentação</h2>
+              <h2>{t('calculator.fermentation.title')}</h2>
             </div>
             <FermentationMethodSelect
               fermentationMethod={fermentationMethod}
@@ -88,7 +90,7 @@ const DoughCalculator: React.FC = () => {
           <div className="space-y-6">
             <div className="flex items-center gap-2 text-lg font-semibold text-foreground">
               <span className="flex items-center justify-center w-6 h-6 rounded-full bg-pizza text-white text-sm">3</span>
-              <h2>Ingredientes</h2>
+              <h2>{t('calculator.ingredients.title', 'Ingredients')}</h2>
             </div>
             <DoughInputs
               flour={state.flour}

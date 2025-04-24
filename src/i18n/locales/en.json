@@ -70,6 +70,7 @@
       "bigaTips": "After incorporating the biga, allow to ferment for 4-8 hours. This method provides strength to the dough and a more intense flavor. Ideal for doughs with greater resistance."
     },
     "ingredients": {
+      "title": "Ingredients",
       "ballWeight": "Ball Weight (g)",
       "ballWeightDescription": "Single dough ball weight. Recommended: 250g for a 12-inch pizza",
       "ballCountResult": "This will make approximately {{count}} dough ball",

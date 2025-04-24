@@ -1,4 +1,3 @@
-
 {
   "common": {
     "calculator": "Calculateur de Pâte à Pizza",
@@ -63,6 +62,7 @@
       "bigaTips": "Après avoir incorporé la biga, laisser fermenter pendant 4-8 heures. Cette méthode donne de la force à la pâte et une saveur plus intense. Idéal pour les pâtes avec plus de résistance."
     },
     "ingredients": {
+      "title": "Ingrédients",
       "ballWeight": "Poids de la Boule (g)",
       "ballWeightDescription": "Poids d'une boule de pâte. Recommandé: 250g pour une pizza de 30cm",
       "amount": "Quantité",
