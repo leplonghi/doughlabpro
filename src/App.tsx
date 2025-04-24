@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import * as React from "react";
@@ -45,60 +44,38 @@ const App = () => (
               <Sonner />
               <Routes>
                 <Route path="/" element={<Navigate to="/home" replace />} />
-                <Route 
-                  path="/auth" 
-                  element={
+                <Route path="/auth" element={
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <Auth />
+                  </Suspense>
+                } />
+                <Route path="/privacy" element={
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <Privacy />
+                  </Suspense>
+                } />
+                <Route path="/home" element={<Index />} />
+                <Route path="/sauce" element={
+                  <AuthGuard>
                     <Suspense fallback={<LoadingSpinner />}>
-                      <Auth />
+                      <Sauce />
                     </Suspense>
-                  } 
-                />
-                <Route 
-                  path="/privacy" 
-                  element={
+                  </AuthGuard>
+                } />
+                <Route path="/toppings" element={
+                  <AuthGuard>
                     <Suspense fallback={<LoadingSpinner />}>
-                      <Privacy />
+                      <Toppings />
                     </Suspense>
-                  } 
-                />
-                <Route 
-                  path="/home" 
-                  element={
-                    <AuthGuard>
-                      <Index />
-                    </AuthGuard>
-                  } 
-                />
-                <Route 
-                  path="/sauce" 
-                  element={
-                    <AuthGuard>
-                      <Suspense fallback={<LoadingSpinner />}>
-                        <Sauce />
-                      </Suspense>
-                    </AuthGuard>
-                  } 
-                />
-                <Route 
-                  path="/toppings" 
-                  element={
-                    <AuthGuard>
-                      <Suspense fallback={<LoadingSpinner />}>
-                        <Toppings />
-                      </Suspense>
-                    </AuthGuard>
-                  } 
-                />
-                <Route 
-                  path="/profile" 
-                  element={
-                    <AuthGuard>
-                      <Suspense fallback={<LoadingSpinner />}>
-                        <Profile />
-                      </Suspense>
-                    </AuthGuard>
-                  } 
-                />
+                  </AuthGuard>
+                } />
+                <Route path="/profile" element={
+                  <AuthGuard>
+                    <Suspense fallback={<LoadingSpinner />}>
+                      <Profile />
+                    </Suspense>
+                  </AuthGuard>
+                } />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </TooltipProvider>
