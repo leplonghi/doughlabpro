@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useCallback } from 'react';
 import { toast } from 'sonner';
 import { DoughRecipe, DoughState, FermentationMethod, YeastType } from '@/types/dough';
@@ -79,9 +78,8 @@ export const useDoughCalculator = (pizzaStyle: PizzaStyle, fermentationMethod: F
   // Recipe calculation
   const calculateRecipe = useCallback(() => {
     if (!validateForm()) {
-      toast("Validation Error", {
-        description: "Please fix the errors in the form.",
-        variant: "destructive"
+      toast.error("Validation Error", {
+        description: "Please fix the errors in the form."
       });
       return;
     }
@@ -143,7 +141,7 @@ export const useDoughCalculator = (pizzaStyle: PizzaStyle, fermentationMethod: F
     calculateNumberOfBalls();
 
     if (!state.isLiveCalculation) {
-      toast("Recipe calculated", {
+      toast.success("Recipe calculated", {
         description:
           pizzaStyle === "napoletana"
             ? "Your Neapolitan pizza recipe has been calculated successfully!"
