@@ -33,6 +33,7 @@ const PizzaStyleSwitch: React.FC<PizzaStyleSwitchProps> = ({ pizzaStyle, setPizz
             id="pizza-style"
             checked={pizzaStyle === "newyork"}
             onCheckedChange={(checked) => setPizzaStyle(checked ? "newyork" : "napoletana")}
+            className="data-[state=checked]:bg-black data-[state=unchecked]:bg-black/50"
           />
           <Label htmlFor="pizza-style" className={`text-sm ${pizzaStyle === "newyork" ? "font-medium" : ""}`}>
             {t('calculator.pizzaStyle.newyork')}
