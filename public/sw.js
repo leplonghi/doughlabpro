@@ -40,12 +40,38 @@ self.addEventListener('activate', (event) => {
   return self.clients.claim();
 });
 
-// Fetch event with network-first strategy for API calls,
+// Fetch event with network-first strategy for API calls and HTML documents,
 // and cache-first strategy for static assets
 self.addEventListener('fetch', (event) => {
   // Skip non-GET requests and browser extensions
   if (event.request.method !== 'GET' || 
       !event.request.url.startsWith('http')) {
+    return;
+  }
+  
+  const url = new URL(event.request.url);
+  
+  // Always use network-first for HTML documents to ensure fresh content
+  if (event.request.mode === 'navigate' || 
+      event.request.headers.get('accept')?.includes('text/html')) {
+    event.respondWith(
+      fetch(event.request)
+        .then(response => {
+          // Clone the response before using it
+          const responseToCache = response.clone();
+          
+          // Update the cache with the latest version
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(event.request, responseToCache);
+          });
+          
+          return response;
+        })
+        .catch(() => {
+          // If network fails, try to serve from cache
+          return caches.match(event.request) || caches.match('/index.html');
+        })
+    );
     return;
   }
 
@@ -68,23 +94,38 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
       if (response) {
-        return response;
+        // Check if the cached response is recent (less than 1 hour old)
+        const headers = response.headers;
+        const date = headers.get('date');
+        if (date) {
+          const cachedTime = new Date(date).getTime();
+          const now = new Date().getTime();
+          const hourInMs = 60 * 60 * 1000;
+          
+          // If the cache is recent, use it
+          if (now - cachedTime < hourInMs) {
+            return response;
+          }
+        } else {
+          return response;
+        }
       }
       
-      return fetch(event.request).then((response) => {
+      // Fetch from network and update cache
+      return fetch(event.request).then((networkResponse) => {
         // Don't cache non-successful responses or non-GET requests
-        if (!response || response.status !== 200 || event.request.method !== 'GET') {
-          return response;
+        if (!networkResponse || networkResponse.status !== 200 || event.request.method !== 'GET') {
+          return networkResponse;
         }
 
         // Clone the response
-        const responseToCache = response.clone();
+        const responseToCache = networkResponse.clone();
         
         caches.open(CACHE_NAME).then((cache) => {
           cache.put(event.request, responseToCache);
         });
         
-        return response;
+        return networkResponse;
       }).catch(() => {
         // If fetch fails (offline), return the offline page for navigation requests
         if (event.request.mode === 'navigate') {
@@ -121,4 +162,25 @@ self.addEventListener('notificationclick', (event) => {
   event.waitUntil(
     clients.openWindow(event.notification.data.url)
   );
+});
+
+// Add an event listener for the 'message' event to handle refresh requests
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+  
+  if (event.data && event.data.type === 'CLEAR_CACHE') {
+    event.waitUntil(
+      caches.keys().then((keyList) => {
+        return Promise.all(keyList.map((key) => caches.delete(key)));
+      }).then(() => {
+        console.log('[ServiceWorker] Cache cleared');
+        // Notify clients that cache has been cleared
+        self.clients.matchAll().then(clients => {
+          clients.forEach(client => client.postMessage({type: 'CACHE_CLEARED'}));
+        });
+      })
+    );
+  }
 });
