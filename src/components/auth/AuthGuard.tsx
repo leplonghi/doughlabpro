@@ -11,13 +11,18 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     // Only redirect if not loading and no user is found
     if (!loading && !user) {
-      console.log("No authenticated user, redirecting to auth");
+      console.log("No authenticated user, redirecting to auth page");
       navigate('/auth');
     }
   }, [user, loading, navigate]);
 
+  // Show loading spinner while checking authentication
   if (loading) {
-    return <LoadingSpinner />;
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <LoadingSpinner />
+      </div>
+    );
   }
 
   // Only render children if we have a user
