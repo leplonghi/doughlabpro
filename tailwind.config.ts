@@ -64,15 +64,15 @@ export default {
           ring: 'hsl(var(--sidebar-ring))'
         },
         pizza: {
-          DEFAULT: '#ea384d',
-          light: '#fef7cd',
-          dark: '#8B0000',
-          accent: '#3A5311',
-          cream: '#FFF8E1',
+          DEFAULT: '#c2410c', // Amber-700
+          light: '#fef3c7', // Amber-100
+          dark: '#78350f', // Amber-900
+          accent: '#d97706', // Amber-600
+          cream: '#fffbeb', // Amber-50
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Outfit', 'system-ui', 'sans-serif'],
         serif: ['Playfair Display', 'Georgia', 'serif'],
       },
       borderRadius: {

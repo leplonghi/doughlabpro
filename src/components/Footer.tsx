@@ -6,14 +6,25 @@ const Footer: React.FC = () => {
   const { t } = useTranslation();
   
   return (
-    <footer className="border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-6 mt-12">
-      <div className="container mx-auto px-4 text-center">
-        <p className="text-sm text-muted-foreground">
-          © {new Date().getFullYear()} {t('common.calculator')}
-        </p>
-        <p className="text-xs text-muted-foreground/80 mt-2">
-          {t('common.footer.tagline')}
-        </p>
+    <footer className="border-t border-border bg-background/95 py-8 mt-auto">
+      <div className="container mx-auto px-4 md:flex md:items-center md:justify-between">
+        <div className="text-center md:text-left mb-4 md:mb-0">
+          <p className="text-sm text-foreground/70">
+            © {new Date().getFullYear()} DoughLab Pro
+          </p>
+        </div>
+        
+        <div className="flex items-center justify-center md:justify-end space-x-4">
+          <a href="/privacy" className="text-sm text-foreground/70 hover:text-primary transition-colors">
+            {t('common.footer.privacy', 'Privacy Policy')}
+          </a>
+          <a href="#" className="text-sm text-foreground/70 hover:text-primary transition-colors">
+            {t('common.footer.terms', 'Terms of Service')}
+          </a>
+          <a href="#" className="text-sm text-foreground/70 hover:text-primary transition-colors">
+            {t('common.footer.contact', 'Contact')}
+          </a>
+        </div>
       </div>
     </footer>
   );

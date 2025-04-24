@@ -60,15 +60,15 @@ const DoughCalculator: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto px-4 md:px-6">
+    <div className="w-full max-w-3xl mx-auto px-4 md:px-6 mb-12 fade-in">
       <SkipToContent />
-      <Card className="mb-8">
+      <Card className="mb-8 shadow-sm border-border overflow-hidden rounded-xl">
         <DoughCalculatorHeader />
-        <CardContent className="pt-6 space-y-8">
-          <div className="space-y-6">
-            <div className="flex items-center gap-2 text-lg font-semibold text-foreground">
-              <span className="flex items-center justify-center w-6 h-6 rounded-full bg-pizza text-white text-sm">1</span>
-              <h2>{t('calculator.pizzaStyle.title')}</h2>
+        <CardContent className="p-6 space-y-8">
+          <div className="space-y-5">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center justify-center w-7 h-7 rounded-full bg-primary text-primary-foreground text-sm font-medium">1</div>
+              <h2 className="text-xl font-semibold text-foreground">{t('calculator.pizzaStyle.title')}</h2>
             </div>
             <PizzaStyleSwitch
               pizzaStyle={pizzaStyle}
@@ -76,10 +76,10 @@ const DoughCalculator: React.FC = () => {
             />
           </div>
 
-          <div className="space-y-6">
-            <div className="flex items-center gap-2 text-lg font-semibold text-foreground">
-              <span className="flex items-center justify-center w-6 h-6 rounded-full bg-pizza text-white text-sm">2</span>
-              <h2>{t('calculator.fermentation.title')}</h2>
+          <div className="space-y-5">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center justify-center w-7 h-7 rounded-full bg-primary text-primary-foreground text-sm font-medium">2</div>
+              <h2 className="text-xl font-semibold text-foreground">{t('calculator.fermentation.title')}</h2>
             </div>
             <FermentationMethodSelect
               fermentationMethod={fermentationMethod}
@@ -87,10 +87,10 @@ const DoughCalculator: React.FC = () => {
             />
           </div>
 
-          <div className="space-y-6">
-            <div className="flex items-center gap-2 text-lg font-semibold text-foreground">
-              <span className="flex items-center justify-center w-6 h-6 rounded-full bg-pizza text-white text-sm">3</span>
-              <h2>{t('calculator.ingredients.title', 'Ingredients')}</h2>
+          <div className="space-y-5">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center justify-center w-7 h-7 rounded-full bg-primary text-primary-foreground text-sm font-medium">3</div>
+              <h2 className="text-xl font-semibold text-foreground">{t('calculator.ingredients.title')}</h2>
             </div>
             <DoughInputs
               flour={state.flour}
