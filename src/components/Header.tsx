@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
@@ -7,13 +6,15 @@ import { useTheme } from 'next-themes';
 import { Moon, Sun, Globe } from 'lucide-react';
 import { Pizza } from 'lucide-react';
 import LanguageSelector from './LanguageSelector';
-
 const Header: React.FC = () => {
-  const { user } = useAuth();
-  const { theme, setTheme } = useTheme();
-  
-  return (
-    <header className="sticky top-0 z-50 w-full bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+  const {
+    user
+  } = useAuth();
+  const {
+    theme,
+    setTheme
+  } = useTheme();
+  return <header className="sticky top-0 z-50 w-full border-b border-gray-200 dark:border-gray-800 bg-amber-200">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo and Navigation */}
@@ -40,46 +41,23 @@ const Header: React.FC = () => {
           <div className="flex items-center gap-4">
             <LanguageSelector />
             
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="rounded-full"
-            >
+            <Button variant="ghost" size="icon" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="rounded-full">
               {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
 
-            {!user ? (
-              <div className="flex items-center gap-2">
-                <Button
-                  variant="ghost"
-                  onClick={() => window.location.href = '/auth'}
-                  className="text-sm font-medium"
-                >
+            {!user ? <div className="flex items-center gap-2">
+                <Button variant="ghost" onClick={() => window.location.href = '/auth'} className="text-sm font-medium">
                   Sign Up
                 </Button>
-                <Button
-                  variant="default"
-                  onClick={() => window.location.href = '/auth'}
-                  className="bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
-                >
+                <Button variant="default" onClick={() => window.location.href = '/auth'} className="bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200">
                   Login
                 </Button>
-              </div>
-            ) : (
-              <Button
-                variant="default"
-                onClick={() => window.location.href = '/profile'}
-                className="bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
-              >
+              </div> : <Button variant="default" onClick={() => window.location.href = '/profile'} className="bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200">
                 Profile
-              </Button>
-            )}
+              </Button>}
           </div>
         </div>
       </div>
-    </header>
-  );
+    </header>;
 };
-
 export default Header;
