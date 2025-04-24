@@ -1,68 +1,85 @@
+
 import React from 'react';
-import { useLocation, Link } from 'react-router-dom';
-import { Pizza, Moon, Sun, Globe } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
-import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { useTheme } from 'next-themes';
+import { Moon, Sun, Globe } from 'lucide-react';
+import { Pizza } from 'lucide-react';
 import LanguageSelector from './LanguageSelector';
-const Header: React.FC = () => {
-  const {
-    t
-  } = useTranslation();
-  const location = useLocation();
-  const {
-    user
-  } = useAuth();
-  const {
-    theme,
-    setTheme
-  } = useTheme();
 
-  // Hide navigation on auth page
-  if (location.pathname === '/auth') {
-    return null;
-  }
-  return <header className="sticky top-0 z-50 w-full border-b border-gray-200 dark:border-gray-800 bg-amber-200">
-      <div className="container mx-auto flex items-center justify-between h-16 px-[17px]">
-        <div className="flex items-center">
-          <Link to="/" className="flex items-center gap-2">
-            <Pizza size={32} className="text-black dark:text-white" />
-            <span className="text-xl px-[7px] py-0 my-0 font-extrabold">DoughLab Pro</span>
-          </Link>
-          
-          <nav className="hidden md:flex ml-10 space-x-8">
-            <Link to="/home" className="text-sm font-medium hover:text-gray-600 dark:hover:text-gray-300">
-              {t('common.menu.home')}
+const Header: React.FC = () => {
+  const { user } = useAuth();
+  const { theme, setTheme } = useTheme();
+  
+  return (
+    <header className="sticky top-0 z-50 w-full bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo and Navigation */}
+          <div className="flex items-center gap-8">
+            <Link to="/" className="flex items-center gap-2">
+              <Pizza className="h-8 w-8" />
+              <span className="text-xl font-bold">DoughLab Pro</span>
             </Link>
-            <Link to="/toppings" className="text-sm font-medium hover:text-gray-600 dark:hover:text-gray-300">
-              {t('common.menu.toppings')}
-            </Link>
-            <Link to="/sauce" className="text-sm font-medium hover:text-gray-600 dark:hover:text-gray-300">
-              {t('common.menu.sauces')}
-            </Link>
-          </nav>
-        </div>
-        
-        <div className="flex items-center gap-2">
-          <LanguageSelector />
-          
-          <Button variant="ghost" size="icon" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="rounded-full" aria-label={t('common.toggleTheme')}>
-            {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-          </Button>
-          
-          {user ? <Button variant="default" onClick={() => window.location.href = '/profile'} className="bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200">
-              {t('common.profile')}
-            </Button> : <div className="flex gap-2">
-              <Button variant="outline" onClick={() => window.location.href = '/auth'} className="border-gray-300 dark:border-gray-700">
-                {t('auth.signUp')}
+            
+            <nav className="hidden md:flex items-center gap-6">
+              <Link to="/home" className="text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
+                Home
+              </Link>
+              <Link to="/toppings" className="text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
+                Toppings
+              </Link>
+              <Link to="/sauce" className="text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
+                Sauces
+              </Link>
+            </nav>
+          </div>
+
+          {/* Right side actions */}
+          <div className="flex items-center gap-4">
+            <LanguageSelector />
+            
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              className="rounded-full"
+            >
+              {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            </Button>
+
+            {!user ? (
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="ghost"
+                  onClick={() => window.location.href = '/auth'}
+                  className="text-sm font-medium"
+                >
+                  Sign Up
+                </Button>
+                <Button
+                  variant="default"
+                  onClick={() => window.location.href = '/auth'}
+                  className="bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
+                >
+                  Login
+                </Button>
+              </div>
+            ) : (
+              <Button
+                variant="default"
+                onClick={() => window.location.href = '/profile'}
+                className="bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
+              >
+                Profile
               </Button>
-              <Button variant="default" onClick={() => window.location.href = '/auth'} className="bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200">
-                {t('auth.login')}
-              </Button>
-            </div>}
+            )}
+          </div>
         </div>
       </div>
-    </header>;
+    </header>
+  );
 };
+
 export default Header;
