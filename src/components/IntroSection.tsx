@@ -1,19 +1,12 @@
-
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { useTranslation } from 'react-i18next';
-
 const IntroSection: React.FC = () => {
-  const { t } = useTranslation();
-  
-  return (
-    <div className="max-w-3xl mx-auto mb-10 px-4">
+  const {
+    t
+  } = useTranslation();
+  return <div className="max-w-3xl mx-auto mb-10 px-4 bg-orange-500">
       <Card className="overflow-hidden">
         <div className="bg-gradient-to-r from-pizza-light to-pizza-cream p-6 text-center">
           <h1 className="text-4xl md:text-5xl font-serif font-bold text-gray-800 mb-3">
@@ -69,8 +62,6 @@ const IntroSection: React.FC = () => {
           </Accordion>
         </CardContent>
       </Card>
-    </div>
-  );
+    </div>;
 };
-
 export default IntroSection;
