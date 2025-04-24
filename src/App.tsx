@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import AuthProvider from "./components/AuthProvider";
+import { AuthGuard } from "./components/auth/AuthGuard";
 import NotFound from "./pages/NotFound";
 import Index from "./pages/Index";
 import '@/i18n/i18n';
@@ -35,26 +36,36 @@ const App = () => (
                     <Auth />
                   </Suspense>
                 } />
-                <Route path="/" element={<Index />} />
-                <Route path="/sauce" element={
-                  <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
-                    <Sauce />
-                  </Suspense>
-                } />
-                <Route path="/toppings" element={
-                  <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
-                    <Toppings />
-                  </Suspense>
-                } />
                 <Route path="/privacy" element={
                   <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
                     <Privacy />
                   </Suspense>
                 } />
+                <Route path="/" element={
+                  <AuthGuard>
+                    <Index />
+                  </AuthGuard>
+                } />
+                <Route path="/sauce" element={
+                  <AuthGuard>
+                    <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
+                      <Sauce />
+                    </Suspense>
+                  </AuthGuard>
+                } />
+                <Route path="/toppings" element={
+                  <AuthGuard>
+                    <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
+                      <Toppings />
+                    </Suspense>
+                  </AuthGuard>
+                } />
                 <Route path="/profile" element={
-                  <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
-                    <Profile />
-                  </Suspense>
+                  <AuthGuard>
+                    <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
+                      <Profile />
+                    </Suspense>
+                  </AuthGuard>
                 } />
                 <Route path="*" element={<NotFound />} />
               </Routes>
