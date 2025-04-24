@@ -9,9 +9,9 @@ const BrandLogo: React.FC = () => {
   
   return (
     <Link to="/" className="flex items-center gap-2.5">
-      <Pizza size={32} className="text-pizza" />
-      <h1 className="text-xl md:text-2xl font-serif font-bold bg-gradient-to-r from-pizza to-pizza-dark bg-clip-text text-transparent">
-        {t('common.calculator')}
+      <Pizza size={32} className="text-black dark:text-white" />
+      <h1 className="text-xl md:text-2xl font-medium">
+        DoughLab Pro
       </h1>
     </Link>
   );

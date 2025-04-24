@@ -1,6 +1,5 @@
 
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/sonner';
@@ -9,7 +8,6 @@ import { useTranslation } from 'react-i18next';
 export function AuthForm() {
   const { signInWithGoogle } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
   const { t } = useTranslation();
 
   const handleGoogleSignIn = async () => {
@@ -30,20 +28,10 @@ export function AuthForm() {
 
   return (
     <div className="space-y-6">
-      <div className="text-center">
-        <h2 className="text-xl font-semibold tracking-tight">
-          {t('auth.welcome', 'Welcome to DoughLab Pro')}
-        </h2>
-        <p className="text-sm text-muted-foreground mt-2">
-          {t('auth.accessDescription', 'Access your personalized pizza recipe calculator')}
-        </p>
-      </div>
-
       <Button
-        className="w-full bg-white hover:bg-gray-50 text-gray-700 border border-gray-200"
+        className="w-full py-6 bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 flex items-center justify-center gap-3"
         onClick={handleGoogleSignIn}
         disabled={isLoading}
-        variant="outline"
         size="lg"
       >
         {isLoading ? (
@@ -55,7 +43,7 @@ export function AuthForm() {
             {t('common.pleaseWait', 'Please wait...')}
           </span>
         ) : (
-          <span className="flex items-center gap-2">
+          <span className="flex items-center gap-3">
             <svg className="h-5 w-5" viewBox="0 0 24 24">
               <path
                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"

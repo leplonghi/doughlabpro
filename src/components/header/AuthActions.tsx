@@ -48,7 +48,7 @@ const AuthActions: React.FC = () => {
             </span>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
+        <DropdownMenuContent align="end" className="bg-white dark:bg-gray-900">
           <DropdownMenuItem onClick={handleProfileClick}>
             <User className="mr-2 h-4 w-4" />
             {t('common.profile')}
@@ -64,15 +64,23 @@ const AuthActions: React.FC = () => {
   }
 
   return (
-    <Button 
-      variant="ghost" 
-      size="sm" 
-      className="flex items-center gap-1"
-      onClick={() => navigate('/auth')}
-    >
-      <LogIn size={18} />
-      <span className="hidden md:inline">{t('common.login')}</span>
-    </Button>
+    <div className="flex gap-2">
+      <Button 
+        variant="outline" 
+        onClick={() => navigate('/auth')}
+        className="border-gray-300 dark:border-gray-700"
+      >
+        {t('auth.signUp')}
+      </Button>
+      <Button 
+        variant="default" 
+        onClick={() => navigate('/auth')}
+        className="bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
+      >
+        <LogIn size={18} className="mr-2" />
+        {t('auth.login')}
+      </Button>
+    </div>
   );
 };
 
