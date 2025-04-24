@@ -5,7 +5,7 @@ import * as React from "react";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "next-themes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import AuthProvider from "./components/AuthProvider";
 import { AuthGuard } from "./components/auth/AuthGuard";
@@ -33,6 +33,7 @@ const App = () => (
               <Toaster />
               <Sonner />
               <Routes>
+                <Route path="/" element={<Navigate to="/auth" replace />} />
                 <Route path="/auth" element={
                   <Suspense fallback={<div className="flex justify-center p-8">Loading...</div>}>
                     <Auth />
@@ -43,7 +44,7 @@ const App = () => (
                     <Privacy />
                   </Suspense>
                 } />
-                <Route path="/" element={
+                <Route path="/home" element={
                   <AuthGuard>
                     <Index />
                   </AuthGuard>

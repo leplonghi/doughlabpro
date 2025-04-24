@@ -11,12 +11,12 @@ const Auth: React.FC = () => {
   
   useEffect(() => {
     if (user) {
-      navigate('/');
+      navigate('/home');
     }
   }, [user, navigate]);
   
   const handleSuccess = () => {
-    navigate('/');
+    navigate('/home');
   };
 
   return (
