@@ -3,7 +3,8 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthForm } from '@/components/auth/AuthForm';
 import { useAuth } from '@/context/AuthContext';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
+import { Pizza } from 'lucide-react';
 
 const Auth: React.FC = () => {
   const { user, loading } = useAuth();
@@ -21,25 +22,25 @@ const Auth: React.FC = () => {
     navigate('/home');
   };
 
-  // Don't render the auth form if we're already authenticated and loading is complete
   if (user && !loading) {
-    return null; // Return nothing while redirecting
+    return null;
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-background to-pizza-light/10">
+    <div className="min-h-screen flex flex-col bg-white">
       <main className="flex-1 flex items-center justify-center p-6">
-        <div className="w-full max-w-md mx-auto space-y-6">
-          <div className="text-center space-y-2">
-            <h1 className="text-3xl font-bold tracking-tighter">DoughLab Pro</h1>
-            <p className="text-muted-foreground">
-              Sign in to access your personalized pizza dough calculator
-            </p>
-          </div>
-          <Card className="border shadow-lg">
-            <CardContent className="pt-6">
+        <div className="w-full max-w-[400px] mx-auto">
+          <Card className="p-8 shadow-lg">
+            <div className="flex flex-col items-center gap-6">
+              <Pizza className="w-12 h-12" />
+              <div className="text-center space-y-2">
+                <h1 className="text-2xl font-bold">Welcome to DoughLab Pro</h1>
+                <p className="text-muted-foreground">
+                  Sign in to access professional pizza dough calculations and recipes
+                </p>
+              </div>
               <AuthForm onSuccess={handleSuccess} />
-            </CardContent>
+            </div>
           </Card>
         </div>
       </main>
