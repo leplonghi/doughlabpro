@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import BrandLogo from './header/BrandLogo';
 import NavLinks from './header/NavLinks';
 import LanguageSelector from './LanguageSelector';
@@ -8,9 +9,13 @@ import { useTranslation } from 'react-i18next';
 
 const Header: React.FC = () => {
   const { t } = useTranslation();
+  const location = useLocation();
+  
+  // Hide navigation on auth page
+  const isAuthPage = location.pathname === '/auth';
   
   return (
-    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b py-3">
+    <header className={`sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b py-3 ${isAuthPage ? 'hidden' : ''}`}>
       <div className="container mx-auto flex justify-between items-center px-4">
         <div className="flex items-center gap-4">
           <BrandLogo />
