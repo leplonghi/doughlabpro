@@ -1,19 +1,16 @@
-
 import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-
 const Privacy: React.FC = () => {
-  return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-br from-white to-pizza-cream/30">
+  return <div className="flex flex-col min-h-screen bg-gradient-to-br from-white to-pizza-cream/30">
       <Header />
       
       <main className="flex-grow py-4 md:py-8 px-4 md:px-8">
         <div className="max-w-3xl mx-auto">
           <Card className="mb-8">
             <CardHeader>
-              <CardTitle className="text-2xl md:text-3xl">Privacy Policy</CardTitle>
+              <CardTitle className="text-2xl md:text-2xl">Privacy Policy</CardTitle>
             </CardHeader>
             <CardContent className="prose prose-sm md:prose-base">
               <h2>1. Introduction</h2>
@@ -38,7 +35,7 @@ const Privacy: React.FC = () => {
               <h2>4. Data Security</h2>
               <p>We implement appropriate security measures to protect your personal data.</p>
               
-              <h2>5. Your Rights</h2>
+              <h2>5. Your Rights </h2>
               <p>You have the right to:</p>
               <ul>
                 <li>Access your personal data</li>
@@ -64,8 +61,6 @@ const Privacy: React.FC = () => {
       </main>
       
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Privacy;
