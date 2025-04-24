@@ -12,6 +12,7 @@ import { AuthGuard } from "./components/auth/AuthGuard";
 import NotFound from "./pages/NotFound";
 import Index from "./pages/Index";
 import '@/i18n/i18n';
+import Header from "./components/Header";
 
 const Sauce = lazy(() => import("./pages/Sauce"));
 const Toppings = lazy(() => import("./pages/Toppings"));
@@ -28,6 +29,7 @@ const App = () => (
         <BrowserRouter>
           <AuthProvider>
             <TooltipProvider>
+              <Header />
               <Toaster />
               <Sonner />
               <Routes>

@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { AuthForm } from '@/components/auth/AuthForm';
 import { useAuth } from '@/context/AuthContext';
 import { Card, CardContent } from '@/components/ui/card';
-import Header from '@/components/Header';
 
 const Auth: React.FC = () => {
   const { user } = useAuth();
@@ -22,7 +21,6 @@ const Auth: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-background to-pizza-light/10">
-      <Header />
       <main className="flex-1 flex items-center justify-center p-6">
         <div className="w-full max-w-md mx-auto space-y-6">
           <div className="text-center space-y-2">
