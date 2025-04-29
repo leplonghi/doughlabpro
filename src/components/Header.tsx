@@ -15,8 +15,7 @@ const Header: React.FC = () => {
     { title: 'Dough Calculator', path: '/calculator' },
     { title: 'Toppings', path: '/toppings' },
     { title: 'Sauces', path: '/sauce' },
-    { title: 'Utensils', path: '/utensils' },
-    { title: 'Gallery', path: '/gallery' }
+    { title: 'Utensils', path: '/utensils' }
   ];
   
   const NavItems = () => (
