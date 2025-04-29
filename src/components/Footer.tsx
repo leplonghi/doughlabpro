@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
               <Pizza className="h-5 w-5" />
               <span className="font-semibold text-lg">DoughLab Pro</span>
             </div>
-            <p className="text-muted-foreground mb-4">Professional dough calculator for enthusiasts</p>
+            <p className="text-muted-foreground mb-4">Dough calculator for enthusiasts</p>
             <p className="text-muted-foreground text-sm">@doughlabpro</p>
           </div>
           
