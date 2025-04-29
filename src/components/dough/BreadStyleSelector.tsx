@@ -6,7 +6,7 @@ import { CircleDot } from 'lucide-react';
 export type BreadStyle = 'baguette' | 'brioche' | 'focaccia';
 
 interface BreadStyleSelectorProps {
-  breadStyle: BreadStyle;
+  breadStyle: BreadStyle | '';
   setBreadStyle: (style: BreadStyle) => void;
   onProceed: () => void;
 }
@@ -36,7 +36,6 @@ const BreadStyleSelector: React.FC<BreadStyleSelectorProps> = ({
           onProceed();
         }}
       >
-        <CircleDot className="mr-2 h-5 w-5" />
         Brioche
       </Button>
       <Button 

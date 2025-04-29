@@ -15,19 +15,22 @@ import BreadStyleSelector, { BreadStyle } from './dough/BreadStyleSelector';
 import StyleDescription from './dough/StyleDescription';
 import FermentationMethodSelector from './dough/FermentationMethodSelector';
 import CalculatorActions from './dough/CalculatorActions';
+import { Info } from 'lucide-react';
 
 type DoughType = 'pizza' | 'bread';
 type StyleType = PizzaStyle | BreadStyle;
 
 const DoughCalculator: React.FC = () => {
   const [doughType, setDoughType] = useState<DoughType>('pizza');
-  const [breadStyle, setBreadStyle] = useState<BreadStyle>('baguette');
-  const [pizzaStyle, setPizzaStyle] = useState<PizzaStyle>('napoletana');
+  const [breadStyle, setBreadStyle] = useState<BreadStyle | ''>('');
+  const [pizzaStyle, setPizzaStyle] = useState<PizzaStyle | ''>('');
   const [fermentationMethod, setFermentationMethod] = useState<FermentationMethod>('direct');
   const [activeStep, setActiveStep] = useState<number>(1);
   const { t } = useTranslation();
   
-  const currentStyle: StyleType = doughType === 'pizza' ? pizzaStyle : breadStyle;
+  const currentStyle: StyleType = doughType === 'pizza' ? 
+    (pizzaStyle || 'napoletana') as PizzaStyle : 
+    (breadStyle || 'baguette') as BreadStyle;
   
   const {
     state,
@@ -40,9 +43,11 @@ const DoughCalculator: React.FC = () => {
   // Reset sub-type when main dough type changes
   useEffect(() => {
     if (doughType === 'pizza') {
-      setPizzaStyle('napoletana');
+      setPizzaStyle('');
+      setBreadStyle('');
     } else {
-      setBreadStyle('baguette');
+      setPizzaStyle('');
+      setBreadStyle('');
     }
   }, [doughType]);
 
@@ -90,7 +95,10 @@ const DoughCalculator: React.FC = () => {
     <div className="w-full max-w-3xl mx-auto px-4 md:px-6 mb-12 fade-in">
       <SkipToContent />
       
-      <h1 className="text-3xl font-bold text-center mb-6">Dough Calculator</h1>
+      <div className="flex flex-col items-center mb-6">
+        <img src="/lovable-uploads/1a7e9690-7fcf-43cb-a119-2b7d22416a67.png" alt="DoughLab Pro logo" className="h-16 w-auto mb-3" />
+        <h1 className="text-3xl font-bold text-center">Dough Calculator</h1>
+      </div>
       
       <Card className="mb-8 shadow-sm border-border overflow-hidden rounded-xl">
         <CardContent className="p-0 space-y-0">
@@ -129,19 +137,21 @@ const DoughCalculator: React.FC = () => {
               <>
                 {doughType === 'pizza' ? (
                   <PizzaStyleSelector 
-                    pizzaStyle={pizzaStyle}
-                    setPizzaStyle={setPizzaStyle}
+                    pizzaStyle={pizzaStyle as PizzaStyle}
+                    setPizzaStyle={setPizzaStyle as (style: PizzaStyle) => void}
                     onProceed={() => handleProceedToNextStep(3)}
                   />
                 ) : (
                   <BreadStyleSelector 
-                    breadStyle={breadStyle}
-                    setBreadStyle={setBreadStyle}
+                    breadStyle={breadStyle as BreadStyle}
+                    setBreadStyle={setBreadStyle as (style: BreadStyle) => void}
                     onProceed={() => handleProceedToNextStep(3)}
                   />
                 )}
                 
-                <StyleDescription doughType={doughType} style={currentStyle} />
+                {(pizzaStyle || breadStyle) && (
+                  <StyleDescription doughType={doughType} style={currentStyle} />
+                )}
               </>
             )}
           </div>
@@ -191,6 +201,13 @@ const DoughCalculator: React.FC = () => {
                   ballWeight={state.ballWeight} 
                   onBallWeightChange={handleBallWeightChange} 
                 />
+                
+                <div className="p-4 border border-blue-100 bg-blue-50 rounded-md flex items-start mt-6">
+                  <Info className="h-5 w-5 text-blue-600 mt-0.5 mr-3 flex-shrink-0" />
+                  <p className="text-sm text-blue-800">
+                    Detailed instructions for handling and fermenting your dough will appear on the results page after calculation.
+                  </p>
+                </div>
               
                 <CalculatorActions 
                   onCalculate={calculateRecipe}
