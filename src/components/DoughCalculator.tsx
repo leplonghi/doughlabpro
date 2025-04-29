@@ -97,8 +97,7 @@ const DoughCalculator: React.FC = () => {
       
       <div className="flex flex-col items-center mb-6">
         <img src="/lovable-uploads/15936b17-7234-47a3-a949-d72c0d2932e6.png" alt="DoughLab Pro logo" className="h-16 w-auto mb-3" />
-        <h1 className="text-3xl font-bold text-center">Dough Calculator</h1>
-      </div>
+              </div>
       
       <Card className="mb-8 shadow-sm border-border overflow-hidden rounded-xl">
         <DoughCalculatorHeader />
