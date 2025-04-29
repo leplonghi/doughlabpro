@@ -17,8 +17,6 @@ const Toppings = lazy(() => import("./pages/Toppings"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const Terms = lazy(() => import("./pages/Terms"));
 const Contact = lazy(() => import("./pages/Contact"));
-const Auth = lazy(() => import("./pages/Auth"));
-const Profile = lazy(() => import("./pages/Profile"));
 const DoughCalculator = lazy(() => import("./components/DoughCalculator"));
 
 // Create query client with optimized settings
@@ -45,11 +43,6 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Navigate to="/home" replace />} />
               <Route path="/home" element={<Index />} />
-              <Route path="/auth" element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <Auth />
-                </Suspense>
-              } />
               <Route path="/privacy" element={
                 <Suspense fallback={<LoadingSpinner />}>
                   <Privacy />
@@ -78,11 +71,6 @@ const App = () => {
               <Route path="/toppings" element={
                 <Suspense fallback={<LoadingSpinner />}>
                   <Toppings />
-                </Suspense>
-              } />
-              <Route path="/profile" element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <Profile />
                 </Suspense>
               } />
               <Route path="*" element={<NotFound />} />

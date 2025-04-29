@@ -1,6 +1,7 @@
-
 import { useState } from 'react';
+import { PizzaStyle } from '@/components/PizzaStyleSelect';
 import { FermentationMethod } from '@/types/dough';
+import { BreadStyle } from '@/components/dough/BreadStyleSelector';
 
 interface DoughState {
   flour: number;
