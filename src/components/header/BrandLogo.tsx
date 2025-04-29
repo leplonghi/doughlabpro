@@ -31,7 +31,7 @@ const BrandLogo: React.FC = () => {
   return (
     <div className="flex items-center gap-4">
       <Link to="/" className="flex items-center gap-2.5">
-        <img src="/lovable-uploads/1a7e9690-7fcf-43cb-a119-2b7d22416a67.png" alt="DoughLab Pro logo" className="h-8 w-auto" />
+        <img src="/lovable-uploads/15936b17-7234-47a3-a949-d72c0d2932e6.png" alt="DoughLab Pro logo" className="h-8 w-auto" />
         <h1 className="text-xl md:text-2xl font-medium">
           DoughLab Pro
         </h1>

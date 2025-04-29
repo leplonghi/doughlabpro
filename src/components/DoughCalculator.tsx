@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import DoughResults from './DoughResults';
@@ -93,11 +92,11 @@ const DoughCalculator: React.FC = () => {
   };
   
   return (
-    <div className="w-full max-w-3xl mx-auto px-4 md:px-6 mb-12 fade-in">
+    <div className="w-full max-w-3xl mx-auto px-4 md:px-6 mb-12 fade-in pt-8">
       <SkipToContent />
       
       <div className="flex flex-col items-center mb-6">
-        <img src="/lovable-uploads/1a7e9690-7fcf-43cb-a119-2b7d22416a67.png" alt="DoughLab Pro logo" className="h-16 w-auto mb-3" />
+        <img src="/lovable-uploads/15936b17-7234-47a3-a949-d72c0d2932e6.png" alt="DoughLab Pro logo" className="h-16 w-auto mb-3" />
         <h1 className="text-3xl font-bold text-center">Dough Calculator</h1>
       </div>
       

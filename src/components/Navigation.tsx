@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 const Navigation: React.FC = () => {
   const isMobile = useIsMobile();
@@ -18,6 +19,12 @@ const Navigation: React.FC = () => {
       "flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-1 w-full",
       isMobile ? "items-start" : "items-center justify-center"
     )}>
+      <NavigationMenuItem>
+        <Link to="/" className="flex items-center gap-2 px-4 py-2">
+          <img src="/lovable-uploads/15936b17-7234-47a3-a949-d72c0d2932e6.png" alt="DoughLab Pro logo" className="h-6 w-auto" />
+          <span className="font-semibold">DoughLab Pro</span>
+        </Link>
+      </NavigationMenuItem>
       <NavigationMenuItem>
         <NavigationMenuLink
           className={cn(

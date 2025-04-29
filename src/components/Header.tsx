@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Pizza, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useTranslation } from 'react-i18next';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
@@ -40,7 +40,7 @@ const Header: React.FC = () => {
           {/* Logo */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center gap-2">
-              <Pizza className="h-6 w-6 text-black" />
+              <img src="/lovable-uploads/15936b17-7234-47a3-a949-d72c0d2932e6.png" className="h-8 w-auto" alt="DoughLab Pro" />
               <span className="text-xl font-semibold">DoughLab Pro</span>
             </Link>
           </div>
@@ -63,7 +63,7 @@ const Header: React.FC = () => {
                 <div className="flex flex-col h-full">
                   <div className="flex items-center justify-between py-4">
                     <div className="flex items-center gap-2">
-                      <Pizza className="h-6 w-6 text-black" />
+                      <img src="/lovable-uploads/15936b17-7234-47a3-a949-d72c0d2932e6.png" className="h-8 w-auto" alt="DoughLab Pro" />
                       <span className="text-xl font-semibold">DoughLab Pro</span>
                     </div>
                     <SheetClose asChild>
