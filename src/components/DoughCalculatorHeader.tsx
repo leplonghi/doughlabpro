@@ -9,7 +9,7 @@ const DoughCalculatorHeader: React.FC = () => {
         <span className="text-primary">Dough</span>Lab Pro Calculator
       </CardTitle>
       <CardDescription className="text-base text-center">
-        Create perfect pizza and bread dough recipes
+        Create pizza and bread dough recipes
       </CardDescription>
     </CardHeader>
   );
