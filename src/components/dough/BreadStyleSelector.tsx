@@ -25,7 +25,7 @@ const BreadStyleSelector: React.FC<BreadStyleSelectorProps> = ({
           onProceed();
         }}
       >
-        French Baguette
+        Baguette
       </Button>
       <Button 
         variant={breadStyle === 'brioche' ? 'default' : 'outline'} 
