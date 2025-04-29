@@ -3,12 +3,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useTranslation } from 'react-i18next';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
-import LanguageSelector from './LanguageSelector';
 
 const Header: React.FC = () => {
-  const { t } = useTranslation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
   const menuItems = [
@@ -29,7 +26,7 @@ const Header: React.FC = () => {
           className="text-base font-medium text-foreground hover:text-black transition-colors" 
           onClick={() => setMobileMenuOpen(false)}
         >
-          {t(`common.menu.${item.title.toLowerCase()}`, item.title)}
+          {item.title}
         </Link>
       ))}
     </>
@@ -54,9 +51,6 @@ const Header: React.FC = () => {
 
           {/* Right side actions */}
           <div className="flex items-center gap-4">
-            {/* Language Selector */}
-            <LanguageSelector />
-            
             {/* Mobile Menu Button */}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild className="md:hidden">
