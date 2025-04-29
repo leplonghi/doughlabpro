@@ -7,7 +7,7 @@ import { ThemeProvider } from "next-themes";
 import { I18nextProvider } from 'react-i18next';
 import i18n from './i18n/i18n';
 
-import { TooltipProvider } from "@/components/ui/tooltip";
+import { TooltipProvider } from "@radix-ui/react-tooltip";
 import AuthProvider from "./components/AuthProvider";
 import LoadingSpinner from "./components/ui/loading-spinner";
 import NotFound from "./pages/NotFound";
@@ -44,9 +44,9 @@ const App = () => {
       <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
         <QueryClientProvider client={queryClient}>
           <I18nextProvider i18n={i18n}>
-            <BrowserRouter>
-              <AuthProvider>
-                <TooltipProvider>
+            <TooltipProvider>
+              <BrowserRouter>
+                <AuthProvider>
                   <Routes>
                     <Route path="/" element={<Navigate to="/home" replace />} />
                     <Route path="/home" element={<Index />} />
@@ -93,12 +93,12 @@ const App = () => {
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                   
-                  {/* Toast notifications - moved inside tooltip provider context */}
+                  {/* Toast notifications */}
                   <Toaster />
                   <SonnerToaster />
-                </TooltipProvider>
-              </AuthProvider>
-            </BrowserRouter>
+                </AuthProvider>
+              </BrowserRouter>
+            </TooltipProvider>
           </I18nextProvider>
         </QueryClientProvider>
       </ThemeProvider>
