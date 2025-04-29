@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import DoughResults from './DoughResults';
@@ -10,10 +9,10 @@ import { FermentationMethod } from '@/types/dough';
 import { useTranslation } from 'react-i18next';
 import { Button } from './ui/button';
 import { Pizza, Bed, CircleDot, RotateCcw, Calculator, ChevronDown } from 'lucide-react';
+import { PizzaStyle } from './PizzaStyleSelect';
 
 type DoughType = 'pizza' | 'bread';
 type BreadStyle = 'baguette' | 'brioche' | 'focaccia';
-type PizzaStyle = 'napoletana' | 'newyork' | 'chicago';
 type StyleType = PizzaStyle | BreadStyle;
 
 const DoughCalculator: React.FC = () => {

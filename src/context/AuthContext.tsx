@@ -71,7 +71,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     // Cleanup subscription on unmount
     return () => subscription.unsubscribe();
-  }, []);
+  }, [loading]);
 
   // Sign in with Google
   const signInWithGoogle = async () => {
