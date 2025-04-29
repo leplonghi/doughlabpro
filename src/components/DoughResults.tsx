@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { FileText } from 'lucide-react';
 import { PizzaStyle } from "./PizzaStyleSelect";
 import { Unit } from './UnitSelect';
 import RecipePreliminary from './recipe/RecipePreliminary';
@@ -40,9 +39,10 @@ interface DoughRecipe {
 interface DoughResultsProps {
   recipe: DoughRecipe;
   fermentationMethod: FermentationMethod;
-  pizzaStyle: PizzaStyle;
+  pizzaStyle: PizzaStyle | string;
   unit: Unit;
   numberOfBalls?: number;
+  doughType?: 'pizza' | 'bread';
 }
 
 const DoughResults: React.FC<DoughResultsProps> = ({ 
@@ -50,7 +50,8 @@ const DoughResults: React.FC<DoughResultsProps> = ({
   fermentationMethod, 
   pizzaStyle, 
   unit,
-  numberOfBalls 
+  numberOfBalls,
+  doughType = 'pizza'
 }) => {
   const convertToUnit = (grams: number): number => {
     switch(unit) {
@@ -79,11 +80,21 @@ const DoughResults: React.FC<DoughResultsProps> = ({
     return converted.toFixed(unit === 'grams' ? 1 : 2).replace(/\.0$/, '');
   };
 
+  const getTitle = () => {
+    if (doughType === 'pizza') {
+      if (pizzaStyle === 'newyork') return "Your New York Style Pizza Recipe";
+      if (pizzaStyle === 'napoletana') return "Your Neapolitan Pizza Recipe";
+      return `Your ${String(pizzaStyle).charAt(0).toUpperCase() + String(pizzaStyle).slice(1)} Recipe`;
+    } else {
+      return `Your ${String(pizzaStyle).charAt(0).toUpperCase() + String(pizzaStyle).slice(1)} Bread Recipe`;
+    }
+  };
+
   return (
     <Card className="mb-8 print-component">
       <CardHeader className="bg-pizza-light bg-opacity-30">
         <CardTitle>
-          {pizzaStyle === "newyork" ? "Your New York Style Pizza Recipe" : "Your Neapolitan Pizza Recipe"}
+          {getTitle()}
         </CardTitle>
         <CardDescription>
           {fermentationMethod === 'direct'
