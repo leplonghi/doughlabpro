@@ -1,3 +1,4 @@
+
 import * as React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { lazy, Suspense } from "react";
@@ -91,7 +92,11 @@ const App = () => {
                         <Profile />
                       </Suspense>
                     } />
-                    <Route path="/gallery" element={<Gallery />} />
+                    <Route path="/gallery" element={
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <Gallery />
+                      </Suspense>
+                    } />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                   

@@ -1,36 +1,42 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useTranslation } from 'react-i18next';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
+import LanguageSelector from './LanguageSelector';
+
 const Header: React.FC = () => {
-  const {
-    t
-  } = useTranslation();
+  const { t } = useTranslation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const menuItems = [{
-    title: 'Home',
-    path: '/home'
-  }, {
-    title: 'Dough Calculator',
-    path: '/calculator'
-  }, {
-    title: 'Toppings',
-    path: '/toppings'
-  }, {
-    title: 'Sauces',
-    path: '/sauce'
-  }, {
-    title: 'Utensils',
-    path: '/utensils'
-  }];
-  const NavItems = () => <>
-      {menuItems.map(item => <Link key={item.path} to={item.path} className="text-base font-medium text-foreground hover:text-black transition-colors" onClick={() => setMobileMenuOpen(false)}>
-          {t(item.title.toLowerCase(), item.title)}
-        </Link>)}
-    </>;
-  return <header className="w-full border-b border-border bg-background sticky top-0 z-50">
+  
+  const menuItems = [
+    { title: 'Home', path: '/home' },
+    { title: 'Dough Calculator', path: '/calculator' },
+    { title: 'Toppings', path: '/toppings' },
+    { title: 'Sauces', path: '/sauce' },
+    { title: 'Utensils', path: '/utensils' },
+    { title: 'Gallery', path: '/gallery' }
+  ];
+  
+  const NavItems = () => (
+    <>
+      {menuItems.map(item => (
+        <Link 
+          key={item.path} 
+          to={item.path} 
+          className="text-base font-medium text-foreground hover:text-black transition-colors" 
+          onClick={() => setMobileMenuOpen(false)}
+        >
+          {t(`common.menu.${item.title.toLowerCase()}`, item.title)}
+        </Link>
+      ))}
+    </>
+  );
+
+  return (
+    <header className="w-full border-b border-border bg-background sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -47,7 +53,10 @@ const Header: React.FC = () => {
           </nav>
 
           {/* Right side actions */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-4">
+            {/* Language Selector */}
+            <LanguageSelector />
+            
             {/* Mobile Menu Button */}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild className="md:hidden">
@@ -78,6 +87,8 @@ const Header: React.FC = () => {
           </div>
         </div>
       </div>
-    </header>;
+    </header>
+  );
 };
+
 export default Header;
