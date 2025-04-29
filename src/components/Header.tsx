@@ -22,7 +22,7 @@ const Header: React.FC = () => {
         <Link 
           key={item.path} 
           to={item.path} 
-          className="text-base font-medium text-foreground hover:text-black transition-colors"
+          className="text-base font-medium text-foreground hover:text-primary transition-colors"
           onClick={() => setMobileMenuOpen(false)}
         >
           {item.title}
@@ -39,7 +39,7 @@ const Header: React.FC = () => {
           <div className="flex items-center">
             <Link to="/" className="flex items-center gap-2">
               <img src="/lovable-uploads/15936b17-7234-47a3-a949-d72c0d2932e6.png" className="h-8 w-auto" alt="DoughLab Pro" />
-              <span className="px-[3px] py-[8px] text-sm font-medium">fast.precise</span>
+              <span className="font-medium text-sm">DoughLab Pro</span>
             </Link>
           </div>
 

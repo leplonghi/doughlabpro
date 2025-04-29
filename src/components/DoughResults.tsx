@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { PizzaStyle } from "./PizzaStyleSelect";
@@ -142,7 +143,10 @@ const DoughResults: React.FC<DoughResultsProps> = ({
               numberOfBalls={numberOfBalls}
             />
 
-            <FermentationTips method={fermentationMethod} />
+            <FermentationTips 
+              method={fermentationMethod} 
+              pizzaStyle={pizzaStyle as string}
+            />
           </div>
 
           <RecipeActions 
