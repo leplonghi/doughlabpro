@@ -7,7 +7,6 @@ import { useTranslation } from 'react-i18next';
 import { 
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
@@ -24,16 +23,14 @@ const FlourInput: React.FC<FlourInputProps> = ({ flour, onChange, error }) => {
     <div className="space-y-2">
       <div className="flex items-center gap-2">
         <Label htmlFor="flour">{t('calculator.flour')}</Label>
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <span className="cursor-help"><InfoCircledIcon className="h-4 w-4 text-muted-foreground" /></span>
-            </TooltipTrigger>
-            <TooltipContent className="max-w-xs">
-              <p>{t('calculator.ingredients.amountDescription')}</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <span className="cursor-help"><InfoCircledIcon className="h-4 w-4 text-muted-foreground" /></span>
+          </TooltipTrigger>
+          <TooltipContent className="max-w-xs">
+            <p>{t('calculator.ingredients.amountDescription')}</p>
+          </TooltipContent>
+        </Tooltip>
       </div>
       <Input 
         id="flour" 

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { InfoCircledIcon } from '@radix-ui/react-icons';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useTranslation } from 'react-i18next';
 
 interface BallWeightInputProps {
@@ -36,16 +36,14 @@ const BallWeightInput: React.FC<BallWeightInputProps> = ({
     <div className="space-y-2">
       <div className="flex items-center gap-2">
         <Label htmlFor="ballWeight">{t('calculator.ingredients.ballWeight')}</Label>
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <span className="cursor-help"><InfoCircledIcon className="h-4 w-4 text-muted-foreground" /></span>
-            </TooltipTrigger>
-            <TooltipContent className="max-w-xs bg-white text-black border border-border">
-              <p>{t('calculator.ingredients.ballWeightDescription')}</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <span className="cursor-help"><InfoCircledIcon className="h-4 w-4 text-muted-foreground" /></span>
+          </TooltipTrigger>
+          <TooltipContent className="max-w-xs bg-white text-black border border-border">
+            <p>{t('calculator.ingredients.ballWeightDescription')}</p>
+          </TooltipContent>
+        </Tooltip>
       </div>
       
       <div className="flex items-center gap-4">

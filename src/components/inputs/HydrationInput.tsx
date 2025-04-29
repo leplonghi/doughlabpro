@@ -7,7 +7,6 @@ import { useTranslation } from 'react-i18next';
 import { 
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
@@ -30,16 +29,14 @@ const HydrationInput: React.FC<HydrationInputProps> = ({
     <div className="space-y-2">
       <div className="flex items-center gap-2">
         <Label htmlFor="hydration">{t('calculator.hydration')}</Label>
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <span className="cursor-help"><InfoCircledIcon className="h-4 w-4 text-muted-foreground" /></span>
-            </TooltipTrigger>
-            <TooltipContent className="max-w-xs">
-              <p>{t('calculator.ingredients.hydrationDescription')}</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <span className="cursor-help"><InfoCircledIcon className="h-4 w-4 text-muted-foreground" /></span>
+          </TooltipTrigger>
+          <TooltipContent className="max-w-xs">
+            <p>{t('calculator.ingredients.hydrationDescription')}</p>
+          </TooltipContent>
+        </Tooltip>
       </div>
       <div className="flex items-center gap-4">
         <Input 
