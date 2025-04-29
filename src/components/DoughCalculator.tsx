@@ -9,7 +9,7 @@ import { useDoughCalculator } from '@/hooks/useDoughCalculator';
 import { FermentationMethod } from '@/types/dough';
 import { useTranslation } from 'react-i18next';
 import { Button } from './ui/button';
-import { Pizza, Bread, Brioche, Reset, Calculate } from 'lucide-react';
+import { Pizza, Bed, CircleDot, RotateCcw, Calculator } from 'lucide-react';
 
 type DoughType = 'pizza' | 'bread' | 'focaccia' | 'brioche';
 type PizzaStyle = "napoletana" | "newyork";
@@ -93,7 +93,7 @@ const DoughCalculator: React.FC = () => {
                 className="h-12 justify-center" 
                 onClick={() => setDoughType('bread')}
               >
-                <Bread className="mr-2 h-5 w-5" />
+                <Bed className="mr-2 h-5 w-5" />
                 Bread
               </Button>
               <Button 
@@ -101,7 +101,7 @@ const DoughCalculator: React.FC = () => {
                 className="h-12 justify-center" 
                 onClick={() => setDoughType('focaccia')}
               >
-                <Bread className="mr-2 h-5 w-5" />
+                <Bed className="mr-2 h-5 w-5" />
                 Focaccia
               </Button>
               <Button 
@@ -109,7 +109,7 @@ const DoughCalculator: React.FC = () => {
                 className="h-12 justify-center" 
                 onClick={() => setDoughType('brioche')}
               >
-                <Brioche className="mr-2 h-5 w-5" />
+                <CircleDot className="mr-2 h-5 w-5" />
                 Brioche
               </Button>
             </div>
@@ -241,7 +241,7 @@ const DoughCalculator: React.FC = () => {
                 className="flex-1 h-12 font-medium"
                 onClick={calculateRecipe}
               >
-                <Calculate className="mr-2 h-5 w-5" />
+                <Calculator className="mr-2 h-5 w-5" />
                 Calculate Recipe
               </Button>
               <Button 
@@ -249,7 +249,7 @@ const DoughCalculator: React.FC = () => {
                 className="flex-1 h-12 font-medium"
                 onClick={resetForm}
               >
-                <Reset className="mr-2 h-5 w-5" />
+                <RotateCcw className="mr-2 h-5 w-5" />
                 Reset
               </Button>
             </div>

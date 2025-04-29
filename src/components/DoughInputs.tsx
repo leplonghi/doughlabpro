@@ -1,10 +1,9 @@
-
 import React from 'react';
 import { PizzaStyle } from './PizzaStyleSelect';
 import { useTranslation } from 'react-i18next';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Wheat, Droplets, Salt, Oil, CircleCheck, Pizza } from 'lucide-react';
+import { Wheat, Droplets, Waves, GanttChart, CheckCircle, Pizza } from 'lucide-react';
 
 type YeastType = 'fresh' | 'dry';
 
@@ -181,7 +180,7 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
       {/* Salt */}
       <div className="space-y-2">
         <div className="flex items-center gap-2">
-          <Salt className="h-5 w-5" />
+          <Waves className="h-5 w-5" />
           <Label>Salt</Label>
         </div>
         <div className="flex gap-4">
@@ -197,7 +196,7 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
       {/* Olive Oil */}
       <div className="space-y-2">
         <div className="flex items-center gap-2">
-          <Oil className="h-5 w-5" />
+          <GanttChart className="h-5 w-5" />
           <Label>Olive Oil</Label>
         </div>
         <div className="flex gap-4">
@@ -213,7 +212,7 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
       {/* Sugar */}
       <div className="space-y-2">
         <div className="flex items-center gap-2">
-          <CircleCheck className="h-5 w-5" />
+          <CheckCircle className="h-5 w-5" />
           <Label>Sugar</Label>
         </div>
         <div className="flex gap-4">
