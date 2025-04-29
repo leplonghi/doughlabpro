@@ -15,8 +15,8 @@ const FermentationInfo: React.FC<FermentationInfoProps> = ({ fermentationMethod 
     <div className="mt-4 space-y-3">
       <p className="text-sm">
         {fermentationMethod === 'poolish' 
-          ? 'Poolish pre-ferment (100% hydration, 30% of total flour) ferments for 12-16 hours at 18-21°C (64-70°F). Creates a mild, nutty flavor and enhances dough extensibility.'
-          : 'Biga pre-ferment (60% hydration, 30% of total flour) ferments for 16-24 hours at 18-21°C (64-70°F). Creates a more complex flavor profile and chewier texture.'}
+          ? 'Poolish is a liquid pre-ferment with 100% hydration. Improves dough extensibility and adds mild acidity and complex aroma. Ideal for pizza, focaccia, and baguette.'
+          : 'Biga is a stiff pre-ferment with low hydration. Adds strength and nutty flavor to rustic breads and traditional pizza.'}
       </p>
       
       <div className="bg-gray-50 p-4 rounded-lg">
