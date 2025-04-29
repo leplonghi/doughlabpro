@@ -10,7 +10,7 @@ const Toppings: React.FC = () => {
       
       <main className="flex-grow py-8 md:py-12">
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl base font-serif font-bold mb-6">Pizza Toppings</h1>
+          <h1 className="text-4xl base font-bold mb-6">Pizza Toppings</h1>
           
           <Card className="mb-6 border-yellow-200">
             <CardContent className="p-6 flex flex-col items-center text-center">
