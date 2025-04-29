@@ -30,7 +30,7 @@ const Header: React.FC = () => {
           className="text-base font-medium text-foreground hover:text-black transition-colors"
           onClick={() => setMobileMenuOpen(false)}
         >
-          {item.title}
+          {t(item.title.toLowerCase(), item.title)}
         </Link>
       ))}
     </>

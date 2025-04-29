@@ -4,7 +4,7 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useTranslation } from "react-i18next";
 
-export type PizzaStyle = "napoletana" | "newyork";
+export type PizzaStyle = "napoletana" | "newyork" | "focaccia" | "brioche" | "baguette";
 
 interface PizzaStyleSelectProps {
   style: PizzaStyle;
@@ -34,15 +34,47 @@ const PizzaStyleSelect: React.FC<PizzaStyleSelectProps> = ({ style, onChange }) 
             {t('calculator.pizzaStyle.newyork')}
           </Label>
         </div>
+        <div className="flex items-center space-x-2">
+          <RadioGroupItem value="focaccia" id="pizza-focaccia" />
+          <Label htmlFor="pizza-focaccia" className="cursor-pointer">
+            {t('calculator.pizzaStyle.focaccia', 'Focaccia')}
+          </Label>
+        </div>
+        <div className="flex items-center space-x-2">
+          <RadioGroupItem value="brioche" id="pizza-brioche" />
+          <Label htmlFor="pizza-brioche" className="cursor-pointer">
+            {t('calculator.pizzaStyle.brioche', 'Brioche')}
+          </Label>
+        </div>
+        <div className="flex items-center space-x-2">
+          <RadioGroupItem value="baguette" id="pizza-baguette" />
+          <Label htmlFor="pizza-baguette" className="cursor-pointer">
+            {t('calculator.pizzaStyle.baguette', 'Baguette')}
+          </Label>
+        </div>
       </RadioGroup>
       <div className="p-2 rounded bg-gray-50 text-xs text-gray-600">
-        {style === "napoletana"
-          ? t('calculator.pizzaStyle.napoletanaDescription')
-          : t('calculator.pizzaStyle.newyorkDescription')
-        }
+        {getStyleDescription(style, t)}
       </div>
     </div>
   );
+};
+
+const getStyleDescription = (style: PizzaStyle, t: any) => {
+  switch (style) {
+    case "napoletana":
+      return t('calculator.pizzaStyle.napoletanaDescription');
+    case "newyork":
+      return t('calculator.pizzaStyle.newyorkDescription');
+    case "focaccia":
+      return t('calculator.pizzaStyle.focacciaDescription', 'Italian flatbread with a crisp exterior and soft interior.');
+    case "brioche":
+      return t('calculator.pizzaStyle.briocheDescription', 'Rich, buttery French bread with a tender crumb.');
+    case "baguette":
+      return t('calculator.pizzaStyle.baguetteDescription', 'Long, thin loaf with a crisp crust and chewy interior.');
+    default:
+      return '';
+  }
 };
 
 export default PizzaStyleSelect;

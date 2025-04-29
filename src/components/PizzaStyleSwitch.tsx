@@ -19,10 +19,7 @@ const PizzaStyleSwitch: React.FC<PizzaStyleSwitchProps> = ({ pizzaStyle, setPizz
         <div>
           <Label htmlFor="pizza-style" className="text-lg font-semibold">{t('calculator.pizzaStyle.title')}</Label>
           <p className="text-sm text-muted-foreground">
-            {pizzaStyle === "napoletana" 
-              ? t('calculator.pizzaStyle.napoletanaDescription')
-              : t('calculator.pizzaStyle.newyorkDescription')
-            }
+            {getStyleDescription(pizzaStyle, t)}
           </p>
         </div>
         <div className="flex items-center space-x-4">
@@ -42,6 +39,23 @@ const PizzaStyleSwitch: React.FC<PizzaStyleSwitchProps> = ({ pizzaStyle, setPizz
       </div>
     </div>
   );
+};
+
+const getStyleDescription = (style: PizzaStyle, t: any) => {
+  switch (style) {
+    case "napoletana":
+      return t('calculator.pizzaStyle.napoletanaDescription');
+    case "newyork":
+      return t('calculator.pizzaStyle.newyorkDescription');
+    case "focaccia":
+      return t('calculator.pizzaStyle.focacciaDescription', 'Italian flatbread with a crisp exterior and soft interior.');
+    case "brioche":
+      return t('calculator.pizzaStyle.briocheDescription', 'Rich, buttery French bread with a tender crumb.');
+    case "baguette":
+      return t('calculator.pizzaStyle.baguetteDescription', 'Long, thin loaf with a crisp crust and chewy interior.');
+    default:
+      return '';
+  }
 };
 
 export default PizzaStyleSwitch;
