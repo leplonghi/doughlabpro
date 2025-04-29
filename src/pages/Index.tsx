@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '@/components/Footer';
@@ -5,8 +6,10 @@ import Header from '@/components/Header';
 import AdBanner from '@/components/monetization/AdBanner';
 import { Button } from '@/components/ui/button';
 import { Clock, Utensils, Calculator } from 'lucide-react';
+
 const Index: React.FC = () => {
-  return <div className="flex flex-col min-h-screen bg-white">
+  return (
+    <div className="flex flex-col min-h-screen bg-white">
       <Header />
       
       <main className="flex-grow">
@@ -56,7 +59,7 @@ const Index: React.FC = () => {
                 <div className="w-12 h-12 bg-black/10 rounded-full flex items-center justify-center mb-4">
                   <Calculator size={24} />
                 </div>
-                <h3 className="text-xl font-medium mb-2">Baker’s Math Made Easy</h3>
+                <h3 className="text-xl font-medium mb-2">Baker's Math Made Easy</h3>
                 <p className="text-muted-foreground">Exact measurements and hydration logic — just input and bake.</p>
               </div>
             </div>
@@ -67,7 +70,10 @@ const Index: React.FC = () => {
         <AdBanner />
       </main>
       
+      {/* Footer is rendered within the Router context */}
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 export default Index;
