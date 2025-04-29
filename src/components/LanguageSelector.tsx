@@ -29,11 +29,11 @@ const LanguageSelector = () => {
       value={i18n.language}
       onValueChange={(value) => i18n.changeLanguage(value)}
     >
-      <SelectTrigger className="w-[160px] bg-background border-border">
+      <SelectTrigger className="w-[160px] bg-background border-input">
         <Globe className="mr-2 h-4 w-4" />
         <SelectValue placeholder="Select Language" />
       </SelectTrigger>
-      <SelectContent className="max-h-[300px]">
+      <SelectContent className="max-h-[300px] bg-white">
         {languages.map((lang) => (
           <SelectItem
             key={lang.code}

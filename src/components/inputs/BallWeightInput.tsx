@@ -41,7 +41,7 @@ const BallWeightInput: React.FC<BallWeightInputProps> = ({
             <TooltipTrigger asChild>
               <span className="cursor-help"><InfoCircledIcon className="h-4 w-4 text-muted-foreground" /></span>
             </TooltipTrigger>
-            <TooltipContent className="max-w-xs">
+            <TooltipContent className="max-w-xs bg-white text-black border border-border">
               <p>{t('calculator.ingredients.ballWeightDescription')}</p>
             </TooltipContent>
           </Tooltip>
@@ -59,7 +59,7 @@ const BallWeightInput: React.FC<BallWeightInputProps> = ({
           min="250"
           max="400"
           placeholder="Ex: 250g"
-          className="w-24"
+          className="w-24 border-input"
         />
         
         <div className="flex-1">
@@ -70,9 +70,9 @@ const BallWeightInput: React.FC<BallWeightInputProps> = ({
             step="50"
             value={ballWeight}
             onChange={handleRangeChange}
-            className="w-full accent-primary"
+            className="w-full accent-black"
           />
-          <div className="flex justify-between text-xs text-gray-500 mt-1">
+          <div className="flex justify-between text-xs text-muted-foreground mt-1">
             <span>250g</span>
             <span>300g</span>
             <span>350g</span>

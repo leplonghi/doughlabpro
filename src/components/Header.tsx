@@ -2,37 +2,41 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
-import { useTheme } from 'next-themes';
-import { Moon, Sun, Pizza } from 'lucide-react';
+import { Pizza } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import LanguageSelector from './LanguageSelector';
 import { useTranslation } from 'react-i18next';
 
 const Header: React.FC = () => {
   const { user } = useAuth();
-  const { theme, setTheme } = useTheme();
   const { t } = useTranslation();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur-sm">
+    <header className="w-full border-b border-border bg-background sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo and Navigation */}
           <div className="flex items-center gap-8">
             <Link to="/" className="flex items-center gap-2">
-              <Pizza className="h-7 w-7 text-primary" />
+              <Pizza className="h-6 w-6 text-black" />
               <span className="text-xl font-semibold">DoughLab Pro</span>
             </Link>
             
             <nav className="hidden md:flex items-center gap-6">
-              <Link to="/home" className="text-base font-medium text-foreground/80 hover:text-primary transition-colors">
-                {t('common.menu.home', 'Home')}
+              <Link to="/home" className="text-base font-medium text-foreground hover:text-black transition-colors">
+                Home
               </Link>
-              <Link to="/toppings" className="text-base font-medium text-foreground/80 hover:text-primary transition-colors">
-                {t('common.menu.toppings', 'Toppings')}
+              <Link to="/calculator" className="text-base font-medium text-foreground hover:text-black transition-colors">
+                Calculator
               </Link>
-              <Link to="/sauce" className="text-base font-medium text-foreground/80 hover:text-primary transition-colors">
-                {t('common.menu.sauce', 'Sauces')}
+              <Link to="/toppings" className="text-base font-medium text-foreground hover:text-black transition-colors">
+                Toppings
+              </Link>
+              <Link to="/sauce" className="text-base font-medium text-foreground hover:text-black transition-colors">
+                Sauces
+              </Link>
+              <Link to="/utensils" className="text-base font-medium text-foreground hover:text-black transition-colors">
+                Utensils
               </Link>
             </nav>
           </div>
@@ -40,15 +44,6 @@ const Header: React.FC = () => {
           {/* Right side actions */}
           <div className="flex items-center gap-4">
             <LanguageSelector />
-            
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} 
-              className="rounded-full"
-            >
-              {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-            </Button>
 
             {!user ? (
               <div className="flex items-center gap-2">
@@ -57,21 +52,21 @@ const Header: React.FC = () => {
                   onClick={() => window.location.href = '/auth'} 
                   className="text-sm font-medium"
                 >
-                  {t('auth.signUp', 'Sign Up')}
+                  {t('common.signUp', 'Sign Up')}
                 </Button>
                 <Button 
                   variant="default" 
                   onClick={() => window.location.href = '/auth'} 
-                  className="bg-primary text-primary-foreground hover:bg-primary/90"
+                  className="bg-black text-white hover:bg-black/80"
                 >
-                  {t('auth.login', 'Login')}
+                  {t('common.login', 'Login')}
                 </Button>
               </div>
             ) : (
               <Button 
                 variant="default" 
                 onClick={() => window.location.href = '/profile'} 
-                className="bg-primary text-primary-foreground hover:bg-primary/90"
+                className="bg-black text-white hover:bg-black/80"
               >
                 {t('common.profile', 'Profile')}
               </Button>

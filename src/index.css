@@ -1,6 +1,4 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,34 +6,34 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
+    --foreground: 0 0% 13%;
 
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    --card-foreground: 0 0% 13%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
+    --popover-foreground: 0 0% 13%;
 
-    --primary: 32 95% 44%;
+    --primary: 0 0% 0%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 35 91% 92%;
-    --secondary-foreground: 32 95% 44%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 13%;
 
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 53%;
 
-    --accent: 35 91% 92%;
-    --accent-foreground: 32 95% 44%;
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 13%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 84% 30%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 32 95% 44%;
+    --border: 0 0% 89%;
+    --input: 0 0% 89%;
+    --ring: 0 0% 53%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 0 0% 10%;
@@ -45,36 +43,6 @@
     --sidebar-accent-foreground: 0 0% 10%;
     --sidebar-border: 0 0% 90%;
     --sidebar-ring: 0 0% 80%;
-  }
-
-  .dark {
-    --background: 240 10% 6%;
-    --foreground: 0 0% 98%;
-
-    --card: 240 10% 8%;
-    --card-foreground: 0 0% 98%;
-
-    --popover: 240 10% 8%;
-    --popover-foreground: 0 0% 98%;
-
-    --primary: 32 95% 44%;
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 35 91% 20%;
-    --secondary-foreground: 0 0% 98%;
-
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-
-    --accent: 35 91% 20%;
-    --accent-foreground: 0 0% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 32 95% 44%;
   }
 }
 
@@ -94,7 +62,7 @@
 
 @layer components {
   .pizza-card {
-    @apply bg-white dark:bg-card rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow;
+    @apply bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow;
   }
   
   .recipe-section {
@@ -115,6 +83,34 @@
   
   .btn-primary {
     @apply bg-primary text-primary-foreground hover:bg-primary/90;
+  }
+  
+  .feature-icon {
+    @apply flex items-center justify-center w-12 h-12 mb-4 text-primary;
+  }
+  
+  .hero-section {
+    @apply flex flex-col md:flex-row items-center gap-8 py-12 md:py-24;
+  }
+  
+  .hero-content {
+    @apply flex-1 space-y-6 max-w-xl;
+  }
+  
+  .hero-image {
+    @apply flex-1 rounded-lg overflow-hidden;
+  }
+  
+  .features-section {
+    @apply py-16 bg-secondary;
+  }
+  
+  .feature-grid {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-8 mt-12;
+  }
+  
+  .feature-card {
+    @apply flex flex-col items-start p-6 transition-all;
   }
 }
 

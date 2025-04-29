@@ -21,19 +21,23 @@ const AdBanner: React.FC = () => {
   }, []);
 
   return (
-    <Card className="mt-4 overflow-hidden">
-      <CardContent className="p-0">
-        {/* Ad content will be inserted here by Google AdSense */}
-        <ins 
-          className="adsbygoogle"
-          style={{ display: 'block', minHeight: '100px', width: '100%' }}
-          data-ad-client={import.meta.env.VITE_AD_CLIENT || 'ca-pub-placeholder'}
-          data-ad-slot={import.meta.env.VITE_AD_SLOT || '0000000000'}
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-        />
-      </CardContent>
-    </Card>
+    <div className="py-8 bg-white">
+      <div className="container mx-auto px-4">
+        <Card className="border border-border shadow-sm overflow-hidden">
+          <CardContent className="p-0">
+            {/* Ad content will be inserted here by Google AdSense */}
+            <ins 
+              className="adsbygoogle"
+              style={{ display: 'block', minHeight: '100px', width: '100%' }}
+              data-ad-client={import.meta.env.VITE_AD_CLIENT || 'ca-pub-placeholder'}
+              data-ad-slot={import.meta.env.VITE_AD_SLOT || '0000000000'}
+              data-ad-format="auto"
+              data-full-width-responsive="true"
+            />
+          </CardContent>
+        </Card>
+      </div>
+    </div>
   );
 };
 

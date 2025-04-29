@@ -20,6 +20,7 @@ const Toppings = lazy(() => import("./pages/Toppings"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const Auth = lazy(() => import("./pages/Auth"));
 const Profile = lazy(() => import("./pages/Profile"));
+const DoughCalculator = lazy(() => import("./components/DoughCalculator"));
 
 // Create query client with optimized settings
 const queryClient = new QueryClient({
@@ -34,7 +35,7 @@ const queryClient = new QueryClient({
 
 const App = () => (
   <React.StrictMode>
-    <ThemeProvider attribute="class" defaultTheme="light">
+    <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <AuthProvider>
@@ -43,6 +44,7 @@ const App = () => (
               <Sonner />
               <Routes>
                 <Route path="/" element={<Navigate to="/home" replace />} />
+                <Route path="/home" element={<Index />} />
                 <Route path="/auth" element={
                   <Suspense fallback={<LoadingSpinner />}>
                     <Auth />
@@ -53,7 +55,11 @@ const App = () => (
                     <Privacy />
                   </Suspense>
                 } />
-                <Route path="/home" element={<Index />} />
+                <Route path="/calculator" element={
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <DoughCalculator />
+                  </Suspense>
+                } />
                 <Route path="/sauce" element={
                   <AuthGuard>
                     <Suspense fallback={<LoadingSpinner />}>
