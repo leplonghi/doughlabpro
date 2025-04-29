@@ -43,13 +43,13 @@ const StyleDescription: React.FC<StyleDescriptionProps> = ({ doughType, style })
       case 'brioche':
         return (
           <p className="text-sm text-gray-600 mt-1">
-            Rich, buttery bread with eggs and sugar
+            oft, enriched dough made with butter, eggs, and milk. This is the standard brioche formula, widely used in both sweet and savory recipes.
           </p>
         );
       case 'focaccia':
         return (
           <p className="text-sm text-gray-600 mt-1">
-            Italian flatbread with olive oil and herbs
+            Traditional focaccia with olive oil and hand-dimpled texture. This is the standard version used across most Italian regions.
           </p>
         );
       default:
