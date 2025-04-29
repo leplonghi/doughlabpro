@@ -10,9 +10,9 @@ const Toppings: React.FC = () => {
       
       <main className="flex-grow py-4 md:py-8">
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl font-serif font-bold mb-6">Pizza Toppings</h1>
+          <h1 className="text-4xl font-serif font-bold mb-6">Toppings</h1>
           <p className="text-lg text-gray-700">
-            Coming soon: Explore classic and innovative pizza toppings combinations.
+            Only for PRO users.
           </p>
         </div>
       </main>
