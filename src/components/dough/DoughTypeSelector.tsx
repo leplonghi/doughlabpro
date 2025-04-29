@@ -11,7 +11,11 @@ interface DoughTypeSelectorProps {
   onProceed: () => void;
 }
 
-const BreadIcon = () => (
+interface IconProps extends React.SVGProps<SVGSVGElement> {
+  className?: string;
+}
+
+const BreadIcon: React.FC<IconProps> = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -22,7 +26,7 @@ const BreadIcon = () => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="lucide"
+    {...props}
   >
     <path d="M8 8h.01" />
     <path d="M12 8h.01" />

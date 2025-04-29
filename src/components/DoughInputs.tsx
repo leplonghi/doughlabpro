@@ -1,12 +1,15 @@
-
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Wheat, Droplets, Weight, CircleDot } from 'lucide-react';
 
+interface IconProps extends React.SVGProps<SVGSVGElement> {
+  className?: string;
+}
+
 // Custom icons for ingredients
-const SaltIcon = () => (
+const SaltIcon: React.FC<IconProps> = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -17,6 +20,7 @@ const SaltIcon = () => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
+    {...props}
   >
     <path d="M14 8v.01" />
     <path d="M12 10v.01" />
@@ -30,7 +34,7 @@ const SaltIcon = () => (
   </svg>
 );
 
-const OilIcon = () => (
+const OilIcon: React.FC<IconProps> = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -41,6 +45,7 @@ const OilIcon = () => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
+    {...props}
   >
     <path d="M5 14c.5-3.5 2-6 3-9" />
     <path d="M14 4h.5C17 4 19 6 19 8.5c0 .5 0 1-.5 1.5" />
@@ -48,7 +53,7 @@ const OilIcon = () => (
   </svg>
 );
 
-const YeastIcon = () => (
+const YeastIcon: React.FC<IconProps> = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -59,6 +64,7 @@ const YeastIcon = () => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
+    {...props}
   >
     <path d="M4 11a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" />
     <path d="M8 9V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4" />
@@ -68,7 +74,7 @@ const YeastIcon = () => (
   </svg>
 );
 
-const SugarIcon = () => (
+const SugarIcon: React.FC<IconProps> = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -79,6 +85,7 @@ const SugarIcon = () => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
+    {...props}
   >
     <path d="M9 13V7c0-1.1.9-2 2-2h0a2 2 0 0 1 2 2v6" />
     <path d="M5 13V9a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v4" />
