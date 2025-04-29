@@ -20,7 +20,7 @@ const Header: React.FC = () => {
     title: 'Sauces',
     path: '/sauce'
   }, {
-    title: 'Utensils',
+    title: 'Shop',
     path: '/utensils'
   }];
   const NavItems = () => <>
