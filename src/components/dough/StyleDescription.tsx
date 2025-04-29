@@ -14,19 +14,19 @@ const StyleDescription: React.FC<StyleDescriptionProps> = ({ doughType, style })
       case 'napoletana':
         return (
           <p className="text-sm text-gray-600 mt-1">
-            Classic Neapolitan style (200-320°C)
+            Classic Italian pizza with a soft, airy crust. Baked quickly at very high temperatures (430–480°C) for a light, blistered finish.
           </p>
         );
       case 'newyork':
         return (
           <p className="text-sm text-gray-600 mt-1">
-            New York style with higher hydration
+            Thin, foldable crust with a chewy bite and crispy underside. Perfect for home ovens and everyday pizza baking.
           </p>
         );
       case 'focaccia':
         return (
           <p className="text-sm text-gray-600 mt-1">
-            Italian flatbread with olive oil and herbs
+            Thick, buttery crust baked in a pan. Layers of cheese, toppings, and sauce create a rich, indulgent experience.
           </p>
         );
       default:
@@ -37,13 +37,13 @@ const StyleDescription: React.FC<StyleDescriptionProps> = ({ doughType, style })
       case 'baguette':
         return (
           <p className="text-sm text-gray-600 mt-1">
-            Traditional French baguette with crisp crust
+            Classic French bread with a crisp crust and open crumb. This is the standard baguette formula, without regional variations.
           </p>
         );
       case 'brioche':
         return (
           <p className="text-sm text-gray-600 mt-1">
-            oft, enriched dough made with butter, eggs, and milk. This is the standard brioche formula, widely used in both sweet and savory recipes.
+            Soft, enriched dough made with butter, eggs, and milk. This is the standard brioche formula, widely used in both sweet and savory recipes.
           </p>
         );
       case 'focaccia':
