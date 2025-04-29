@@ -16,10 +16,10 @@ const Index: React.FC = () => {
         {/* Hero Section */}
         <section className="container mx-auto px-4 py-12 md:py-16 grid md:grid-cols-2 gap-6 md:gap-12 items-center">
           <div className="hero-content order-2 md:order-1">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Perfect Dough Every Time</h1>
-            <p className="text-lg text-muted-foreground mb-8">Professional measures for home bakers and pizzaiolos</p>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Master Every Dough. Bake with Precision.</h1>
+            <p className="text-lg text-muted-foreground mb-8">Smart dough calculator for pizza makers, bread lovers, and artisan bakers.</p>
             <Button asChild className="bg-black text-white font-medium rounded hover:bg-black/80 px-6 py-6">
-              <Link to="/calculator">Start the Magic</Link>
+              <Link to="/calculator">Let’s Bake!</Link>
             </Button>
           </div>
           
@@ -46,7 +46,7 @@ const Index: React.FC = () => {
                   <Utensils size={24} />
                 </div>
                 <h3 className="text-xl font-medium mb-2">Multiple Dough Styles</h3>
-                <p className="text-muted-foreground">From authentic Neapolitan pizza to brioche bread and crusty French baguettes</p>
+                <p className="text-muted-foreground">From Neapolitan pizza to focaccia, ciabatta, brioche and more — all styles, one formula engine.</p>
               </div>
               
               <div className="bg-white p-6 rounded-lg shadow-sm">
@@ -54,15 +54,15 @@ const Index: React.FC = () => {
                   <Clock size={24} />
                 </div>
                 <h3 className="text-xl font-medium mb-2">Advanced Fermentation</h3>
-                <p className="text-muted-foreground">Direct, Poolish, and Biga methods for optimal flavor development</p>
+                <p className="text-muted-foreground">Explore Direct, Poolish and Biga methods for deeper flavor and better structure.</p>
               </div>
               
               <div className="bg-white p-6 rounded-lg shadow-sm">
                 <div className="w-12 h-12 bg-black/10 rounded-full flex items-center justify-center mb-4">
                   <Calculator size={24} />
                 </div>
-                <h3 className="text-xl font-medium mb-2">Precise Calculations</h3>
-                <p className="text-muted-foreground">Baker's percentages and exact measurements for consistent results every time</p>
+                <h3 className="text-xl font-medium mb-2">Baker’s Math Made Easy</h3>
+                <p className="text-muted-foreground">Exact measurements and hydration logic — just input and bake.</p>
               </div>
             </div>
           </div>
