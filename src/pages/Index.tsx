@@ -25,7 +25,7 @@ const Index: React.FC = () => {
           
           <div className="hero-image order-1 md:order-2">
             <img 
-              src="https://images.unsplash.com/photo-1651739887857-5ac98f2a4582?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3" 
+              src="https://oojhhvutzzkvugizucks.supabase.co/storage/v1/object/public/imagens//ChatGPT%20Image%2029%20de%20abr.%20de%202025,%2011_50_01.png" 
               alt="Fresh bread and baking" 
               className="rounded-lg w-full h-auto object-cover shadow-lg"
             />
