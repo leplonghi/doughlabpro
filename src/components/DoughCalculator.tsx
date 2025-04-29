@@ -101,6 +101,7 @@ const DoughCalculator: React.FC = () => {
               title="Dough Type" 
               isActive={activeStep === 1} 
               onClick={() => setActiveStep(1)}
+              description="Choose between pizza dough or bread dough to customize your recipe."
             />
             
             {activeStep >= 1 && (
@@ -119,6 +120,9 @@ const DoughCalculator: React.FC = () => {
               title={doughType === 'pizza' ? 'Pizza Style' : 'Bread Style'} 
               isActive={activeStep === 2}
               onClick={() => activeStep > 2 && setActiveStep(2)}
+              description={doughType === 'pizza' ? 
+                "Select a pizza style to determine hydration and ingredients." : 
+                "Choose a bread style to determine the optimal recipe formulation."}
             />
             
             {activeStep >= 2 && (
@@ -149,6 +153,7 @@ const DoughCalculator: React.FC = () => {
               title="Fermentation Method" 
               isActive={activeStep === 3}
               onClick={() => activeStep > 3 && setActiveStep(3)}
+              description="Choose a fermentation method to affect flavor development and timing."
             />
             
             {activeStep >= 3 && (
@@ -167,6 +172,7 @@ const DoughCalculator: React.FC = () => {
               title="Ingredients" 
               isActive={activeStep === 4}
               onClick={() => activeStep >= 4 && setActiveStep(4)}
+              description="Adjust flour amount, hydration, and other ingredients to customize your recipe."
             />
             
             {activeStep >= 4 && (
