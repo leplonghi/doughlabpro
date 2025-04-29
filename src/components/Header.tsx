@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
+import { Badge } from '@/components/ui/badge';
+import ProButton from '@/components/usage/ProButton';
 
 const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -51,6 +53,11 @@ const Header: React.FC = () => {
 
           {/* Right side actions */}
           <div className="flex items-center gap-4">
+            {/* Pro Button in Header */}
+            <div className="hidden md:block">
+              <ProButton />
+            </div>
+            
             {/* Mobile Menu Button */}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild className="md:hidden">
@@ -75,6 +82,10 @@ const Header: React.FC = () => {
                   <nav className="flex flex-col space-y-4 mt-6">
                     <NavItems />
                   </nav>
+                  
+                  <div className="mt-auto py-4">
+                    <ProButton />
+                  </div>
                 </div>
               </SheetContent>
             </Sheet>
