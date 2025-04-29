@@ -12,11 +12,11 @@ const Index: React.FC = () => {
       
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="container mx-auto md:py-16 grid md:grid-cols-2 gap-6 md:gap-20 items-center px-4 md:px-[50px] py-8 md:py-0">
+        <section className="container mx-auto md:py-16 grid md:grid-cols-2 gap-6 md:gap-20 items-center md:px-[50px] md:py-0 py-0 px-[152px]">
           <div className="hero-content order-2 md:order-1 mx-[13px] px-0">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Master Every Dough. Bake with Precision.</h1>
             <p className="text-lg text-muted-foreground mb-8">Smart dough calculator for pizza makers, bread lovers, and artisan bakers.</p>
-            <div className="flex flex-col sm:flex-row items-center gap-2 sm:justify-center mx-0 my-0 rounded-md">
+            <div className="flex flex-col sm:flex-row items-center gap-2 sm:justify-center mx-0 rounded-md my-[22px]">
               <Button asChild className="bg-black text-white font-medium rounded hover:bg-black/80 px-6 py-6 w-full sm:w-auto">
                 <Link to="/calculator">Let's Bake!</Link>
               </Button>
@@ -33,7 +33,7 @@ const Index: React.FC = () => {
         <AdBanner />
         
         {/* Features Section */}
-        <section className="bg-secondary py-12">
+        <section className="bg-secondary py-[17px]">
           <div className="container mx-auto px-4 md:px-[116px]">
             <h2 className="text-3xl font-bold text-center mb-12">Features</h2>
             
