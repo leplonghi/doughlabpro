@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '@/components/Footer';
@@ -7,10 +6,8 @@ import AdBanner from '@/components/monetization/AdBanner';
 import { Button } from '@/components/ui/button';
 import { Clock, Utensils, Calculator } from 'lucide-react';
 import ProButton from '@/components/usage/ProButton';
-
 const Index: React.FC = () => {
-  return (
-    <div className="flex flex-col min-h-screen bg-white">
+  return <div className="flex flex-col min-h-screen bg-white">
       <Header />
       
       <main className="flex-grow">
@@ -37,7 +34,7 @@ const Index: React.FC = () => {
         
         {/* Features Section */}
         <section className="bg-secondary py-0">
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto px-[116px]">
             <h2 className="text-3xl font-bold text-center mb-12">Features</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -74,8 +71,6 @@ const Index: React.FC = () => {
       
       {/* Footer is rendered within the Router context */}
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Index;

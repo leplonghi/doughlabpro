@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
@@ -6,42 +5,37 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import { Badge } from '@/components/ui/badge';
 import ProButton from '@/components/usage/ProButton';
-
 const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  
-  const menuItems = [
-    { title: 'Home', path: '/home' },
-    { title: 'Dough Calculator', path: '/calculator' },
-    { title: 'Toppings', path: '/toppings' },
-    { title: 'Sauces', path: '/sauce' },
-    { title: 'Utensils', path: '/utensils' }
-  ];
-  
-  const NavItems = () => (
-    <>
-      {menuItems.map(item => (
-        <Link 
-          key={item.path} 
-          to={item.path} 
-          className="text-base font-medium text-foreground hover:text-black transition-colors" 
-          onClick={() => setMobileMenuOpen(false)}
-        >
+  const menuItems = [{
+    title: 'Home',
+    path: '/home'
+  }, {
+    title: 'Dough Calculator',
+    path: '/calculator'
+  }, {
+    title: 'Toppings',
+    path: '/toppings'
+  }, {
+    title: 'Sauces',
+    path: '/sauce'
+  }, {
+    title: 'Utensils',
+    path: '/utensils'
+  }];
+  const NavItems = () => <>
+      {menuItems.map(item => <Link key={item.path} to={item.path} className="text-base font-medium text-foreground hover:text-black transition-colors" onClick={() => setMobileMenuOpen(false)}>
           {item.title}
-        </Link>
-      ))}
-    </>
-  );
-
-  return (
-    <header className="w-full border-b border-border bg-background sticky top-0 z-50">
+        </Link>)}
+    </>;
+  return <header className="w-full border-b border-border bg-background sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center gap-2">
               <img src="/lovable-uploads/15936b17-7234-47a3-a949-d72c0d2932e6.png" className="h-8 w-auto" alt="DoughLab Pro" />
-              <span className="px-[3px] py-[8px] text-sm font-medium">simple.fast.precise</span>
+              <span className="px-[3px] py-[8px] text-sm font-medium">fast.precise</span>
             </Link>
           </div>
 
@@ -91,8 +85,6 @@ const Header: React.FC = () => {
           </div>
         </div>
       </div>
-    </header>
-  );
+    </header>;
 };
-
 export default Header;

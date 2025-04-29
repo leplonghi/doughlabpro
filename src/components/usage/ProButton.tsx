@@ -1,24 +1,19 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
-
 const ProButton: React.FC = () => {
-  return (
-    <Dialog>
+  return <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" className="border-amber-400 text-amber-700 hover:bg-amber-50 hover:text-amber-800">
+        <Button variant="outline" className="border-amber-400 text-gray-950 bg-orange-500 hover:bg-orange-400 py-0 px-[5px] rounded-xl mx-0">
           <span className="mr-1">Upgrade to</span> 
-          <Badge className="bg-amber-500 text-white hover:bg-amber-600">PRO</Badge>
+          <Badge className="text-black bg-orange-200">PRO</Badge>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Upgrade to DoughLab Pro</DialogTitle>
-          <DialogDescription>
-            Unlock unlimited recipes, advanced fermentation techniques, and more with DoughLab Pro.
-          </DialogDescription>
+          <DialogDescription>Unlock unlimited recipes, traditional and new types os sauces and toppings, and more with DoughLab Pro.</DialogDescription>
         </DialogHeader>
 
         <div className="grid gap-4 py-4">
@@ -48,8 +43,6 @@ const ProButton: React.FC = () => {
           </Button>
         </DialogFooter>
       </DialogContent>
-    </Dialog>
-  );
+    </Dialog>;
 };
-
 export default ProButton;
