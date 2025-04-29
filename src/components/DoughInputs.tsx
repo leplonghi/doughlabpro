@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Input } from '@/components/ui/input';
@@ -39,7 +40,8 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
   ballWeight,
   onBallWeightChange
 }) => {
-  const { t } = useTranslation();
+  // Use safe translation access with fallbacks
+  const { t = (key: string) => key, ready = true } = useTranslation();
   
   // Calculate ingredients based on dough type
   const salt = (flour * 2.5) / 100;

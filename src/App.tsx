@@ -6,13 +6,14 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "next-themes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import AuthProvider from "./components/AuthProvider";
 import { AuthGuard } from "./components/auth/AuthGuard";
 import LoadingSpinner from "./components/ui/loading-spinner";
 import NotFound from "./pages/NotFound";
 import Index from "./pages/Index";
-import '@/i18n/i18n';
+import { I18nextProvider } from 'react-i18next';
+import i18n from './i18n/i18n';
 
 // Lazy-loaded components
 const Sauce = lazy(() => import("./pages/Sauce"));
@@ -33,62 +34,84 @@ const queryClient = new QueryClient({
   },
 });
 
-const App = () => (
-  <React.StrictMode>
-    <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <AuthProvider>
-            <TooltipProvider>
-              <Toaster />
-              <Sonner />
-              <Routes>
-                <Route path="/" element={<Navigate to="/home" replace />} />
-                <Route path="/home" element={<Index />} />
-                <Route path="/auth" element={
-                  <Suspense fallback={<LoadingSpinner />}>
-                    <Auth />
-                  </Suspense>
-                } />
-                <Route path="/privacy" element={
-                  <Suspense fallback={<LoadingSpinner />}>
-                    <Privacy />
-                  </Suspense>
-                } />
-                <Route path="/calculator" element={
-                  <Suspense fallback={<LoadingSpinner />}>
-                    <DoughCalculator />
-                  </Suspense>
-                } />
-                <Route path="/sauce" element={
-                  <AuthGuard>
-                    <Suspense fallback={<LoadingSpinner />}>
-                      <Sauce />
-                    </Suspense>
-                  </AuthGuard>
-                } />
-                <Route path="/toppings" element={
-                  <AuthGuard>
-                    <Suspense fallback={<LoadingSpinner />}>
-                      <Toppings />
-                    </Suspense>
-                  </AuthGuard>
-                } />
-                <Route path="/profile" element={
-                  <AuthGuard>
-                    <Suspense fallback={<LoadingSpinner />}>
-                      <Profile />
-                    </Suspense>
-                  </AuthGuard>
-                } />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </TooltipProvider>
-          </AuthProvider>
-        </BrowserRouter>
-      </QueryClientProvider>
-    </ThemeProvider>
-  </React.StrictMode>
-);
+// Component to ensure i18n is initialized
+const App = () => {
+  const [i18nInitialized, setI18nInitialized] = useState(false);
+
+  useEffect(() => {
+    // Initialize i18n if not already initialized
+    if (!i18n.isInitialized) {
+      i18n.init().then(() => {
+        setI18nInitialized(true);
+      });
+    } else {
+      setI18nInitialized(true);
+    }
+  }, []);
+
+  if (!i18nInitialized) {
+    return <LoadingSpinner />;
+  }
+
+  return (
+    <React.StrictMode>
+      <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
+        <QueryClientProvider client={queryClient}>
+          <I18nextProvider i18n={i18n}>
+            <BrowserRouter>
+              <AuthProvider>
+                <TooltipProvider>
+                  <Toaster />
+                  <Sonner />
+                  <Routes>
+                    <Route path="/" element={<Navigate to="/home" replace />} />
+                    <Route path="/home" element={<Index />} />
+                    <Route path="/auth" element={
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <Auth />
+                      </Suspense>
+                    } />
+                    <Route path="/privacy" element={
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <Privacy />
+                      </Suspense>
+                    } />
+                    <Route path="/calculator" element={
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <DoughCalculator />
+                      </Suspense>
+                    } />
+                    <Route path="/sauce" element={
+                      <AuthGuard>
+                        <Suspense fallback={<LoadingSpinner />}>
+                          <Sauce />
+                        </Suspense>
+                      </AuthGuard>
+                    } />
+                    <Route path="/toppings" element={
+                      <AuthGuard>
+                        <Suspense fallback={<LoadingSpinner />}>
+                          <Toppings />
+                        </Suspense>
+                      </AuthGuard>
+                    } />
+                    <Route path="/profile" element={
+                      <AuthGuard>
+                        <Suspense fallback={<LoadingSpinner />}>
+                          <Profile />
+                        </Suspense>
+                      </AuthGuard>
+                    } />
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </TooltipProvider>
+              </AuthProvider>
+            </BrowserRouter>
+          </I18nextProvider>
+        </QueryClientProvider>
+      </ThemeProvider>
+    </React.StrictMode>
+  );
+};
 
 export default App;
