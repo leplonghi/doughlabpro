@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Calculator } from 'lucide-react';
 import DoughResults from './DoughResults';
 import DoughInputs from './DoughInputs';
 import SkipToContent from './SkipToContent';
 import { useDoughCalculator } from '@/hooks/useDoughCalculator';
 import { FermentationMethod } from '@/types/dough';
+import { useTranslation } from 'react-i18next';
 import { PizzaStyle } from './PizzaStyleSelect';
 import StepHeader from './dough/StepHeader';
 import DoughTypeSelector from './dough/DoughTypeSelector';
@@ -17,8 +16,6 @@ import FermentationMethodSelector from './dough/FermentationMethodSelector';
 import CalculatorActions from './dough/CalculatorActions';
 import { Info } from 'lucide-react';
 import DoughCalculatorHeader from './DoughCalculatorHeader';
-import ProButton from './ProButton';
-import UsageWarning from './UsageWarning';
 
 type DoughType = 'pizza' | 'bread';
 type StyleType = PizzaStyle | BreadStyle;
@@ -29,7 +26,7 @@ const DoughCalculator: React.FC = () => {
   const [pizzaStyle, setPizzaStyle] = useState<PizzaStyle | ''>('');
   const [fermentationMethod, setFermentationMethod] = useState<FermentationMethod>('direct');
   const [activeStep, setActiveStep] = useState<number>(1);
-  const [showUsageWarning, setShowUsageWarning] = useState(false);
+  const { t } = useTranslation();
   
   const currentStyle: StyleType = doughType === 'pizza' ? 
     (pizzaStyle || 'napoletana') as PizzaStyle : 
@@ -93,16 +90,6 @@ const DoughCalculator: React.FC = () => {
   const handleProceedToNextStep = (nextStep: number) => {
     setActiveStep(nextStep);
   };
-
-  const handleCalculate = () => {
-    // Randomly show the usage warning for demo purposes
-    // In a real app, this would be based on actual usage tracking
-    if (Math.random() > 0.5) {
-      setShowUsageWarning(true);
-    } else {
-      calculateRecipe();
-    }
-  };
   
   return (
     <div className="w-full max-w-3xl mx-auto px-4 md:px-6 mb-12 fade-in pt-8">
@@ -110,12 +97,7 @@ const DoughCalculator: React.FC = () => {
       
       <div className="flex flex-col items-center mb-6">
         <img src="/lovable-uploads/15936b17-7234-47a3-a949-d72c0d2932e6.png" alt="DoughLab Pro logo" className="h-16 w-auto mb-3" />
-        <div className="flex justify-center">
-          <ProButton />
-        </div>
-      </div>
-      
-      {showUsageWarning && <UsageWarning />}
+              </div>
       
       <Card className="mb-8 shadow-sm border-border overflow-hidden rounded-xl">
         <DoughCalculatorHeader />
@@ -227,16 +209,10 @@ const DoughCalculator: React.FC = () => {
                   </p>
                 </div>
               
-                <div className="flex justify-between gap-3 mt-6">
-                  <Button 
-                    variant="default" 
-                    className="flex-1 h-12 font-medium"
-                    onClick={handleCalculate}
-                  >
-                    <Calculator className="mr-2 h-5 w-5" />
-                    Calculate Recipe
-                  </Button>
-                </div>
+                <CalculatorActions 
+                  onCalculate={calculateRecipe}
+                  onReset={resetForm}
+                />
               </>
             )}
           </div>

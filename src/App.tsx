@@ -5,6 +5,7 @@ import { lazy, Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "next-themes";
 
+import { TooltipProvider } from "@/components/ui/tooltip";
 import AuthProvider from "./components/AuthProvider";
 import LoadingSpinner from "./components/ui/loading-spinner";
 import NotFound from "./pages/NotFound";
@@ -19,6 +20,7 @@ const Contact = lazy(() => import("./pages/Contact"));
 const Auth = lazy(() => import("./pages/Auth"));
 const Profile = lazy(() => import("./pages/Profile"));
 const DoughCalculator = lazy(() => import("./components/DoughCalculator"));
+const Gallery = lazy(() => import("./pages/Gallery"));
 
 // Create query client with optimized settings
 const queryClient = new QueryClient({
@@ -34,7 +36,6 @@ const queryClient = new QueryClient({
 // Import Toaster components
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as SonnerToaster } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
 
 const App = () => {
   return (
@@ -86,6 +87,11 @@ const App = () => {
                   <Route path="/profile" element={
                     <Suspense fallback={<LoadingSpinner />}>
                       <Profile />
+                    </Suspense>
+                  } />
+                  <Route path="/gallery" element={
+                    <Suspense fallback={<LoadingSpinner />}>
+                      <Gallery />
                     </Suspense>
                   } />
                   <Route path="*" element={<NotFound />} />

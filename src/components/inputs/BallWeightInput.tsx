@@ -4,6 +4,7 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { InfoCircledIcon } from '@radix-ui/react-icons';
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { useTranslation } from 'react-i18next';
 
 interface BallWeightInputProps {
   ballWeight: number;
@@ -16,6 +17,8 @@ const BallWeightInput: React.FC<BallWeightInputProps> = ({
   totalDoughWeight,
   onBallWeightChange
 }) => {
+  const { t } = useTranslation();
+  
   const numberOfBalls = Math.floor(totalDoughWeight / ballWeight) || 0;
   
   const handleRangeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,13 +35,13 @@ const BallWeightInput: React.FC<BallWeightInputProps> = ({
   return (
     <div className="space-y-2">
       <div className="flex items-center gap-2">
-        <Label htmlFor="ballWeight">Ball Weight</Label>
+        <Label htmlFor="ballWeight">{t('calculator.ingredients.ballWeight')}</Label>
         <Tooltip>
           <TooltipTrigger asChild>
             <span className="cursor-help"><InfoCircledIcon className="h-4 w-4 text-muted-foreground" /></span>
           </TooltipTrigger>
           <TooltipContent className="max-w-xs bg-white text-black border border-border">
-            <p>The weight of each dough ball in grams</p>
+            <p>{t('calculator.ingredients.ballWeightDescription')}</p>
           </TooltipContent>
         </Tooltip>
       </div>
@@ -77,7 +80,7 @@ const BallWeightInput: React.FC<BallWeightInputProps> = ({
       </div>
       
       <div className="text-sm text-muted-foreground mt-1">
-        Ball count: {numberOfBalls}
+        {t('calculator.ingredients.ballCountResult', { count: numberOfBalls })}
       </div>
     </div>
   );
