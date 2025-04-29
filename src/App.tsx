@@ -5,7 +5,6 @@ import { lazy, Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "next-themes";
 
-import { TooltipProvider } from "@/components/ui/tooltip";
 import AuthProvider from "./components/AuthProvider";
 import LoadingSpinner from "./components/ui/loading-spinner";
 import NotFound from "./pages/NotFound";
@@ -35,6 +34,7 @@ const queryClient = new QueryClient({
 // Import Toaster components
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as SonnerToaster } from "@/components/ui/sonner";
+import { TooltipProvider } from "@radix-ui/react-tooltip";
 
 const App = () => {
   return (
