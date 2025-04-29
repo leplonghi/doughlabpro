@@ -18,9 +18,11 @@ const Index: React.FC = () => {
           <div className="hero-content order-2 md:order-1">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Master Every Dough. Bake with Precision.</h1>
             <p className="text-lg text-muted-foreground mb-8">Smart dough calculator for pizza makers, bread lovers, and artisan bakers.</p>
-            <Button asChild className="bg-black text-white font-medium rounded hover:bg-black/80 px-6 py-6">
-              <Link to="/calculator">Let’s Bake!</Link>
-            </Button>
+            <div className="flex justify-center">
+              <Button asChild className="bg-black text-white font-medium rounded hover:bg-black/80 px-6 py-6">
+                <Link to="/calculator">Let's Bake!</Link>
+              </Button>
+            </div>
           </div>
           
           <div className="hero-image order-1 md:order-2">
