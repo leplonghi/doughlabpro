@@ -12,7 +12,7 @@ const Sauce: React.FC = () => {
         <div className="container mx-auto px-4">
           <h1 className="text-4xl font-serif font-bold mb-6">Pizza Sauces</h1>
           <p className="text-lg text-gray-700">
-            Coming soon: Discover traditional and modern pizza sauce recipes.
+            Pro users only.
           </p>
         </div>
       </main>
