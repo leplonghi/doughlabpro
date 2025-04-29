@@ -1,23 +1,26 @@
+
 import * as React from 'react';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { InfoCircledIcon } from '@radix-ui/react-icons';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useTranslation } from 'react-i18next';
+
 interface BallWeightInputProps {
   ballWeight: number;
   totalDoughWeight: number;
   onBallWeightChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
+
 const BallWeightInput: React.FC<BallWeightInputProps> = ({
   ballWeight,
   totalDoughWeight,
   onBallWeightChange
 }) => {
-  const {
-    t
-  } = useTranslation();
+  const { t } = useTranslation();
+  
   const numberOfBalls = Math.floor(totalDoughWeight / ballWeight) || 0;
+  
   const handleRangeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newEvent = {
       ...e,
@@ -28,7 +31,9 @@ const BallWeightInput: React.FC<BallWeightInputProps> = ({
     };
     onBallWeightChange(newEvent);
   };
-  return <div className="space-y-2">
+  
+  return (
+    <div className="space-y-2">
       <div className="flex items-center gap-2">
         <Label htmlFor="ballWeight">{t('calculator.ingredients.ballWeight')}</Label>
         <TooltipProvider>
@@ -42,10 +47,31 @@ const BallWeightInput: React.FC<BallWeightInputProps> = ({
           </Tooltip>
         </TooltipProvider>
       </div>
+      
       <div className="flex items-center gap-4">
-        <Input id="ballWeight" type="number" inputMode="numeric" pattern="[0-9]*" value={ballWeight || ''} onChange={onBallWeightChange} min="250" max="400" placeholder="Ex: 250g" className="w-24" />
+        <Input
+          id="ballWeight"
+          type="number"
+          inputMode="numeric"
+          pattern="[0-9]*"
+          value={ballWeight || ''}
+          onChange={onBallWeightChange}
+          min="250"
+          max="400"
+          placeholder="Ex: 250g"
+          className="w-24"
+        />
+        
         <div className="flex-1">
-          <input type="range" min="250" max="400" step="50" value={ballWeight} onChange={handleRangeChange} className="w-full bg-amber-600" />
+          <input
+            type="range"
+            min="250"
+            max="400"
+            step="50"
+            value={ballWeight}
+            onChange={handleRangeChange}
+            className="w-full accent-primary"
+          />
           <div className="flex justify-between text-xs text-gray-500 mt-1">
             <span>250g</span>
             <span>300g</span>
@@ -54,11 +80,12 @@ const BallWeightInput: React.FC<BallWeightInputProps> = ({
           </div>
         </div>
       </div>
+      
       <div className="text-sm text-muted-foreground mt-1">
-        {t('calculator.ingredients.ballCountResult', {
-        count: numberOfBalls
-      })}
+        {t('calculator.ingredients.ballCountResult', { count: numberOfBalls })}
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default BallWeightInput;

@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import * as React from "react";
@@ -12,7 +13,6 @@ import LoadingSpinner from "./components/ui/loading-spinner";
 import NotFound from "./pages/NotFound";
 import Index from "./pages/Index";
 import '@/i18n/i18n';
-import Header from "./components/Header";
 
 // Lazy-loaded components
 const Sauce = lazy(() => import("./pages/Sauce"));
@@ -39,7 +39,6 @@ const App = () => (
         <BrowserRouter>
           <AuthProvider>
             <TooltipProvider>
-              <Header />
               <Toaster />
               <Sonner />
               <Routes>
