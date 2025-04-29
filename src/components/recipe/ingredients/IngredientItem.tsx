@@ -22,8 +22,10 @@ const IngredientItem: React.FC<IngredientItemProps> = ({
       {tooltip && (
         <TooltipProvider>
           <Tooltip>
-            <TooltipTrigger>
-              <Info className="w-3.5 h-3.5 text-muted-foreground cursor-help" />
+            <TooltipTrigger asChild>
+              <span className="cursor-help">
+                <Info className="w-3.5 h-3.5 text-muted-foreground" />
+              </span>
             </TooltipTrigger>
             <TooltipContent>
               <p>{tooltip}</p>
