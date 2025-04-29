@@ -45,10 +45,8 @@ const DoughTypeSelector: React.FC<DoughTypeSelectorProps> = ({
       
       <p className="text-sm text-gray-600 mt-1">
         {doughType === 'pizza' 
-          ? 'Pizza dough, crafted for high-temperature baking and iconic styles. Choose between Neapolitan, New York, or Deep Dish to match your taste and baking method.
-
-' 
-          : 'Artisanal bread dough with a variety of fermentation methods and hydration profiles. Select from classic styles like Baguette, Ciabatta, or Whole Wheat to begin your recipe.'}
+          ? "Pizza dough, crafted for high-temperature baking and iconic styles. Choose between Neapolitan, New York, or Deep Dish to match your taste and baking method."
+          : "Artisanal bread dough with a variety of fermentation methods and hydration profiles. Select from classic styles like Baguette, Ciabatta, or Whole Wheat to begin your recipe."}
       </p>
     </>
   );
