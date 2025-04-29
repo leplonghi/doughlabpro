@@ -14,20 +14,20 @@ const Index: React.FC = () => {
       
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="hero-section container mx-auto px-4">
-          <div className="hero-content">
-            <h1 className="text-4xl md:text-5xl font-bold">Perfect Dough Every Time</h1>
-            <p className="text-lg text-muted-foreground">Professional measures for home bakers and pizzaiolos</p>
+        <section className="container mx-auto px-4 py-12 md:py-16 grid md:grid-cols-2 gap-6 md:gap-12 items-center">
+          <div className="hero-content order-2 md:order-1">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Perfect Dough Every Time</h1>
+            <p className="text-lg text-muted-foreground mb-8">Professional measures for home bakers and pizzaiolos</p>
             <Button asChild className="bg-black text-white font-medium rounded hover:bg-black/80 px-6 py-6">
               <Link to="/calculator">Start the Magic</Link>
             </Button>
           </div>
           
-          <div className="hero-image">
+          <div className="hero-image order-1 md:order-2">
             <img 
-              src="/lovable-uploads/10240500-8679-4a2d-9667-7895246fe108.png" 
-              alt="Perfect pizza dough" 
-              className="rounded-lg w-full h-auto object-cover"
+              src="https://images.unsplash.com/photo-1651739887857-5ac98f2a4582?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3" 
+              alt="Fresh bread and baking" 
+              className="rounded-lg w-full h-auto object-cover shadow-lg"
             />
           </div>
         </section>
@@ -38,31 +38,31 @@ const Index: React.FC = () => {
         {/* Features Section */}
         <section className="py-16 bg-secondary">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center">Features</h2>
+            <h2 className="text-3xl font-bold text-center mb-12">Features</h2>
             
-            <div className="feature-grid">
-              <div className="feature-card">
-                <div className="feature-icon">
-                  <Utensils size={28} />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="bg-white p-6 rounded-lg shadow-sm">
+                <div className="w-12 h-12 bg-black/10 rounded-full flex items-center justify-center mb-4">
+                  <Utensils size={24} />
                 </div>
-                <h3 className="text-xl font-medium mb-2">Multiple Dough and Pizza Styles</h3>
-                <p className="text-muted-foreground">From authentic Neapolitan to classic New York style to Brioche</p>
+                <h3 className="text-xl font-medium mb-2">Multiple Dough Styles</h3>
+                <p className="text-muted-foreground">From authentic Neapolitan pizza to brioche bread and crusty French baguettes</p>
               </div>
               
-              <div className="feature-card">
-                <div className="feature-icon">
-                  <Clock size={28} />
+              <div className="bg-white p-6 rounded-lg shadow-sm">
+                <div className="w-12 h-12 bg-black/10 rounded-full flex items-center justify-center mb-4">
+                  <Clock size={24} />
                 </div>
                 <h3 className="text-xl font-medium mb-2">Advanced Fermentation</h3>
-                <p className="text-muted-foreground">Direct, Poolish, and Biga methods for optimal flavor</p>
+                <p className="text-muted-foreground">Direct, Poolish, and Biga methods for optimal flavor development</p>
               </div>
               
-              <div className="feature-card">
-                <div className="feature-icon">
-                  <Calculator size={28} />
+              <div className="bg-white p-6 rounded-lg shadow-sm">
+                <div className="w-12 h-12 bg-black/10 rounded-full flex items-center justify-center mb-4">
+                  <Calculator size={24} />
                 </div>
                 <h3 className="text-xl font-medium mb-2">Precise Calculations</h3>
-                <p className="text-muted-foreground">Baker's percentages and exact measurements for consistency</p>
+                <p className="text-muted-foreground">Baker's percentages and exact measurements for consistent results every time</p>
               </div>
             </div>
           </div>

@@ -3,12 +3,13 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Wheat, Droplets, Waves, GanttChart, CheckCircle, Pizza } from 'lucide-react';
+import { Wheat, Droplets, Waves, GanttChart, CheckCircle, Pizza, Bread, Weight, CircleDot } from 'lucide-react';
 
 type YeastType = 'fresh' | 'dry';
 type DoughType = 'pizza' | 'bread';
 type PizzaStyle = 'napoletana' | 'newyork' | 'chicago';
 type BreadStyle = 'baguette' | 'brioche' | 'focaccia';
+type StyleType = PizzaStyle | BreadStyle;
 
 interface DoughInputsProps {
   flour: number;
@@ -17,7 +18,7 @@ interface DoughInputsProps {
   setHydration: (v: number) => void;
   yeastType: YeastType;
   setYeastType: (v: YeastType) => void;
-  pizzaStyle: string;
+  pizzaStyle: StyleType;
   doughType: DoughType;
   errors: Record<string, string>;
   validateField: (field: string, value: any) => void;
@@ -109,6 +110,40 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
     }
   };
 
+  // Get description for the number of balls based on dough type and style
+  const getBallDescription = () => {
+    if (doughType === 'pizza') {
+      return `${numberOfBalls} pizza${numberOfBalls !== 1 ? 's' : ''}`;
+    } else {
+      if (pizzaStyle === 'baguette') {
+        return `${numberOfBalls} baguette${numberOfBalls !== 1 ? 's' : ''} (each approx. 35cm long)`;
+      } else if (pizzaStyle === 'brioche') {
+        return `${numberOfBalls} brioche loaf/loaves (approx. 10cm × 20cm each)`;
+      } else if (pizzaStyle === 'focaccia') {
+        return `${numberOfBalls} focaccia sheet${numberOfBalls !== 1 ? 's' : ''} (approx. 20cm × 30cm)`;
+      }
+    }
+    return '';
+  };
+
+  // Get min/max weight range based on dough type and style
+  const getWeightRange = () => {
+    if (doughType === 'pizza') {
+      return { min: 200, max: 400, step: 10 };
+    } else {
+      if (pizzaStyle === 'baguette') {
+        return { min: 350, max: 450, step: 10 };
+      } else if (pizzaStyle === 'brioche') {
+        return { min: 500, max: 800, step: 50 };
+      } else if (pizzaStyle === 'focaccia') {
+        return { min: 400, max: 800, step: 50 };
+      }
+      return { min: 350, max: 800, step: 50 };
+    }
+  };
+
+  const weightRange = getWeightRange();
+
   return (
     <div className="space-y-6">
       {/* Flour Input with Slider */}
@@ -145,21 +180,19 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
         )}
       </div>
 
-      {/* Dough Ball Weight or Loaf Weight */}
+      {/* Dough Ball Size */}
       <div className="space-y-2">
         <div className="flex items-center gap-2">
-          <Pizza className="h-5 w-5" />
-          <Label htmlFor="ballWeight">
-            {doughType === 'pizza' ? 'Dough Ball Weight' : 'Loaf Weight'}
-          </Label>
+          <Weight className="h-5 w-5" />
+          <Label htmlFor="ballWeight">Doughball Size</Label>
         </div>
         <div className="flex gap-4">
           <div className="flex-1">
             <input
               type="range"
-              min={doughType === 'pizza' ? '200' : '350'}
-              max={doughType === 'pizza' ? '400' : '800'}
-              step="10"
+              min={weightRange.min}
+              max={weightRange.max}
+              step={weightRange.step}
               value={ballWeight}
               onChange={(e) => onBallWeightChange(Number(e.target.value))}
               className="w-full accent-black"
@@ -177,9 +210,7 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
           </div>
         </div>
         <p className="text-sm text-gray-600">
-          {doughType === 'pizza' 
-            ? `${numberOfBalls} pizza${numberOfBalls !== 1 ? 's' : ''}` 
-            : `${numberOfBalls} ${numberOfBalls === 1 ? 'loaf' : 'loaves'}`}
+          {getBallDescription()}
         </p>
       </div>
 
@@ -313,9 +344,11 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
           <div className="font-medium">Total Dough Weight</div>
           <div className="font-bold">
             {totalDoughWeight.toFixed(0)}g 
-            ({numberOfBalls} {doughType === 'pizza' ? 'pizzas' : numberOfBalls === 1 ? 'loaf' : 'loaves'})
           </div>
         </div>
+        <p className="text-sm text-gray-500 mt-1">
+          {getBallDescription()}
+        </p>
       </div>
     </div>
   );

@@ -9,11 +9,12 @@ import { useDoughCalculator } from '@/hooks/useDoughCalculator';
 import { FermentationMethod } from '@/types/dough';
 import { useTranslation } from 'react-i18next';
 import { Button } from './ui/button';
-import { Pizza, Bed, CircleDot, RotateCcw, Calculator } from 'lucide-react';
+import { Pizza, Bread, CircleDot, RotateCcw, Calculator } from 'lucide-react';
 
 type DoughType = 'pizza' | 'bread';
 type BreadStyle = 'baguette' | 'brioche' | 'focaccia';
 type PizzaStyle = 'napoletana' | 'newyork' | 'chicago';
+type StyleType = PizzaStyle | BreadStyle;
 
 const DoughCalculator: React.FC = () => {
   const [doughType, setDoughType] = useState<DoughType>('pizza');
@@ -22,13 +23,15 @@ const DoughCalculator: React.FC = () => {
   const [fermentationMethod, setFermentationMethod] = useState<FermentationMethod>('direct');
   const { t } = useTranslation();
   
+  const currentStyle: StyleType = doughType === 'pizza' ? pizzaStyle : breadStyle;
+  
   const {
     state,
     setState,
     validateField,
     calculateRecipe,
     resetForm
-  } = useDoughCalculator(doughType === 'pizza' ? pizzaStyle : breadStyle, fermentationMethod);
+  } = useDoughCalculator(currentStyle, fermentationMethod);
 
   // Reset sub-type when main dough type changes
   useEffect(() => {
@@ -104,7 +107,7 @@ const DoughCalculator: React.FC = () => {
                 className="h-12 justify-center" 
                 onClick={() => setDoughType('bread')}
               >
-                <Bed className="mr-2 h-5 w-5" />
+                <Bread className="mr-2 h-5 w-5" />
                 Bread
               </Button>
             </div>
@@ -271,7 +274,7 @@ const DoughCalculator: React.FC = () => {
               setHydration={hydration => setState(prev => ({ ...prev, hydration }))} 
               yeastType={state.yeastType} 
               setYeastType={yeastType => setState(prev => ({ ...prev, yeastType }))} 
-              pizzaStyle={doughType === 'pizza' ? pizzaStyle : breadStyle} 
+              pizzaStyle={currentStyle} 
               doughType={doughType}
               errors={state.errors} 
               validateField={validateField} 
@@ -306,7 +309,7 @@ const DoughCalculator: React.FC = () => {
           <DoughResults 
             recipe={state.recipe} 
             fermentationMethod={fermentationMethod} 
-            pizzaStyle={doughType === 'pizza' ? pizzaStyle : breadStyle} 
+            pizzaStyle={currentStyle} 
             doughType={doughType}
             unit="grams" 
             numberOfBalls={state.numberOfBalls} 

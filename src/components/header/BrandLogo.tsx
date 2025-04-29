@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Pizza, RefreshCw } from 'lucide-react';
+import { RefreshCw } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { refreshApplication } from '@/serviceWorker';
@@ -31,7 +31,7 @@ const BrandLogo: React.FC = () => {
   return (
     <div className="flex items-center gap-4">
       <Link to="/" className="flex items-center gap-2.5">
-        <Pizza size={32} className="text-black dark:text-white" />
+        <img src="/lovable-uploads/1a7e9690-7fcf-43cb-a119-2b7d22416a67.png" alt="DoughLab Pro logo" className="h-8 w-auto" />
         <h1 className="text-xl md:text-2xl font-medium">
           DoughLab Pro
         </h1>

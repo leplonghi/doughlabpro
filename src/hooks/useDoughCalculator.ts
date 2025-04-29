@@ -37,11 +37,25 @@ interface DoughState {
 type StyleType = 'napoletana' | 'newyork' | 'chicago' | 'baguette' | 'brioche' | 'focaccia';
 
 export const useDoughCalculator = (style: StyleType, fermentationMethod: FermentationMethod) => {
+  // Set initial ball weight based on style
+  const getInitialBallWeight = () => {
+    if (['napoletana', 'newyork', 'chicago'].includes(style)) {
+      return 250; // Default pizza ball weight
+    } else if (style === 'baguette') {
+      return 350; // French baguette
+    } else if (style === 'brioche') {
+      return 600; // Brioche loaf
+    } else if (style === 'focaccia') {
+      return 500; // Focaccia sheet
+    }
+    return 250; // Default
+  };
+
   const [state, setState] = useState<DoughState>({
     flour: 1000,
     hydration: 60,
     yeastType: 'dry',
-    ballWeight: 250,
+    ballWeight: getInitialBallWeight(),
     numberOfBalls: 4,
     errors: {},
   });
@@ -116,7 +130,7 @@ export const useDoughCalculator = (style: StyleType, fermentationMethod: Ferment
       }
     }
     
-    const totalWeight = flour + water + salt + yeast + oil + sugar + butter;
+    const totalWeight = flour + water + salt + yeast + (butter || oil) + sugar;
     const numberOfBalls = Math.floor(totalWeight / state.ballWeight);
     
     let recipe: DoughState['recipe'] = {
@@ -124,7 +138,7 @@ export const useDoughCalculator = (style: StyleType, fermentationMethod: Ferment
       water,
       salt,
       yeast,
-      oil,
+      oil: butter || oil,
       sugar,
     };
     
@@ -183,7 +197,7 @@ export const useDoughCalculator = (style: StyleType, fermentationMethod: Ferment
       flour: 1000,
       hydration: 60,
       yeastType: 'dry',
-      ballWeight: 250,
+      ballWeight: getInitialBallWeight(),
       numberOfBalls: 4,
       errors: {},
       recipe: undefined
