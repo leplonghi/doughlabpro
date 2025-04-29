@@ -81,17 +81,17 @@ const FermentationTips: React.FC<FermentationTipsProps> = ({ method, pizzaStyle 
           )}
           {pizzaStyle === 'napoletana' && (
             <p>
-              <strong>Neapolitan Tips:</strong> Stretch to 10-12 inches, keeping the edge thicker. Bake at the highest possible temperature (500°F+/260°C+) on a preheated stone for just 60-90 seconds if possible.
+              <strong>Neapolitan Tips:</strong> Stretch to 10-12 inches, keeping the edge thicker. Bake at the highest possible temperature (350°C+) on a pizza onvenb(Neapolitan can´t be done on a home oven) for just 60-90 seconds if possible.
             </p>
           )}
           {pizzaStyle === 'chicago' && (
             <p>
-              <strong>Chicago Style Tips:</strong> Press dough into an oiled deep dish pan, making sure it covers the bottom and sides. Layer cheese first, then toppings, and finally sauce on top. Bake at 425°F/220°C for 25-35 minutes.
+              <strong>Chicago Style Tips:</strong> Press dough into an oiled deep dish pan, making sure it covers the bottom and sides. Layer cheese first, then toppings, and finally sauce on top. Bake at 250°C for 25-35 minutes.
             </p>
           )}
           {pizzaStyle === 'focaccia' && (
             <p>
-              <strong>Focaccia Tips:</strong> Press dough into an oiled baking sheet, creating dimples with your fingers. Drizzle with olive oil and sprinkle with salt before baking at 450°F/230°C for 20-25 minutes.
+              <strong>Focaccia Tips:</strong> Press dough into an oiled baking sheet, creating dimples with your fingers. Drizzle with olive oil and sprinkle with salt before baking at 250°C for 20-25 minutes.
             </p>
           )}
         </div>
