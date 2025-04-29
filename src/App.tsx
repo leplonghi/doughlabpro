@@ -34,7 +34,7 @@ const queryClient = new QueryClient({
 // Import Toaster components
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as SonnerToaster } from "@/components/ui/sonner";
-import { TooltipProvider } from "@radix-ui/react-tooltip";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const App = () => {
   return (
