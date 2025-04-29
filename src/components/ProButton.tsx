@@ -15,7 +15,7 @@ const ProButton: React.FC<ProButtonProps> = ({ className }) => {
       onClick={() => window.open('/pricing', '_self')}
     >
       <Crown size={18} className="mr-2" />
-      Atualizar para PRO
+      Upgrade to PRO
     </Button>
   );
 };
