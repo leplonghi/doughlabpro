@@ -19,6 +19,8 @@ import i18n from './i18n/i18n';
 const Sauce = lazy(() => import("./pages/Sauce"));
 const Toppings = lazy(() => import("./pages/Toppings"));
 const Privacy = lazy(() => import("./pages/Privacy"));
+const Terms = lazy(() => import("./pages/Terms"));
+const Contact = lazy(() => import("./pages/Contact"));
 const Auth = lazy(() => import("./pages/Auth"));
 const Profile = lazy(() => import("./pages/Profile"));
 const DoughCalculator = lazy(() => import("./components/DoughCalculator"));
@@ -56,6 +58,16 @@ const App = () => {
                     <Route path="/privacy" element={
                       <Suspense fallback={<LoadingSpinner />}>
                         <Privacy />
+                      </Suspense>
+                    } />
+                    <Route path="/terms" element={
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <Terms />
+                      </Suspense>
+                    } />
+                    <Route path="/contact" element={
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <Contact />
                       </Suspense>
                     } />
                     <Route path="/calculator" element={

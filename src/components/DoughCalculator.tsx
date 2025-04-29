@@ -16,6 +16,7 @@ import StyleDescription from './dough/StyleDescription';
 import FermentationMethodSelector from './dough/FermentationMethodSelector';
 import CalculatorActions from './dough/CalculatorActions';
 import { Info } from 'lucide-react';
+import DoughCalculatorHeader from './DoughCalculatorHeader';
 
 type DoughType = 'pizza' | 'bread';
 type StyleType = PizzaStyle | BreadStyle;
@@ -101,6 +102,7 @@ const DoughCalculator: React.FC = () => {
       </div>
       
       <Card className="mb-8 shadow-sm border-border overflow-hidden rounded-xl">
+        <DoughCalculatorHeader />
         <CardContent className="p-0 space-y-0">
           {/* Dough Type Section */}
           <div className="p-6 space-y-4">
