@@ -1,11 +1,14 @@
+
 import React from 'react';
-import { PizzaStyle } from './PizzaStyleSelect';
 import { useTranslation } from 'react-i18next';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Wheat, Droplets, Waves, GanttChart, CheckCircle, Pizza } from 'lucide-react';
 
 type YeastType = 'fresh' | 'dry';
+type DoughType = 'pizza' | 'bread';
+type PizzaStyle = 'napoletana' | 'newyork' | 'chicago';
+type BreadStyle = 'baguette' | 'brioche' | 'focaccia';
 
 interface DoughInputsProps {
   flour: number;
@@ -14,7 +17,8 @@ interface DoughInputsProps {
   setHydration: (v: number) => void;
   yeastType: YeastType;
   setYeastType: (v: YeastType) => void;
-  pizzaStyle: PizzaStyle;
+  pizzaStyle: string;
+  doughType: DoughType;
   errors: Record<string, string>;
   validateField: (field: string, value: any) => void;
   ballWeight: number;
@@ -29,6 +33,7 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
   yeastType,
   setYeastType,
   pizzaStyle,
+  doughType,
   errors,
   validateField,
   ballWeight,
@@ -36,10 +41,38 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
 }) => {
   const { t } = useTranslation();
   
+  // Calculate ingredients based on dough type
   const salt = (flour * 2.5) / 100;
   const yeast = yeastType === 'fresh' ? (flour * 0.3) / 100 : (flour * 0.15) / 100;
-  const oil = pizzaStyle === "napoletana" ? (flour * 2.5) / 100 : (flour * 3) / 100;
-  const sugar = pizzaStyle === "napoletana" ? (flour * 2.5) / 100 : (flour * 3) / 100;
+  
+  // Adjust oil and sugar based on dough type and style
+  let oil = 0;
+  let sugar = 0;
+  
+  if (doughType === 'pizza') {
+    if (pizzaStyle === 'napoletana') {
+      oil = (flour * 1.5) / 100;
+      sugar = 0;
+    } else if (pizzaStyle === 'newyork') {
+      oil = (flour * 2.5) / 100;
+      sugar = (flour * 1.5) / 100;
+    } else if (pizzaStyle === 'chicago') {
+      oil = (flour * 5) / 100;
+      sugar = (flour * 2) / 100;
+    }
+  } else if (doughType === 'bread') {
+    if (pizzaStyle === 'baguette') {
+      oil = 0;
+      sugar = 0;
+    } else if (pizzaStyle === 'brioche') {
+      oil = (flour * 15) / 100; // Butter for brioche
+      sugar = (flour * 8) / 100;
+    } else if (pizzaStyle === 'focaccia') {
+      oil = (flour * 8) / 100;
+      sugar = (flour * 1) / 100;
+    }
+  }
+  
   const water = (flour * hydration) / 100;
   const totalDoughWeight = flour + water + salt + yeast + oil + sugar;
   const numberOfBalls = Math.floor(totalDoughWeight / ballWeight) || 0;
@@ -112,18 +145,20 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
         )}
       </div>
 
-      {/* Dough Ball Weight */}
+      {/* Dough Ball Weight or Loaf Weight */}
       <div className="space-y-2">
         <div className="flex items-center gap-2">
           <Pizza className="h-5 w-5" />
-          <Label htmlFor="ballWeight">Dough Ball Weight</Label>
+          <Label htmlFor="ballWeight">
+            {doughType === 'pizza' ? 'Dough Ball Weight' : 'Loaf Weight'}
+          </Label>
         </div>
         <div className="flex gap-4">
           <div className="flex-1">
             <input
               type="range"
-              min="200"
-              max="400"
+              min={doughType === 'pizza' ? '200' : '350'}
+              max={doughType === 'pizza' ? '400' : '800'}
               step="10"
               value={ballWeight}
               onChange={(e) => onBallWeightChange(Number(e.target.value))}
@@ -141,7 +176,11 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
             <span className="ml-1">g</span>
           </div>
         </div>
-        <p className="text-sm text-gray-600">{numberOfBalls} pizza{numberOfBalls !== 1 ? 's' : ''}</p>
+        <p className="text-sm text-gray-600">
+          {doughType === 'pizza' 
+            ? `${numberOfBalls} pizza${numberOfBalls !== 1 ? 's' : ''}` 
+            : `${numberOfBalls} ${numberOfBalls === 1 ? 'loaf' : 'loaves'}`}
+        </p>
       </div>
 
       {/* Hydration */}
@@ -193,37 +232,51 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
         </div>
       </div>
 
-      {/* Olive Oil */}
-      <div className="space-y-2">
-        <div className="flex items-center gap-2">
-          <GanttChart className="h-5 w-5" />
-          <Label>Olive Oil</Label>
-        </div>
-        <div className="flex gap-4">
-          <div className="flex-1">
-            <div className="text-sm">2.5% of flour weight</div>
+      {/* Olive Oil or Butter */}
+      {oil > 0 && (
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <GanttChart className="h-5 w-5" />
+            <Label>
+              {doughType === 'bread' && pizzaStyle === 'brioche' ? 'Butter' : 'Olive Oil'}
+            </Label>
           </div>
-          <div className="w-24">
-            <div className="text-right font-medium">{oil.toFixed(1)}g</div>
+          <div className="flex gap-4">
+            <div className="flex-1">
+              <div className="text-sm">
+                {oil > 0 
+                  ? `${(oil / flour * 100).toFixed(1)}% of flour weight` 
+                  : 'Not used in this recipe'}
+              </div>
+            </div>
+            <div className="w-24">
+              <div className="text-right font-medium">{oil.toFixed(1)}g</div>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Sugar */}
-      <div className="space-y-2">
-        <div className="flex items-center gap-2">
-          <CheckCircle className="h-5 w-5" />
-          <Label>Sugar</Label>
-        </div>
-        <div className="flex gap-4">
-          <div className="flex-1">
-            <div className="text-sm">2.5% of flour weight</div>
+      {sugar > 0 && (
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <CheckCircle className="h-5 w-5" />
+            <Label>Sugar</Label>
           </div>
-          <div className="w-24">
-            <div className="text-right font-medium">{sugar.toFixed(1)}g</div>
+          <div className="flex gap-4">
+            <div className="flex-1">
+              <div className="text-sm">
+                {sugar > 0 
+                  ? `${(sugar / flour * 100).toFixed(1)}% of flour weight` 
+                  : 'Not used in this recipe'}
+              </div>
+            </div>
+            <div className="w-24">
+              <div className="text-right font-medium">{sugar.toFixed(1)}g</div>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Yeast Type */}
       <div className="space-y-3">
@@ -258,7 +311,10 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
       <div className="pt-4 border-t border-gray-200">
         <div className="flex justify-between items-center">
           <div className="font-medium">Total Dough Weight</div>
-          <div className="font-bold">{totalDoughWeight.toFixed(0)}g ({numberOfBalls} pizzas)</div>
+          <div className="font-bold">
+            {totalDoughWeight.toFixed(0)}g 
+            ({numberOfBalls} {doughType === 'pizza' ? 'pizzas' : numberOfBalls === 1 ? 'loaf' : 'loaves'})
+          </div>
         </div>
       </div>
     </div>

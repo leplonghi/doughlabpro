@@ -11,13 +11,15 @@ import { useTranslation } from 'react-i18next';
 import { Button } from './ui/button';
 import { Pizza, Bed, CircleDot, RotateCcw, Calculator } from 'lucide-react';
 
-type DoughType = 'pizza' | 'bread' | 'focaccia' | 'brioche';
-type PizzaStyle = "napoletana" | "newyork";
+type DoughType = 'pizza' | 'bread';
+type BreadStyle = 'baguette' | 'brioche' | 'focaccia';
+type PizzaStyle = 'napoletana' | 'newyork' | 'chicago';
 
 const DoughCalculator: React.FC = () => {
   const [doughType, setDoughType] = useState<DoughType>('pizza');
-  const [pizzaStyle, setPizzaStyle] = useState<PizzaStyle>("napoletana");
-  const [fermentationMethod, setFermentationMethod] = useState<FermentationMethod>("direct");
+  const [breadStyle, setBreadStyle] = useState<BreadStyle>('baguette');
+  const [pizzaStyle, setPizzaStyle] = useState<PizzaStyle>('napoletana');
+  const [fermentationMethod, setFermentationMethod] = useState<FermentationMethod>('direct');
   const { t } = useTranslation();
   
   const {
@@ -26,7 +28,16 @@ const DoughCalculator: React.FC = () => {
     validateField,
     calculateRecipe,
     resetForm
-  } = useDoughCalculator(pizzaStyle, fermentationMethod);
+  } = useDoughCalculator(doughType === 'pizza' ? pizzaStyle : breadStyle, fermentationMethod);
+
+  // Reset sub-type when main dough type changes
+  useEffect(() => {
+    if (doughType === 'pizza') {
+      setPizzaStyle('napoletana');
+    } else {
+      setBreadStyle('baguette');
+    }
+  }, [doughType]);
 
   // Add print-specific CSS
   useEffect(() => {
@@ -68,7 +79,7 @@ const DoughCalculator: React.FC = () => {
     <div className="w-full max-w-3xl mx-auto px-4 md:px-6 mb-12 fade-in">
       <SkipToContent />
       
-      <h1 className="text-3xl font-bold text-center mb-6">Pizza Dough Calculator</h1>
+      <h1 className="text-3xl font-bold text-center mb-6">Dough Calculator</h1>
       
       <Card className="mb-8 shadow-sm border-border overflow-hidden rounded-xl">
         <CardContent className="p-0 space-y-6">
@@ -96,58 +107,89 @@ const DoughCalculator: React.FC = () => {
                 <Bed className="mr-2 h-5 w-5" />
                 Bread
               </Button>
-              <Button 
-                variant={doughType === 'focaccia' ? 'default' : 'outline'} 
-                className="h-12 justify-center" 
-                onClick={() => setDoughType('focaccia')}
-              >
-                <Bed className="mr-2 h-5 w-5" />
-                Focaccia
-              </Button>
-              <Button 
-                variant={doughType === 'brioche' ? 'default' : 'outline'} 
-                className="h-12 justify-center" 
-                onClick={() => setDoughType('brioche')}
-              >
-                <CircleDot className="mr-2 h-5 w-5" />
-                Brioche
-              </Button>
             </div>
             
             <p className="text-sm text-gray-600 mt-1">
-              Classic Italian pizza dough with various styles
+              {doughType === 'pizza' 
+                ? 'Pizza dough with various styles' 
+                : 'Bread dough with different variations'}
             </p>
           </div>
           
-          {/* Pizza Style Section */}
+          {/* Bread or Pizza Style Section */}
           <div className="p-6 space-y-4 border-t border-border">
             <div className="flex items-center gap-3 mb-2">
               <div className="flex items-center justify-center w-7 h-7 rounded-full bg-black text-white text-sm font-medium">2</div>
-              <h2 className="text-xl font-semibold">Pizza Style</h2>
+              <h2 className="text-xl font-semibold">
+                {doughType === 'pizza' ? 'Pizza Style' : 'Bread Style'}
+              </h2>
             </div>
             
-            <div className="grid grid-cols-2 gap-3">
-              <Button 
-                variant={pizzaStyle === 'napoletana' ? 'default' : 'outline'} 
-                className="h-12 justify-center" 
-                onClick={() => setPizzaStyle('napoletana')}
-              >
-                Neapolitan
-              </Button>
-              <Button 
-                variant={pizzaStyle === 'newyork' ? 'default' : 'outline'} 
-                className="h-12 justify-center" 
-                onClick={() => setPizzaStyle('newyork')}
-              >
-                New York
-              </Button>
-            </div>
+            {doughType === 'pizza' ? (
+              <div className="grid grid-cols-3 gap-3">
+                <Button 
+                  variant={pizzaStyle === 'napoletana' ? 'default' : 'outline'} 
+                  className="h-12 justify-center" 
+                  onClick={() => setPizzaStyle('napoletana')}
+                >
+                  Neapolitan
+                </Button>
+                <Button 
+                  variant={pizzaStyle === 'newyork' ? 'default' : 'outline'} 
+                  className="h-12 justify-center" 
+                  onClick={() => setPizzaStyle('newyork')}
+                >
+                  New York
+                </Button>
+                <Button 
+                  variant={pizzaStyle === 'chicago' ? 'default' : 'outline'} 
+                  className="h-12 justify-center" 
+                  onClick={() => setPizzaStyle('chicago')}
+                >
+                  Chicago Deep Dish
+                </Button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-3 gap-3">
+                <Button 
+                  variant={breadStyle === 'baguette' ? 'default' : 'outline'} 
+                  className="h-12 justify-center" 
+                  onClick={() => setBreadStyle('baguette')}
+                >
+                  French Baguette
+                </Button>
+                <Button 
+                  variant={breadStyle === 'brioche' ? 'default' : 'outline'} 
+                  className="h-12 justify-center" 
+                  onClick={() => setBreadStyle('brioche')}
+                >
+                  <CircleDot className="mr-2 h-5 w-5" />
+                  Brioche
+                </Button>
+                <Button 
+                  variant={breadStyle === 'focaccia' ? 'default' : 'outline'} 
+                  className="h-12 justify-center" 
+                  onClick={() => setBreadStyle('focaccia')}
+                >
+                  Focaccia
+                </Button>
+              </div>
+            )}
             
             <p className="text-sm text-gray-600 mt-1">
-              {pizzaStyle === 'napoletana' 
-                ? 'Classic style with olive oil and sugar (200-320°C)'
-                : 'New York style with higher hydration and longer fermentation'
-              }
+              {doughType === 'pizza' ? (
+                pizzaStyle === 'napoletana' 
+                  ? 'Classic Neapolitan style (200-320°C)'
+                  : pizzaStyle === 'newyork'
+                    ? 'New York style with higher hydration'
+                    : 'Thick Chicago-style deep dish'
+              ) : (
+                breadStyle === 'baguette'
+                  ? 'Traditional French baguette with crisp crust'
+                  : breadStyle === 'brioche'
+                    ? 'Rich, buttery bread with eggs and sugar'
+                    : 'Italian flatbread with olive oil and herbs'
+              )}
             </p>
           </div>
           
@@ -185,8 +227,9 @@ const DoughCalculator: React.FC = () => {
             {fermentationMethod !== 'direct' && (
               <div className="mt-4 space-y-3">
                 <p className="text-sm">
-                  Poolish pre-ferment (100% hydration, 30% of total flour) ferments for 12-16 hours at 18-21°C (64-70°F). 
-                  Creates a mild, nutty flavor and enhances dough extensibility.
+                  {fermentationMethod === 'poolish' 
+                    ? 'Poolish pre-ferment (100% hydration, 30% of total flour) ferments for 12-16 hours at 18-21°C (64-70°F). Creates a mild, nutty flavor and enhances dough extensibility.'
+                    : 'Biga pre-ferment (60% hydration, 30% of total flour) ferments for 16-24 hours at 18-21°C (64-70°F). Creates a more complex flavor profile and chewier texture.'}
                 </p>
                 
                 <div className="bg-gray-50 p-4 rounded-lg">
@@ -198,15 +241,15 @@ const DoughCalculator: React.FC = () => {
                     </div>
                     <div>
                       <p className="text-sm text-gray-600">Hydration:</p>
-                      <p className="font-medium">100%</p>
+                      <p className="font-medium">{fermentationMethod === 'poolish' ? '100%' : '60%'}</p>
                     </div>
                     <div>
                       <p className="text-sm text-gray-600">Yeast Amount:</p>
-                      <p className="font-medium">0.1% of pre-ferment flour</p>
+                      <p className="font-medium">{fermentationMethod === 'poolish' ? '0.1%' : '0.05%'} of pre-ferment flour</p>
                     </div>
                     <div>
                       <p className="text-sm text-gray-600">Fermentation Time:</p>
-                      <p className="font-medium">12-16 hours at 18-21°C</p>
+                      <p className="font-medium">{fermentationMethod === 'poolish' ? '12-16' : '16-24'} hours at 18-21°C</p>
                     </div>
                   </div>
                 </div>
@@ -228,7 +271,8 @@ const DoughCalculator: React.FC = () => {
               setHydration={hydration => setState(prev => ({ ...prev, hydration }))} 
               yeastType={state.yeastType} 
               setYeastType={yeastType => setState(prev => ({ ...prev, yeastType }))} 
-              pizzaStyle={pizzaStyle} 
+              pizzaStyle={doughType === 'pizza' ? pizzaStyle : breadStyle} 
+              doughType={doughType}
               errors={state.errors} 
               validateField={validateField} 
               ballWeight={state.ballWeight} 
@@ -262,7 +306,8 @@ const DoughCalculator: React.FC = () => {
           <DoughResults 
             recipe={state.recipe} 
             fermentationMethod={fermentationMethod} 
-            pizzaStyle={pizzaStyle} 
+            pizzaStyle={doughType === 'pizza' ? pizzaStyle : breadStyle} 
+            doughType={doughType}
             unit="grams" 
             numberOfBalls={state.numberOfBalls} 
           />
