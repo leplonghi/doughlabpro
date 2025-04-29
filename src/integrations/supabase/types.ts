@@ -12,26 +12,145 @@ export type Database = {
       profiles: {
         Row: {
           avatar_url: string | null
-          full_name: string | null
+          created_at: string | null
+          email: string
           id: string
+          name: string | null
+          preferences: Json | null
           updated_at: string | null
-          username: string | null
         }
         Insert: {
           avatar_url?: string | null
-          full_name?: string | null
-          id: string
+          created_at?: string | null
+          email: string
+          id?: string
+          name?: string | null
+          preferences?: Json | null
           updated_at?: string | null
-          username?: string | null
         }
         Update: {
           avatar_url?: string | null
-          full_name?: string | null
+          created_at?: string | null
+          email?: string
           id?: string
+          name?: string | null
+          preferences?: Json | null
           updated_at?: string | null
-          username?: string | null
         }
         Relationships: []
+      }
+      recipes: {
+        Row: {
+          butter: number | null
+          created_at: string | null
+          dough_type: string
+          eggs: number | null
+          flour: number
+          hydration: number
+          id: string
+          malt: number | null
+          method: string
+          milk: number | null
+          name: string
+          oil: number
+          salt: number
+          seeds: number | null
+          style: string | null
+          sugar: number
+          updated_at: string | null
+          user_id: string | null
+          whole_wheat: number | null
+          yeast: number
+        }
+        Insert: {
+          butter?: number | null
+          created_at?: string | null
+          dough_type?: string
+          eggs?: number | null
+          flour: number
+          hydration: number
+          id?: string
+          malt?: number | null
+          method: string
+          milk?: number | null
+          name: string
+          oil: number
+          salt: number
+          seeds?: number | null
+          style?: string | null
+          sugar: number
+          updated_at?: string | null
+          user_id?: string | null
+          whole_wheat?: number | null
+          yeast: number
+        }
+        Update: {
+          butter?: number | null
+          created_at?: string | null
+          dough_type?: string
+          eggs?: number | null
+          flour?: number
+          hydration?: number
+          id?: string
+          malt?: number | null
+          method?: string
+          milk?: number | null
+          name?: string
+          oil?: number
+          salt?: number
+          seeds?: number | null
+          style?: string | null
+          sugar?: number
+          updated_at?: string | null
+          user_id?: string | null
+          whole_wheat?: number | null
+          yeast?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recipes_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      saved_recipes: {
+        Row: {
+          created_at: string | null
+          id: string
+          recipe_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          recipe_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          recipe_id?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "saved_recipes_recipe_id_fkey"
+            columns: ["recipe_id"]
+            isOneToOne: false
+            referencedRelation: "recipes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "saved_recipes_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
