@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 const ProButton: React.FC = () => {
   return <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" className="border-amber-400 text-gray-950 bg-orange-500 hover:bg-orange-400 py-0 px-[5px] rounded-xl mx-0">
+        <Button variant="outline" className="border-amber-400 text-gray-950 py-0 px-[5px] rounded-xl mx-0 bg-amber-500 hover:bg-amber-400">
           <span className="mr-1">Upgrade to</span> 
           <Badge className="text-black bg-orange-200">PRO</Badge>
         </Button>
