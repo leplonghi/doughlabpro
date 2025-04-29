@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { CircleDot } from 'lucide-react';
 
 export type BreadStyle = 'baguette' | 'brioche' | 'focaccia';
 

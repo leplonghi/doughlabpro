@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { Pizza, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import LanguageSelector from './LanguageSelector';
 import { useTranslation } from 'react-i18next';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 
@@ -81,8 +80,6 @@ const Header: React.FC = () => {
                   </nav>
                   
                   <div className="mt-auto pb-8">
-                    <LanguageSelector />
-                    
                     {!user ? (
                       <div className="flex flex-col gap-3 mt-4">
                         <Button 
@@ -125,8 +122,6 @@ const Header: React.FC = () => {
 
             {/* Desktop actions */}
             <div className="hidden md:flex items-center gap-4">
-              <LanguageSelector />
-
               {!user ? (
                 <div className="flex items-center gap-2">
                   <Button 

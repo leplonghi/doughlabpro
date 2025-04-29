@@ -34,25 +34,7 @@ const queryClient = new QueryClient({
   },
 });
 
-// Component to ensure i18n is initialized
 const App = () => {
-  const [i18nInitialized, setI18nInitialized] = useState(false);
-
-  useEffect(() => {
-    // Initialize i18n if not already initialized
-    if (!i18n.isInitialized) {
-      i18n.init().then(() => {
-        setI18nInitialized(true);
-      });
-    } else {
-      setI18nInitialized(true);
-    }
-  }, []);
-
-  if (!i18nInitialized) {
-    return <LoadingSpinner />;
-  }
-
   return (
     <React.StrictMode>
       <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
