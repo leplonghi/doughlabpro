@@ -9,7 +9,7 @@ import { useDoughCalculator } from '@/hooks/useDoughCalculator';
 import { FermentationMethod } from '@/types/dough';
 import { useTranslation } from 'react-i18next';
 import { Button } from './ui/button';
-import { Pizza, Bread, CircleDot, RotateCcw, Calculator } from 'lucide-react';
+import { Pizza, Bed, CircleDot, RotateCcw, Calculator } from 'lucide-react';
 
 type DoughType = 'pizza' | 'bread';
 type BreadStyle = 'baguette' | 'brioche' | 'focaccia';
@@ -107,7 +107,7 @@ const DoughCalculator: React.FC = () => {
                 className="h-12 justify-center" 
                 onClick={() => setDoughType('bread')}
               >
-                <Bread className="mr-2 h-5 w-5" />
+                <Bed className="mr-2 h-5 w-5" />
                 Bread
               </Button>
             </div>
@@ -274,7 +274,7 @@ const DoughCalculator: React.FC = () => {
               setHydration={hydration => setState(prev => ({ ...prev, hydration }))} 
               yeastType={state.yeastType} 
               setYeastType={yeastType => setState(prev => ({ ...prev, yeastType }))} 
-              pizzaStyle={currentStyle} 
+              pizzaStyle={currentStyle as StyleType} 
               doughType={doughType}
               errors={state.errors} 
               validateField={validateField} 

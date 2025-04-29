@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Wheat, Droplets, Waves, GanttChart, CheckCircle, Pizza, Bread, Weight, CircleDot } from 'lucide-react';
+import { Wheat, Droplets, Waves, GanttChart, CheckCircle, Pizza, Bed, Weight, CircleDot } from 'lucide-react';
 
 type YeastType = 'fresh' | 'dry';
 type DoughType = 'pizza' | 'bread';
