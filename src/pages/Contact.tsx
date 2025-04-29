@@ -71,10 +71,8 @@ const Contact: React.FC = () => {
           <div className="mt-8 text-center">
             <h2 className="text-xl font-semibold mb-2">Other Ways to Reach Us</h2>
             <p className="text-muted-foreground">
-              Email: support@doughlabpro.example.com<br />
-              Phone: +1 (555) 123-4567<br />
-              Hours: Monday-Friday, 9am-5pm EST
-            </p>
+              Email: longhisfood@gmail.com<br />
+                                        </p>
           </div>
         </div>
       </main>
