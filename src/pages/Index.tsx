@@ -6,6 +6,7 @@ import Header from '@/components/Header';
 import AdBanner from '@/components/monetization/AdBanner';
 import { Button } from '@/components/ui/button';
 import { Clock, Utensils, Calculator } from 'lucide-react';
+import ProButton from '@/components/ProButton';
 
 const Index: React.FC = () => {
   return (
@@ -18,10 +19,11 @@ const Index: React.FC = () => {
           <div className="hero-content order-2 md:order-1">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Master Every Dough. Bake with Precision.</h1>
             <p className="text-lg text-muted-foreground mb-8">Smart dough calculator for pizza makers, bread lovers, and artisan bakers.</p>
-            <div className="flex justify-center">
+            <div className="flex flex-wrap justify-center gap-4">
               <Button asChild className="bg-black text-white font-medium rounded hover:bg-black/80 px-6 py-6">
                 <Link to="/calculator">Let's Bake!</Link>
               </Button>
+              <ProButton />
             </div>
           </div>
           

@@ -20,7 +20,6 @@ const Contact = lazy(() => import("./pages/Contact"));
 const Auth = lazy(() => import("./pages/Auth"));
 const Profile = lazy(() => import("./pages/Profile"));
 const DoughCalculator = lazy(() => import("./components/DoughCalculator"));
-const Gallery = lazy(() => import("./pages/Gallery"));
 
 // Create query client with optimized settings
 const queryClient = new QueryClient({
@@ -87,11 +86,6 @@ const App = () => {
                   <Route path="/profile" element={
                     <Suspense fallback={<LoadingSpinner />}>
                       <Profile />
-                    </Suspense>
-                  } />
-                  <Route path="/gallery" element={
-                    <Suspense fallback={<LoadingSpinner />}>
-                      <Gallery />
                     </Suspense>
                   } />
                   <Route path="*" element={<NotFound />} />
