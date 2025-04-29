@@ -33,8 +33,7 @@ const BrandLogo: React.FC = () => {
       <Link to="/" className="flex items-center gap-2.5">
         <img src="/lovable-uploads/15936b17-7234-47a3-a949-d72c0d2932e6.png" alt="DoughLab Pro logo" className="h-8 w-auto" />
               </Link>
-      
-      <Button 
+            <Button 
         variant="ghost" 
         size="icon" 
         onClick={handleRefresh}
