@@ -1,173 +1,158 @@
-import { useState, useEffect, useCallback } from 'react';
-import { toast } from 'sonner';
-import { DoughRecipe, DoughState, FermentationMethod, YeastType } from '@/types/dough';
+import { useState } from 'react';
 import { PizzaStyle } from '@/components/PizzaStyleSelect';
+import { FermentationMethod } from '@/types/dough';
+
+interface DoughState {
+  flour: number;
+  hydration: number;
+  yeastType: 'fresh' | 'dry';
+  ballWeight: number;
+  numberOfBalls: number;
+  errors: {
+    flour?: string;
+    hydration?: string;
+  };
+  recipe?: {
+    flour: number;
+    water: number;
+    salt: number;
+    yeast: number;
+    oil: number;
+    sugar?: number;
+    poolish?: {
+      flour: number;
+      water: number;
+      yeast: number;
+    };
+    biga?: {
+      flour: number;
+      water: number;
+      yeast: number;
+    };
+  };
+}
 
 export const useDoughCalculator = (pizzaStyle: PizzaStyle, fermentationMethod: FermentationMethod) => {
-  // State initialization
   const [state, setState] = useState<DoughState>({
     flour: 1000,
     hydration: 60,
-    yeastType: 'dry' as YeastType,
+    yeastType: 'dry',
     ballWeight: 250,
-    numberOfBalls: 0,
-    recipe: null,
+    numberOfBalls: 4,
     errors: {},
-    isLiveCalculation: false,
   });
 
-  // Memoized validation function
-  const validateField = useCallback((field: string, value: any) => {
-    const newErrors = { ...state.errors };
+  const validateField = (field: string, value: any) => {
+    const errors: Record<string, string> = {};
     
-    switch (field) {
-      case 'flour':
-        if (!value) {
-          newErrors.flour = 'Flour amount is required';
-        } else if (value < 100) {
-          newErrors.flour = 'Minimum amount is 100g';
-        } else if (value > 10000) {
-          newErrors.flour = 'Maximum amount is 10,000g';
-        } else {
-          delete newErrors.flour;
-        }
-        break;
-      case 'hydration':
-        if (!value) {
-          newErrors.hydration = 'Hydration percentage is required';
-        } else if (value < 50) {
-          newErrors.hydration = 'Minimum hydration is 50%';
-        } else if (value > 90) {
-          newErrors.hydration = 'Maximum hydration is 90%';
-        } else {
-          delete newErrors.hydration;
-        }
-        break;
+    if (field === 'flour' || field === 'all') {
+      if (!state.flour || state.flour < 100) {
+        errors.flour = 'Please enter a valid flour amount (min 100g)';
+      }
     }
-
-    setState(prev => ({ ...prev, errors: newErrors }));
-    return Object.keys(newErrors).length === 0;
-  }, [state.errors]);
-
-  // Memoized calculate number of balls function
-  const calculateNumberOfBalls = useCallback(() => {
-    if (state.flour && state.ballWeight && state.ballWeight > 0) {
-      const water = (state.flour * state.hydration) / 100;
-      const salt = (state.flour * 2.5) / 100;
-      const yeast = state.yeastType === 'fresh' ? (state.flour * 0.3) / 100 : (state.flour * 0.1) / 100;
-      const oil = pizzaStyle === "napoletana" ? 0 : (state.flour * 2.5) / 100;
-      const sugar = pizzaStyle === "napoletana" ? 0 : (state.flour * 2.5) / 100;
-      
-      const totalDoughWeight = state.flour + water + salt + yeast + oil + (sugar || 0);
-      const balls = Math.floor(totalDoughWeight / state.ballWeight);
-      
-      setState(prev => ({ ...prev, numberOfBalls: balls }));
-      return balls;
+    
+    if (field === 'hydration' || field === 'all') {
+      if (!state.hydration || state.hydration < 50 || state.hydration > 90) {
+        errors.hydration = 'Hydration should be between 50% and 90%';
+      }
     }
-    setState(prev => ({ ...prev, numberOfBalls: 0 }));
-    return 0;
-  }, [state.flour, state.hydration, state.yeastType, state.ballWeight, pizzaStyle]);
+    
+    setState(prev => ({
+      ...prev,
+      errors: {
+        ...prev.errors,
+        ...errors,
+      }
+    }));
+    
+    return Object.keys(errors).length === 0;
+  };
 
-  // Form validation
-  const validateForm = useCallback(() => {
-    const flourValid = validateField('flour', state.flour);
-    const hydrationValid = validateField('hydration', state.hydration);
-    return flourValid && hydrationValid;
-  }, [state.flour, state.hydration, validateField]);
-
-  // Recipe calculation
-  const calculateRecipe = useCallback(() => {
-    if (!validateForm()) {
-      toast.error("Validation Error", {
-        description: "Please fix the errors in the form."
-      });
+  const calculateRecipe = () => {
+    if (!validateField('all', null)) {
       return;
     }
-
-    const water = (state.flour * state.hydration) / 100;
-    const salt = (state.flour * 2.5) / 100;
-    const yeast = state.yeastType === 'fresh' ? (state.flour * 0.3) / 100 : (state.flour * 0.1) / 100;
-    const oil = pizzaStyle === "napoletana" ? 0 : (state.flour * 2.5) / 100;
-    const sugar = pizzaStyle === "napoletana" ? 0 : (state.flour * 2.5) / 100;
-
-    let newRecipe: DoughRecipe = {
-      flour: state.flour,
+    
+    const { flour, hydration, yeastType } = state;
+    const water = (flour * hydration) / 100;
+    const salt = (flour * 2.5) / 100;
+    const yeast = yeastType === 'fresh' ? (flour * 0.3) / 100 : (flour * 0.15) / 100;
+    const oil = pizzaStyle === "napoletana" ? 0 : (flour * 2.5) / 100;
+    const sugar = pizzaStyle === "napoletana" ? 0 : (flour * 2.5) / 100;
+    
+    const totalWeight = flour + water + salt + yeast + oil + sugar;
+    const numberOfBalls = Math.floor(totalWeight / state.ballWeight);
+    
+    let recipe: DoughState['recipe'] = {
+      flour,
       water,
       salt,
       yeast,
       oil,
-      sugar
+      sugar,
     };
-
+    
     if (fermentationMethod === 'poolish') {
-      const poolishFlour = (state.flour * 30) / 100;
+      const poolishFlour = flour * 0.3;
       const poolishWater = poolishFlour;
-      const poolishYeast = (poolishFlour * 0.1) / 100;
-
-      newRecipe = {
-        flour: state.flour - poolishFlour,
+      const poolishYeast = poolishFlour * 0.001;
+      
+      recipe = {
+        ...recipe,
+        flour: flour - poolishFlour,
         water: water - poolishWater,
-        salt,
-        yeast: 0,
-        oil,
-        sugar,
         poolish: {
           flour: poolishFlour,
           water: poolishWater,
-          yeast: poolishYeast
+          yeast: poolishYeast,
         }
       };
     } else if (fermentationMethod === 'biga') {
-      const bigaFlour = (state.flour * 50) / 100;
-      const bigaWater = (bigaFlour * 50) / 100;
-      const bigaYeast = (bigaFlour * 0.1) / 100;
-
-      newRecipe = {
-        flour: state.flour - bigaFlour,
+      const bigaFlour = flour * 0.3;
+      const bigaWater = bigaFlour * 0.6;
+      const bigaYeast = bigaFlour * 0.0005;
+      
+      recipe = {
+        ...recipe,
+        flour: flour - bigaFlour,
         water: water - bigaWater,
-        salt,
-        yeast: 0,
-        oil,
-        sugar,
         biga: {
           flour: bigaFlour,
           water: bigaWater,
-          yeast: bigaYeast
+          yeast: bigaYeast,
         }
       };
     }
+    
+    setState(prev => ({
+      ...prev,
+      recipe,
+      numberOfBalls,
+    }));
+    
+    // Scroll to results
+    setTimeout(() => {
+      document.getElementById('results')?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  };
 
-    setState(prev => ({ ...prev, recipe: newRecipe }));
-    calculateNumberOfBalls();
-
-    if (!state.isLiveCalculation) {
-      toast.success("Recipe calculated", {
-        description:
-          pizzaStyle === "napoletana"
-            ? "Your Neapolitan pizza recipe has been calculated successfully!"
-            : "Your New York Style pizza recipe has been calculated successfully!",
-      });
-    }
-  }, [state, pizzaStyle, fermentationMethod, calculateNumberOfBalls, validateForm]);
-
-  // Effect for live calculation
-  useEffect(() => {
-    if (state.isLiveCalculation && Object.keys(state.errors).length === 0 && state.flour > 0) {
-      calculateRecipe();
-    }
-  }, [state.isLiveCalculation, state.flour, state.hydration, state.yeastType, pizzaStyle, fermentationMethod, state.ballWeight, state.errors, calculateRecipe]);
-
-  // Enable live calculation after initial manual calculation
-  useEffect(() => {
-    if (state.recipe && !state.isLiveCalculation) {
-      setState(prev => ({ ...prev, isLiveCalculation: true }));
-    }
-  }, [state.recipe, state.isLiveCalculation]);
+  const resetForm = () => {
+    setState({
+      flour: 1000,
+      hydration: 60,
+      yeastType: 'dry',
+      ballWeight: 250,
+      numberOfBalls: 4,
+      errors: {},
+      recipe: undefined
+    });
+  };
 
   return {
     state,
     setState,
     validateField,
     calculateRecipe,
+    resetForm
   };
 };

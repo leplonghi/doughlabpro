@@ -1,13 +1,10 @@
 
 import React from 'react';
-import { Separator } from '@/components/ui/separator';
-import BallWeightInput from './inputs/BallWeightInput';
-import FlourInput from './inputs/FlourInput';
-import HydrationInput from './inputs/HydrationInput';
-import YeastSelector from './inputs/YeastSelector';
-import IngredientDisplay from './inputs/IngredientDisplay';
 import { PizzaStyle } from './PizzaStyleSelect';
 import { useTranslation } from 'react-i18next';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Wheat, Droplets, Salt, Oil, CircleCheck, Pizza } from 'lucide-react';
 
 type YeastType = 'fresh' | 'dry';
 
@@ -42,10 +39,11 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
   
   const salt = (flour * 2.5) / 100;
   const yeast = yeastType === 'fresh' ? (flour * 0.3) / 100 : (flour * 0.15) / 100;
-  const oil = pizzaStyle === "napoletana" ? 0 : (flour * 2.5) / 100;
-  const sugar = pizzaStyle === "napoletana" ? 0 : (flour * 2.5) / 100;
+  const oil = pizzaStyle === "napoletana" ? (flour * 2.5) / 100 : (flour * 3) / 100;
+  const sugar = pizzaStyle === "napoletana" ? (flour * 2.5) / 100 : (flour * 3) / 100;
   const water = (flour * hydration) / 100;
   const totalDoughWeight = flour + water + salt + yeast + oil + sugar;
+  const numberOfBalls = Math.floor(totalDoughWeight / ballWeight) || 0;
 
   const handleFlourChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -81,38 +79,189 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
 
   return (
     <div className="space-y-6">
-      <BallWeightInput
-        ballWeight={ballWeight}
-        totalDoughWeight={totalDoughWeight}
-        onBallWeightChange={handleBallWeightChange}
-      />
-
-      <FlourInput
-        flour={flour}
-        onChange={handleFlourChange}
-        error={errors.flour}
-      />
-
-      <div className="grid grid-cols-2 gap-4">
-        <IngredientDisplay label={t('calculator.salt')} value={salt} translationKey="calculator.salt" />
-        <IngredientDisplay label={t('calculator.yeast')} value={yeast} translationKey="calculator.yeast" />
-        <IngredientDisplay label={t('calculator.oil')} value={oil} translationKey="calculator.oil" />
-        <IngredientDisplay label={t('calculator.sugar')} value={sugar} translationKey="calculator.sugar" />
+      {/* Flour Input with Slider */}
+      <div className="space-y-2">
+        <div className="flex items-center gap-2">
+          <Wheat className="h-5 w-5" />
+          <Label htmlFor="flour">Flour (100%)</Label>
+        </div>
+        <div className="flex gap-4">
+          <div className="flex-1">
+            <input
+              type="range"
+              min="500"
+              max="2000"
+              step="50"
+              value={flour}
+              onChange={handleFlourChange}
+              className="w-full accent-black"
+            />
+          </div>
+          <div className="w-24 flex items-center">
+            <Input
+              id="flour"
+              type="number"
+              value={flour || ''}
+              onChange={handleFlourChange}
+              className={`text-right ${errors.flour ? "border-red-500" : ""}`}
+            />
+            <span className="ml-1">g</span>
+          </div>
+        </div>
+        {errors.flour && (
+          <p className="text-red-500 text-sm">{errors.flour}</p>
+        )}
       </div>
 
-      <HydrationInput
-        hydration={hydration}
-        onInputChange={handleHydrationChange}
-        onRangeChange={handleHydrationRangeChange}
-        error={errors.hydration}
-      />
+      {/* Dough Ball Weight */}
+      <div className="space-y-2">
+        <div className="flex items-center gap-2">
+          <Pizza className="h-5 w-5" />
+          <Label htmlFor="ballWeight">Dough Ball Weight</Label>
+        </div>
+        <div className="flex gap-4">
+          <div className="flex-1">
+            <input
+              type="range"
+              min="200"
+              max="400"
+              step="10"
+              value={ballWeight}
+              onChange={(e) => onBallWeightChange(Number(e.target.value))}
+              className="w-full accent-black"
+            />
+          </div>
+          <div className="w-24 flex items-center">
+            <Input
+              id="ballWeight"
+              type="number"
+              value={ballWeight || ''}
+              onChange={(e) => onBallWeightChange(Number(e.target.value))}
+              className="text-right"
+            />
+            <span className="ml-1">g</span>
+          </div>
+        </div>
+        <p className="text-sm text-gray-600">{numberOfBalls} pizza{numberOfBalls !== 1 ? 's' : ''}</p>
+      </div>
 
-      <Separator className="my-4" />
+      {/* Hydration */}
+      <div className="space-y-2">
+        <div className="flex items-center gap-2">
+          <Droplets className="h-5 w-5" />
+          <Label htmlFor="hydration">Hydration</Label>
+        </div>
+        <div className="flex gap-4">
+          <div className="flex-1">
+            <input
+              type="range"
+              min="50"
+              max="80"
+              value={hydration}
+              onChange={handleHydrationRangeChange}
+              className="w-full accent-black"
+            />
+          </div>
+          <div className="w-24 flex items-center">
+            <Input
+              id="hydration"
+              type="number"
+              value={hydration || ''}
+              onChange={handleHydrationChange}
+              className={`text-right ${errors.hydration ? "border-red-500" : ""}`}
+            />
+            <span className="ml-1">%</span>
+          </div>
+        </div>
+        {errors.hydration && (
+          <p className="text-red-500 text-sm">{errors.hydration}</p>
+        )}
+      </div>
 
-      <YeastSelector
-        yeastType={yeastType}
-        onYeastTypeChange={setYeastType}
-      />
+      {/* Salt */}
+      <div className="space-y-2">
+        <div className="flex items-center gap-2">
+          <Salt className="h-5 w-5" />
+          <Label>Salt</Label>
+        </div>
+        <div className="flex gap-4">
+          <div className="flex-1">
+            <div className="text-sm">2.5% of flour weight</div>
+          </div>
+          <div className="w-24">
+            <div className="text-right font-medium">{salt.toFixed(1)}g</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Olive Oil */}
+      <div className="space-y-2">
+        <div className="flex items-center gap-2">
+          <Oil className="h-5 w-5" />
+          <Label>Olive Oil</Label>
+        </div>
+        <div className="flex gap-4">
+          <div className="flex-1">
+            <div className="text-sm">2.5% of flour weight</div>
+          </div>
+          <div className="w-24">
+            <div className="text-right font-medium">{oil.toFixed(1)}g</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Sugar */}
+      <div className="space-y-2">
+        <div className="flex items-center gap-2">
+          <CircleCheck className="h-5 w-5" />
+          <Label>Sugar</Label>
+        </div>
+        <div className="flex gap-4">
+          <div className="flex-1">
+            <div className="text-sm">2.5% of flour weight</div>
+          </div>
+          <div className="w-24">
+            <div className="text-right font-medium">{sugar.toFixed(1)}g</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Yeast Type */}
+      <div className="space-y-3">
+        <Label>Yeast Type</Label>
+        <div className="grid grid-cols-2 gap-3">
+          <button
+            type="button"
+            onClick={() => setYeastType('fresh')}
+            className={`py-3 px-4 border rounded-md text-center ${
+              yeastType === 'fresh'
+                ? 'bg-black text-white border-black'
+                : 'border-gray-200 bg-white'
+            }`}
+          >
+            Fresh (0.3% - 3g)
+          </button>
+          <button
+            type="button"
+            onClick={() => setYeastType('dry')}
+            className={`py-3 px-4 border rounded-md text-center ${
+              yeastType === 'dry'
+                ? 'bg-black text-white border-black'
+                : 'border-gray-200 bg-white'
+            }`}
+          >
+            Dry (0.15% - 2g)
+          </button>
+        </div>
+      </div>
+
+      {/* Total Dough Weight Display */}
+      <div className="pt-4 border-t border-gray-200">
+        <div className="flex justify-between items-center">
+          <div className="font-medium">Total Dough Weight</div>
+          <div className="font-bold">{totalDoughWeight.toFixed(0)}g ({numberOfBalls} pizzas)</div>
+        </div>
+      </div>
     </div>
   );
 };
