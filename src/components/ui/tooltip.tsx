@@ -1,19 +1,10 @@
 
 import * as React from "react"
-import * as ToastPrimitives from "@radix-ui/react-toast"
 import * as TooltipPrimitive from "@radix-ui/react-tooltip"
 
 import { cn } from "@/lib/utils"
 
-// Fix: Properly define TooltipProvider as a React functional component
-const TooltipProvider = React.forwardRef<
-  React.ElementRef<typeof TooltipPrimitive.Provider>,
-  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Provider>
->(({ children, ...props }, ref) => (
-  <TooltipPrimitive.Provider {...props} ref={ref}>
-    {children}
-  </TooltipPrimitive.Provider>
-));
+const TooltipProvider = TooltipPrimitive.Provider;
 TooltipProvider.displayName = "TooltipProvider";
 
 const Tooltip = TooltipPrimitive.Root

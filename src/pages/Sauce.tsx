@@ -2,7 +2,6 @@
 import * as React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { TooltipProvider } from "@/components/ui/tooltip";
 
 const Sauce: React.FC = () => {
   return (

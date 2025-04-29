@@ -1,3 +1,5 @@
-import { useToast, toast } from "@/hooks/use-toast";
 
-export { useToast, toast };
+// Forward exports from the hooks file
+import { useToast, toast } from "@/hooks/use-toast"
+
+export { useToast, toast }

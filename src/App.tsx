@@ -1,18 +1,18 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
+
 import * as React from "react";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { ThemeProvider } from "next-themes";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ThemeProvider } from "next-themes";
+import { I18nextProvider } from 'react-i18next';
+import i18n from './i18n/i18n';
+
+import { TooltipProvider } from "@/components/ui/tooltip";
 import AuthProvider from "./components/AuthProvider";
 import { AuthGuard } from "./components/auth/AuthGuard";
 import LoadingSpinner from "./components/ui/loading-spinner";
 import NotFound from "./pages/NotFound";
 import Index from "./pages/Index";
-import { I18nextProvider } from 'react-i18next';
-import i18n from './i18n/i18n';
 
 // Lazy-loaded components
 const Sauce = lazy(() => import("./pages/Sauce"));
@@ -35,6 +35,10 @@ const queryClient = new QueryClient({
   },
 });
 
+// Import Toaster components
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as SonnerToaster } from "@/components/ui/sonner";
+
 const App = () => {
   return (
     <React.StrictMode>
@@ -44,8 +48,6 @@ const App = () => {
             <BrowserRouter>
               <AuthProvider>
                 <TooltipProvider>
-                  <Toaster />
-                  <Sonner />
                   <Routes>
                     <Route path="/" element={<Navigate to="/home" replace />} />
                     <Route path="/home" element={<Index />} />
@@ -97,6 +99,10 @@ const App = () => {
                     } />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
+                  
+                  {/* Toast notifications - moved inside tooltip provider context */}
+                  <Toaster />
+                  <SonnerToaster />
                 </TooltipProvider>
               </AuthProvider>
             </BrowserRouter>
