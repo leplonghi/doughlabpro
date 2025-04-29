@@ -6,7 +6,8 @@ const DoughCalculatorHeader: React.FC = () => {
   return (
     <CardHeader className="space-y-3 p-6 bg-primary/10 rounded-t-xl border-b">
       <CardTitle className="text-2xl font-sans text-center">
-             </CardTitle>
+        DoughLab Pro Calculator
+      </CardTitle>
       <CardDescription className="text-base text-center">
         Create pizza and bread dough recipes
       </CardDescription>

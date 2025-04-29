@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { PizzaStyle } from "./PizzaStyleSelect";
@@ -85,7 +84,7 @@ const DoughResults: React.FC<DoughResultsProps> = ({
   };
 
   return (
-    <Card className="mb-8 print-component">
+    <Card className="mb-8 print-component" id="recipe-card">
       <CardHeader className="bg-pizza-light bg-opacity-30">
         <CardTitle>
           {getTitle()}
@@ -146,7 +145,10 @@ const DoughResults: React.FC<DoughResultsProps> = ({
             <FermentationTips method={fermentationMethod} />
           </div>
 
-          <RecipeActions />
+          <RecipeActions 
+            recipeType={doughType}
+            recipeStyle={String(pizzaStyle)}
+          />
         </div>
       </CardContent>
 

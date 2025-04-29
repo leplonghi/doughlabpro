@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Wheat, Droplet, Info } from 'lucide-react';
 import {
@@ -9,7 +8,7 @@ import {
 } from "@/components/ui/tooltip";
 
 // Custom icons for recipe ingredients
-const YeastIcon = () => (
+const YeastIcon = React.forwardRef<SVGSVGElement, React.SVGProps<SVGSVGElement>>((props, ref) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -20,15 +19,18 @@ const YeastIcon = () => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
+    {...props}
+    ref={ref}
   >
     <path d="M4 11a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" />
     <path d="M8 9V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4" />
     <path d="M9.5 13.5v2" />
     <path d="M14.5 13.5v2" />
   </svg>
-);
+));
+YeastIcon.displayName = 'YeastIcon';
 
-const SaltIcon = () => (
+const SaltIcon = React.forwardRef<SVGSVGElement, React.SVGProps<SVGSVGElement>>((props, ref) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -39,6 +41,8 @@ const SaltIcon = () => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
+    {...props}
+    ref={ref}
   >
     <path d="M14 8v.01" />
     <path d="M12 10v.01" />
@@ -50,9 +54,10 @@ const SaltIcon = () => (
     <path d="M3 14h.01" />
     <path d="M7 14h.01" />
   </svg>
-);
+));
+SaltIcon.displayName = 'SaltIcon';
 
-const OilIcon = () => (
+const OilIcon = React.forwardRef<SVGSVGElement, React.SVGProps<SVGSVGElement>>((props, ref) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -63,14 +68,17 @@ const OilIcon = () => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
+    {...props}
+    ref={ref}
   >
     <path d="M5 14c.5-3.5 2-6 3-9" />
     <path d="M14 4h.5C17 4 19 6 19 8.5c0 .5 0 1-.5 1.5" />
     <path d="M8.5 13C5 15 7 20 12 20h2.5c2.5 0 4.5-2 4.5-4.5 0-3-2-5.5-5-5.5-3 0-5 2-5.5 3z" />
   </svg>
-);
+));
+OilIcon.displayName = 'OilIcon';
 
-const SugarIcon = () => (
+const SugarIcon = React.forwardRef<SVGSVGElement, React.SVGProps<SVGSVGElement>>((props, ref) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -81,15 +89,18 @@ const SugarIcon = () => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
+    {...props}
+    ref={ref}
   >
     <path d="M9 13V7c0-1.1.9-2 2-2h0a2 2 0 0 1 2 2v6" />
     <path d="M5 13V9a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v4" />
     <path d="M15 13v-3a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v3" />
     <path d="M3 13h18v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
   </svg>
-);
+));
+SugarIcon.displayName = 'SugarIcon';
 
-const DoughBallIcon = () => (
+const DoughBallIcon = React.forwardRef<SVGSVGElement, React.SVGProps<SVGSVGElement>>((props, ref) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -100,14 +111,17 @@ const DoughBallIcon = () => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
+    {...props}
+    ref={ref}
   >
     <circle cx="12" cy="12" r="8" />
     <path d="m16 12-4-4-4 4" />
     <path d="m16 12-4 4-4-4" />
   </svg>
-);
+));
+DoughBallIcon.displayName = 'DoughBallIcon';
 
-const RecipeIcon = () => (
+const RecipeIcon = React.forwardRef<SVGSVGElement, React.SVGProps<SVGSVGElement>>((props, ref) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -118,6 +132,8 @@ const RecipeIcon = () => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
+    {...props}
+    ref={ref}
   >
     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
     <path d="M14 2v6h6" />
@@ -125,7 +141,8 @@ const RecipeIcon = () => (
     <path d="M16 17H8" />
     <path d="M10 9H8" />
   </svg>
-);
+));
+RecipeIcon.displayName = 'RecipeIcon';
 
 interface RecipeFinalProps {
   flour: number;
@@ -156,29 +173,29 @@ const RecipeFinal: React.FC<RecipeFinalProps> = ({
 }) => (
   <div className="recipe-section">
     <h3 className="font-medium text-gray-900 flex items-center gap-2 mb-3">
-      <RecipeIcon size={18} />
+      <RecipeIcon className="w-5 h-5" />
       Final Dough
     </h3>
     <ul className="space-y-2 text-gray-700">
       <li className="flex justify-between">
-        <span className="result-label flex items-center gap-2"><Wheat size={16} /> Flour:</span>
+        <span className="result-label flex items-center gap-2"><Wheat className="w-4 h-4" /> Flour:</span>
         <span className="result-value">{formatValue(flour)}{getUnitLabel()}</span>
       </li>
       <li className="flex justify-between">
-        <span className="result-label flex items-center gap-2"><Droplet size={16} /> Water:</span>
+        <span className="result-label flex items-center gap-2"><Droplet className="w-4 h-4" /> Water:</span>
         <span className="result-value">{formatValue(water)}{getUnitLabel()}</span>
       </li>
       <li className="flex justify-between">
-        <span className="result-label flex items-center gap-2"><SaltIcon size={16} /> Salt:</span>
+        <span className="result-label flex items-center gap-2"><SaltIcon className="w-4 h-4" /> Salt:</span>
         <span className="result-value">{formatValue(salt)}{getUnitLabel()}</span>
       </li>
       <li className="flex justify-between">
         <span className="result-label flex items-center gap-2">
-          <OilIcon size={16} /> {isNewYorkStyle ? 'Olive Oil:' : 'Oil/Butter:'}
+          <OilIcon className="w-4 h-4" /> {isNewYorkStyle ? 'Olive Oil:' : 'Oil/Butter:'}
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger>
-                <Info size={14} className="text-muted-foreground cursor-help" />
+                <Info className="w-3.5 h-3.5 text-muted-foreground cursor-help" />
               </TooltipTrigger>
               <TooltipContent>
                 <p>Oil amount is fixed based on the selected style. Some styles use more oil for richness and texture.</p>
@@ -191,11 +208,11 @@ const RecipeFinal: React.FC<RecipeFinalProps> = ({
       {isNewYorkStyle && sugar && sugar > 0 && (
         <li className="flex justify-between">
           <span className="result-label flex items-center gap-2">
-            <SugarIcon size={16} /> Sugar:
+            <SugarIcon className="w-4 h-4" /> Sugar:
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger>
-                  <Info size={14} className="text-muted-foreground cursor-help" />
+                  <Info className="w-3.5 h-3.5 text-muted-foreground cursor-help" />
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>Sugar amount is fixed based on the style. Only some styles use sugar to enhance browning and flavor.</p>
@@ -208,7 +225,7 @@ const RecipeFinal: React.FC<RecipeFinalProps> = ({
       )}
       {fermentationMethod === 'direct' && (
         <li className="flex justify-between">
-          <span className="result-label flex items-center gap-2"><YeastIcon size={16} /> Yeast:</span>
+          <span className="result-label flex items-center gap-2"><YeastIcon className="w-4 h-4" /> Yeast:</span>
           <span className="result-value">{formatValue(yeast)}{getUnitLabel()}</span>
         </li>
       )}
@@ -222,7 +239,7 @@ const RecipeFinal: React.FC<RecipeFinalProps> = ({
       )}
       {numberOfBalls !== undefined && (
         <li className="flex justify-between">
-          <span className="result-label flex items-center gap-2"><DoughBallIcon size={16} /> Dough Balls:</span>
+          <span className="result-label flex items-center gap-2"><DoughBallIcon className="w-4 h-4" /> Dough Balls:</span>
           <span className="result-value">{numberOfBalls}</span>
         </li>
       )}

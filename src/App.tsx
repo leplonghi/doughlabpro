@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { lazy, Suspense } from "react";
@@ -22,6 +21,7 @@ const Contact = lazy(() => import("./pages/Contact"));
 const Auth = lazy(() => import("./pages/Auth"));
 const Profile = lazy(() => import("./pages/Profile"));
 const DoughCalculator = lazy(() => import("./components/DoughCalculator"));
+const Gallery = lazy(() => import("./pages/Gallery"));
 
 // Create query client with optimized settings
 const queryClient = new QueryClient({
@@ -91,6 +91,7 @@ const App = () => {
                         <Profile />
                       </Suspense>
                     } />
+                    <Route path="/gallery" element={<Gallery />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                   

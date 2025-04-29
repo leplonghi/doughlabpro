@@ -5,8 +5,17 @@ import { Separator } from '@/components/ui/separator';
 import { Save, Share, Printer, RotateCcw } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useTranslation } from 'react-i18next';
+import ScreenshotButton from './ScreenshotButton';
 
-const RecipeActions: React.FC = () => {
+interface RecipeActionsProps {
+  recipeType?: 'pizza' | 'bread';
+  recipeStyle?: string;
+}
+
+const RecipeActions: React.FC<RecipeActionsProps> = ({ 
+  recipeType = 'pizza',
+  recipeStyle = 'custom'
+}) => {
   const { toast } = useToast();
   const [saving, setSaving] = React.useState(false);
   const { t } = useTranslation();
@@ -58,6 +67,11 @@ const RecipeActions: React.FC = () => {
           <Save className="mr-2 h-4 w-4" />
           {saving ? t('recipe.saving', 'Saving...') : t('recipe.saveRecipe', 'Save Recipe')}
         </Button>
+        <ScreenshotButton 
+          recipeElementId="recipe-card" 
+          recipeType={recipeType}
+          recipeStyle={recipeStyle}
+        />
         <Button onClick={handleReset}>
           <RotateCcw className="mr-2 h-4 w-4" />
           {t('recipe.newRecipe', 'New Recipe')}
