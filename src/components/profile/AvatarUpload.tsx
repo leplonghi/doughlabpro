@@ -1,8 +1,6 @@
 
 import { useState, useRef } from 'react';
-import { useToast } from "@/components/ui/use-toast";
-import { useAuth } from '@/context/AuthContext';
-import { supabase } from '@/lib/supabase';
+import { useToast } from "@/hooks/use-toast";
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Loader2, Camera, User } from 'lucide-react';
@@ -15,52 +13,26 @@ interface AvatarUploadProps {
 }
 
 const AvatarUpload = ({ profile, onUploadComplete }: AvatarUploadProps) => {
-  const { user } = useAuth();
   const { toast } = useToast();
   const { t } = useTranslation();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
 
   const handleAvatarUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!event.target.files || event.target.files.length === 0 || !user) {
+    if (!event.target.files || event.target.files.length === 0) {
       return;
     }
 
     setUploading(true);
-    const file = event.target.files[0];
-    const fileExt = file.name.split('.').pop();
-    const filePath = `${user.id}/avatar.${fileExt}`;
-
     try {
-      const { error: uploadError } = await supabase.storage
-        .from('avatars')
-        .upload(filePath, file, { upsert: true });
-
-      if (uploadError) {
-        throw uploadError;
-      }
-
-      const { data: urlData } = supabase.storage
-        .from('avatars')
-        .getPublicUrl(filePath);
-
-      const { error: updateError } = await supabase
-        .from('profiles')
-        .update({ avatar_url: urlData.publicUrl })
-        .eq('id', user.id);
-
-      if (updateError) {
-        throw updateError;
-      }
-
+      // Just simulate upload since we're not using auth
+      await new Promise(resolve => setTimeout(resolve, 1000)); 
       toast({
-        title: t('profile.success'),
-        description: t('profile.avatarUpdated'),
+        title: t('profile.info'),
+        description: t('profile.authDisabled', 'Profile features are currently disabled'),
       });
-
       onUploadComplete();
     } catch (error) {
-      console.error('Error uploading avatar:', error);
       toast({
         title: t('profile.error'),
         description: t('profile.errorUploadingAvatar'),
@@ -111,4 +83,3 @@ const AvatarUpload = ({ profile, onUploadComplete }: AvatarUploadProps) => {
 };
 
 export default AvatarUpload;
-

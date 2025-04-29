@@ -3,9 +3,12 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Pizza } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 const Auth: React.FC = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -23,6 +26,15 @@ const Auth: React.FC = () => {
                 {t('auth.signInPrompt', 'All features are currently free to use!')}
               </CardDescription>
             </CardHeader>
+            <CardContent className="pb-8 pt-4 text-center">
+              <p className="mb-6">{t('auth.authDisabled', 'Authentication is currently disabled - all features are free!')}</p>
+              <Button 
+                onClick={() => navigate('/calculator')}
+                className="bg-black text-white hover:bg-gray-800"
+              >
+                {t('auth.startUsing', 'Start Using DoughLab Pro')}
+              </Button>
+            </CardContent>
           </Card>
         </div>
       </div>

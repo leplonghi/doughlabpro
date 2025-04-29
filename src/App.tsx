@@ -41,6 +41,7 @@ import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 const App = () => {
   return (
     <React.StrictMode>
+      {/* Important: ThemeProvider must wrap everything that uses the theme context */}
       <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
         <QueryClientProvider client={queryClient}>
           <I18nextProvider i18n={i18n}>
@@ -93,7 +94,7 @@ const App = () => {
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                   
-                  {/* Toast notifications */}
+                  {/* Toast notifications - must be inside ThemeProvider */}
                   <Toaster />
                   <SonnerToaster />
                 </AuthProvider>

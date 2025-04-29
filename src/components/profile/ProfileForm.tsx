@@ -12,7 +12,6 @@ interface ProfileFormProps {
 }
 
 const ProfileForm = ({ profile, onUsernameChange, onFullNameChange }: ProfileFormProps) => {
-  const { user } = useAuth();
   const { t } = useTranslation();
 
   return (
@@ -24,6 +23,7 @@ const ProfileForm = ({ profile, onUsernameChange, onFullNameChange }: ProfileFor
           placeholder={t('profile.enterUsername')}
           value={profile?.username || ''}
           onChange={(e) => onUsernameChange(e.target.value)}
+          disabled
         />
       </div>
       
@@ -34,6 +34,7 @@ const ProfileForm = ({ profile, onUsernameChange, onFullNameChange }: ProfileFor
           placeholder={t('profile.enterFullName')}
           value={profile?.full_name || ''}
           onChange={(e) => onFullNameChange(e.target.value)}
+          disabled
         />
       </div>
       
@@ -41,7 +42,7 @@ const ProfileForm = ({ profile, onUsernameChange, onFullNameChange }: ProfileFor
         <Label htmlFor="email">{t('profile.email')}</Label>
         <Input
           id="email"
-          value={user?.email || ''}
+          value="example@email.com" // Since auth is disabled
           disabled
           className="bg-muted"
         />
@@ -51,4 +52,3 @@ const ProfileForm = ({ profile, onUsernameChange, onFullNameChange }: ProfileFor
 };
 
 export default ProfileForm;
-

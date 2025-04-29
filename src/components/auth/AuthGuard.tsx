@@ -1,20 +1,12 @@
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import LoadingSpinner from '@/components/ui/loading-spinner';
 
 export function AuthGuard({ children }: { children: React.ReactNode }) {
-  const { user, loading } = useAuth();
+  const { loading } = useAuth();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    // Only redirect if not loading and no user is found
-    if (!loading && !user) {
-      console.log("No authenticated user, redirecting to auth page");
-      navigate('/auth');
-    }
-  }, [user, loading, navigate]);
 
   // Show loading spinner while checking authentication
   if (loading) {
@@ -25,10 +17,6 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
     );
   }
 
-  // Only render children if we have a user
-  if (!user) {
-    return null;
-  }
-
+  // Since auth is disabled, we always render children
   return <>{children}</>;
 }
