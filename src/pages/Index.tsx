@@ -43,7 +43,7 @@ const Index: React.FC = () => {
                   <Utensils size={24} />
                 </div>
                 <h3 className="text-xl font-medium mb-2">Multiple Dough Styles</h3>
-                <p className="text-muted-foreground">From Neapolitan pizza to focaccia, brioche and more — all styles, one formula engine.</p>
+                <p className="text-muted-foreground">From Neapolitan pizza to focaccia, brioche and more — many styles, one formula engine.</p>
               </div>
               
               <div className="bg-white p-6 rounded-lg shadow-sm py-[5px]">
