@@ -1,14 +1,12 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '@/context/AuthContext';
 import { Pizza, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useTranslation } from 'react-i18next';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 
 const Header: React.FC = () => {
-  const { user } = useAuth();
   const { t } = useTranslation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -78,77 +76,9 @@ const Header: React.FC = () => {
                   <nav className="flex flex-col space-y-4 mt-6">
                     <NavItems />
                   </nav>
-                  
-                  <div className="mt-auto pb-8">
-                    {!user ? (
-                      <div className="flex flex-col gap-3 mt-4">
-                        <Button 
-                          variant="outline" 
-                          onClick={() => {
-                            window.location.href = '/auth';
-                            setMobileMenuOpen(false);
-                          }} 
-                          className="w-full"
-                        >
-                          {t('common.signUp', 'Sign Up')}
-                        </Button>
-                        <Button 
-                          variant="default" 
-                          onClick={() => {
-                            window.location.href = '/auth';
-                            setMobileMenuOpen(false);
-                          }} 
-                          className="w-full bg-black text-white hover:bg-black/80"
-                        >
-                          {t('common.login', 'Login')}
-                        </Button>
-                      </div>
-                    ) : (
-                      <Button 
-                        variant="default" 
-                        onClick={() => {
-                          window.location.href = '/profile';
-                          setMobileMenuOpen(false);
-                        }} 
-                        className="w-full mt-4 bg-black text-white hover:bg-black/80"
-                      >
-                        {t('common.profile', 'Profile')}
-                      </Button>
-                    )}
-                  </div>
                 </div>
               </SheetContent>
             </Sheet>
-
-            {/* Desktop actions */}
-            <div className="hidden md:flex items-center gap-4">
-              {!user ? (
-                <div className="flex items-center gap-2">
-                  <Button 
-                    variant="ghost" 
-                    onClick={() => window.location.href = '/auth'} 
-                    className="text-sm font-medium"
-                  >
-                    {t('common.signUp', 'Sign Up')}
-                  </Button>
-                  <Button 
-                    variant="default" 
-                    onClick={() => window.location.href = '/auth'} 
-                    className="bg-black text-white hover:bg-black/80"
-                  >
-                    {t('common.login', 'Login')}
-                  </Button>
-                </div>
-              ) : (
-                <Button 
-                  variant="default" 
-                  onClick={() => window.location.href = '/profile'} 
-                  className="bg-black text-white hover:bg-black/80"
-                >
-                  {t('common.profile', 'Profile')}
-                </Button>
-              )}
-            </div>
           </div>
         </div>
       </div>

@@ -9,12 +9,6 @@ import FermentationTips from './recipe/FermentationTips';
 import RecipeActions from './recipe/RecipeActions';
 import AdBanner from './monetization/AdBanner';
 
-// Check if user is a pro subscriber
-const isPro = () => {
-  // This would be replaced with actual authentication check
-  return localStorage.getItem('subscription_tier') === 'pro';
-};
-
 type FermentationMethod = 'direct' | 'poolish' | 'biga';
 
 interface DoughRecipe {
@@ -156,8 +150,8 @@ const DoughResults: React.FC<DoughResultsProps> = ({
         </div>
       </CardContent>
 
-      {/* Show ad banner for free users */}
-      {!isPro() && <AdBanner />}
+      {/* Show ad banner */}
+      <AdBanner />
     </Card>
   );
 };

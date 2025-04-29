@@ -9,7 +9,6 @@ import i18n from './i18n/i18n';
 
 import { TooltipProvider } from "@/components/ui/tooltip";
 import AuthProvider from "./components/AuthProvider";
-import { AuthGuard } from "./components/auth/AuthGuard";
 import LoadingSpinner from "./components/ui/loading-spinner";
 import NotFound from "./pages/NotFound";
 import Index from "./pages/Index";
@@ -77,25 +76,19 @@ const App = () => {
                       </Suspense>
                     } />
                     <Route path="/sauce" element={
-                      <AuthGuard>
-                        <Suspense fallback={<LoadingSpinner />}>
-                          <Sauce />
-                        </Suspense>
-                      </AuthGuard>
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <Sauce />
+                      </Suspense>
                     } />
                     <Route path="/toppings" element={
-                      <AuthGuard>
-                        <Suspense fallback={<LoadingSpinner />}>
-                          <Toppings />
-                        </Suspense>
-                      </AuthGuard>
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <Toppings />
+                      </Suspense>
                     } />
                     <Route path="/profile" element={
-                      <AuthGuard>
-                        <Suspense fallback={<LoadingSpinner />}>
-                          <Profile />
-                        </Suspense>
-                      </AuthGuard>
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <Profile />
+                      </Suspense>
                     } />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
