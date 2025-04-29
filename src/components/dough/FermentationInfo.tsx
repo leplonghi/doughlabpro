@@ -28,7 +28,7 @@ const FermentationInfo: React.FC<FermentationInfoProps> = ({ fermentationMethod 
           </div>
           <div>
             <p className="text-sm text-gray-600">Hydration:</p>
-            <p className="font-medium">{fermentationMethod === 'poolish' ? '100%' : '60%'}</p>
+            <p className="font-medium">{fermentationMethod === 'poolish' ? '100%' : '40%'}</p>
           </div>
           <div>
             <p className="text-sm text-gray-600">Yeast Amount:</p>
@@ -36,7 +36,7 @@ const FermentationInfo: React.FC<FermentationInfoProps> = ({ fermentationMethod 
           </div>
           <div>
             <p className="text-sm text-gray-600">Fermentation Time:</p>
-            <p className="font-medium">{fermentationMethod === 'poolish' ? '12-16' : '16-24'} hours at 18-21°C</p>
+            <p className="font-medium">{fermentationMethod === 'poolish' ? '12-24' : '12-24'} hours at 18-21°C</p>
           </div>
         </div>
       </div>
