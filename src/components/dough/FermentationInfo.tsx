@@ -36,7 +36,7 @@ const FermentationInfo: React.FC<FermentationInfoProps> = ({ fermentationMethod 
           </div>
           <div>
             <p className="text-sm text-gray-600">Fermentation Time:</p>
-            <p className="font-medium">{fermentationMethod === 'poolish' ? '12-24' : '12-24'} hours at 18-21°C</p>
+            <p className="font-medium">{fermentationMethod === 'poolish' ? '12-24' : '12-24'} hours in the fridge</p>
           </div>
         </div>
       </div>
