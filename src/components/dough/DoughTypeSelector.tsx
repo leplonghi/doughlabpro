@@ -46,7 +46,7 @@ const DoughTypeSelector: React.FC<DoughTypeSelectorProps> = ({
       <div className="grid grid-cols-2 gap-3">
         <Button 
           variant={doughType === 'pizza' ? 'default' : 'outline'} 
-          className="h-12 justify-center" 
+          className={`h-12 justify-center ${doughType === 'pizza' ? '' : 'bg-white hover:bg-gray-50'}`}
           onClick={() => {
             setDoughType('pizza');
             onProceed();
@@ -57,7 +57,7 @@ const DoughTypeSelector: React.FC<DoughTypeSelectorProps> = ({
         </Button>
         <Button 
           variant={doughType === 'bread' ? 'default' : 'outline'} 
-          className="h-12 justify-center" 
+          className={`h-12 justify-center ${doughType === 'bread' ? '' : 'bg-white hover:bg-gray-50'}`}
           onClick={() => {
             setDoughType('bread');
             onProceed();

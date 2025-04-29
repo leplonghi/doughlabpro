@@ -19,7 +19,7 @@ const BreadStyleSelector: React.FC<BreadStyleSelectorProps> = ({
     <div className="grid grid-cols-3 gap-3">
       <Button 
         variant={breadStyle === 'baguette' ? 'default' : 'outline'} 
-        className="h-12 justify-center" 
+        className={`h-12 justify-center ${breadStyle === 'baguette' ? '' : 'bg-white hover:bg-gray-50'}`}
         onClick={() => {
           setBreadStyle('baguette');
           onProceed();
@@ -29,7 +29,7 @@ const BreadStyleSelector: React.FC<BreadStyleSelectorProps> = ({
       </Button>
       <Button 
         variant={breadStyle === 'brioche' ? 'default' : 'outline'} 
-        className="h-12 justify-center" 
+        className={`h-12 justify-center ${breadStyle === 'brioche' ? '' : 'bg-white hover:bg-gray-50'}`}
         onClick={() => {
           setBreadStyle('brioche');
           onProceed();
@@ -39,7 +39,7 @@ const BreadStyleSelector: React.FC<BreadStyleSelectorProps> = ({
       </Button>
       <Button 
         variant={breadStyle === 'focaccia' ? 'default' : 'outline'} 
-        className="h-12 justify-center" 
+        className={`h-12 justify-center ${breadStyle === 'focaccia' ? '' : 'bg-white hover:bg-gray-50'}`}
         onClick={() => {
           setBreadStyle('focaccia');
           onProceed();

@@ -18,7 +18,7 @@ const PizzaStyleSelector: React.FC<PizzaStyleSelectorProps> = ({
     <div className="grid grid-cols-2 gap-3">
       <Button 
         variant={pizzaStyle === 'napoletana' ? 'default' : 'outline'} 
-        className="h-12 justify-center" 
+        className={`h-12 justify-center ${pizzaStyle === 'napoletana' ? '' : 'bg-white hover:bg-gray-50'}`}
         onClick={() => {
           setPizzaStyle('napoletana');
           onProceed();
@@ -28,7 +28,7 @@ const PizzaStyleSelector: React.FC<PizzaStyleSelectorProps> = ({
       </Button>
       <Button 
         variant={pizzaStyle === 'newyork' ? 'default' : 'outline'} 
-        className="h-12 justify-center" 
+        className={`h-12 justify-center ${pizzaStyle === 'newyork' ? '' : 'bg-white hover:bg-gray-50'}`}
         onClick={() => {
           setPizzaStyle('newyork');
           onProceed();

@@ -21,7 +21,7 @@ const CalculatorActions: React.FC<CalculatorActionsProps> = ({ onCalculate, onRe
       </Button>
       <Button 
         variant="outline" 
-        className="flex-1 h-12 font-medium"
+        className="flex-1 h-12 font-medium bg-white hover:bg-gray-50"
         onClick={onReset}
       >
         <RotateCcw className="mr-2 h-5 w-5" />

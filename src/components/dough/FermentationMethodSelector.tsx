@@ -20,7 +20,7 @@ const FermentationMethodSelector: React.FC<FermentationMethodSelectorProps> = ({
       <div className="grid grid-cols-3 gap-3">
         <Button 
           variant={fermentationMethod === 'direct' ? 'default' : 'outline'} 
-          className="h-12 justify-center" 
+          className={`h-12 justify-center ${fermentationMethod === 'direct' ? '' : 'bg-white hover:bg-gray-50'}`}
           onClick={() => {
             setFermentationMethod('direct');
             onProceed();
@@ -30,7 +30,7 @@ const FermentationMethodSelector: React.FC<FermentationMethodSelectorProps> = ({
         </Button>
         <Button 
           variant={fermentationMethod === 'poolish' ? 'default' : 'outline'} 
-          className="h-12 justify-center" 
+          className={`h-12 justify-center ${fermentationMethod === 'poolish' ? '' : 'bg-white hover:bg-gray-50'}`}
           onClick={() => {
             setFermentationMethod('poolish');
             onProceed();
@@ -40,7 +40,7 @@ const FermentationMethodSelector: React.FC<FermentationMethodSelectorProps> = ({
         </Button>
         <Button 
           variant={fermentationMethod === 'biga' ? 'default' : 'outline'} 
-          className="h-12 justify-center" 
+          className={`h-12 justify-center ${fermentationMethod === 'biga' ? '' : 'bg-white hover:bg-gray-50'}`}
           onClick={() => {
             setFermentationMethod('biga');
             onProceed();
