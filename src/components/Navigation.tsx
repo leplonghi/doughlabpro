@@ -1,7 +1,7 @@
 
 import * as React from 'react';
 import { ShoppingCart, Lightbulb, Utensils, Menu as MenuIcon } from 'lucide-react';
-import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from '@/components/ui/navigation-menu';
+import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from '@/components/ui/navigation-menu';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { cn } from '@/lib/utils';
@@ -26,40 +26,40 @@ const Navigation: React.FC = () => {
         </Link>
       </NavigationMenuItem>
       <NavigationMenuItem>
-        <NavigationMenuLink
+        <Link 
+          to="/shop"
           className={cn(
             "group inline-flex h-10 w-full md:w-max items-center justify-start md:justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50",
             isMobile ? "gap-3" : "gap-2"
           )}
-          href="/shop"
         >
           <ShoppingCart className={cn("h-5 w-5", isMobile ? "mr-2" : "")} />
           <span className={isMobile ? "flex-1" : ""}>{t('common.menu.shop')}</span>
-        </NavigationMenuLink>
+        </Link>
       </NavigationMenuItem>
       <NavigationMenuItem>
-        <NavigationMenuLink
+        <Link 
+          to="/toppings"
           className={cn(
             "group inline-flex h-10 w-full md:w-max items-center justify-start md:justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50",
             isMobile ? "gap-3" : "gap-2"
           )}
-          href="/toppings"
         >
           <Utensils className={cn("h-5 w-5", isMobile ? "mr-2" : "")} />
           <span className={isMobile ? "flex-1" : ""}>{t('common.menu.toppings')}</span>
-        </NavigationMenuLink>
+        </Link>
       </NavigationMenuItem>
       <NavigationMenuItem>
-        <NavigationMenuLink
+        <Link 
+          to="/tips"
           className={cn(
             "group inline-flex h-10 w-full md:w-max items-center justify-start md:justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50",
             isMobile ? "gap-3" : "gap-2"
           )}
-          href="/tips"
         >
           <Lightbulb className={cn("h-5 w-5", isMobile ? "mr-2" : "")} />
           <span className={isMobile ? "flex-1" : ""}>{t('common.menu.tips')}</span>
-        </NavigationMenuLink>
+        </Link>
       </NavigationMenuItem>
     </NavigationMenuList>
   );
