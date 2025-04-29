@@ -20,7 +20,7 @@ const Toppings: React.FC = () => {
               <Lock className="h-12 w-12 text-amber-500 mb-4" />
               <h2 className="text-xl font-semibold mb-2">PRO Feature</h2>
               <p className="text-gray-600 mb-4">
-                Access to our curated toppings guide and combination recommendations is available for PRO users only.
+                Explore our complete guide to toppings, fillings, and layering — curated for every dough style, from pizzas to focaccias, brioches and more.
               </p>
               <Button className="bg-black text-white font-medium rounded hover:bg-black/80">
                 Upgrade to PRO
@@ -33,10 +33,10 @@ const Toppings: React.FC = () => {
           </p>
           
           <ul className="list-disc pl-6 mt-4 space-y-2 text-gray-700">
-            <li>Classic topping combinations for different pizza styles</li>
-            <li>Seasonal ingredient recommendations</li>
-            <li>Proper layering techniques for optimal cooking</li>
-            <li>Regional Italian topping traditions</li>
+            <li>✅ Classic and modern combinations by dough type</li>
+            <li>🌿 Seasonal and regional ingredient suggestions</li>
+            <li>🔥 Layering and stuffing techniques for best bake results</li>
+            <li>🇮🇹 Culinary traditions for pizza, focaccia, and enriched breads</li>
           </ul>
         </div>
       </main>
