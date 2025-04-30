@@ -1,4 +1,3 @@
-
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
@@ -32,7 +31,8 @@ const resources = {
         continueWith: 'Continue with',
         continueAsGuest: 'Continue as Guest',
         signInSuccess: 'Successfully signed in',
-        redirecting: 'Redirecting you to homepage'
+        redirecting: 'Redirecting you to homepage',
+        signInWithGoogle: 'Sign in'
       },
       common: {
         pleaseWait: 'Please wait...',
