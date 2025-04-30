@@ -49,11 +49,19 @@ type ToastContextType = {
 
 const ToastContext = React.createContext<ToastContextType | undefined>(undefined);
 
-// Create a separate ToastDispatchContext
-const ToastDispatchContext = React.createContext<React.Dispatch<ToastActionType> | undefined>(undefined);
+// Create a standalone toast function using a mutable reference to the dispatch
+let toastDispatch: React.Dispatch<ToastActionType> | undefined;
 
 export function ToastProvider({ children }: { children: React.ReactNode }) {
   const [toasts, dispatch] = React.useReducer(toastReducer, []);
+
+  // Store dispatch function in module scope for standalone toast function
+  React.useEffect(() => {
+    toastDispatch = dispatch;
+    return () => {
+      toastDispatch = undefined;
+    };
+  }, [dispatch]);
 
   const addToast = React.useCallback((toast: ToasterToast) => {
     dispatch({ type: "ADD_TOAST", toast });
@@ -74,9 +82,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <ToastContext.Provider value={contextValue}>
-      <ToastDispatchContext.Provider value={dispatch}>
-        {children}
-      </ToastDispatchContext.Provider>
+      {children}
     </ToastContext.Provider>
   );
 }
@@ -107,19 +113,18 @@ export function useToast() {
   };
 }
 
-// Standalone toast function
+// Standalone toast function that doesn't rely on React hooks
 export const toast = ({ title, description, variant = "default", action }: Omit<ToasterToast, "id">) => {
   const id = Math.random().toString(36).substring(2, 9);
   
-  // Use a safely queued method to add toast
-  setTimeout(() => {
-    const dispatch = React.useContext(ToastDispatchContext);
-    if (dispatch) {
-      dispatch({ type: "ADD_TOAST", toast: { id, title, description, variant, action } });
-    } else {
-      console.warn("Toast was called outside of ToastProvider context");
-    }
-  }, 0);
+  if (toastDispatch) {
+    toastDispatch({ 
+      type: "ADD_TOAST", 
+      toast: { id, title, description, variant, action } 
+    });
+  } else {
+    console.warn("Toast was called outside of ToastProvider context");
+  }
   
   return id;
 };
