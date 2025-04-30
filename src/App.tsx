@@ -18,7 +18,6 @@ const Privacy = lazy(() => import("./pages/Privacy"));
 const Terms = lazy(() => import("./pages/Terms"));
 const Contact = lazy(() => import("./pages/Contact"));
 const DoughCalculator = lazy(() => import("./components/DoughCalculator"));
-const Profile = lazy(() => import("./pages/Profile"));
 
 // Create query client with optimized settings
 const queryClient = new QueryClient({
@@ -35,12 +34,12 @@ const queryClient = new QueryClient({
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 
-const App: React.FC = () => {
+const App = () => {
   return (
     <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
       <QueryClientProvider client={queryClient}>
-        <AuthProvider>
-          <TooltipProvider>
+        <TooltipProvider>
+          <AuthProvider>
             <Routes>
               <Route path="/" element={<Navigate to="/home" replace />} />
               <Route path="/home" element={<Index />} />
@@ -74,19 +73,14 @@ const App: React.FC = () => {
                   <Toppings />
                 </Suspense>
               } />
-              <Route path="/profile" element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <Profile />
-                </Suspense>
-              } />
               <Route path="*" element={<NotFound />} />
             </Routes>
             
             {/* Toast notifications - must be inside ThemeProvider */}
             <Toaster />
             <SonnerToaster />
-          </TooltipProvider>
-        </AuthProvider>
+          </AuthProvider>
+        </TooltipProvider>
       </QueryClientProvider>
     </ThemeProvider>
   );

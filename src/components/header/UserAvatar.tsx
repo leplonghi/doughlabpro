@@ -1,5 +1,5 @@
 
-import * as React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { User } from 'lucide-react';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';

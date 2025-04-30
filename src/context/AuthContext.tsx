@@ -1,47 +1,51 @@
 
 import * as React from 'react';
+import { toast } from '@/components/ui/sonner';
+import { useTranslation } from 'react-i18next';
 
-// Define simplified auth state type
-interface AuthState {
-  isAuthenticated: boolean;
-  user: null;
-}
-
-// Define simplified auth context type
-interface AuthContextType {
-  authState: AuthState;
-  isLoading: boolean;
-}
-
-// Create context with default values
-const defaultAuthContext: AuthContextType = {
-  authState: {
-    isAuthenticated: false,
-    user: null,
-  },
-  isLoading: false,
+// Define the AuthContext type with needed properties
+type AuthContextType = {
+  user: null;  // Set to null since we're not using auth
+  loading: boolean;
+  signInWithGoogle: () => Promise<{error: null}>;
 };
 
-// Create the context
-const AuthContext = React.createContext<AuthContextType>(defaultAuthContext);
+// Create the auth context with default values
+const AuthContext = React.createContext<AuthContextType>({
+  user: null,
+  loading: false,
+  signInWithGoogle: async () => ({error: null}),
+});
 
-// Custom hook for using auth context
-export const useAuth = () => React.useContext(AuthContext);
+// Hook to use the auth context
+export const useAuth = () => {
+  const context = React.useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};
 
-// Auth provider component - simplified
+// Provider component to wrap the app with auth context
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // We maintain the basic structure but remove actual auth functionality
-  const [authState] = React.useState<AuthState>({
-    isAuthenticated: false,
-    user: null,
-  });
-  
-  const [isLoading] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
+  const { t } = useTranslation();
 
-  // Simply provide the basic context values
-  return (
-    <AuthContext.Provider value={{ authState, isLoading }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  // Mock implementation of signInWithGoogle since auth is disabled
+  const signInWithGoogle = async () => {
+    setLoading(true);
+    // Wait a bit to simulate network request
+    await new Promise(resolve => setTimeout(resolve, 500));
+    toast.info(t('auth.authDisabled', 'All features are free - no login needed'));
+    setLoading(false);
+    return { error: null };
+  };
+
+  const value = {
+    user: null, // Always null since we're not using auth
+    loading,
+    signInWithGoogle,
+  };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
