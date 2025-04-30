@@ -11,6 +11,9 @@ import LoadingSpinner from "./components/ui/loading-spinner";
 import NotFound from "./pages/NotFound";
 import Index from "./pages/Index";
 
+// Import toast component
+import { Toaster } from "@/components/ui/toaster";
+
 // Lazy-loaded components
 const Sauce = lazy(() => import("./pages/Sauce"));
 const Toppings = lazy(() => import("./pages/Toppings"));
@@ -32,10 +35,6 @@ const queryClient = new QueryClient({
     },
   },
 });
-
-// Import toast components
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 
 const App = () => {
   return (
@@ -94,9 +93,8 @@ const App = () => {
               <Route path="*" element={<NotFound />} />
             </Routes>
             
-            {/* Toast notifications */}
+            {/* Only include a single toast notification system */}
             <Toaster />
-            <SonnerToaster />
           </AuthProvider>
         </TooltipProvider>
       </QueryClientProvider>

@@ -5,6 +5,14 @@ import { Toaster as Sonner } from "sonner"
 type ToasterProps = React.ComponentProps<typeof Sonner>
 
 const Toaster = ({ ...props }: ToasterProps) => {
+  // Use useState hook only inside a component context
+  const [, setMounted] = React.useState(false);
+  
+  // Use useEffect to set mounted state
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // Set a default theme instead of using the theme provider
   const theme = "light";
 
