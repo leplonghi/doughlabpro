@@ -23,12 +23,16 @@ const resources = {
         }
       },
       auth: {
-        signIn: 'Sign In',
+        signIn: 'Welcome Back',
         signInToAccess: 'Sign in to access all features',
         continueWithGoogle: 'Continue with Google',
         signInFailed: 'Sign in failed',
         unexpectedError: 'An unexpected error occurred',
-        unlockProFeatures: 'Sign in to unlock pro features'
+        unlockProFeatures: 'Sign in to unlock pro features',
+        continueWith: 'Continue with',
+        continueAsGuest: 'Continue as Guest',
+        signInSuccess: 'Successfully signed in',
+        redirecting: 'Redirecting you to homepage'
       },
       common: {
         pleaseWait: 'Please wait...',

@@ -26,10 +26,10 @@ const Auth: React.FC = () => {
       <Header />
       
       <div className="flex-grow flex items-center justify-center py-10 px-4 bg-gradient-to-br from-white to-pizza-cream/30">
-        <Card className="w-full max-w-md shadow-lg">
+        <Card className="w-full max-w-md shadow-lg transform transition-all duration-300 hover:shadow-xl">
           <CardHeader className="space-y-1 text-center">
-            <CardTitle className="text-2xl">{t('auth.signIn')}</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-2xl font-bold text-gray-800">{t('auth.signIn')}</CardTitle>
+            <CardDescription className="text-gray-600">
               {t('auth.signInToAccess')}
             </CardDescription>
           </CardHeader>
