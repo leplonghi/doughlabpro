@@ -56,6 +56,9 @@ const Header: React.FC = () => {
     navigate('/home');
   };
 
+  // Get the user's name
+  const userName = user?.user_metadata?.full_name || user?.email || 'User';
+
   return (
     <header className="w-full border-b border-border bg-background sticky top-0 z-50">
       <div className="container mx-auto px-4">
@@ -77,37 +80,44 @@ const Header: React.FC = () => {
           <div className="flex items-center gap-4">
             {/* Auth Actions */}
             {user ? (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Avatar className="h-8 w-8 cursor-pointer">
-                    {user.user_metadata.avatar_url ? (
-                      <AvatarImage src={user.user_metadata.avatar_url} alt={user.user_metadata.full_name || 'User'} />
-                    ) : (
-                      <AvatarFallback className="bg-black text-white">
-                        {user.user_metadata.full_name ? 
-                          `${user.user_metadata.full_name.charAt(0)}` : 
-                          'U'
-                        }
-                      </AvatarFallback>
-                    )}
-                  </Avatar>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem onClick={() => navigate('/profile')}>
-                    {t('profile.title', 'Profile')}
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => navigate('/calculator')}>
-                    Dough Calculator
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem 
-                    onClick={handleSignOut}
-                    className="text-red-600 focus:text-red-600"
-                  >
-                    {t('auth.signOut', 'Sign out')}
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <div className="flex items-center gap-2">
+                {/* Show user name */}
+                <span className="hidden md:inline text-sm font-medium">
+                  {userName}
+                </span>
+                
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Avatar className="h-8 w-8 cursor-pointer">
+                      {user.user_metadata.avatar_url ? (
+                        <AvatarImage src={user.user_metadata.avatar_url} alt={userName} />
+                      ) : (
+                        <AvatarFallback className="bg-black text-white">
+                          {user.user_metadata.full_name ? 
+                            `${user.user_metadata.full_name.charAt(0)}` : 
+                            'U'
+                          }
+                        </AvatarFallback>
+                      )}
+                    </Avatar>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem onClick={() => navigate('/profile')}>
+                      {t('profile.title', 'Profile')}
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => navigate('/calculator')}>
+                      Dough Calculator
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem 
+                      onClick={handleSignOut}
+                      className="text-red-600 focus:text-red-600"
+                    >
+                      {t('auth.signOut', 'Sign out')}
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
             ) : (
               <Button 
                 variant="ghost" 

@@ -40,7 +40,7 @@ const Auth: React.FC = () => {
           <CardHeader className="space-y-2 text-center relative z-10 pb-6">
             <CardTitle className="text-3xl font-bold text-gray-800">{t('auth.signIn')}</CardTitle>
             <CardDescription className="text-gray-600 text-lg">
-              {t('auth.signInToAccess')}
+              Sign in to access all features
             </CardDescription>
           </CardHeader>
           

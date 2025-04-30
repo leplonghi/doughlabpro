@@ -67,18 +67,6 @@ export function AuthForm({ returnUrl = '/home' }: AuthFormProps) {
           </>
         )}
       </Button>
-      
-      <div className="pt-4 text-center">
-        <Button 
-          variant="link" 
-          className="text-sm text-gray-500 hover:text-black transition-colors"
-          onClick={() => navigate('/home')}
-          disabled={isLoading}
-        >
-          <LogIn className="mr-2 h-4 w-4" />
-          {t('auth.continueAsGuest')}
-        </Button>
-      </div>
     </div>
   );
 }
