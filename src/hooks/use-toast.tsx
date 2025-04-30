@@ -1,43 +1,43 @@
 
-import * as React from "react"
+import * as React from "react";
 
 // Define toast types
 export type ToastProps = {
-  id: string
-  title?: React.ReactNode
-  description?: React.ReactNode
-  action?: React.ReactNode
-  variant?: "default" | "destructive" | "success"
-}
+  id: string;
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  action?: React.ReactNode;
+  variant?: "default" | "destructive" | "success";
+};
 
-const TOAST_LIMIT = 5
-const TOAST_REMOVE_DELAY = 1000000
+const TOAST_LIMIT = 5;
+const TOAST_REMOVE_DELAY = 1000000;
 
 type ToasterToast = ToastProps & {
-  id: string
-  title?: React.ReactNode
-  description?: React.ReactNode
-  action?: React.ReactNode
-  dismissible?: boolean
-}
+  id: string;
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  action?: React.ReactNode;
+  dismissible?: boolean;
+};
 
 // Create context for toast state
 const ToastContext = React.createContext<{
-  toasts: ToasterToast[]
-  addToast: (toast: ToasterToast) => void
-  removeToast: (id: string) => void
-  removeAll: () => void
+  toasts: ToasterToast[];
+  addToast: (toast: ToasterToast) => void;
+  removeToast: (id: string) => void;
+  removeAll: () => void;
 }>({
   toasts: [],
   addToast: () => {},
   removeToast: () => {},
   removeAll: () => {},
-})
+});
 
 export const ToastProvider = ({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) => {
   const [toasts, setToasts] = React.useState<ToasterToast[]>([]);
 
@@ -89,6 +89,12 @@ export const useToast = () => {
     toasts,
     removeAll,
   };
+};
+
+// Export standalone toast function for easier usage
+export const toast = (props: Omit<ToasterToast, "id">) => {
+  const { toast: toastFn } = useToast();
+  return toastFn(props);
 };
 
 export { ToastContext };

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Save, Printer, RotateCcw, Lock } from 'lucide-react';
-import { toast } from "@/hooks/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import ProButton from '@/components/usage/ProButton';
 
 interface RecipeActionsProps {
@@ -15,6 +15,8 @@ const RecipeActions: React.FC<RecipeActionsProps> = ({
   recipeType = 'pizza',
   recipeStyle = 'custom'
 }) => {
+  const { toast } = useToast();
+  
   const handleProFeatureClick = () => {
     toast({
       title: "PRO Feature",
