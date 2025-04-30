@@ -44,7 +44,7 @@ const App = () => {
         <TooltipProvider>
           <AuthProvider>
             <Routes>
-              <Route path="/" element={<Navigate to="/home" replace />} />
+              <Route path="/" element={<Navigate to="/auth" replace />} />
               <Route path="/home" element={<Index />} />
               <Route path="/auth" element={
                 <Suspense fallback={<LoadingSpinner />}>
