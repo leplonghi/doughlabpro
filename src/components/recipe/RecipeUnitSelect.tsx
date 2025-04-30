@@ -33,7 +33,7 @@ const RecipeUnitSelect: React.FC<RecipeUnitSelectProps> = ({ activeUnit, onUnitC
         className={`${activeUnit !== 'cups' ? 'bg-white' : ''}`}
         onClick={() => onUnitChange('cups')}
       >
-        Cups/Spoons
+        Cups/Tbsp/Tsp
       </Button>
     </div>
   );
