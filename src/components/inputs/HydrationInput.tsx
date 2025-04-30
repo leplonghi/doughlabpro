@@ -33,7 +33,7 @@ const HydrationInput: React.FC<HydrationInputProps> = ({
           <TooltipTrigger asChild>
             <span className="cursor-help"><InfoCircledIcon className="h-4 w-4 text-muted-foreground" /></span>
           </TooltipTrigger>
-          <TooltipContent className="max-w-xs">
+          <TooltipContent>
             <p>{t('calculator.ingredients.hydrationDescription')}</p>
           </TooltipContent>
         </Tooltip>
