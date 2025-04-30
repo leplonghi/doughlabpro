@@ -22,7 +22,7 @@ type ToasterToast = ToastProps & {
 };
 
 // Create context for toast state
-const ToastContext = React.createContext<{
+export const ToastContext = React.createContext<{
   toasts: ToasterToast[];
   addToast: (toast: ToasterToast) => void;
   removeToast: (id: string) => void;
@@ -93,7 +93,7 @@ export const useToast = () => {
 
 // Create toast instance for global usage
 // We need to use a dynamic approach since hooks can only be used within components
-let toastFn: (props: Omit<ToasterToast, "id">) => string;
+let toastFn: ((props: Omit<ToasterToast, "id">) => string) | null = null;
 
 // Helper function to set the toast function when the context is available
 export const setToastFunction = (fn: (props: Omit<ToasterToast, "id">) => string) => {
@@ -108,5 +108,3 @@ export const toast = (props: Omit<ToasterToast, "id">) => {
   }
   return toastFn(props);
 };
-
-export { ToastContext };

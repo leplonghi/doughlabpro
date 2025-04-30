@@ -15,7 +15,9 @@ export function Toaster() {
   
   // Set up the global toast function on first render
   React.useEffect(() => {
-    setToastFunction(toast);
+    if (toast) {
+      setToastFunction(toast);
+    }
   }, [toast]);
 
   return (
