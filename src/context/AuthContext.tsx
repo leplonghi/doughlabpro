@@ -1,6 +1,6 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { toast } from '@/hooks/use-toast';
+import { toast } from '@/components/ui/sonner';  // Updated import path
 import { useTranslation } from 'react-i18next';
 import { supabase } from '@/lib/supabase';
 import { Session, User } from '@supabase/supabase-js';
@@ -27,7 +27,7 @@ const AuthContext = createContext<AuthContextType>({
 
 // Hook to use the auth context
 export const useAuth = () => {
-  const context = React.useContext(AuthContext);
+  const context = useContext(AuthContext);
   if (!context) {
     throw new Error('useAuth must be used within an AuthProvider');
   }
@@ -97,7 +97,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       toast({
         title: t('auth.signInFailed'),
         description: error.message || t('auth.unexpectedError'),
-        variant: 'destructive',
       });
       setLoading(false);
       return { error };
@@ -116,7 +115,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       toast({
         title: t('auth.signOutFailed'),
         description: error.message || t('auth.unexpectedError'),
-        variant: 'destructive',
       });
       setLoading(false);
       return { error };

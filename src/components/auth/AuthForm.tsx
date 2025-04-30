@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
-import { toast } from '@/hooks/use-toast';
+import { toast } from '@/components/ui/sonner'; // Updated import
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { LogIn, Loader2 } from 'lucide-react';
@@ -27,7 +27,6 @@ export function AuthForm() {
       toast({
         title: t('auth.signInSuccess'),
         description: t('auth.redirecting'),
-        variant: 'default',
       });
       
       // Navigate is here as a fallback, but the auth state change should handle it
@@ -38,7 +37,6 @@ export function AuthForm() {
       toast({
         title: t('auth.signInFailed'),
         description: error.message || t('auth.unexpectedError'),
-        variant: 'destructive',
       });
     } finally {
       setIsLoading(false);

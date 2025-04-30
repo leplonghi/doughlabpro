@@ -5,9 +5,6 @@ import { Toaster as Sonner } from "sonner"
 type ToasterProps = React.ComponentProps<typeof Sonner>
 
 const Toaster = ({ ...props }: ToasterProps) => {
-  // No need for client-side only rendering check that uses useState
-  // This was causing the error with null React context
-  
   return (
     <Sonner
       theme="light"
