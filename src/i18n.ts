@@ -23,7 +23,7 @@ const resources = {
         }
       },
       auth: {
-        signIn: 'Welcome Back',
+        signIn: 'Sign In',
         signInToAccess: 'Sign in to access all features',
         continueWithGoogle: 'Continue with Google',
         signInFailed: 'Sign in failed',

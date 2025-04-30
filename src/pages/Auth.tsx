@@ -38,7 +38,7 @@ const Auth: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-br from-pizza-cream/5 to-pizza-cream/20 z-0"></div>
           
           <CardHeader className="space-y-2 text-center relative z-10 pb-6">
-            <CardTitle className="text-3xl font-bold text-gray-800">{t('auth.signIn')}</CardTitle>
+            <CardTitle className="text-3xl font-bold text-gray-800">Sign In</CardTitle>
             <CardDescription className="text-gray-600 text-lg">
               Sign in to access all features
             </CardDescription>
