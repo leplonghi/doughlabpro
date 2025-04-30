@@ -1,5 +1,5 @@
 
-import React from 'react';
+import * as React from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
@@ -22,12 +22,12 @@ const ProfilePage = () => {
           <CardHeader>
             <CardTitle>{t('profile.personalInfo', 'Personal Information')}</CardTitle>
             <CardDescription>
-              {t('profile.personalInfoDescription', 'Authentication is currently disabled. All features are free to use!')}
+              {t('profile.personalInfoDescription', 'Authentication is disabled. All features are free to use!')}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <p className="text-center text-muted-foreground mb-6">
-              {t('profile.authDisabled', 'User profiles are currently disabled as all features are free to use.')}
+              {t('profile.authDisabled', 'User profiles are disabled as all features are free to use.')}
             </p>
             <div className="flex justify-center">
               <Button onClick={() => navigate('/calculator')}>

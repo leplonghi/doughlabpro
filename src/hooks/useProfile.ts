@@ -56,7 +56,7 @@ export const useProfile = () => {
       
       toast({
         title: t('profile.info'),
-        description: t('profile.authDisabled', 'Profile updates are currently disabled'),
+        description: t('profile.authDisabled', 'Profile updates are disabled'),
       });
     } catch (error: any) {
       console.error('Error updating profile:', error);

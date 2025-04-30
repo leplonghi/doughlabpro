@@ -1,23 +1,15 @@
 
 import * as React from 'react';
-import { createContext, useContext } from 'react';
 
-// Define auth state types
+// Define simplified auth state type
 interface AuthState {
   isAuthenticated: boolean;
-  user: null | {
-    id: string;
-    email: string;
-    name?: string;
-  };
+  user: null;
 }
 
-// Define auth context type
+// Define simplified auth context type
 interface AuthContextType {
   authState: AuthState;
-  login: (email: string, password: string) => Promise<void>;
-  logout: () => Promise<void>;
-  register: (email: string, password: string, name?: string) => Promise<void>;
   isLoading: boolean;
 }
 
@@ -27,93 +19,28 @@ const defaultAuthContext: AuthContextType = {
     isAuthenticated: false,
     user: null,
   },
-  login: async () => {},
-  logout: async () => {},
-  register: async () => {},
   isLoading: false,
 };
 
 // Create the context
-const AuthContext = createContext<AuthContextType>(defaultAuthContext);
+const AuthContext = React.createContext<AuthContextType>(defaultAuthContext);
 
 // Custom hook for using auth context
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = () => React.useContext(AuthContext);
 
-// Auth provider component
+// Auth provider component - simplified
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [authState, setAuthState] = React.useState<AuthState>({
+  // We maintain the basic structure but remove actual auth functionality
+  const [authState] = React.useState<AuthState>({
     isAuthenticated: false,
     user: null,
   });
-  const [isLoading, setIsLoading] = React.useState(false);
+  
+  const [isLoading] = React.useState(false);
 
-  // Simplified login function for demo
-  const login = async (email: string, password: string) => {
-    setIsLoading(true);
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Set authenticated user
-      setAuthState({
-        isAuthenticated: true,
-        user: {
-          id: '1',
-          email,
-          name: 'Demo User'
-        }
-      });
-    } catch (error) {
-      console.error('Login error:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  // Logout function
-  const logout = async () => {
-    setIsLoading(true);
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 500));
-      
-      // Reset auth state
-      setAuthState({
-        isAuthenticated: false,
-        user: null
-      });
-    } catch (error) {
-      console.error('Logout error:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  // Register function
-  const register = async (email: string, password: string, name?: string) => {
-    setIsLoading(true);
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Set authenticated user after registration
-      setAuthState({
-        isAuthenticated: true,
-        user: {
-          id: '1',
-          email,
-          name: name || 'New User'
-        }
-      });
-    } catch (error) {
-      console.error('Registration error:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
+  // Simply provide the basic context values
   return (
-    <AuthContext.Provider value={{ authState, login, logout, register, isLoading }}>
+    <AuthContext.Provider value={{ authState, isLoading }}>
       {children}
     </AuthContext.Provider>
   );
