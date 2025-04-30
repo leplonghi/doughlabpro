@@ -3,8 +3,12 @@ import * as React from 'react';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { InfoCircledIcon } from '@radix-ui/react-icons';
-import * as TooltipPrimitive from "@radix-ui/react-tooltip";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { 
+  Tooltip, 
+  TooltipContent, 
+  TooltipProvider, 
+  TooltipTrigger 
+} from "@/components/ui/tooltip";
 import { useTranslation } from 'react-i18next';
 
 interface BallWeightInputProps {
@@ -37,7 +41,7 @@ const BallWeightInput: React.FC<BallWeightInputProps> = ({
     <div className="space-y-2">
       <div className="flex items-center gap-2">
         <Label htmlFor="ballWeight">{t('calculator.ingredients.ballWeight')}</Label>
-        <TooltipPrimitive.Provider>
+        <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
               <span className="cursor-help"><InfoCircledIcon className="h-4 w-4 text-muted-foreground" /></span>
@@ -46,7 +50,7 @@ const BallWeightInput: React.FC<BallWeightInputProps> = ({
               <p>{t('calculator.ingredients.ballWeightDescription')}</p>
             </TooltipContent>
           </Tooltip>
-        </TooltipPrimitive.Provider>
+        </TooltipProvider>
       </div>
       
       <div className="flex items-center gap-4">

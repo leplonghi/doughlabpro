@@ -3,9 +3,9 @@ import * as React from 'react';
 import {
   Tooltip,
   TooltipContent,
+  TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
-import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import { Info } from 'lucide-react';
 
 interface IngredientItemProps {
@@ -25,7 +25,7 @@ const IngredientItem: React.FC<IngredientItemProps> = ({
     <span className="result-label flex items-center gap-2">
       {icon} {label}
       {tooltip && (
-        <TooltipPrimitive.Provider>
+        <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
               <span className="cursor-help">
@@ -36,7 +36,7 @@ const IngredientItem: React.FC<IngredientItemProps> = ({
               <p>{tooltip}</p>
             </TooltipContent>
           </Tooltip>
-        </TooltipPrimitive.Provider>
+        </TooltipProvider>
       )}
     </span>
     <span className="result-value">{value}</span>

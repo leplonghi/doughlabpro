@@ -96,7 +96,7 @@ const App = () => {
                 <Route path="*" element={<NotFound />} />
               </Routes>
               
-              {/* Toast notifications - must be inside ToastProvider */}
+              {/* Toast notifications */}
               <Toaster />
               <SonnerToaster />
             </AuthProvider>
