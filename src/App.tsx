@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "next-themes";
 
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { ToastProvider } from "@/hooks/use-toast";
 import AuthProvider from "./components/AuthProvider";
 import LoadingSpinner from "./components/ui/loading-spinner";
 import NotFound from "./pages/NotFound";
@@ -39,47 +40,49 @@ const App = () => {
     <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
-          <AuthProvider>
-            <Routes>
-              <Route path="/" element={<Navigate to="/home" replace />} />
-              <Route path="/home" element={<Index />} />
-              <Route path="/privacy" element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <Privacy />
-                </Suspense>
-              } />
-              <Route path="/terms" element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <Terms />
-                </Suspense>
-              } />
-              <Route path="/contact" element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <Contact />
-                </Suspense>
-              } />
-              <Route path="/calculator" element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <DoughCalculator />
-                </Suspense>
-              } />
-              <Route path="/sauce" element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <Sauce />
-                </Suspense>
-              } />
-              <Route path="/toppings" element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <Toppings />
-                </Suspense>
-              } />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-            
-            {/* Toast notifications - must be inside ThemeProvider */}
-            <Toaster />
-            <SonnerToaster />
-          </AuthProvider>
+          <ToastProvider>
+            <AuthProvider>
+              <Routes>
+                <Route path="/" element={<Navigate to="/home" replace />} />
+                <Route path="/home" element={<Index />} />
+                <Route path="/privacy" element={
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <Privacy />
+                  </Suspense>
+                } />
+                <Route path="/terms" element={
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <Terms />
+                  </Suspense>
+                } />
+                <Route path="/contact" element={
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <Contact />
+                  </Suspense>
+                } />
+                <Route path="/calculator" element={
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <DoughCalculator />
+                  </Suspense>
+                } />
+                <Route path="/sauce" element={
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <Sauce />
+                  </Suspense>
+                } />
+                <Route path="/toppings" element={
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <Toppings />
+                  </Suspense>
+                } />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+              
+              {/* Toast notifications - must be inside ToastProvider */}
+              <Toaster />
+              <SonnerToaster />
+            </AuthProvider>
+          </ToastProvider>
         </TooltipProvider>
       </QueryClientProvider>
     </ThemeProvider>

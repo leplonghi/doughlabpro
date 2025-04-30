@@ -5,9 +5,8 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App.tsx';
 import './index.css';
 
-// Create root and render app first
-const root = ReactDOM.createRoot(document.getElementById('root')!);
-root.render(
+// Create root and render app
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
@@ -15,6 +14,6 @@ root.render(
   </React.StrictMode>,
 );
 
-// Only register service worker after React has initialized
+// Register service worker after React has initialized
 import registerServiceWorker from './serviceWorker.ts';
 registerServiceWorker();
