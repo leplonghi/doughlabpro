@@ -1,6 +1,6 @@
 
 import * as React from "react";
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation, BrowserRouter } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "next-themes";
@@ -37,70 +37,77 @@ const queryClient = new QueryClient({
   },
 });
 
+const AppRoutes = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<Navigate to="/home" replace />} />
+      <Route path="/home" element={<Index />} />
+      <Route path="/auth" element={
+        <Suspense fallback={<LoadingSpinner />}>
+          <Auth />
+        </Suspense>
+      } />
+      <Route path="/privacy" element={
+        <Suspense fallback={<LoadingSpinner />}>
+          <Privacy />
+        </Suspense>
+      } />
+      <Route path="/terms" element={
+        <Suspense fallback={<LoadingSpinner />}>
+          <Terms />
+        </Suspense>
+      } />
+      <Route path="/contact" element={
+        <Suspense fallback={<LoadingSpinner />}>
+          <Contact />
+        </Suspense>
+      } />
+      
+      {/* Protected routes */}
+      <Route path="/profile" element={
+        <AuthGuard>
+          <Suspense fallback={<LoadingSpinner />}>
+            <Profile />
+          </Suspense>
+        </AuthGuard>
+      } />
+      <Route path="/calculator" element={
+        <AuthGuard>
+          <Suspense fallback={<LoadingSpinner />}>
+            <DoughCalculator />
+          </Suspense>
+        </AuthGuard>
+      } />
+      <Route path="/sauce" element={
+        <AuthGuard>
+          <Suspense fallback={<LoadingSpinner />}>
+            <Sauce />
+          </Suspense>
+        </AuthGuard>
+      } />
+      <Route path="/toppings" element={
+        <AuthGuard>
+          <Suspense fallback={<LoadingSpinner />}>
+            <Toppings />
+          </Suspense>
+        </AuthGuard>
+      } />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  );
+};
+
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
         <TooltipProvider>
           <AuthProvider>
-            <Routes>
-              <Route path="/" element={<Navigate to="/home" replace />} />
-              <Route path="/home" element={<Index />} />
-              <Route path="/auth" element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <Auth />
-                </Suspense>
-              } />
-              <Route path="/privacy" element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <Privacy />
-                </Suspense>
-              } />
-              <Route path="/terms" element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <Terms />
-                </Suspense>
-              } />
-              <Route path="/contact" element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <Contact />
-                </Suspense>
-              } />
-              
-              {/* Protected routes */}
-              <Route path="/profile" element={
-                <AuthGuard>
-                  <Suspense fallback={<LoadingSpinner />}>
-                    <Profile />
-                  </Suspense>
-                </AuthGuard>
-              } />
-              <Route path="/calculator" element={
-                <AuthGuard>
-                  <Suspense fallback={<LoadingSpinner />}>
-                    <DoughCalculator />
-                  </Suspense>
-                </AuthGuard>
-              } />
-              <Route path="/sauce" element={
-                <AuthGuard>
-                  <Suspense fallback={<LoadingSpinner />}>
-                    <Sauce />
-                  </Suspense>
-                </AuthGuard>
-              } />
-              <Route path="/toppings" element={
-                <AuthGuard>
-                  <Suspense fallback={<LoadingSpinner />}>
-                    <Toppings />
-                  </Suspense>
-                </AuthGuard>
-              } />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-            
-            {/* Single toast notification system using Sonner */}
-            <Toaster />
+            <BrowserRouter>
+              <AppRoutes />
+              {/* Single toast notification system using Sonner */}
+              <Toaster />
+            </BrowserRouter>
           </AuthProvider>
         </TooltipProvider>
       </ThemeProvider>
