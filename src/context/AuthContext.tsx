@@ -94,8 +94,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (error) throw error;
       return { error: null };
     } catch (error: any) {
-      toast({
-        title: t('auth.signInFailed'),
+      toast(t('auth.signInFailed'), {
         description: error.message || t('auth.unexpectedError'),
       });
       setLoading(false);
@@ -112,8 +111,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       
       return { error: null };
     } catch (error: any) {
-      toast({
-        title: t('auth.signOutFailed'),
+      toast(t('auth.signOutFailed'), {
         description: error.message || t('auth.unexpectedError'),
       });
       setLoading(false);

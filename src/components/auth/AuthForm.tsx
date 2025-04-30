@@ -24,8 +24,7 @@ export function AuthForm() {
       if (error) throw error;
       
       // Success toast - though Auth state change in context will handle redirect
-      toast({
-        title: t('auth.signInSuccess'),
+      toast(t('auth.signInSuccess'), {
         description: t('auth.redirecting'),
       });
       
@@ -34,8 +33,7 @@ export function AuthForm() {
       navigate('/home');
     } catch (error: any) {
       console.error('Google Sign In Error:', error);
-      toast({
-        title: t('auth.signInFailed'),
+      toast(t('auth.signInFailed'), {
         description: error.message || t('auth.unexpectedError'),
       });
     } finally {
