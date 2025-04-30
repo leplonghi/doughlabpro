@@ -40,7 +40,7 @@ const BallWeightInput: React.FC<BallWeightInputProps> = ({
           <TooltipTrigger asChild>
             <span className="cursor-help"><InfoCircledIcon className="h-4 w-4 text-muted-foreground" /></span>
           </TooltipTrigger>
-          <TooltipContent>
+          <TooltipContent className="max-w-xs bg-white text-black border border-border">
             <p>{t('calculator.ingredients.ballWeightDescription')}</p>
           </TooltipContent>
         </Tooltip>

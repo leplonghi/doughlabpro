@@ -47,8 +47,6 @@ const getStyleDescription = (style: PizzaStyle, t: any) => {
       return t('calculator.pizzaStyle.napoletanaDescription');
     case "newyork":
       return t('calculator.pizzaStyle.newyorkDescription');
-    case "chicago":
-      return t('calculator.pizzaStyle.chicagoDescription', 'Deep-dish style with a thick crust and rich tomato sauce.');
     case "focaccia":
       return t('calculator.pizzaStyle.focacciaDescription', 'Italian flatbread with a crisp exterior and soft interior.');
     case "brioche":

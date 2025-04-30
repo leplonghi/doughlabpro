@@ -1,12 +1,9 @@
-
-import * as React from "react";
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
-
 const ProButton: React.FC = () => {
-  return (
-    <Dialog>
+  return <Dialog>
       <DialogTrigger asChild>
         <Button variant="outline" className="border-amber-400 text-gray-950 py-0 px-[5px] rounded-xl mx-0 bg-amber-500 hover:bg-amber-400">
           <span className="mr-1">Upgrade to</span> 
@@ -46,8 +43,6 @@ const ProButton: React.FC = () => {
           </Button>
         </DialogFooter>
       </DialogContent>
-    </Dialog>
-  );
+    </Dialog>;
 };
-
 export default ProButton;

@@ -27,7 +27,7 @@ const FlourInput: React.FC<FlourInputProps> = ({ flour, onChange, error }) => {
           <TooltipTrigger asChild>
             <span className="cursor-help"><InfoCircledIcon className="h-4 w-4 text-muted-foreground" /></span>
           </TooltipTrigger>
-          <TooltipContent>
+          <TooltipContent className="max-w-xs">
             <p>{t('calculator.ingredients.amountDescription')}</p>
           </TooltipContent>
         </Tooltip>

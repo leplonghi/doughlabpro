@@ -4,7 +4,7 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useTranslation } from "react-i18next";
 
-export type PizzaStyle = "napoletana" | "newyork" | "chicago" | "focaccia" | "brioche" | "baguette";
+export type PizzaStyle = "napoletana" | "newyork" | "focaccia" | "brioche" | "baguette";
 
 interface PizzaStyleSelectProps {
   style: PizzaStyle;
@@ -32,12 +32,6 @@ const PizzaStyleSelect: React.FC<PizzaStyleSelectProps> = ({ style, onChange }) 
           <RadioGroupItem value="newyork" id="pizza-newyork" />
           <Label htmlFor="pizza-newyork" className="cursor-pointer">
             {t('calculator.pizzaStyle.newyork')}
-          </Label>
-        </div>
-        <div className="flex items-center space-x-2">
-          <RadioGroupItem value="chicago" id="pizza-chicago" />
-          <Label htmlFor="pizza-chicago" className="cursor-pointer">
-            {t('calculator.pizzaStyle.chicago', 'Chicago')}
           </Label>
         </div>
         <div className="flex items-center space-x-2">
@@ -72,8 +66,6 @@ const getStyleDescription = (style: PizzaStyle, t: any) => {
       return t('calculator.pizzaStyle.napoletanaDescription');
     case "newyork":
       return t('calculator.pizzaStyle.newyorkDescription');
-    case "chicago":
-      return t('calculator.pizzaStyle.chicagoDescription', 'Deep-dish style with a thick crust and rich tomato sauce.');
     case "focaccia":
       return t('calculator.pizzaStyle.focacciaDescription', 'Italian flatbread with a crisp exterior and soft interior.');
     case "brioche":
