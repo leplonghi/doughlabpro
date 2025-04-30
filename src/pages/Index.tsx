@@ -1,13 +1,20 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import AdBanner from '@/components/monetization/AdBanner';
 import { Button } from '@/components/ui/button';
-import { Clock, Utensils, Calculator } from 'lucide-react';
-import ProButton from '@/components/usage/ProButton';
+import { Clock, Utensils, Calculator, LogIn } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
+import { useTranslation } from 'react-i18next';
+
 const Index: React.FC = () => {
-  return <div className="flex flex-col min-h-screen bg-white">
+  const { user } = useAuth();
+  const { t } = useTranslation();
+
+  return (
+    <div className="flex flex-col min-h-screen bg-white">
       <Header />
       
       <main className="flex-grow">
@@ -17,10 +24,18 @@ const Index: React.FC = () => {
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Master Every Dough. Bake with Precision.</h1>
             <p className="text-lg text-muted-foreground mb-8">Smart dough calculator for pizza makers, bread lovers, and artisan bakers.</p>
             <div className="flex flex-col sm:flex-row items-center gap-2 sm:justify-center mx-0 rounded-md my-[22px]">
-              <Button asChild className="bg-black text-white font-medium rounded hover:bg-black/80 px-6 py-6 w-full sm:w-auto">
-                <Link to="/calculator">Let's Bake!</Link>
-              </Button>
-              <ProButton />
+              {user ? (
+                <Button asChild className="bg-black text-white font-medium rounded hover:bg-black/80 px-6 py-6 w-full sm:w-auto">
+                  <Link to="/calculator">Let's Bake!</Link>
+                </Button>
+              ) : (
+                <Button asChild className="bg-black text-white font-medium rounded hover:bg-black/80 px-6 py-6 w-full sm:w-auto">
+                  <Link to="/auth">
+                    <LogIn className="mr-2 h-4 w-4" />
+                    {t('auth.signIn')}
+                  </Link>
+                </Button>
+              )}
             </div>
           </div>
           
@@ -70,6 +85,8 @@ const Index: React.FC = () => {
       </main>
       
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 export default Index;

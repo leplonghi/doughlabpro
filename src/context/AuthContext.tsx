@@ -10,7 +10,7 @@ type AuthContextType = {
   user: User | null;
   session: Session | null;
   loading: boolean;
-  signInWithGoogle: () => Promise<{error: any | null}>;
+  signInWithGoogle: (returnUrl?: string) => Promise<{error: any | null}>;
   signOut: () => Promise<{error: any | null}>;
   isPro: boolean;
 };
@@ -54,9 +54,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
         // Check pro status whenever auth state changes
         if (currentSession?.user) {
-          // For now, we'll simulate pro status
-          // This would be replaced with an actual check against your subscription database
-          setIsPro(false);
+          setIsPro(false); // Remove pro status check for now
         } else {
           setIsPro(false);
         }
@@ -69,12 +67,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setSession(currentSession);
       setUser(currentSession?.user ?? null);
       setLoading(false);
-      
-      // Check pro status on initial load
-      if (currentSession?.user) {
-        // For now, we'll simulate pro status
-        setIsPro(false);
-      }
     });
 
     return () => {
@@ -83,13 +75,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   // Google Sign In
-  const signInWithGoogle = async () => {
+  const signInWithGoogle = async (returnUrl = '/home') => {
     setLoading(true);
     try {
+      // Ensure returnUrl has the origin prefix
+      const redirectTo = `${window.location.origin}${returnUrl.startsWith('/') ? returnUrl : '/' + returnUrl}`;
+      console.log('Signing in with Google, redirect to:', redirectTo);
+      
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/home`,
+          redirectTo
         }
       });
       

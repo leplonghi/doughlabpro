@@ -1,11 +1,27 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, LogIn } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
-import ProButton from '@/components/usage/ProButton';
+import { useAuth } from '@/context/AuthContext';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+
 const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { user, signOut } = useAuth();
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+
   const menuItems = [{
     title: 'Home',
     path: '/home'
@@ -19,12 +35,29 @@ const Header: React.FC = () => {
     title: 'Sauces',
     path: '/sauce'
   }];
-  const NavItems = () => <>
-      {menuItems.map(item => <Link key={item.path} to={item.path} className="text-base font-medium text-foreground hover:text-primary transition-colors" onClick={() => setMobileMenuOpen(false)}>
+  
+  const NavItems = () => (
+    <>
+      {menuItems.map(item => (
+        <Link 
+          key={item.path} 
+          to={item.path} 
+          className="text-base font-medium text-foreground hover:text-primary transition-colors" 
+          onClick={() => setMobileMenuOpen(false)}
+        >
           {item.title}
-        </Link>)}
-    </>;
-  return <header className="w-full border-b border-border bg-background sticky top-0 z-50">
+        </Link>
+      ))}
+    </>
+  );
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate('/home');
+  };
+
+  return (
+    <header className="w-full border-b border-border bg-background sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -42,10 +75,50 @@ const Header: React.FC = () => {
 
           {/* Right side actions */}
           <div className="flex items-center gap-4">
-            {/* Pro Button in Header */}
-            <div className="hidden md:block">
-              <ProButton />
-            </div>
+            {/* Auth Actions */}
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Avatar className="h-8 w-8 cursor-pointer">
+                    {user.user_metadata.avatar_url ? (
+                      <AvatarImage src={user.user_metadata.avatar_url} alt={user.user_metadata.full_name || 'User'} />
+                    ) : (
+                      <AvatarFallback className="bg-black text-white">
+                        {user.user_metadata.full_name ? 
+                          `${user.user_metadata.full_name.charAt(0)}` : 
+                          'U'
+                        }
+                      </AvatarFallback>
+                    )}
+                  </Avatar>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={() => navigate('/profile')}>
+                    {t('profile.title', 'Profile')}
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => navigate('/calculator')}>
+                    Dough Calculator
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem 
+                    onClick={handleSignOut}
+                    className="text-red-600 focus:text-red-600"
+                  >
+                    {t('auth.signOut', 'Sign out')}
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="flex items-center gap-2"
+                onClick={() => navigate('/auth')}
+              >
+                <LogIn size={18} />
+                <span className="hidden md:inline">{t('auth.signIn', 'Sign in')}</span>
+              </Button>
+            )}
             
             {/* Mobile Menu Button */}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
@@ -73,7 +146,30 @@ const Header: React.FC = () => {
                   </nav>
                   
                   <div className="mt-auto py-4">
-                    <ProButton />
+                    {!user && (
+                      <Button 
+                        className="w-full"
+                        onClick={() => {
+                          setMobileMenuOpen(false);
+                          navigate('/auth');
+                        }}
+                      >
+                        <LogIn className="mr-2 h-4 w-4" />
+                        {t('auth.signIn', 'Sign in')}
+                      </Button>
+                    )}
+                    {user && (
+                      <Button 
+                        variant="outline"
+                        className="w-full text-red-600 border-red-200 hover:bg-red-50"
+                        onClick={() => {
+                          handleSignOut();
+                          setMobileMenuOpen(false);
+                        }}
+                      >
+                        {t('auth.signOut', 'Sign out')}
+                      </Button>
+                    )}
                   </div>
                 </div>
               </SheetContent>
@@ -81,6 +177,8 @@ const Header: React.FC = () => {
           </div>
         </div>
       </div>
-    </header>;
+    </header>
+  );
 };
+
 export default Header;

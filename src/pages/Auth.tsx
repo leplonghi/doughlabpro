@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { AuthForm } from '@/components/auth/AuthForm';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAuth } from '@/context/AuthContext';
@@ -9,17 +9,25 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useTranslation } from 'react-i18next';
 
+interface LocationState {
+  returnUrl?: string;
+}
+
 const Auth: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { user, loading } = useAuth();
   const { t } = useTranslation();
   
-  // If user is already authenticated, redirect to home
+  const state = location.state as LocationState;
+  const returnUrl = state?.returnUrl || '/home';
+  
+  // If user is already authenticated, redirect to return URL or home
   useEffect(() => {
     if (user && !loading) {
-      navigate('/home');
+      navigate(returnUrl, { replace: true });
     }
-  }, [user, loading, navigate]);
+  }, [user, loading, navigate, returnUrl]);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -37,7 +45,7 @@ const Auth: React.FC = () => {
           </CardHeader>
           
           <CardContent className="grid gap-6 relative z-10 px-8">
-            <AuthForm />
+            <AuthForm returnUrl={returnUrl} />
           </CardContent>
         </Card>
       </div>

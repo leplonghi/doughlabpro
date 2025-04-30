@@ -7,7 +7,11 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { LogIn, Loader2 } from 'lucide-react';
 
-export function AuthForm() {
+interface AuthFormProps {
+  returnUrl?: string;
+}
+
+export function AuthForm({ returnUrl = '/home' }: AuthFormProps) {
   const { signInWithGoogle } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
@@ -19,17 +23,14 @@ export function AuthForm() {
       // Clear previous errors from local storage if any
       localStorage.removeItem('supabase.auth.error');
       
-      const { error } = await signInWithGoogle();
+      const { error } = await signInWithGoogle(returnUrl);
       
       if (error) throw error;
       
-      // Success toast - though Auth state change in context will handle redirect
       toast.success(t('auth.signInSuccess'), {
         description: t('auth.redirecting'),
       });
       
-      // Note: Auth state change in context should handle the redirect
-      // This is just a fallback and typically won't execute
     } catch (error: any) {
       console.error('Google Sign In Error:', error);
       toast.error(t('auth.signInFailed'), {

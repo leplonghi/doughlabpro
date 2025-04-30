@@ -1,6 +1,6 @@
 
 import * as React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "next-themes";
@@ -10,6 +10,7 @@ import { AuthProvider } from "./context/AuthContext";
 import LoadingSpinner from "./components/ui/loading-spinner";
 import NotFound from "./pages/NotFound";
 import Index from "./pages/Index";
+import { AuthGuard } from "./components/auth/AuthGuard";
 
 // Import Sonner Toaster component
 import { Toaster } from "@/components/ui/sonner";
@@ -50,11 +51,6 @@ const App = () => {
                   <Auth />
                 </Suspense>
               } />
-              <Route path="/upgrade" element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <Upgrade />
-                </Suspense>
-              } />
               <Route path="/privacy" element={
                 <Suspense fallback={<LoadingSpinner />}>
                   <Privacy />
@@ -70,25 +66,35 @@ const App = () => {
                   <Contact />
                 </Suspense>
               } />
+              
+              {/* Protected routes */}
               <Route path="/profile" element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <Profile />
-                </Suspense>
+                <AuthGuard>
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <Profile />
+                  </Suspense>
+                </AuthGuard>
               } />
               <Route path="/calculator" element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <DoughCalculator />
-                </Suspense>
+                <AuthGuard>
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <DoughCalculator />
+                  </Suspense>
+                </AuthGuard>
               } />
               <Route path="/sauce" element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <Sauce />
-                </Suspense>
+                <AuthGuard>
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <Sauce />
+                  </Suspense>
+                </AuthGuard>
               } />
               <Route path="/toppings" element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <Toppings />
-                </Suspense>
+                <AuthGuard>
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <Toppings />
+                  </Suspense>
+                </AuthGuard>
               } />
               <Route path="*" element={<NotFound />} />
             </Routes>
