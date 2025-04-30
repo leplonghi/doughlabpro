@@ -91,9 +91,21 @@ export const useToast = () => {
   };
 };
 
-// Export standalone toast function for easier usage
+// Create toast instance for global usage
+// We need to use a dynamic approach since hooks can only be used within components
+let toastFn: (props: Omit<ToasterToast, "id">) => string;
+
+// Helper function to set the toast function when the context is available
+export const setToastFunction = (fn: (props: Omit<ToasterToast, "id">) => string) => {
+  toastFn = fn;
+};
+
+// Standalone toast function for usage outside components
 export const toast = (props: Omit<ToasterToast, "id">) => {
-  const { toast: toastFn } = useToast();
+  if (!toastFn) {
+    console.warn("Toast function called before it was initialized");
+    return "";
+  }
   return toastFn(props);
 };
 

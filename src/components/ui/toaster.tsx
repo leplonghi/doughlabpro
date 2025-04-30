@@ -8,10 +8,15 @@ import {
   ToastTitle,
   ToastViewport,
 } from "@/components/ui/toast";
-import { useToast } from "@/hooks/use-toast";
+import { useToast, setToastFunction } from "@/hooks/use-toast";
 
 export function Toaster() {
-  const { toasts } = useToast();
+  const { toasts, toast } = useToast();
+  
+  // Set up the global toast function on first render
+  React.useEffect(() => {
+    setToastFunction(toast);
+  }, [toast]);
 
   return (
     <ToastProvider>

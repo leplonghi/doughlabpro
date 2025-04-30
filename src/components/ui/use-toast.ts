@@ -1,5 +1,5 @@
 
 // Forward exports from the hooks file
-import { useToast, ToastProvider, toast } from "@/hooks/use-toast";
+import { useToast, ToastProvider, toast, setToastFunction } from "@/hooks/use-toast";
 
-export { useToast, toast, ToastProvider };
+export { useToast, toast, ToastProvider, setToastFunction };
