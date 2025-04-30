@@ -1,6 +1,6 @@
 
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App.tsx';
 import './index.css';
@@ -15,4 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 );
 
 // Register service worker for offline functionality
-registerServiceWorker();
+// Moving this after the React initialization to avoid potential issues
+setTimeout(() => {
+  registerServiceWorker();
+}, 0);
