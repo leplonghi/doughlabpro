@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { PizzaStyle } from '@/components/PizzaStyleSelect';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -10,11 +10,13 @@ import { Unit } from '@/components/UnitSelect';
 interface SauceCalculatorProps {
   pizzaStyle: PizzaStyle;
   initialNumberOfBalls: number;
+  onNumberOfPizzasChange?: (value: number) => void;
 }
 
 const SauceCalculator: React.FC<SauceCalculatorProps> = ({
   pizzaStyle,
-  initialNumberOfBalls
+  initialNumberOfBalls,
+  onNumberOfPizzasChange
 }) => {
   const [numberOfBalls, setNumberOfBalls] = useState<number>(initialNumberOfBalls || 4);
   const [activeUnit, setActiveUnit] = useState<Unit>('grams');
@@ -26,11 +28,12 @@ const SauceCalculator: React.FC<SauceCalculatorProps> = ({
         return 100;
       case 'newyork':
         return 150;
+      case 'chicago':
+        return 200;
       case 'focaccia':
-        return 120;
       case 'brioche':
       case 'baguette':
-        return 100;
+        return 120;
       default:
         return 100;
     }
@@ -59,6 +62,14 @@ const SauceCalculator: React.FC<SauceCalculatorProps> = ({
     }
   };
 
+  const handleNumberOfPizzasChange = (value: number) => {
+    const newValue = Math.max(1, value);
+    setNumberOfBalls(newValue);
+    if (onNumberOfPizzasChange) {
+      onNumberOfPizzasChange(newValue);
+    }
+  };
+
   const totalSauce = getSaucePerPizza() * numberOfBalls;
 
   return (
@@ -71,7 +82,7 @@ const SauceCalculator: React.FC<SauceCalculatorProps> = ({
           id="number-of-pizzas"
           type="number"
           value={numberOfBalls}
-          onChange={(e) => setNumberOfBalls(Math.max(1, parseInt(e.target.value) || 1))}
+          onChange={(e) => handleNumberOfPizzasChange(parseInt(e.target.value) || 1)}
           min={1}
           className="max-w-[200px]"
         />
@@ -91,7 +102,8 @@ const SauceCalculator: React.FC<SauceCalculatorProps> = ({
         <p className="mt-4 text-gray-600 text-sm">
           This recommendation is calculated based on {getSaucePerPizza()}g of sauce per {pizzaStyle === 'napoletana' ? 'Neapolitan' : 
            pizzaStyle === 'newyork' ? 'New York-Style' :
-           pizzaStyle === 'focaccia' ? 'Focaccia' :
+           pizzaStyle === 'chicago' ? 'Chicago Deep-Dish' :
+           pizzaStyle === 'focaccia' ? 'White' :
            pizzaStyle === 'brioche' ? 'Brioche' :
            pizzaStyle === 'baguette' ? 'Baguette' :
            'standard'} pizza.

@@ -1,31 +1,20 @@
 
 import * as React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { PizzaStyle } from '@/components/PizzaStyleSelect';
 import SauceRecipe from '@/components/sauce/SauceRecipe';
 import SauceCalculator from '@/components/sauce/SauceCalculator';
+import { PizzaStyle } from '@/components/PizzaStyleSelect';
 
 const Sauce: React.FC = () => {
-  const location = useLocation();
   const navigate = useNavigate();
-  const [pizzaStyle, setPizzaStyle] = React.useState<PizzaStyle>('napoletana');
-  const [numberOfBalls, setNumberOfBalls] = React.useState<number>(4);
-
-  // Check if we received state from previous page
-  React.useEffect(() => {
-    if (location.state?.pizzaStyle) {
-      setPizzaStyle(location.state.pizzaStyle);
-    }
-    if (location.state?.numberOfBalls) {
-      setNumberOfBalls(location.state.numberOfBalls);
-    }
-  }, [location]);
+  const [selectedSauceType, setSelectedSauceType] = React.useState<PizzaStyle>('napoletana');
+  const [numberOfPizzas, setNumberOfPizzas] = React.useState<number>(4);
 
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-br from-white to-pizza-cream/30">
@@ -35,7 +24,7 @@ const Sauce: React.FC = () => {
         <div className="container mx-auto px-4">
           <div className="mb-8">
             <h1 className="text-4xl font-serif font-bold mb-2">Sauce Builder</h1>
-            <p className="text-gray-600 mb-6">Perfect your pizza sauce based on your dough style</p>
+            <p className="text-gray-600 mb-6">Create the perfect sauce for your pizza</p>
             
             {/* Navigation Progress Indicator */}
             <div className="mb-8">
@@ -47,28 +36,68 @@ const Sauce: React.FC = () => {
               <Progress value={66} className="h-2" />
             </div>
 
+            {/* Sauce Type Selector */}
+            <Card className="mb-6">
+              <CardHeader>
+                <CardTitle>Choose Your Sauce Type</CardTitle>
+                <CardDescription>
+                  Select the sauce that best complements your pizza
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+                  <Button 
+                    variant={selectedSauceType === 'napoletana' ? 'default' : 'outline'} 
+                    className={`h-12 justify-center ${selectedSauceType === 'napoletana' ? '' : 'bg-white hover:bg-gray-50'}`}
+                    onClick={() => setSelectedSauceType('napoletana')}
+                  >
+                    Neapolitan
+                  </Button>
+                  <Button 
+                    variant={selectedSauceType === 'newyork' ? 'default' : 'outline'} 
+                    className={`h-12 justify-center ${selectedSauceType === 'newyork' ? '' : 'bg-white hover:bg-gray-50'}`}
+                    onClick={() => setSelectedSauceType('newyork')}
+                  >
+                    New York
+                  </Button>
+                  <Button 
+                    variant={selectedSauceType === 'chicago' ? 'default' : 'outline'} 
+                    className={`h-12 justify-center ${selectedSauceType === 'chicago' ? '' : 'bg-white hover:bg-gray-50'}`}
+                    onClick={() => setSelectedSauceType('chicago')}
+                  >
+                    Chicago
+                  </Button>
+                  <Button 
+                    variant={selectedSauceType === 'focaccia' ? 'default' : 'outline'} 
+                    className={`h-12 justify-center ${selectedSauceType === 'focaccia' ? '' : 'bg-white hover:bg-gray-50'}`}
+                    onClick={() => setSelectedSauceType('focaccia')}
+                  >
+                    White Sauce
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
             {/* Sauce Recipe Card */}
             <Card className="mb-6">
               <CardHeader>
                 <CardTitle>
-                  {pizzaStyle === 'napoletana' ? 'Neapolitan Pizza Sauce' : 
-                   pizzaStyle === 'newyork' ? 'New York-Style Pizza Sauce' :
-                   pizzaStyle === 'focaccia' ? 'White Pizza Sauce' :
-                   pizzaStyle === 'brioche' ? 'White Pizza Sauce' :
-                   pizzaStyle === 'baguette' ? 'White Pizza Sauce' :
+                  {selectedSauceType === 'napoletana' ? 'Neapolitan Pizza Sauce' : 
+                   selectedSauceType === 'newyork' ? 'New York-Style Pizza Sauce' :
+                   selectedSauceType === 'chicago' ? 'Chicago Deep-Dish Sauce' :
+                   selectedSauceType === 'focaccia' ? 'White Pizza Sauce' :
                    'Classic Pizza Sauce'}
                 </CardTitle>
                 <CardDescription>
-                  Recipe selected for your {pizzaStyle === 'napoletana' ? 'Neapolitan' : 
-                   pizzaStyle === 'newyork' ? 'New York-Style' :
-                   pizzaStyle === 'focaccia' ? 'Focaccia' :
-                   pizzaStyle === 'brioche' ? 'Brioche' :
-                   pizzaStyle === 'baguette' ? 'Baguette' :
-                   'Classic'} dough
+                  Recipe for {selectedSauceType === 'napoletana' ? 'Neapolitan' : 
+                   selectedSauceType === 'newyork' ? 'New York-Style' :
+                   selectedSauceType === 'chicago' ? 'Chicago Deep-Dish' :
+                   selectedSauceType === 'focaccia' ? 'White Pizza' :
+                   'Classic'} sauce
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <SauceRecipe pizzaStyle={pizzaStyle} />
+                <SauceRecipe pizzaStyle={selectedSauceType} />
               </CardContent>
             </Card>
             
@@ -82,8 +111,9 @@ const Sauce: React.FC = () => {
               </CardHeader>
               <CardContent>
                 <SauceCalculator 
-                  pizzaStyle={pizzaStyle} 
-                  initialNumberOfBalls={numberOfBalls} 
+                  pizzaStyle={selectedSauceType} 
+                  initialNumberOfBalls={numberOfPizzas}
+                  onNumberOfPizzasChange={setNumberOfPizzas}
                 />
               </CardContent>
             </Card>
@@ -101,7 +131,7 @@ const Sauce: React.FC = () => {
               
               <Button 
                 className="flex items-center gap-2 bg-pizza-light hover:bg-pizza-light/90 text-white"
-                onClick={() => navigate('/toppings', { state: { pizzaStyle, numberOfBalls } })}
+                onClick={() => navigate('/toppings', { state: { numberOfPizzas } })}
               >
                 Continue to Toppings
                 <ArrowRight size={18} />

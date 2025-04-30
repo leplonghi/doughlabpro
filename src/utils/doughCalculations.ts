@@ -3,7 +3,7 @@ import { StyleType } from '@/types/DoughTypes';
 import { FermentationMethod } from '@/types/dough';
 
 export const getInitialBallWeight = (style: StyleType): number => {
-  if (['napoletana', 'newyork', 'chicago'].includes(style)) {
+  if (['napoletana', 'newyork', 'chicago'].includes(style as string)) {
     return 250; // Default pizza ball weight
   } else if (style === 'baguette') {
     return 350; // French baguette
@@ -34,7 +34,7 @@ export const calculateDoughRecipe = (
   let eggs = 0;
   
   // Determine dough type from style
-  const isPizza = ['napoletana', 'newyork', 'chicago'].includes(style);
+  const isPizza = ['napoletana', 'newyork', 'chicago'].includes(style as string);
   
   if (isPizza) {
     if (style === 'napoletana') {

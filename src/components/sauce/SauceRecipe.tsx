@@ -57,6 +57,26 @@ const SauceRecipe: React.FC<SauceRecipeProps> = ({ pizzaStyle }) => {
             'Remove onion and basil before using.'
           ]
         };
+      case 'chicago':
+        return {
+          ingredients: [
+            { name: 'Olive oil', quantity: '2 tbsp' },
+            { name: 'Garlic cloves, minced', quantity: '2 cloves' },
+            { name: 'Dried oregano', quantity: '1 tsp' },
+            { name: 'Red pepper flakes', quantity: '1/4 tsp' },
+            { name: 'Crushed tomatoes', quantity: '1 can (28 oz)' },
+            { name: 'Sugar', quantity: '1 tsp' },
+            { name: 'Salt', quantity: 'to taste' }
+          ],
+          steps: [
+            'Heat olive oil in a saucepan over medium heat.',
+            'Sauté garlic, oregano, and red pepper flakes until aromatic.',
+            'Add crushed tomatoes and sugar.',
+            'Simmer for 30 minutes until thickened.',
+            'Season with salt to taste.',
+            'Allow to cool slightly before using on your deep-dish pizza.'
+          ]
+        };
       case 'focaccia':
       case 'brioche':
       case 'baguette':
