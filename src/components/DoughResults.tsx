@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { PizzaStyle } from "./PizzaStyleSelect";
 import { Unit } from './UnitSelect';
@@ -8,6 +8,9 @@ import RecipeFinal from './recipe/RecipeFinal';
 import FermentationTips from './recipe/FermentationTips';
 import RecipeActions from './recipe/RecipeActions';
 import AdBanner from './monetization/AdBanner';
+import RecipeUnitSelect from './recipe/RecipeUnitSelect';
+import TemperatureGuide from './recipe/TemperatureGuide';
+import BakingTips from './recipe/BakingTips';
 
 type FermentationMethod = 'direct' | 'poolish' | 'biga';
 
@@ -43,12 +46,14 @@ const DoughResults: React.FC<DoughResultsProps> = ({
   recipe, 
   fermentationMethod, 
   pizzaStyle, 
-  unit,
+  unit: initialUnit,
   numberOfBalls,
   doughType = 'pizza'
 }) => {
+  const [activeUnit, setActiveUnit] = useState<Unit>(initialUnit);
+
   const convertToUnit = (grams: number): number => {
-    switch(unit) {
+    switch(activeUnit) {
       case 'ounces':
         return grams / 28.35;
       case 'cups':
@@ -59,7 +64,7 @@ const DoughResults: React.FC<DoughResultsProps> = ({
   };
 
   const getUnitLabel = () => {
-    switch(unit) {
+    switch(activeUnit) {
       case 'ounces':
         return 'oz';
       case 'cups':
@@ -71,7 +76,7 @@ const DoughResults: React.FC<DoughResultsProps> = ({
 
   const formatValue = (value: number): string => {
     const converted = convertToUnit(value);
-    return converted.toFixed(unit === 'grams' ? 1 : 2).replace(/\.0$/, '');
+    return converted.toFixed(activeUnit === 'grams' ? 1 : 2).replace(/\.0$/, '');
   };
 
   const getTitle = () => {
@@ -106,6 +111,11 @@ const DoughResults: React.FC<DoughResultsProps> = ({
       
       <CardContent className="pt-6">
         <div className="space-y-6">
+          <RecipeUnitSelect 
+            activeUnit={activeUnit}
+            onUnitChange={(unit) => setActiveUnit(unit)}
+          />
+          
           <div className="overflow-x-auto">
             {fermentationMethod === 'poolish' && recipe.poolish && (
               <RecipePreliminary
@@ -146,6 +156,17 @@ const DoughResults: React.FC<DoughResultsProps> = ({
             <FermentationTips 
               method={fermentationMethod} 
               pizzaStyle={pizzaStyle as string}
+            />
+            
+            <TemperatureGuide
+              pizzaStyle={pizzaStyle as string}
+              doughType={doughType}
+              fermentationMethod={fermentationMethod}
+            />
+            
+            <BakingTips
+              doughType={doughType}
+              style={pizzaStyle as string}
             />
           </div>
 

@@ -112,6 +112,31 @@
   .feature-card {
     @apply flex flex-col items-start p-6 transition-all;
   }
+
+  /* Responsive improvements */
+  .responsive-container {
+    @apply w-full px-4 sm:px-6 md:px-8 mx-auto max-w-7xl;
+  }
+
+  .recipe-card {
+    @apply rounded-lg border shadow-sm overflow-hidden;
+  }
+  
+  .recipe-header {
+    @apply bg-gradient-to-r from-gray-50 to-gray-100 p-4 md:p-6;
+  }
+  
+  .recipe-content {
+    @apply p-4 md:p-6 space-y-6;
+  }
+  
+  .tooltip-wrapper {
+    @apply relative inline-block;
+  }
+  
+  .tooltip-content {
+    @apply absolute z-10 invisible group-hover:visible bg-black text-white text-xs rounded p-2 -mt-2 transform -translate-x-1/2 left-1/2 w-40 text-center;
+  }
 }
 
 /* Animation keyframes */
@@ -128,4 +153,32 @@
 
 .fade-in {
   animation: fade-in 0.3s ease-out;
+}
+
+/* Additional responsive tweaks */
+@media (max-width: 640px) {
+  .card-header {
+    padding: 1rem;
+  }
+  
+  .card-content {
+    padding: 1rem;
+  }
+  
+  h3 {
+    font-size: 1.1rem;
+  }
+}
+
+/* Improve print styling */
+@media print {
+  .recipe-section {
+    break-inside: avoid;
+  }
+  
+  .recipe-header {
+    background: #f9f9f9 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 }
