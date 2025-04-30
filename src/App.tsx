@@ -34,12 +34,12 @@ const queryClient = new QueryClient({
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
       <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <AuthProvider>
+        <AuthProvider>
+          <TooltipProvider>
             <Routes>
               <Route path="/" element={<Navigate to="/home" replace />} />
               <Route path="/home" element={<Index />} />
@@ -79,8 +79,8 @@ const App = () => {
             {/* Toast notifications - must be inside ThemeProvider */}
             <Toaster />
             <SonnerToaster />
-          </AuthProvider>
-        </TooltipProvider>
+          </TooltipProvider>
+        </AuthProvider>
       </QueryClientProvider>
     </ThemeProvider>
   );

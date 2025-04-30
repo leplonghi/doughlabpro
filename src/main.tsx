@@ -6,7 +6,11 @@ import App from './App.tsx';
 import './index.css';
 import registerServiceWorker from './serviceWorker.ts';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+// Create a separate root element to ensure React is properly initialized
+const root = ReactDOM.createRoot(document.getElementById('root')!);
+
+// Render the app
+root.render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
@@ -14,8 +18,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   </React.StrictMode>,
 );
 
-// Register service worker for offline functionality
-// Moving this after the React initialization to avoid potential issues
+// Register service worker for offline functionality after React has initialized
 setTimeout(() => {
   registerServiceWorker();
-}, 0);
+}, 100);
