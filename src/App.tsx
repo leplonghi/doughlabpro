@@ -4,9 +4,8 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "next-themes";
+import { TooltipProvider } from "@radix-ui/react-tooltip";
 
-import * as TooltipPrimitive from "@radix-ui/react-tooltip";
-import { ToastProvider } from "@/hooks/use-toast"; // Ensure this import is from hooks
 import AuthProvider from "./components/AuthProvider";
 import LoadingSpinner from "./components/ui/loading-spinner";
 import NotFound from "./pages/NotFound";
@@ -34,76 +33,79 @@ const queryClient = new QueryClient({
   },
 });
 
-// Import Toaster components
+// Import toast components
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as SonnerToaster } from "@/components/ui/sonner";
+import { ToastProvider } from "@/hooks/use-toast";
 
 const App = () => {
   return (
-    <TooltipPrimitive.Provider>
+    <React.StrictMode>
       <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
         <QueryClientProvider client={queryClient}>
-          <ToastProvider>
-            <AuthProvider>
-              <Routes>
-                <Route path="/" element={<Navigate to="/home" replace />} />
-                <Route path="/home" element={<Index />} />
-                <Route path="/auth" element={
-                  <Suspense fallback={<LoadingSpinner />}>
-                    <Auth />
-                  </Suspense>
-                } />
-                <Route path="/upgrade" element={
-                  <Suspense fallback={<LoadingSpinner />}>
-                    <Upgrade />
-                  </Suspense>
-                } />
-                <Route path="/privacy" element={
-                  <Suspense fallback={<LoadingSpinner />}>
-                    <Privacy />
-                  </Suspense>
-                } />
-                <Route path="/terms" element={
-                  <Suspense fallback={<LoadingSpinner />}>
-                    <Terms />
-                  </Suspense>
-                } />
-                <Route path="/contact" element={
-                  <Suspense fallback={<LoadingSpinner />}>
-                    <Contact />
-                  </Suspense>
-                } />
-                <Route path="/profile" element={
-                  <Suspense fallback={<LoadingSpinner />}>
-                    <Profile />
-                  </Suspense>
-                } />
-                <Route path="/calculator" element={
-                  <Suspense fallback={<LoadingSpinner />}>
-                    <DoughCalculator />
-                  </Suspense>
-                } />
-                <Route path="/sauce" element={
-                  <Suspense fallback={<LoadingSpinner />}>
-                    <Sauce />
-                  </Suspense>
-                } />
-                <Route path="/toppings" element={
-                  <Suspense fallback={<LoadingSpinner />}>
-                    <Toppings />
-                  </Suspense>
-                } />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-              
-              {/* Toast notifications */}
-              <Toaster />
-              <SonnerToaster />
-            </AuthProvider>
-          </ToastProvider>
+          <TooltipProvider>
+            <ToastProvider>
+              <AuthProvider>
+                <Routes>
+                  <Route path="/" element={<Navigate to="/home" replace />} />
+                  <Route path="/home" element={<Index />} />
+                  <Route path="/auth" element={
+                    <Suspense fallback={<LoadingSpinner />}>
+                      <Auth />
+                    </Suspense>
+                  } />
+                  <Route path="/upgrade" element={
+                    <Suspense fallback={<LoadingSpinner />}>
+                      <Upgrade />
+                    </Suspense>
+                  } />
+                  <Route path="/privacy" element={
+                    <Suspense fallback={<LoadingSpinner />}>
+                      <Privacy />
+                    </Suspense>
+                  } />
+                  <Route path="/terms" element={
+                    <Suspense fallback={<LoadingSpinner />}>
+                      <Terms />
+                    </Suspense>
+                  } />
+                  <Route path="/contact" element={
+                    <Suspense fallback={<LoadingSpinner />}>
+                      <Contact />
+                    </Suspense>
+                  } />
+                  <Route path="/profile" element={
+                    <Suspense fallback={<LoadingSpinner />}>
+                      <Profile />
+                    </Suspense>
+                  } />
+                  <Route path="/calculator" element={
+                    <Suspense fallback={<LoadingSpinner />}>
+                      <DoughCalculator />
+                    </Suspense>
+                  } />
+                  <Route path="/sauce" element={
+                    <Suspense fallback={<LoadingSpinner />}>
+                      <Sauce />
+                    </Suspense>
+                  } />
+                  <Route path="/toppings" element={
+                    <Suspense fallback={<LoadingSpinner />}>
+                      <Toppings />
+                    </Suspense>
+                  } />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+                
+                {/* Toast notifications */}
+                <Toaster />
+                <SonnerToaster />
+              </AuthProvider>
+            </ToastProvider>
+          </TooltipProvider>
         </QueryClientProvider>
       </ThemeProvider>
-    </TooltipPrimitive.Provider>
+    </React.StrictMode>
   );
 };
 
