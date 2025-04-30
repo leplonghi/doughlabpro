@@ -75,7 +75,7 @@ const DoughResults: React.FC<DoughResultsProps> = ({
     }
   };
 
-  // New function to format cup measurements properly
+  // New function to format cup measurements properly with correct conversion ratios
   const formatCupMeasurement = (grams: number): string => {
     // Base conversion - 1 cup = 120g of flour (approximate)
     const cups = grams / 120;

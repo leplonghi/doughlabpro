@@ -43,6 +43,10 @@
     --sidebar-accent-foreground: 0 0% 10%;
     --sidebar-border: 0 0% 90%;
     --sidebar-ring: 0 0% 80%;
+    
+    /* Pizza sauce colors */
+    --pizza-sauce-red: 0 85% 55%;
+    --pizza-sauce-white: 0 0% 95%;
   }
 }
 
@@ -136,6 +140,19 @@
   
   .tooltip-content {
     @apply absolute z-10 invisible group-hover:visible bg-black text-white text-xs rounded p-2 -mt-2 transform -translate-x-1/2 left-1/2 w-40 text-center;
+  }
+  
+  /* Sauce specific components */
+  .sauce-ingredient {
+    @apply flex items-center justify-between py-2 border-b border-gray-100;
+  }
+  
+  .sauce-step {
+    @apply py-2 pl-4 border-l-2 border-amber-300;
+  }
+  
+  .sauce-tip {
+    @apply bg-amber-50 p-4 rounded-lg border border-amber-200 my-4;
   }
 }
 
