@@ -21,81 +21,39 @@ type ToasterToast = ToastProps & {
   dismissible?: boolean;
 };
 
+type ToastActionType = 
+  | { type: "ADD_TOAST"; toast: ToasterToast }
+  | { type: "REMOVE_TOAST"; toastId: string }
+  | { type: "REMOVE_ALL_TOASTS" };
+
+const toastReducer = (state: ToasterToast[], action: ToastActionType): ToasterToast[] => {
+  switch (action.type) {
+    case "ADD_TOAST":
+      return state.length >= TOAST_LIMIT 
+        ? [...state.slice(1), action.toast]
+        : [...state, action.toast];
+    case "REMOVE_TOAST":
+      return state.filter(t => t.id !== action.toastId);
+    case "REMOVE_ALL_TOASTS":
+      return [];
+  }
+};
+
 // Create context for toast state
-const ToastContext = React.createContext<{
+type ToastContextType = {
   toasts: ToasterToast[];
   addToast: (toast: ToasterToast) => void;
   removeToast: (id: string) => void;
   removeAll: () => void;
-}>({
-  toasts: [],
-  addToast: () => {},
-  removeToast: () => {},
-  removeAll: () => {},
-});
+};
 
-// Standalone toast function for usage outside components
-export function toast(props: Omit<ToasterToast, "id">) {
-  const id = Math.random().toString(36).substring(2, 9);
-  
-  // Get the dispatch function from the context
-  const dispatch = toastDispatch;
-  
-  if (dispatch) {
-    dispatch({
-      type: "ADD_TOAST",
-      toast: {
-        ...props,
-        id,
-      },
-    });
-  }
-  
-  return id;
-}
+const ToastContext = React.createContext<ToastContextType | undefined>(undefined);
 
-// Toast dispatch reference
-let toastDispatch: React.Dispatch<{
-  type: "ADD_TOAST" | "REMOVE_TOAST" | "REMOVE_ALL_TOASTS";
-  toast?: ToasterToast;
-  toastId?: string;
-}> | null = null;
+// Create a separate ToastDispatchContext
+const ToastDispatchContext = React.createContext<React.Dispatch<ToastActionType> | undefined>(undefined);
 
-export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ 
-  children 
-}) => {
-  const [toasts, dispatch] = React.useReducer(
-    (state: ToasterToast[], action: {
-      type: "ADD_TOAST" | "REMOVE_TOAST" | "REMOVE_ALL_TOASTS";
-      toast?: ToasterToast;
-      toastId?: string;
-    }) => {
-      switch (action.type) {
-        case "ADD_TOAST":
-          if (!action.toast) return state;
-          
-          if (state.length >= TOAST_LIMIT) {
-            return [...state.slice(1), action.toast];
-          }
-          return [...state, action.toast];
-          
-        case "REMOVE_TOAST":
-          if (!action.toastId) return state;
-          return state.filter(t => t.id !== action.toastId);
-          
-        case "REMOVE_ALL_TOASTS":
-          return [];
-      }
-    },
-    []
-  );
-
-  React.useEffect(() => {
-    toastDispatch = dispatch;
-    return () => {
-      toastDispatch = null;
-    };
-  }, [dispatch]);
+export function ToastProvider({ children }: { children: React.ReactNode }) {
+  const [toasts, dispatch] = React.useReducer(toastReducer, []);
 
   const addToast = React.useCallback((toast: ToasterToast) => {
     dispatch({ type: "ADD_TOAST", toast });
@@ -109,14 +67,21 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
     dispatch({ type: "REMOVE_ALL_TOASTS" });
   }, []);
 
+  const contextValue = React.useMemo(
+    () => ({ toasts, addToast, removeToast, removeAll }),
+    [toasts, addToast, removeToast, removeAll]
+  );
+
   return (
-    <ToastContext.Provider value={{ toasts, addToast, removeToast, removeAll }}>
-      {children}
+    <ToastContext.Provider value={contextValue}>
+      <ToastDispatchContext.Provider value={dispatch}>
+        {children}
+      </ToastDispatchContext.Provider>
     </ToastContext.Provider>
   );
-};
+}
 
-export const useToast = () => {
+export function useToast() {
   const context = React.useContext(ToastContext);
 
   if (!context) {
@@ -140,4 +105,21 @@ export const useToast = () => {
     toasts,
     removeAll,
   };
+}
+
+// Standalone toast function
+export const toast = ({ title, description, variant = "default", action }: Omit<ToasterToast, "id">) => {
+  const id = Math.random().toString(36).substring(2, 9);
+  
+  // Use a safely queued method to add toast
+  setTimeout(() => {
+    const dispatch = React.useContext(ToastDispatchContext);
+    if (dispatch) {
+      dispatch({ type: "ADD_TOAST", toast: { id, title, description, variant, action } });
+    } else {
+      console.warn("Toast was called outside of ToastProvider context");
+    }
+  }, 0);
+  
+  return id;
 };
