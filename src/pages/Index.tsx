@@ -12,7 +12,7 @@ const Index: React.FC = () => {
       
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="container mx-auto md:py-16 grid md:grid-cols-2 gap-6 md:gap-20 items-center md:px-[50px] md:py-0 py-0 px-[152px]">
+        <section className="container mx-auto md:py-16 grid md:grid-cols-2 gap-6 md:gap-20 items-center md:px-[50px] md:py-0 px-[152px] py-0">
           <div className="hero-content order-2 md:order-1 mx-[13px] px-0">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Master Every Dough. Bake with Precision.</h1>
             <p className="text-lg text-muted-foreground mb-8">Smart dough calculator for pizza makers, bread lovers, and artisan bakers.</p>
