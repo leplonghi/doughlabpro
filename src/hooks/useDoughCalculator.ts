@@ -1,80 +1,22 @@
+
 import { useState } from 'react';
-import { PizzaStyle } from '@/components/PizzaStyleSelect';
+import { StyleType, DoughCalculatorState } from '@/types/DoughTypes';
 import { FermentationMethod } from '@/types/dough';
-import { BreadStyle } from '@/components/dough/BreadStyleSelector';
-
-interface DoughState {
-  flour: number;
-  hydration: number;
-  yeastType: 'fresh' | 'dry';
-  ballWeight: number;
-  numberOfBalls: number;
-  errors: {
-    flour?: string;
-    hydration?: string;
-  };
-  recipe?: {
-    flour: number;
-    water: number;
-    salt: number;
-    yeast: number;
-    oil: number;
-    sugar?: number;
-    butter?: number;
-    eggs?: number;
-    poolish?: {
-      flour: number;
-      water: number;
-      yeast: number;
-    };
-    biga?: {
-      flour: number;
-      water: number;
-      yeast: number;
-    };
-  };
-}
-
-type StyleType = 'napoletana' | 'newyork' | 'chicago' | 'baguette' | 'brioche' | 'focaccia';
+import { getInitialBallWeight, calculateDoughRecipe, calculateNumberOfBalls } from '@/utils/doughCalculations';
+import { validateDoughField } from '@/utils/doughValidation';
 
 export const useDoughCalculator = (style: StyleType, fermentationMethod: FermentationMethod) => {
-  // Set initial ball weight based on style
-  const getInitialBallWeight = () => {
-    if (['napoletana', 'newyork', 'chicago'].includes(style)) {
-      return 250; // Default pizza ball weight
-    } else if (style === 'baguette') {
-      return 350; // French baguette
-    } else if (style === 'brioche') {
-      return 600; // Brioche loaf
-    } else if (style === 'focaccia') {
-      return 500; // Focaccia sheet
-    }
-    return 250; // Default
-  };
-
-  const [state, setState] = useState<DoughState>({
+  const [state, setState] = useState<DoughCalculatorState>({
     flour: 1000,
     hydration: 60,
     yeastType: 'dry',
-    ballWeight: getInitialBallWeight(),
+    ballWeight: getInitialBallWeight(style),
     numberOfBalls: 4,
     errors: {},
   });
 
   const validateField = (field: string, value: any) => {
-    const errors: Record<string, string> = {};
-    
-    if (field === 'flour' || field === 'all') {
-      if (!state.flour || state.flour < 100) {
-        errors.flour = 'Please enter a valid flour amount (min 100g)';
-      }
-    }
-    
-    if (field === 'hydration' || field === 'all') {
-      if (!state.hydration || state.hydration < 50 || state.hydration > 90) {
-        errors.hydration = 'Hydration should be between 50% and 90%';
-      }
-    }
+    const errors = validateDoughField(field, value, state);
     
     setState(prev => ({
       ...prev,
@@ -92,94 +34,13 @@ export const useDoughCalculator = (style: StyleType, fermentationMethod: Ferment
       return;
     }
     
-    const { flour, hydration, yeastType } = state;
-    const water = (flour * hydration) / 100;
-    const salt = (flour * 2.5) / 100;
-    const yeast = yeastType === 'fresh' ? (flour * 0.3) / 100 : (flour * 0.15) / 100;
+    const { flour, hydration, yeastType, ballWeight } = state;
     
-    // Calculate oil and sugar based on style
-    let oil = 0;
-    let sugar = 0;
-    let butter = 0;
-    let eggs = 0;
+    // Calculate the recipe
+    const recipe = calculateDoughRecipe(flour, hydration, yeastType, style, fermentationMethod);
     
-    // Determine dough type from style
-    const isPizza = ['napoletana', 'newyork', 'chicago'].includes(style);
-    
-    if (isPizza) {
-      if (style === 'napoletana') {
-        oil = (flour * 1.5) / 100;
-        sugar = 0;
-      } else if (style === 'newyork') {
-        oil = (flour * 2.5) / 100;
-        sugar = (flour * 1.5) / 100;
-      } else if (style === 'chicago') {
-        oil = (flour * 5) / 100;
-        sugar = (flour * 2) / 100;
-      }
-    } else {
-      if (style === 'baguette') {
-        oil = 0;
-        sugar = 0;
-      } else if (style === 'brioche') {
-        butter = (flour * 15) / 100;
-        sugar = (flour * 8) / 100;
-        eggs = Math.ceil((flour * 20) / 100 / 50); // Approximately 50g per egg
-      } else if (style === 'focaccia') {
-        oil = (flour * 8) / 100;
-        sugar = (flour * 1) / 100;
-      }
-    }
-    
-    const totalWeight = flour + water + salt + yeast + (butter || oil) + sugar;
-    const numberOfBalls = Math.floor(totalWeight / state.ballWeight);
-    
-    let recipe: DoughState['recipe'] = {
-      flour,
-      water,
-      salt,
-      yeast,
-      oil: butter || oil,
-      sugar,
-    };
-    
-    // Add special ingredients for bread types
-    if (style === 'brioche') {
-      recipe.butter = butter;
-      recipe.eggs = eggs;
-    }
-    
-    if (fermentationMethod === 'poolish') {
-      const poolishFlour = flour * 0.3;
-      const poolishWater = poolishFlour;
-      const poolishYeast = poolishFlour * 0.001;
-      
-      recipe = {
-        ...recipe,
-        flour: flour - poolishFlour,
-        water: water - poolishWater,
-        poolish: {
-          flour: poolishFlour,
-          water: poolishWater,
-          yeast: poolishYeast,
-        }
-      };
-    } else if (fermentationMethod === 'biga') {
-      const bigaFlour = flour * 0.3;
-      const bigaWater = bigaFlour * 0.6;
-      const bigaYeast = bigaFlour * 0.0005;
-      
-      recipe = {
-        ...recipe,
-        flour: flour - bigaFlour,
-        water: water - bigaWater,
-        biga: {
-          flour: bigaFlour,
-          water: bigaWater,
-          yeast: bigaYeast,
-        }
-      };
-    }
+    // Calculate number of balls
+    const numberOfBalls = calculateNumberOfBalls(recipe, ballWeight);
     
     setState(prev => ({
       ...prev,
@@ -198,7 +59,7 @@ export const useDoughCalculator = (style: StyleType, fermentationMethod: Ferment
       flour: 1000,
       hydration: 60,
       yeastType: 'dry',
-      ballWeight: getInitialBallWeight(),
+      ballWeight: getInitialBallWeight(style),
       numberOfBalls: 4,
       errors: {},
       recipe: undefined
