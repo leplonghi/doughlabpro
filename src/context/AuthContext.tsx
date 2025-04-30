@@ -1,5 +1,5 @@
 
-import React from 'react';
+import * as React from 'react';
 import { toast } from '@/components/ui/sonner';
 import { useTranslation } from 'react-i18next';
 
