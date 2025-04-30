@@ -14,10 +14,10 @@ const Auth: React.FC = () => {
   const { user, loading } = useAuth();
   const { t } = useTranslation();
   
-  // If user is already authenticated, redirect to calculator
+  // If user is already authenticated, redirect to home
   useEffect(() => {
     if (user && !loading) {
-      navigate('/calculator');
+      navigate('/home');
     }
   }, [user, loading, navigate]);
 

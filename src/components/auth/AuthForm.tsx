@@ -4,11 +4,13 @@ import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/hooks/use-toast';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 export function AuthForm() {
   const { signInWithGoogle } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const handleGoogleSignIn = async () => {
     try {
@@ -16,6 +18,9 @@ export function AuthForm() {
       const { error } = await signInWithGoogle();
       
       if (error) throw error;
+      
+      // Successfully authenticated, navigate to home
+      navigate('/home');
     } catch (error: any) {
       toast({
         title: t('auth.signInFailed'),
