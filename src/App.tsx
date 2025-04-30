@@ -5,7 +5,7 @@ import { lazy, Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "next-themes";
 
-import { TooltipProvider } from "@/components/ui/tooltip";
+import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import { ToastProvider } from "@/hooks/use-toast"; // Ensure this import is from hooks
 import AuthProvider from "./components/AuthProvider";
 import LoadingSpinner from "./components/ui/loading-spinner";
@@ -40,9 +40,9 @@ import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 
 const App = () => {
   return (
-    <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
+    <TooltipPrimitive.Provider>
+      <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
+        <QueryClientProvider client={queryClient}>
           <ToastProvider>
             <AuthProvider>
               <Routes>
@@ -101,9 +101,9 @@ const App = () => {
               <SonnerToaster />
             </AuthProvider>
           </ToastProvider>
-        </TooltipProvider>
-      </QueryClientProvider>
-    </ThemeProvider>
+        </QueryClientProvider>
+      </ThemeProvider>
+    </TooltipPrimitive.Provider>
   );
 };
 

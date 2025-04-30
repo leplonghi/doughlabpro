@@ -4,6 +4,7 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { InfoCircledIcon } from '@radix-ui/react-icons';
 import { useTranslation } from 'react-i18next';
+import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import { 
   Tooltip,
   TooltipContent,
@@ -23,14 +24,16 @@ const FlourInput: React.FC<FlourInputProps> = ({ flour, onChange, error }) => {
     <div className="space-y-2">
       <div className="flex items-center gap-2">
         <Label htmlFor="flour">{t('calculator.flour')}</Label>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <span className="cursor-help"><InfoCircledIcon className="h-4 w-4 text-muted-foreground" /></span>
-          </TooltipTrigger>
-          <TooltipContent className="max-w-xs">
-            <p>{t('calculator.ingredients.amountDescription')}</p>
-          </TooltipContent>
-        </Tooltip>
+        <TooltipPrimitive.Provider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <span className="cursor-help"><InfoCircledIcon className="h-4 w-4 text-muted-foreground" /></span>
+            </TooltipTrigger>
+            <TooltipContent className="max-w-xs">
+              <p>{t('calculator.ingredients.amountDescription')}</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipPrimitive.Provider>
       </div>
       <Input 
         id="flour" 
