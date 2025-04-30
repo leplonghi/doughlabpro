@@ -11,7 +11,7 @@ import LoadingSpinner from "./components/ui/loading-spinner";
 import NotFound from "./pages/NotFound";
 import Index from "./pages/Index";
 
-// Import toast component
+// Import Sonner Toaster component
 import { Toaster } from "@/components/ui/toaster";
 
 // Lazy-loaded components
@@ -93,7 +93,7 @@ const App = () => {
               <Route path="*" element={<NotFound />} />
             </Routes>
             
-            {/* Only include a single toast notification system */}
+            {/* Single toast notification system using Sonner */}
             <Toaster />
           </AuthProvider>
         </TooltipProvider>

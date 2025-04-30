@@ -1,6 +1,6 @@
 
 import { useState, useCallback } from 'react';
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "@/components/ui/toaster"; // Using our consolidated toast import
 import { useTranslation } from 'react-i18next';
 
 export interface Profile {
@@ -12,7 +12,6 @@ export interface Profile {
 }
 
 export const useProfile = () => {
-  const { toast } = useToast();
   const { t } = useTranslation();
   
   const [loading, setLoading] = useState(false);
@@ -43,7 +42,7 @@ export const useProfile = () => {
     } finally {
       setLoading(false);
     }
-  }, [toast, t]);
+  }, [t]);
 
   const updateProfile = useCallback(async (updates: Partial<Profile>) => {
     setLoading(true);
@@ -68,7 +67,7 @@ export const useProfile = () => {
     } finally {
       setLoading(false);
     }
-  }, [toast, t]);
+  }, [t]);
 
   return {
     profile,

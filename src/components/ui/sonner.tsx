@@ -5,8 +5,8 @@ import { Toaster as Sonner } from "sonner"
 type ToasterProps = React.ComponentProps<typeof Sonner>
 
 const Toaster = ({ ...props }: ToasterProps) => {
-  // Use useState hook only inside a component context
-  const [, setMounted] = React.useState(false);
+  // UseState hook to track component mounting
+  const [mounted, setMounted] = React.useState(false);
   
   // Use useEffect to set mounted state
   React.useEffect(() => {
@@ -36,4 +36,5 @@ const Toaster = ({ ...props }: ToasterProps) => {
   )
 }
 
-export { Toaster, toast } from "sonner"
+export { Toaster }
+export { toast } from "sonner"
