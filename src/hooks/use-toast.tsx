@@ -39,9 +39,9 @@ export function useToast() {
     toasts: [], // Sonner manages its own toast state
     removeAll: () => sonnerToast.dismiss()
   };
-};
+}
 
-// No provider needed for Sonner
+// This ToastProvider is a no-op as we're using Sonner's own provider in App.tsx
 export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
   return <>{children}</>;
 };

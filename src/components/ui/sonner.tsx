@@ -5,23 +5,12 @@ import { Toaster as Sonner } from "sonner"
 type ToasterProps = React.ComponentProps<typeof Sonner>
 
 const Toaster = ({ ...props }: ToasterProps) => {
-  const [mounted, setMounted] = React.useState(false);
+  // No need for client-side only rendering check that uses useState
+  // This was causing the error with null React context
   
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Only render when on client side
-  if (!mounted) {
-    return null;
-  }
-  
-  // Set a default theme instead of using the theme provider
-  const theme = "light";
-
   return (
     <Sonner
-      theme={theme as ToasterProps["theme"]}
+      theme="light"
       className="toaster group"
       toastOptions={{
         classNames: {
