@@ -1,7 +1,7 @@
 
 import * as React from 'react';
 import { createContext, useContext, useEffect, useState } from 'react';
-import { toast } from '@/components/ui/sonner';
+import { toast } from 'sonner';
 import { useTranslation } from 'react-i18next';
 import { supabase } from '@/lib/supabase';
 import { Session, User } from '@supabase/supabase-js';

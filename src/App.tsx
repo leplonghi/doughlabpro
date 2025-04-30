@@ -11,9 +11,7 @@ import LoadingSpinner from "./components/ui/loading-spinner";
 import NotFound from "./pages/NotFound";
 import Index from "./pages/Index";
 import { AuthGuard } from "./components/auth/AuthGuard";
-
-// Import Sonner Toaster component
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "sonner";
 
 // Lazy-loaded components
 const Sauce = lazy(() => import("./pages/Sauce"));
@@ -105,7 +103,6 @@ const App = () => {
           <BrowserRouter>
             <AuthProvider>
               <AppRoutes />
-              {/* Single toast notification system using Sonner */}
               <Toaster />
             </AuthProvider>
           </BrowserRouter>
