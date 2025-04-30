@@ -1,6 +1,6 @@
 
 import * as React from "react";
-import { Routes, Route, Navigate, useLocation, BrowserRouter } from "react-router-dom";
+import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "next-themes";
@@ -22,6 +22,7 @@ const Contact = lazy(() => import("./pages/Contact"));
 const Auth = lazy(() => import("./pages/Auth"));
 const Profile = lazy(() => import("./pages/Profile"));
 const Upgrade = lazy(() => import("./pages/Upgrade"));
+const Home = lazy(() => import("./pages/Home"));
 const DoughCalculator = lazy(() => import("./components/DoughCalculator"));
 
 // Create query client with optimized settings
@@ -39,7 +40,14 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/home" replace />} />
-      <Route path="/home" element={<Index />} />
+      <Route path="/home" element={
+        <Suspense fallback={<LoadingSpinner />}>
+          <AuthGuard fallbackPath="/landing">
+            <Home />
+          </AuthGuard>
+        </Suspense>
+      } />
+      <Route path="/landing" element={<Index />} />
       <Route path="/auth" element={
         <Suspense fallback={<LoadingSpinner />}>
           <Auth />

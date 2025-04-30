@@ -4,7 +4,12 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import LoadingSpinner from '@/components/ui/loading-spinner';
 
-export function AuthGuard({ children }: { children: React.ReactNode }) {
+interface AuthGuardProps {
+  children: React.ReactNode;
+  fallbackPath?: string;
+}
+
+export function AuthGuard({ children, fallbackPath = '/auth' }: AuthGuardProps) {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -12,12 +17,12 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (!loading && !user) {
       // Redirect to auth page with return URL
-      navigate('/auth', { 
+      navigate(fallbackPath, { 
         state: { returnUrl: location.pathname },
         replace: true 
       });
     }
-  }, [user, loading, navigate, location]);
+  }, [user, loading, navigate, location, fallbackPath]);
 
   // Show loading spinner while checking authentication
   if (loading) {
