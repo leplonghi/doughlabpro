@@ -21,6 +21,22 @@ const resources = {
           ballWeightDescription: 'Weight of each individual dough ball',
           ballCountResult: 'Makes approximately {{count}} dough ball(s)'
         }
+      },
+      auth: {
+        signIn: 'Sign In',
+        signInToAccess: 'Sign in to access all features',
+        continueWithGoogle: 'Continue with Google',
+        signInFailed: 'Sign in failed',
+        unexpectedError: 'An unexpected error occurred',
+        unlockProFeatures: 'Sign in to unlock pro features'
+      },
+      common: {
+        pleaseWait: 'Please wait...',
+        loading: 'Loading...',
+        error: 'Error',
+        success: 'Success',
+        warning: 'Warning',
+        info: 'Information'
       }
     }
   }
