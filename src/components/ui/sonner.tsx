@@ -5,14 +5,17 @@ import { Toaster as Sonner } from "sonner"
 type ToasterProps = React.ComponentProps<typeof Sonner>
 
 const Toaster = ({ ...props }: ToasterProps) => {
-  // UseState hook to track component mounting
   const [mounted, setMounted] = React.useState(false);
   
-  // Use useEffect to set mounted state
   React.useEffect(() => {
     setMounted(true);
   }, []);
 
+  // Only render when on client side
+  if (!mounted) {
+    return null;
+  }
+  
   // Set a default theme instead of using the theme provider
   const theme = "light";
 

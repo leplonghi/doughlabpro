@@ -1,6 +1,6 @@
 
 import { useState, useCallback } from 'react';
-import { toast } from "@/components/ui/toaster"; // Using our consolidated toast import
+import { toast } from "@/hooks/use-toast";
 import { useTranslation } from 'react-i18next';
 
 export interface Profile {

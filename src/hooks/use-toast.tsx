@@ -1,14 +1,40 @@
 
 import * as React from "react";
-import { toast as sonnerToast } from "sonner";
+import { toast as sonnerToast, type ToastOptions as SonnerToastOptions } from "sonner";
 
-// Re-export the toast function from sonner
-export const toast = sonnerToast;
+// Define toast type that matches the API used in components
+export type ToastProps = {
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  action?: React.ReactNode;
+  variant?: "default" | "destructive" | "success";
+};
+
+// Convert our toast format to Sonner's format
+export const toast = (props: ToastProps) => {
+  const { title, description, variant = "default", action } = props;
+  
+  // Convert our variant to Sonner's style
+  const style: React.CSSProperties = {};
+  if (variant === "destructive") {
+    style.backgroundColor = "var(--destructive)";
+    style.color = "var(--destructive-foreground)";
+  } else if (variant === "success") {
+    style.backgroundColor = "var(--success)"; 
+    style.color = "var(--success-foreground)";
+  }
+
+  return sonnerToast(title as string, {
+    description,
+    action: action ? { label: 'Action', onClick: () => {} } : undefined,
+    style
+  });
+};
 
 // Helper function to maintain API compatibility with existing code
 export function useToast() {
   return {
-    toast: sonnerToast,
+    toast,
     dismiss: (id: string) => sonnerToast.dismiss(id),
     toasts: [], // Sonner manages its own toast state
     removeAll: () => sonnerToast.dismiss()
@@ -18,13 +44,4 @@ export function useToast() {
 // No provider needed for Sonner
 export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
   return <>{children}</>;
-};
-
-// For compatibility with existing code
-export type ToastProps = {
-  id?: string;
-  title?: React.ReactNode;
-  description?: React.ReactNode;
-  action?: React.ReactNode;
-  variant?: "default" | "destructive" | "success";
 };
