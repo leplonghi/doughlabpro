@@ -38,8 +38,8 @@ const queryClient = new QueryClient({
 
 const App = () => {
   return (
-    <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
         <TooltipProvider>
           <AuthProvider>
             <Routes>
@@ -97,8 +97,8 @@ const App = () => {
             <Toaster />
           </AuthProvider>
         </TooltipProvider>
-      </QueryClientProvider>
-    </ThemeProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 };
 
