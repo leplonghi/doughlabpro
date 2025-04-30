@@ -1,6 +1,11 @@
 
 import React from 'react';
-import { TooltipProvider, Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+  TooltipProvider,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger
+} from "@/components/ui/tooltip";
 import { Info } from 'lucide-react';
 
 interface IngredientItemProps {
