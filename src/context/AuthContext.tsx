@@ -47,6 +47,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     // Set up auth state listener FIRST
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, currentSession) => {
+        console.log('Auth state changed:', event, currentSession?.user?.id);
         setSession(currentSession);
         setUser(currentSession?.user ?? null);
         setLoading(false);
@@ -64,6 +65,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     // THEN check for existing session
     supabase.auth.getSession().then(({ data: { session: currentSession } }) => {
+      console.log('Initial session check:', currentSession?.user?.id);
       setSession(currentSession);
       setUser(currentSession?.user ?? null);
       setLoading(false);
@@ -87,14 +89,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: window.location.origin,
+          redirectTo: `${window.location.origin}/home`,
         }
       });
       
       if (error) throw error;
       return { error: null };
     } catch (error: any) {
-      toast(t('auth.signInFailed'), {
+      console.error('Google Sign In Error:', error);
+      toast.error(t('auth.signInFailed'), {
         description: error.message || t('auth.unexpectedError'),
       });
       setLoading(false);
@@ -111,7 +114,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       
       return { error: null };
     } catch (error: any) {
-      toast(t('auth.signOutFailed'), {
+      toast.error(t('auth.signOutFailed'), {
         description: error.message || t('auth.unexpectedError'),
       });
       setLoading(false);

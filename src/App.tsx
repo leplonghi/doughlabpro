@@ -6,13 +6,13 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "next-themes";
 import { TooltipProvider } from "@radix-ui/react-tooltip";
 
-import AuthProvider from "./components/AuthProvider";
+import { AuthProvider } from "./context/AuthContext";
 import LoadingSpinner from "./components/ui/loading-spinner";
 import NotFound from "./pages/NotFound";
 import Index from "./pages/Index";
 
 // Import Sonner Toaster component
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "@/components/ui/sonner";
 
 // Lazy-loaded components
 const Sauce = lazy(() => import("./pages/Sauce"));
@@ -43,7 +43,7 @@ const App = () => {
         <TooltipProvider>
           <AuthProvider>
             <Routes>
-              <Route path="/" element={<Navigate to="/auth" replace />} />
+              <Route path="/" element={<Navigate to="/home" replace />} />
               <Route path="/home" element={<Index />} />
               <Route path="/auth" element={
                 <Suspense fallback={<LoadingSpinner />}>

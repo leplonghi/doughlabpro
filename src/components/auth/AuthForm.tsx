@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
-import { toast } from '@/components/ui/sonner'; // Updated import
+import { toast } from '@/components/ui/sonner';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { LogIn, Loader2 } from 'lucide-react';
@@ -24,16 +24,15 @@ export function AuthForm() {
       if (error) throw error;
       
       // Success toast - though Auth state change in context will handle redirect
-      toast(t('auth.signInSuccess'), {
+      toast.success(t('auth.signInSuccess'), {
         description: t('auth.redirecting'),
       });
       
-      // Navigate is here as a fallback, but the auth state change should handle it
-      // This helps in case the auth state listener takes time to trigger
-      navigate('/home');
+      // Note: Auth state change in context should handle the redirect
+      // This is just a fallback and typically won't execute
     } catch (error: any) {
       console.error('Google Sign In Error:', error);
-      toast(t('auth.signInFailed'), {
+      toast.error(t('auth.signInFailed'), {
         description: error.message || t('auth.unexpectedError'),
       });
     } finally {
