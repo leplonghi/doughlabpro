@@ -1,5 +1,6 @@
 
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import * as React from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { toast } from '@/components/ui/sonner';
 import { useTranslation } from 'react-i18next';
 import { supabase } from '@/lib/supabase';
