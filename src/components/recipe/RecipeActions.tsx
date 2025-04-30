@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Save, Printer, RotateCcw, Lock } from 'lucide-react';
-import { toast } from "@/components/ui/toaster"; // Using our new consolidated import
+import { toast } from "@/hooks/use-toast"; // Using our updated toast import
 import ProButton from '@/components/usage/ProButton';
 
 interface RecipeActionsProps {
