@@ -85,15 +85,13 @@ const Sauce: React.FC = () => {
                   {selectedSauceType === 'napoletana' ? 'Neapolitan Pizza Sauce' : 
                    selectedSauceType === 'newyork' ? 'New York-Style Pizza Sauce' :
                    selectedSauceType === 'chicago' ? 'Chicago Deep-Dish Sauce' :
-                   selectedSauceType === 'focaccia' ? 'White Pizza Sauce' :
-                   'Classic Pizza Sauce'}
+                   'White Pizza Sauce'}
                 </CardTitle>
                 <CardDescription>
                   Recipe for {selectedSauceType === 'napoletana' ? 'Neapolitan' : 
                    selectedSauceType === 'newyork' ? 'New York-Style' :
                    selectedSauceType === 'chicago' ? 'Chicago Deep-Dish' :
-                   selectedSauceType === 'focaccia' ? 'White Pizza' :
-                   'Classic'} sauce
+                   'White Pizza'} sauce
                 </CardDescription>
               </CardHeader>
               <CardContent>
