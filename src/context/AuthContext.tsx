@@ -1,51 +1,120 @@
 
 import * as React from 'react';
-import { toast } from '@/components/ui/sonner';
-import { useTranslation } from 'react-i18next';
+import { createContext, useContext } from 'react';
 
-// Define the AuthContext type with needed properties
-type AuthContextType = {
-  user: null;  // Set to null since we're not using auth
-  loading: boolean;
-  signInWithGoogle: () => Promise<{error: null}>;
+// Define auth state types
+interface AuthState {
+  isAuthenticated: boolean;
+  user: null | {
+    id: string;
+    email: string;
+    name?: string;
+  };
+}
+
+// Define auth context type
+interface AuthContextType {
+  authState: AuthState;
+  login: (email: string, password: string) => Promise<void>;
+  logout: () => Promise<void>;
+  register: (email: string, password: string, name?: string) => Promise<void>;
+  isLoading: boolean;
+}
+
+// Create context with default values
+const defaultAuthContext: AuthContextType = {
+  authState: {
+    isAuthenticated: false,
+    user: null,
+  },
+  login: async () => {},
+  logout: async () => {},
+  register: async () => {},
+  isLoading: false,
 };
 
-// Create the auth context with default values
-const AuthContext = React.createContext<AuthContextType>({
-  user: null,
-  loading: false,
-  signInWithGoogle: async () => ({error: null}),
-});
+// Create the context
+const AuthContext = createContext<AuthContextType>(defaultAuthContext);
 
-// Hook to use the auth context
-export const useAuth = () => {
-  const context = React.useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
-};
+// Custom hook for using auth context
+export const useAuth = () => useContext(AuthContext);
 
-// Provider component to wrap the app with auth context
+// Auth provider component
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [loading, setLoading] = React.useState(false);
-  const { t } = useTranslation();
+  const [authState, setAuthState] = React.useState<AuthState>({
+    isAuthenticated: false,
+    user: null,
+  });
+  const [isLoading, setIsLoading] = React.useState(false);
 
-  // Mock implementation of signInWithGoogle since auth is disabled
-  const signInWithGoogle = async () => {
-    setLoading(true);
-    // Wait a bit to simulate network request
-    await new Promise(resolve => setTimeout(resolve, 500));
-    toast.info(t('auth.authDisabled', 'All features are free - no login needed'));
-    setLoading(false);
-    return { error: null };
+  // Simplified login function for demo
+  const login = async (email: string, password: string) => {
+    setIsLoading(true);
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Set authenticated user
+      setAuthState({
+        isAuthenticated: true,
+        user: {
+          id: '1',
+          email,
+          name: 'Demo User'
+        }
+      });
+    } catch (error) {
+      console.error('Login error:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const value = {
-    user: null, // Always null since we're not using auth
-    loading,
-    signInWithGoogle,
+  // Logout function
+  const logout = async () => {
+    setIsLoading(true);
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      // Reset auth state
+      setAuthState({
+        isAuthenticated: false,
+        user: null
+      });
+    } catch (error) {
+      console.error('Logout error:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  // Register function
+  const register = async (email: string, password: string, name?: string) => {
+    setIsLoading(true);
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Set authenticated user after registration
+      setAuthState({
+        isAuthenticated: true,
+        user: {
+          id: '1',
+          email,
+          name: name || 'New User'
+        }
+      });
+    } catch (error) {
+      console.error('Registration error:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <AuthContext.Provider value={{ authState, login, logout, register, isLoading }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };

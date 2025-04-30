@@ -18,6 +18,7 @@ const Privacy = lazy(() => import("./pages/Privacy"));
 const Terms = lazy(() => import("./pages/Terms"));
 const Contact = lazy(() => import("./pages/Contact"));
 const DoughCalculator = lazy(() => import("./components/DoughCalculator"));
+const Profile = lazy(() => import("./pages/Profile"));
 
 // Create query client with optimized settings
 const queryClient = new QueryClient({
@@ -71,6 +72,11 @@ const App: React.FC = () => {
               <Route path="/toppings" element={
                 <Suspense fallback={<LoadingSpinner />}>
                   <Toppings />
+                </Suspense>
+              } />
+              <Route path="/profile" element={
+                <Suspense fallback={<LoadingSpinner />}>
+                  <Profile />
                 </Suspense>
               } />
               <Route path="*" element={<NotFound />} />
