@@ -25,19 +25,23 @@ const Auth: React.FC = () => {
     <div className="flex flex-col min-h-screen">
       <Header />
       
-      <div className="flex-grow flex items-center justify-center py-10 px-4 bg-gradient-to-br from-white to-pizza-cream/30">
-        <Card className="w-full max-w-md shadow-lg transform transition-all duration-300 hover:shadow-xl">
-          <CardHeader className="space-y-1 text-center">
-            <CardTitle className="text-2xl font-bold text-gray-800">{t('auth.signIn')}</CardTitle>
-            <CardDescription className="text-gray-600">
+      <div className="flex-grow flex items-center justify-center py-10 px-4 bg-gradient-to-b from-white via-white to-pizza-cream/20">
+        <Card className="w-full max-w-md rounded-xl shadow-xl border-0 overflow-hidden transform transition-all duration-300 hover:shadow-2xl">
+          <div className="absolute inset-0 bg-gradient-to-br from-pizza-cream/5 to-pizza-cream/20 z-0"></div>
+          
+          <CardHeader className="space-y-2 text-center relative z-10 pb-6">
+            <CardTitle className="text-3xl font-bold text-gray-800">{t('auth.signIn')}</CardTitle>
+            <CardDescription className="text-gray-600 text-lg">
               {t('auth.signInToAccess')}
             </CardDescription>
           </CardHeader>
-          <CardContent className="grid gap-4">
+          
+          <CardContent className="grid gap-6 relative z-10 px-8">
             <AuthForm />
           </CardContent>
-          <CardFooter className="flex justify-center border-t pt-4">
-            <p className="text-sm text-center text-gray-500">
+          
+          <CardFooter className="flex justify-center border-t pt-6 pb-8 text-center relative z-10">
+            <p className="text-sm text-center text-gray-500 max-w-xs">
               {t('auth.unlockProFeatures')}
             </p>
           </CardFooter>

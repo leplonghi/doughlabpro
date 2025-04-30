@@ -28,7 +28,7 @@ const resources = {
         continueWithGoogle: 'Continue with Google',
         signInFailed: 'Sign in failed',
         unexpectedError: 'An unexpected error occurred',
-        unlockProFeatures: 'Sign in to unlock pro features',
+        unlockProFeatures: 'Sign in to unlock premium features',
         continueWith: 'Continue with',
         continueAsGuest: 'Continue as Guest',
         signInSuccess: 'Successfully signed in',

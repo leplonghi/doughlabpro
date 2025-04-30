@@ -16,18 +16,25 @@ export function AuthForm() {
   const handleGoogleSignIn = async () => {
     try {
       setIsLoading(true);
+      // Clear previous errors from local storage if any
+      localStorage.removeItem('supabase.auth.error');
+      
       const { error } = await signInWithGoogle();
       
       if (error) throw error;
       
-      // Success is handled by the auth state change in AuthContext
+      // Success toast - though Auth state change in context will handle redirect
       toast({
         title: t('auth.signInSuccess'),
         description: t('auth.redirecting'),
         variant: 'default',
       });
+      
+      // Navigate is here as a fallback, but the auth state change should handle it
+      // This helps in case the auth state listener takes time to trigger
       navigate('/home');
     } catch (error: any) {
+      console.error('Google Sign In Error:', error);
       toast({
         title: t('auth.signInFailed'),
         description: error.message || t('auth.unexpectedError'),
@@ -39,20 +46,20 @@ export function AuthForm() {
   };
 
   return (
-    <div className="space-y-6 w-full mt-6">
+    <div className="space-y-6 w-full">
       <div className="relative">
         <div className="absolute inset-0 flex items-center">
           <span className="w-full border-t" />
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-background px-2 text-muted-foreground">
+          <span className="bg-background px-3 text-muted-foreground font-medium">
             {t('auth.continueWith')}
           </span>
         </div>
       </div>
       
       <Button
-        className="w-full bg-white text-black border border-gray-300 hover:bg-gray-50 h-12 font-medium flex items-center justify-center gap-3 shadow-sm transition-all duration-200"
+        className="w-full bg-white hover:bg-gray-50 text-black border border-gray-300 h-12 font-medium flex items-center justify-center gap-3 shadow-sm hover:shadow-md transition-all duration-300 rounded-lg"
         onClick={handleGoogleSignIn}
         disabled={isLoading}
       >
@@ -76,10 +83,10 @@ export function AuthForm() {
         )}
       </Button>
       
-      <div className="mt-8 text-center">
+      <div className="pt-4 text-center">
         <Button 
           variant="link" 
-          className="text-sm text-gray-500 hover:text-black"
+          className="text-sm text-gray-500 hover:text-black transition-colors"
           onClick={() => navigate('/home')}
           disabled={isLoading}
         >
