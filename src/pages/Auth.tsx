@@ -2,7 +2,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthForm } from '@/components/auth/AuthForm';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAuth } from '@/context/AuthContext';
 import { useEffect } from 'react';
 import Header from '@/components/Header';
@@ -39,12 +39,6 @@ const Auth: React.FC = () => {
           <CardContent className="grid gap-6 relative z-10 px-8">
             <AuthForm />
           </CardContent>
-          
-          <CardFooter className="flex justify-center border-t pt-6 pb-8 text-center relative z-10">
-            <p className="text-sm text-center text-gray-500 max-w-xs">
-              {t('auth.unlockProFeatures')}
-            </p>
-          </CardFooter>
         </Card>
       </div>
       

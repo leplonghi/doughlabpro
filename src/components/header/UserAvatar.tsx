@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { User, LogIn } from 'lucide-react';
@@ -29,7 +30,7 @@ const UserAvatar: React.FC = () => {
         onClick={() => navigate('/auth')}
       >
         <LogIn size={18} />
-        <span className="hidden md:inline">{t('auth.signIn')}</span>
+        <span className="hidden md:inline">{t('auth.signInWithGoogle')}</span>
       </Button>
     );
   }

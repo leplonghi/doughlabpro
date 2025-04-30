@@ -43,17 +43,6 @@ export function AuthForm() {
 
   return (
     <div className="space-y-6 w-full">
-      <div className="relative">
-        <div className="absolute inset-0 flex items-center">
-          <span className="w-full border-t" />
-        </div>
-        <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-background px-3 text-muted-foreground font-medium">
-            {t('auth.continueWith')}
-          </span>
-        </div>
-      </div>
-      
       <Button
         className="w-full bg-white hover:bg-gray-50 text-black border border-gray-300 h-12 font-medium flex items-center justify-center gap-3 shadow-sm hover:shadow-md transition-all duration-300 rounded-lg"
         onClick={handleGoogleSignIn}
