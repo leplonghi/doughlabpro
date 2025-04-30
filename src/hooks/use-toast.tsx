@@ -49,7 +49,7 @@ type ToastContextType = {
 
 const ToastContext = React.createContext<ToastContextType | undefined>(undefined);
 
-// Create a standalone toast function using a mutable reference to the dispatch
+// Create a singleton variable to store the dispatch function
 let toastDispatch: React.Dispatch<ToastActionType> | undefined;
 
 export function ToastProvider({ children }: { children: React.ReactNode }) {
@@ -61,7 +61,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
     return () => {
       toastDispatch = undefined;
     };
-  }, [dispatch]);
+  }, []);
 
   const addToast = React.useCallback((toast: ToasterToast) => {
     dispatch({ type: "ADD_TOAST", toast });
