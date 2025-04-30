@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
-import { toast } from '@/components/ui/sonner';
+import { toast } from '@/components/ui/use-toast';
 import { useTranslation } from 'react-i18next';
 
 export function AuthForm() {
@@ -17,7 +17,11 @@ export function AuthForm() {
       
       if (error) throw error;
     } catch (error: any) {
-      toast.error(error.message || t('auth.unexpectedError', 'An unexpected error occurred'));
+      toast({
+        title: t('auth.signInFailed'),
+        description: error.message || t('auth.unexpectedError'),
+        variant: 'destructive',
+      });
     } finally {
       setIsLoading(false);
     }

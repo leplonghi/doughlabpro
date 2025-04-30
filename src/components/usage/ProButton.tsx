@@ -1,15 +1,46 @@
+
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
+import { useAuth } from "@/context/AuthContext";
+import { useNavigate } from "react-router-dom";
+
 const ProButton: React.FC = () => {
-  return <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline" className="border-amber-400 text-gray-950 py-0 px-[5px] rounded-xl mx-0 bg-amber-500 hover:bg-amber-400">
-          <span className="mr-1">Upgrade to</span> 
-          <Badge className="text-black bg-orange-200">PRO</Badge>
-        </Button>
-      </DialogTrigger>
+  const { user, isPro } = useAuth();
+  const navigate = useNavigate();
+  const [open, setOpen] = React.useState(false);
+
+  // If user is already Pro, don't show the button
+  if (isPro) {
+    return null;
+  }
+
+  const handleClick = () => {
+    if (!user) {
+      // If not logged in, redirect to auth page first
+      navigate('/auth');
+    } else {
+      // If logged in, open dialog or navigate to upgrade page
+      setOpen(true);
+    }
+  };
+
+  const handleUpgradeClick = () => {
+    setOpen(false);
+    navigate('/upgrade');
+  };
+
+  return <Dialog open={open} onOpenChange={setOpen}>
+      <Button 
+        variant="outline" 
+        className="border-amber-400 text-gray-950 py-0 px-[5px] rounded-xl mx-0 bg-amber-500 hover:bg-amber-400"
+        onClick={handleClick}
+      >
+        <span className="mr-1">Upgrade to</span> 
+        <Badge className="text-black bg-orange-200">PRO</Badge>
+      </Button>
+      
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Upgrade to DoughLab Pro</DialogTitle>
@@ -38,11 +69,16 @@ const ProButton: React.FC = () => {
         </div>
         
         <DialogFooter>
-          <Button type="button" className="w-full bg-amber-500 hover:bg-amber-600 text-white">
+          <Button 
+            type="button" 
+            className="w-full bg-amber-500 hover:bg-amber-600 text-white"
+            onClick={handleUpgradeClick}
+          >
             Subscribe Now - $4.99/month
           </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>;
 };
+
 export default ProButton;
