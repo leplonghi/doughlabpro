@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, LogIn } from 'lucide-react';
@@ -18,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { user, signOut, loading } = useAuth();
+  const { user, signOut, loading, bypassAuth } = useAuth();
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -61,6 +60,11 @@ const Header: React.FC = () => {
 
   return (
     <header className="w-full border-b border-border bg-background sticky top-0 z-50">
+      {bypassAuth && (
+        <div className="bg-amber-500 text-black text-center py-1 text-sm font-medium">
+          Development Mode - Authentication Bypassed
+        </div>
+      )}
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -79,7 +83,7 @@ const Header: React.FC = () => {
           {/* Right side actions */}
           <div className="flex items-center gap-4">
             {/* Auth Actions */}
-            {!loading && (user ? (
+            {!bypassAuth && !loading && (user ? (
               <div className="flex items-center gap-2">
                 {/* Show user name */}
                 <span className="hidden md:inline text-sm font-medium">
@@ -156,7 +160,7 @@ const Header: React.FC = () => {
                   </nav>
                   
                   <div className="mt-auto py-4">
-                    {!loading && !user && (
+                    {!bypassAuth && !loading && !user && (
                       <Button 
                         className="w-full"
                         onClick={() => {
@@ -168,7 +172,7 @@ const Header: React.FC = () => {
                         {t('auth.signIn', 'Sign in')}
                       </Button>
                     )}
-                    {user && (
+                    {!bypassAuth && user && (
                       <Button 
                         variant="outline"
                         className="w-full text-red-600 border-red-200 hover:bg-red-50"

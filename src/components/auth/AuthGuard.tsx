@@ -10,11 +10,14 @@ interface AuthGuardProps {
 }
 
 export function AuthGuard({ children, fallbackPath = '/auth' }: AuthGuardProps) {
-  const { user, loading } = useAuth();
+  const { user, loading, bypassAuth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
+    // Skip auth check if bypassing
+    if (bypassAuth) return;
+
     if (!loading && !user) {
       // Redirect to auth page with return URL
       navigate(fallbackPath, { 
@@ -22,10 +25,10 @@ export function AuthGuard({ children, fallbackPath = '/auth' }: AuthGuardProps) 
         replace: true 
       });
     }
-  }, [user, loading, navigate, location, fallbackPath]);
+  }, [user, loading, navigate, location, fallbackPath, bypassAuth]);
 
-  // Show loading spinner while checking authentication
-  if (loading) {
+  // Skip loading state if bypassing auth
+  if (loading && !bypassAuth) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <LoadingSpinner />
@@ -33,6 +36,6 @@ export function AuthGuard({ children, fallbackPath = '/auth' }: AuthGuardProps) 
     );
   }
 
-  // Only render children if user is authenticated
-  return user ? <>{children}</> : null;
+  // Always render children if bypassing auth, otherwise check for authenticated user
+  return (bypassAuth || user) ? <>{children}</> : null;
 }

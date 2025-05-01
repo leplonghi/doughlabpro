@@ -14,6 +14,7 @@ type AuthContextType = {
   signInWithGoogle: (returnUrl?: string) => Promise<{error: any | null}>;
   signOut: () => Promise<{error: any | null}>;
   isPro: boolean;
+  bypassAuth: boolean; // Added for development
 };
 
 // Create the auth context with default values
@@ -24,6 +25,7 @@ const AuthContext = createContext<AuthContextType>({
   signInWithGoogle: async () => ({error: null}),
   signOut: async () => ({error: null}),
   isPro: false,
+  bypassAuth: true, // Set to true to bypass auth by default
 });
 
 // Hook to use the auth context
@@ -39,13 +41,20 @@ export const useAuth = () => {
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false); // Set to false for quick loading
   const [isPro, setIsPro] = useState(false);
+  const [bypassAuth, setBypassAuth] = useState(true); // Set to true to bypass auth
   const { t } = useTranslation();
 
   // Check for session on mount and setup auth listener
   useEffect(() => {
-    // Set up auth state listener FIRST
+    if (bypassAuth) {
+      // Skip auth checks if we're bypassing
+      setLoading(false);
+      return () => {};
+    }
+
+    // Regular authentication flow when not bypassed
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, currentSession) => {
         console.log('Auth state changed:', event, currentSession?.user?.id);
@@ -62,7 +71,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
     );
 
-    // THEN check for existing session
+    // Check for existing session
     supabase.auth.getSession().then(({ data: { session: currentSession } }) => {
       console.log('Initial session check:', currentSession?.user?.id);
       setSession(currentSession);
@@ -73,10 +82,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return () => {
       subscription.unsubscribe();
     };
-  }, []);
+  }, [bypassAuth]);
 
   // Google Sign In
   const signInWithGoogle = async (returnUrl = '/home') => {
+    if (bypassAuth) {
+      // Skip actual auth if bypassing
+      console.log('Auth bypassed, simulating sign in');
+      return { error: null };
+    }
+
     setLoading(true);
     try {
       // Ensure returnUrl has the origin prefix
@@ -104,6 +119,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Sign out
   const signOut = async () => {
+    if (bypassAuth) {
+      // Skip actual auth if bypassing
+      console.log('Auth bypassed, simulating sign out');
+      return { error: null };
+    }
+
     setLoading(true);
     try {
       const { error } = await supabase.auth.signOut();
@@ -120,12 +141,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const value = {
-    user,
+    user: bypassAuth ? { user_metadata: { full_name: 'Development User', avatar_url: null } } as User : user,
     session,
     loading,
     signInWithGoogle,
     signOut,
     isPro,
+    bypassAuth,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
