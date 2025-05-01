@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, LogIn } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -17,7 +18,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { user, signOut } = useAuth();
+  const { user, signOut, loading } = useAuth();
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -72,13 +73,13 @@ const Header: React.FC = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">
-            <NavItems />
+            {user && <NavItems />}
           </nav>
 
           {/* Right side actions */}
           <div className="flex items-center gap-4">
             {/* Auth Actions */}
-            {user ? (
+            {!loading && (user ? (
               <div className="flex items-center gap-2">
                 {/* Show user name */}
                 <span className="hidden md:inline text-sm font-medium">
@@ -127,7 +128,7 @@ const Header: React.FC = () => {
                 <LogIn size={18} />
                 <span className="hidden md:inline">{t('auth.signIn', 'Sign in')}</span>
               </Button>
-            )}
+            ))}
             
             {/* Mobile Menu Button */}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
@@ -151,11 +152,11 @@ const Header: React.FC = () => {
                   </div>
                   
                   <nav className="flex flex-col space-y-4 mt-6">
-                    <NavItems />
+                    {user && <NavItems />}
                   </nav>
                   
                   <div className="mt-auto py-4">
-                    {!user && (
+                    {!loading && !user && (
                       <Button 
                         className="w-full"
                         onClick={() => {
