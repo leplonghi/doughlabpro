@@ -15,26 +15,40 @@ const PizzaStyleSelector: React.FC<PizzaStyleSelectorProps> = ({
   onProceed
 }) => {
   return (
-    <div className="grid grid-cols-2 gap-3">
+    <div className="grid grid-cols-2 gap-4">
       <Button 
         variant={pizzaStyle === 'napoletana' ? 'default' : 'outline'} 
-        className={`h-12 justify-center ${pizzaStyle === 'napoletana' ? '' : 'bg-white hover:bg-gray-50'}`}
+        className={`h-14 justify-center transition-all duration-200 ${
+          pizzaStyle === 'napoletana' 
+            ? 'shadow-sm' 
+            : 'bg-white hover:bg-gray-50'
+        }`}
         onClick={() => {
           setPizzaStyle('napoletana');
           onProceed();
         }}
       >
-        Neapolitan
+        <div className="flex flex-col items-center">
+          <span className="text-base">Neapolitan</span>
+          <span className="text-xs opacity-75">Traditional Italian</span>
+        </div>
       </Button>
       <Button 
         variant={pizzaStyle === 'newyork' ? 'default' : 'outline'} 
-        className={`h-12 justify-center ${pizzaStyle === 'newyork' ? '' : 'bg-white hover:bg-gray-50'}`}
+        className={`h-14 justify-center transition-all duration-200 ${
+          pizzaStyle === 'newyork' 
+            ? 'shadow-sm' 
+            : 'bg-white hover:bg-gray-50'
+        }`}
         onClick={() => {
           setPizzaStyle('newyork');
           onProceed();
         }}
       >
-        New York
+        <div className="flex flex-col items-center">
+          <span className="text-base">New York</span>
+          <span className="text-xs opacity-75">Classic American</span>
+        </div>
       </Button>
     </div>
   );

@@ -1,79 +1,64 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Pizza } from 'lucide-react';
-
-type DoughType = 'pizza' | 'bread';
+import { Pizza, Bread } from 'lucide-react';
 
 interface DoughTypeSelectorProps {
-  doughType: DoughType;
-  setDoughType: (type: DoughType) => void;
+  doughType: 'pizza' | 'bread';
+  setDoughType: (type: 'pizza' | 'bread') => void;
   onProceed: () => void;
 }
 
-interface IconProps extends React.SVGProps<SVGSVGElement> {
-  className?: string;
-}
-
-const BreadIcon: React.FC<IconProps> = (props) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    {...props}
-  >
-    <path d="M8 8h.01" />
-    <path d="M12 8h.01" />
-    <path d="M16 8h.01" />
-    <path d="M19 4H5a3 3 0 0 0-3 3v.2c0 1.2.7 2.3 1.8 2.8L6 11c1.5.7 3.1.7 4.6 0l1.4-.7c1.2-.6 2.6-.6 3.8 0l1.4.7c1.5.7 3.1.7 4.6 0l2.2-1c1.1-.5 1.8-1.6 1.8-2.8V7a3 3 0 0 0-3-3z" />
-    <path d="M20 11.8V16a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-4.2" />
-  </svg>
-);
-
-const DoughTypeSelector: React.FC<DoughTypeSelectorProps> = ({
-  doughType,
+const DoughTypeSelector: React.FC<DoughTypeSelectorProps> = ({ 
+  doughType, 
   setDoughType,
   onProceed
 }) => {
   return (
-    <>
-      <div className="grid grid-cols-2 gap-3">
-        <Button 
-          variant={doughType === 'pizza' ? 'default' : 'outline'} 
-          className={`h-12 justify-center ${doughType === 'pizza' ? '' : 'bg-white hover:bg-gray-50'}`}
-          onClick={() => {
-            setDoughType('pizza');
-            onProceed();
-          }}
-        >
-          <Pizza className="mr-2 h-5 w-5" />
-          Pizza
-        </Button>
-        <Button 
-          variant={doughType === 'bread' ? 'default' : 'outline'} 
-          className={`h-12 justify-center ${doughType === 'bread' ? '' : 'bg-white hover:bg-gray-50'}`}
-          onClick={() => {
-            setDoughType('bread');
-            onProceed();
-          }}
-        >
-          <BreadIcon className="mr-2 h-5 w-5" />
-          Bread
-        </Button>
-      </div>
-      
-      <p className="text-sm text-gray-600 mt-1">
-        {doughType === 'pizza' 
-          ? "Pizza dough, crafted for high-temperature or home baking with iconic styles. Choose between Neapolitan, New York, or Deep Dish to match your taste and baking method."
-          : "Artisanal bread dough with a variety of fermentation methods and hydration profiles. Select from classic styles like Baguette, Ciabatta, or Whole Wheat to begin your recipe."}
-      </p>
-    </>
+    <div className="grid grid-cols-2 gap-4">
+      <Button
+        variant={doughType === 'pizza' ? 'default' : 'outline'}
+        className={`h-24 transition-all duration-300 ${
+          doughType === 'pizza' 
+            ? 'shadow-sm' 
+            : 'bg-white hover:bg-gray-50'
+        }`}
+        onClick={() => {
+          setDoughType('pizza');
+          onProceed();
+        }}
+      >
+        <div className="flex flex-col items-center">
+          <div className="rounded-full bg-white p-2 mb-2">
+            <Pizza 
+              className={`h-10 w-10 ${doughType === 'pizza' ? 'text-primary' : 'text-gray-400'}`} 
+            />
+          </div>
+          <span className="font-medium text-base">Pizza Dough</span>
+        </div>
+      </Button>
+      <Button
+        variant={doughType === 'bread' ? 'default' : 'outline'}
+        className={`h-24 transition-all duration-300 ${
+          doughType === 'bread' 
+            ? 'shadow-sm' 
+            : 'bg-white hover:bg-gray-50'
+        }`}
+        onClick={() => {
+          setDoughType('bread');
+          onProceed();
+        }}
+      >
+        <div className="flex flex-col items-center">
+          <div className="rounded-full bg-white p-2 mb-2">
+            <Bread 
+              className={`h-10 w-10 ${doughType === 'bread' ? 'text-primary' : 'text-gray-400'}`} 
+            />
+          </div>
+          <span className="font-medium text-base">Bread Dough</span>
+        </div>
+      </Button>
+    </div>
   );
 };
 

@@ -19,59 +19,59 @@ export default {
     },
     extend: {
       colors: {
-        border: '#e2e2e2',
-        input: '#e2e2e2',
-        ring: '#888888',
+        border: '#e0e0e0',
+        input: '#e0e0e0',
+        ring: '#787878',
         background: '#FFFFFF',
-        foreground: '#222222',
+        foreground: '#252525',
         primary: {
-          DEFAULT: '#000000',
+          DEFAULT: '#3b5998',
           foreground: '#FFFFFF'
         },
         secondary: {
-          DEFAULT: '#f5f5f5',
-          foreground: '#222222'
+          DEFAULT: '#f5f7fa',
+          foreground: '#252525'
         },
         destructive: {
-          DEFAULT: '#7f1d1d',
+          DEFAULT: '#d32f2f',
           foreground: '#FFFFFF'
         },
         muted: {
-          DEFAULT: '#f5f5f5',
-          foreground: '#888888'
+          DEFAULT: '#f5f7fa',
+          foreground: '#787878'
         },
         accent: {
-          DEFAULT: '#f5f5f5',
-          foreground: '#222222'
+          DEFAULT: '#f8f9fc',
+          foreground: '#252525'
         },
         popover: {
           DEFAULT: '#FFFFFF',
-          foreground: '#222222'
+          foreground: '#252525'
         },
         card: {
           DEFAULT: '#FFFFFF',
-          foreground: '#222222'
+          foreground: '#252525'
         },
         sidebar: {
           DEFAULT: '#FFFFFF',
-          foreground: '#222222',
-          primary: '#222222',
+          foreground: '#252525',
+          primary: '#252525',
           'primary-foreground': '#FFFFFF',
-          accent: '#f5f5f5',
-          'accent-foreground': '#222222',
-          border: '#e2e2e2',
-          ring: '#888888'
+          accent: '#f8f9fc',
+          'accent-foreground': '#252525',
+          border: '#e0e0e0',
+          ring: '#787878'
         },
         pizza: {
-          DEFAULT: '#222222',
-          light: '#f5f5f5',
-          dark: '#000000',
-          accent: '#666666',
-          cream: '#FFFFFF',
+          DEFAULT: '#3b5998',
+          light: '#f5f7fa',
+          dark: '#344e86',
+          accent: '#8b9dc3',
+          cream: '#dfe3ee',
         },
       },
       fontFamily: {
-        sans: ['system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
+        sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
         serif: ['Georgia', '"Times New Roman"', 'serif'],
       },
       borderRadius: {
@@ -87,15 +87,26 @@ export default {
         'accordion-up': {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' }
+        },
+        'pulse': {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.7' }
+        },
+        'scale': {
+          '0%': { transform: 'scale(1)' },
+          '100%': { transform: 'scale(1.03)' }
         }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out'
+        'accordion-up': 'accordion-up 0.2s ease-out',
+        'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'scale': 'scale 0.15s ease-in-out'
       },
       backgroundImage: {
         'flour-texture': "url('/flour-texture.jpg')",
         'hero-pizza': "url('/lovable-uploads/10240500-8679-4a2d-9667-7895246fe108.png')",
+        'gradient-primary': 'linear-gradient(135deg, #3b5998 0%, #8b9dc3 100%)',
       },
     }
   },

@@ -6,32 +6,32 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 0 0% 13%;
+    --foreground: 0 0% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 13%;
+    --card-foreground: 0 0% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 13%;
+    --popover-foreground: 0 0% 15%;
 
-    --primary: 0 0% 0%;
+    --primary: 220 44% 42%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 13%;
+    --secondary: 210 33% 97%;
+    --secondary-foreground: 0 0% 15%;
 
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 53%;
+    --muted: 210 33% 97%;
+    --muted-foreground: 0 0% 47%;
 
-    --accent: 0 0% 96%;
-    --accent-foreground: 0 0% 13%;
+    --accent: 220 33% 98%;
+    --accent-foreground: 0 0% 15%;
 
-    --destructive: 0 84% 30%;
+    --destructive: 0 65% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 89%;
-    --input: 0 0% 89%;
-    --ring: 0 0% 53%;
+    --border: 0 0% 88%;
+    --input: 0 0% 88%;
+    --ring: 0 0% 47%;
 
     --radius: 0.5rem;
 
@@ -62,7 +62,7 @@
 
 @layer components {
   .pizza-card {
-    @apply bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow;
+    @apply bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200;
   }
   
   .recipe-section {
@@ -82,7 +82,7 @@
   }
   
   .btn-primary {
-    @apply bg-primary text-primary-foreground hover:bg-primary/90;
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-200;
   }
   
   .feature-icon {
@@ -98,7 +98,7 @@
   }
   
   .hero-image {
-    @apply flex-1 rounded-lg overflow-hidden;
+    @apply flex-1 rounded-lg overflow-hidden shadow-lg;
   }
   
   .features-section {
@@ -110,7 +110,12 @@
   }
   
   .feature-card {
-    @apply flex flex-col items-start p-6 transition-all;
+    @apply flex flex-col items-start p-6 transition-all duration-200 hover:shadow-md rounded-lg;
+  }
+
+  /* Button hover and active states */
+  .interactive-btn {
+    @apply transition-all duration-200 hover:scale-[1.02] active:scale-[0.98];
   }
 
   /* Responsive improvements */
@@ -119,11 +124,11 @@
   }
 
   .recipe-card {
-    @apply rounded-lg border shadow-sm overflow-hidden;
+    @apply rounded-lg border shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-200;
   }
   
   .recipe-header {
-    @apply bg-gradient-to-r from-gray-50 to-gray-100 p-4 md:p-6;
+    @apply bg-gradient-to-r from-secondary to-secondary/70 p-4 md:p-6;
   }
   
   .recipe-content {
@@ -136,6 +141,15 @@
   
   .tooltip-content {
     @apply absolute z-10 invisible group-hover:visible bg-black text-white text-xs rounded p-2 -mt-2 transform -translate-x-1/2 left-1/2 w-40 text-center;
+  }
+
+  /* Icon containers */
+  .icon-container {
+    @apply flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary;
+  }
+
+  .step-icon {
+    @apply flex items-center justify-center w-8 h-8 rounded-full bg-primary text-white font-medium text-sm;
   }
 }
 
@@ -153,6 +167,21 @@
 
 .fade-in {
   animation: fade-in 0.3s ease-out;
+}
+
+/* Button hover effects */
+button, a {
+  transition: all 0.2s ease;
+}
+
+button:hover:not([disabled]), 
+a:hover:not([disabled]) {
+  transform: translateY(-1px);
+}
+
+button:active:not([disabled]), 
+a:active:not([disabled]) {
+  transform: translateY(1px);
 }
 
 /* Additional responsive tweaks */
