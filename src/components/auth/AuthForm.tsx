@@ -2,10 +2,12 @@
 import { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Separator } from '@/components/ui/separator';
 import { toast } from 'sonner';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import { LogIn, Loader2 } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface AuthFormProps {
   returnUrl?: string;
@@ -14,8 +16,8 @@ interface AuthFormProps {
 export function AuthForm({ returnUrl = '/home' }: AuthFormProps) {
   const { signInWithGoogle } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState('');
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
   const handleGoogleSignIn = async () => {
     try {
@@ -41,10 +43,17 @@ export function AuthForm({ returnUrl = '/home' }: AuthFormProps) {
     }
   };
 
+  const handleEmailContinue = () => {
+    // This would typically handle email sign-in
+    // For now we'll just show a toast
+    toast.info("Email sign-in not yet implemented");
+  };
+
   return (
     <div className="space-y-6 w-full">
+      {/* Google Sign In Button */}
       <Button
-        className="w-full bg-white hover:bg-gray-50 text-black border border-gray-300 h-12 font-medium flex items-center justify-center gap-3 shadow-sm hover:shadow-md transition-all duration-300 rounded-lg"
+        className="w-full bg-white text-black border border-gray-300 h-12 font-medium flex items-center justify-center gap-3 hover:bg-gray-50"
         onClick={handleGoogleSignIn}
         disabled={isLoading}
       >
@@ -67,6 +76,53 @@ export function AuthForm({ returnUrl = '/home' }: AuthFormProps) {
           </>
         )}
       </Button>
+
+      {/* Separator */}
+      <div className="flex items-center gap-4">
+        <Separator className="flex-1" />
+        <span className="text-sm text-gray-500">{t('common.or')}</span>
+        <Separator className="flex-1" />
+      </div>
+
+      {/* Email Input */}
+      <div className="space-y-4">
+        <Input 
+          type="email" 
+          placeholder={t('auth.workEmailAddress')} 
+          className="h-12"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        
+        <Button 
+          className="w-full h-12 bg-blue-500 hover:bg-blue-600"
+          onClick={handleEmailContinue}
+          disabled={!email.trim() || isLoading}
+        >
+          {t('common.continue')}
+        </Button>
+      </div>
+      
+      {/* Terms */}
+      <div className="text-xs text-gray-500 text-center">
+        {t('auth.signingUpMeans')} 
+        <Link to="/privacy" className="text-gray-900 hover:underline ml-1">
+          {t('common.privacyPolicy')}
+        </Link> {t('common.and')} 
+        <Link to="/terms" className="text-gray-900 hover:underline">
+          {t('common.termsOfService')}
+        </Link>
+      </div>
+
+      {/* Sign In Link */}
+      <div className="text-center">
+        <p className="text-sm">
+          {t('auth.alreadyHaveAccount')} 
+          <Link to="/auth" className="text-blue-500 hover:underline ml-1">
+            {t('auth.logIn')}
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }

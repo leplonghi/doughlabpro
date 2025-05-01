@@ -141,7 +141,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const value = {
-    user: bypassAuth ? { user_metadata: { full_name: 'Development User', avatar_url: null } } as User : user,
+    user: bypassAuth ? ({ 
+      id: 'bypass-user-id',
+      app_metadata: {},
+      user_metadata: { full_name: 'Development User', avatar_url: null },
+      aud: 'authenticated',
+      created_at: new Date().toISOString()
+    } as User) : user,
     session,
     loading,
     signInWithGoogle,
