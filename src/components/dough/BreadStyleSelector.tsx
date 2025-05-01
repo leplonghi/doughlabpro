@@ -16,57 +16,36 @@ const BreadStyleSelector: React.FC<BreadStyleSelectorProps> = ({
   onProceed
 }) => {
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid grid-cols-3 gap-3">
       <Button 
         variant={breadStyle === 'baguette' ? 'default' : 'outline'} 
-        className={`h-14 justify-center transition-all duration-200 ${
-          breadStyle === 'baguette' 
-            ? 'shadow-sm' 
-            : 'bg-white hover:bg-gray-50'
-        }`}
+        className={`h-12 justify-center ${breadStyle === 'baguette' ? '' : 'bg-white hover:bg-gray-50'}`}
         onClick={() => {
           setBreadStyle('baguette');
           onProceed();
         }}
       >
-        <div className="flex flex-col items-center">
-          <span className="text-base">Baguette</span>
-          <span className="text-xs opacity-75">French Classic</span>
-        </div>
+        Baguette
       </Button>
       <Button 
         variant={breadStyle === 'brioche' ? 'default' : 'outline'} 
-        className={`h-14 justify-center transition-all duration-200 ${
-          breadStyle === 'brioche' 
-            ? 'shadow-sm' 
-            : 'bg-white hover:bg-gray-50'
-        }`}
+        className={`h-12 justify-center ${breadStyle === 'brioche' ? '' : 'bg-white hover:bg-gray-50'}`}
         onClick={() => {
           setBreadStyle('brioche');
           onProceed();
         }}
       >
-        <div className="flex flex-col items-center">
-          <span className="text-base">Brioche</span>
-          <span className="text-xs opacity-75">Rich & Buttery</span>
-        </div>
+        Brioche
       </Button>
       <Button 
         variant={breadStyle === 'focaccia' ? 'default' : 'outline'} 
-        className={`h-14 justify-center transition-all duration-200 ${
-          breadStyle === 'focaccia' 
-            ? 'shadow-sm' 
-            : 'bg-white hover:bg-gray-50'
-        }`}
+        className={`h-12 justify-center ${breadStyle === 'focaccia' ? '' : 'bg-white hover:bg-gray-50'}`}
         onClick={() => {
           setBreadStyle('focaccia');
           onProceed();
         }}
       >
-        <div className="flex flex-col items-center">
-          <span className="text-base">Focaccia</span>
-          <span className="text-xs opacity-75">Italian Flatbread</span>
-        </div>
+        Focaccia
       </Button>
     </div>
   );

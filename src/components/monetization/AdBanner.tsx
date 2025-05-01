@@ -33,7 +33,7 @@ const AdBanner: React.FC = () => {
                 minHeight: '100px',
                 width: '100%'
               }} 
-              data-ad-client="ca-pub-8653595934786167" 
+              data-ad-client="ca-pub-2467788380843491" 
               data-ad-slot="0000000000" 
               data-ad-format="auto" 
               data-full-width-responsive="true" 

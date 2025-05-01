@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import { InfoCircledIcon } from '@radix-ui/react-icons';
 import { useTranslation } from 'react-i18next';
 import { 
   Tooltip,
@@ -9,7 +10,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { HelpCircle, FlowerIcon } from 'lucide-react';
 
 interface FlourInputProps {
   flour: number;
@@ -23,14 +23,13 @@ const FlourInput: React.FC<FlourInputProps> = ({ flour, onChange, error }) => {
   return (
     <div className="space-y-2">
       <div className="flex items-center gap-2">
-        <FlowerIcon className="h-4 w-4 text-primary" />
         <Label htmlFor="flour">{t('calculator.flour')}</Label>
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <span className="cursor-help"><HelpCircle className="h-4 w-4 text-muted-foreground hover:text-primary transition-colors duration-200" /></span>
+              <span className="cursor-help"><InfoCircledIcon className="h-4 w-4 text-muted-foreground" /></span>
             </TooltipTrigger>
-            <TooltipContent className="bg-white shadow-md border border-border p-3 max-w-xs">
+            <TooltipContent className="max-w-xs">
               <p>{t('calculator.ingredients.amountDescription')}</p>
             </TooltipContent>
           </Tooltip>
@@ -45,10 +44,10 @@ const FlourInput: React.FC<FlourInputProps> = ({ flour, onChange, error }) => {
         max="10000"
         placeholder="Ex: 1000g"
         aria-describedby={error ? "flour-error" : undefined}
-        className={`transition-all duration-200 focus:border-primary focus:ring-2 focus:ring-primary/20 ${error ? "border-red-500 focus-visible:ring-red-500" : ""}`}
+        className={error ? "border-red-500 focus-visible:ring-red-500" : ""}
       />
       {error && (
-        <div id="flour-error" className="text-red-500 text-sm animate-fade-in" aria-live="assertive">{error}</div>
+        <div id="flour-error" className="text-red-500 text-sm" aria-live="assertive">{error}</div>
       )}
     </div>
   );

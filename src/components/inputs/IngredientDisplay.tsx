@@ -8,14 +8,12 @@ interface IngredientDisplayProps {
   label: string;
   value: number;
   translationKey?: string;
-  icon?: React.ReactNode;
 }
 
 const IngredientDisplay: React.FC<IngredientDisplayProps> = ({ 
   label, 
   value,
-  translationKey,
-  icon
+  translationKey 
 }) => {
   const { t } = useTranslation();
   
@@ -24,14 +22,11 @@ const IngredientDisplay: React.FC<IngredientDisplayProps> = ({
   
   return (
     <div className="space-y-2">
-      <Label className="flex items-center">
-        {icon && <span className="mr-2 text-primary">{icon}</span>}
-        {displayLabel}
-      </Label>
+      <Label>{displayLabel}</Label>
       <Input
         value={value.toFixed(2)}
         readOnly
-        className="bg-gray-50 font-medium"
+        className="bg-gray-50"
       />
     </div>
   );
