@@ -33,8 +33,8 @@ const AdBanner: React.FC = () => {
                 minHeight: '100px',
                 width: '100%'
               }} 
-              data-ad-client={import.meta.env.VITE_AD_CLIENT || 'ca-pub-placeholder'} 
-              data-ad-slot={import.meta.env.VITE_AD_SLOT || '0000000000'} 
+              data-ad-client="ca-pub-2467788380843491" 
+              data-ad-slot="0000000000" 
               data-ad-format="auto" 
               data-full-width-responsive="true" 
             />
