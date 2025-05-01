@@ -1,16 +1,20 @@
+
 import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Lock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import AdBanner from '@/components/monetization/AdBanner';
+
 const Toppings: React.FC = () => {
   return <div className="flex flex-col min-h-screen bg-gradient-to-br from-white to-pizza-cream/30">
       <Header />
       
       <main className="flex-grow py-8 md:py-12">
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl base font-bold mb-6">Pizza Toppings</h1>
+          <AdBanner />
+          <h1 className="text-4xl base font-bold mb-6 mt-6">Pizza Toppings</h1>
           
           <Card className="mb-6 border-yellow-200">
             <CardContent className="p-6 flex flex-col items-center text-center">

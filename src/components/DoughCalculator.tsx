@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import DoughResults from './DoughResults';
@@ -19,6 +18,7 @@ import { Info } from 'lucide-react';
 import DoughCalculatorHeader from './DoughCalculatorHeader';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import AdBanner from '@/components/monetization/AdBanner';
 
 type DoughType = 'pizza' | 'bread';
 type StyleType = PizzaStyle | BreadStyle;
@@ -104,6 +104,8 @@ const DoughCalculator: React.FC = () => {
         <div className="flex flex-col items-center mb-6">
           <img src="/lovable-uploads/15936b17-7234-47a3-a949-d72c0d2932e6.png" alt="DoughLab Pro logo" className="h-16 w-auto mb-3" />
         </div>
+        
+        <AdBanner />
         
         <Card className="mb-8 shadow-sm border-border overflow-hidden rounded-xl">
           <DoughCalculatorHeader />
