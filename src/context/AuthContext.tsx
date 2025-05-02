@@ -38,7 +38,7 @@ export const useAuth = () => {
 };
 
 // Provider component to wrap the app with auth context
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(false); // Set to false for quick loading
