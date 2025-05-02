@@ -35,7 +35,7 @@ const Header: React.FC = () => {
     {
       title: 'Calculator',
       path: '/calculator',
-      icon: <Flask className="h-4 w-4 mr-2" />
+      icon: <FlaskConical className="h-4 w-4 mr-2" />
     }, 
     {
       title: 'Toppings',
