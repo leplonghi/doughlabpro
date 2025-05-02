@@ -1,91 +1,199 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Footer from '@/components/Footer';
-import Header from '@/components/Header';
-import AdBanner from '@/components/monetization/AdBanner';
+import PageLayout from '@/components/layout/PageLayout';
 import { Button } from '@/components/ui/button';
-import { Clock, Utensils, Calculator, LogIn } from 'lucide-react';
+import { ChefHat, Flask, ArrowRight } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import AdBanner from '@/components/monetization/AdBanner';
 import { useAuth } from '@/context/AuthContext';
-import { useTranslation } from 'react-i18next';
 
 const Index: React.FC = () => {
   const { user } = useAuth();
-  const { t } = useTranslation();
-
+  
+  const doughTypes = [
+    { name: 'Pizza', icon: '🍕', description: 'Classic, Neapolitan, NY Style' },
+    { name: 'Bread', icon: '🍞', description: 'Artisan, Sandwich, Baguette' },
+    { name: 'Focaccia', icon: '🫓', description: 'Classic Italian flatbread' },
+    { name: 'Brioche', icon: '🥐', description: 'Enriched, buttery bread' },
+    { name: 'Bagel', icon: '🥯', description: 'NY style, dense & chewy' },
+    { name: 'Sourdough', icon: '🥖', description: 'Wild yeast fermentation' }
+  ];
+  
   return (
-    <div className="flex flex-col min-h-screen bg-white">
-      <Header />
+    <PageLayout>
+      {/* Hero Section */}
+      <section className="px-4 py-16 md:py-24 max-w-7xl mx-auto text-center">
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
+          Master Every Dough – Whether You're Starting or Scaling
+        </h1>
+        <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-12">
+          From your first focaccia to your perfect sourdough. DoughLab Pro guides, calculates, and teaches.
+        </p>
+        
+        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <Card className="border-amber-200 hover:border-amber-300 transition-all hover:shadow-md">
+            <CardContent className="p-8 flex flex-col items-center">
+              <ChefHat className="h-12 w-12 text-amber-500 mb-4" />
+              <h2 className="text-xl font-semibold mb-2">I'm a Beginner</h2>
+              <p className="text-muted-foreground mb-6">
+                Learn step-by-step with guided recipes and timers. Perfect for your first few bakes.
+              </p>
+              <Button asChild className="bg-amber-500 hover:bg-amber-600">
+                <Link to="/learn">
+                  Start Learning
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </CardContent>
+          </Card>
+          
+          <Card className="border-blue-200 hover:border-blue-300 transition-all hover:shadow-md">
+            <CardContent className="p-8 flex flex-col items-center">
+              <Flask className="h-12 w-12 text-blue-500 mb-4" />
+              <h2 className="text-xl font-semibold mb-2">I'm Experienced</h2>
+              <p className="text-muted-foreground mb-6">
+                Fine-tune hydration, fermentation, and baker's percentages with precision tools.
+              </p>
+              <Button asChild className="bg-blue-500 hover:bg-blue-600">
+                <Link to="/calculator">
+                  To The Calculator
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
       
-      <main className="flex-grow">
-        {/* Hero Section */}
-        <section className="container mx-auto md:py-16 grid md:grid-cols-2 gap-6 md:gap-20 items-center md:px-[50px] md:py-0 px-[152px] py-0">
-          <div className="hero-content order-2 md:order-1 mx-[13px] px-0">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Master Every Dough. Bake with Precision.</h1>
-            <p className="text-lg text-muted-foreground mb-8">Smart dough calculator for pizza makers, bread lovers, and artisan bakers.</p>
-            <div className="flex flex-col sm:flex-row items-center gap-2 sm:justify-center mx-0 rounded-md my-[22px]">
-              {user ? (
-                <Button asChild className="bg-black text-white font-medium rounded hover:bg-black/80 px-6 py-6 w-full sm:w-auto">
-                  <Link to="/calculator">Let's Bake!</Link>
-                </Button>
-              ) : (
-                <Button asChild className="bg-black text-white font-medium rounded hover:bg-black/80 px-6 py-6 w-full sm:w-auto">
-                  <Link to="/auth">
-                    <LogIn className="mr-2 h-4 w-4" />
-                    {t('auth.signIn')}
-                  </Link>
-                </Button>
-              )}
+      {/* Ad Banner */}
+      <AdBanner />
+      
+      {/* What Can You Make Section */}
+      <section className="px-4 py-16 bg-gray-50">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12">What Can You Make?</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            {doughTypes.map((type) => (
+              <Card key={type.name} className="border hover:shadow-md transition-all">
+                <CardContent className="p-6 flex flex-col items-center text-center">
+                  <div className="text-4xl mb-3">{type.icon}</div>
+                  <h3 className="font-medium mb-1">{type.name}</h3>
+                  <p className="text-xs text-muted-foreground">{type.description}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+      
+      {/* Dual Path Explainer */}
+      <section className="px-4 py-16">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12">Choose Your Path</h2>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="flex flex-col items-center text-center p-6 rounded-lg bg-amber-50">
+              <div className="bg-amber-100 p-4 rounded-full mb-4">
+                <ChefHat className="h-8 w-8 text-amber-500" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Beginner Mode</h3>
+              <ul className="space-y-2 text-left mt-4">
+                <li className="flex items-center">
+                  <span className="bg-green-100 text-green-800 p-1 rounded-full mr-2">✓</span>
+                  Step-by-step guided baking
+                </li>
+                <li className="flex items-center">
+                  <span className="bg-green-100 text-green-800 p-1 rounded-full mr-2">✓</span>
+                  Built-in timers and checklists
+                </li>
+                <li className="flex items-center">
+                  <span className="bg-green-100 text-green-800 p-1 rounded-full mr-2">✓</span>
+                  Simple starter recipes
+                </li>
+                <li className="flex items-center">
+                  <span className="bg-green-100 text-green-800 p-1 rounded-full mr-2">✓</span>
+                  In-context help with DoughGuide
+                </li>
+              </ul>
+            </div>
+            
+            <div className="flex flex-col items-center text-center p-6 rounded-lg bg-blue-50">
+              <div className="bg-blue-100 p-4 rounded-full mb-4">
+                <Flask className="h-8 w-8 text-blue-500" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Pro Mode</h3>
+              <ul className="space-y-2 text-left mt-4">
+                <li className="flex items-center">
+                  <span className="bg-green-100 text-green-800 p-1 rounded-full mr-2">✓</span>
+                  Advanced baker's percentages
+                </li>
+                <li className="flex items-center">
+                  <span className="bg-green-100 text-green-800 p-1 rounded-full mr-2">✓</span>
+                  Preferment calculations (poolish, biga)
+                </li>
+                <li className="flex items-center">
+                  <span className="bg-green-100 text-green-800 p-1 rounded-full mr-2">✓</span>
+                  Fine-tune every aspect of your dough
+                </li>
+                <li className="flex items-center">
+                  <span className="bg-green-100 text-green-800 p-1 rounded-full mr-2">✓</span>
+                  Temperature and environment adjustments
+                </li>
+              </ul>
             </div>
           </div>
           
-          <div className="hero-image order-1 md:order-2">
-            <img alt="Fresh bread and baking" className="rounded-lg w-full h-auto object-cover shadow-lg" src="/lovable-uploads/af799f78-d4b3-47c9-a194-0885a14c4753.png" />
+          <div className="text-center mt-12">
+            <Button asChild className="bg-black text-white hover:bg-gray-800">
+              <Link to="/school">
+                Learn from scratch in Dough School
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
           </div>
-        </section>
-        
-        {/* Ad Banner */}
-        <AdBanner />
-        
-        {/* Features Section */}
-        <section className="bg-secondary py-[17px]">
-          <div className="container mx-auto px-4 md:px-[116px]">
-            <h2 className="text-3xl font-bold text-center mb-12">Features</h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-white p-6 rounded-lg shadow-sm">
-                <div className="w-12 h-12 bg-black/10 rounded-full flex items-center justify-center mb-4">
-                  <Utensils size={24} />
-                </div>
-                <h3 className="text-xl font-medium mb-2">Multiple Dough Styles</h3>
-                <p className="text-muted-foreground">From Neapolitan pizza to focaccia, brioche and more — many styles, one formula engine.</p>
-              </div>
-              
-              <div className="bg-white p-6 rounded-lg shadow-sm">
-                <div className="w-12 h-12 bg-black/10 rounded-full flex items-center justify-center mb-4">
-                  <Clock size={24} />
-                </div>
-                <h3 className="text-xl font-medium mb-2">Fermentation Methods</h3>
-                <p className="text-muted-foreground">Explore Direct, Poolish and Biga methods for deeper flavor and better structure.</p>
-              </div>
-              
-              <div className="bg-white p-6 rounded-lg shadow-sm">
-                <div className="w-12 h-12 bg-black/10 rounded-full flex items-center justify-center mb-4">
-                  <Calculator size={24} />
-                </div>
-                <h3 className="text-xl font-medium mb-2">Baker's Math Made Easy</h3>
-                <p className="text-muted-foreground">Exact measurements and hydration logic — just input and bake.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-        
-        {/* Second Ad Banner */}
-        <AdBanner />
-      </main>
+        </div>
+      </section>
       
-      <Footer />
-    </div>
+      {/* Testimonials */}
+      <section className="px-4 py-16 bg-gray-50">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12">What Bakers Say</h2>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            <Card className="border">
+              <CardContent className="p-6">
+                <p className="mb-4 italic text-gray-600">
+                  "DoughLab Pro transformed my pizza game. The calculator is spot-on every time."
+                </p>
+                <p className="font-medium">- Marco T.</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="border">
+              <CardContent className="p-6">
+                <p className="mb-4 italic text-gray-600">
+                  "As a beginner, the guided mode was exactly what I needed to make my first successful loaf."
+                </p>
+                <p className="font-medium">- Sarah K.</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="border">
+              <CardContent className="p-6">
+                <p className="mb-4 italic text-gray-600">
+                  "The AI assistant helped me troubleshoot when my dough wasn't rising. Problem solved!"
+                </p>
+                <p className="font-medium">- James L.</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+      
+      {/* Second Ad Banner */}
+      <AdBanner />
+    </PageLayout>
   );
 };
 

@@ -1,6 +1,7 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, LogIn } from 'lucide-react';
+import { Menu, X, LogIn, ChefHat, Flask } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import { useAuth } from '@/context/AuthContext';
@@ -21,19 +22,34 @@ const Header: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const menuItems = [{
-    title: 'Home',
-    path: '/home'
-  }, {
-    title: 'Calculator',
-    path: '/calculator'
-  }, {
-    title: 'Toppings',
-    path: '/toppings'
-  }, {
-    title: 'Sauces',
-    path: '/sauce'
-  }];
+  const menuItems = [
+    {
+      title: 'Home',
+      path: '/home'
+    },
+    {
+      title: 'Learn',
+      path: '/learn',
+      icon: <ChefHat className="h-4 w-4 mr-2" />
+    }, 
+    {
+      title: 'Calculator',
+      path: '/calculator',
+      icon: <Flask className="h-4 w-4 mr-2" />
+    }, 
+    {
+      title: 'Toppings',
+      path: '/toppings'
+    }, 
+    {
+      title: 'Sauces',
+      path: '/sauce'
+    },
+    {
+      title: 'School',
+      path: '/school'
+    }
+  ];
   
   const NavItems = () => (
     <>
@@ -41,9 +57,10 @@ const Header: React.FC = () => {
         <Link 
           key={item.path} 
           to={item.path} 
-          className="text-base font-medium text-foreground hover:text-primary transition-colors" 
+          className="text-base font-medium text-foreground hover:text-primary transition-colors flex items-center" 
           onClick={() => setMobileMenuOpen(false)}
         >
+          {item.icon}
           {item.title}
         </Link>
       ))}
@@ -69,7 +86,7 @@ const Header: React.FC = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <Link to={user ? "/home" : "/landing"} className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2">
               <img src="/lovable-uploads/15936b17-7234-47a3-a949-d72c0d2932e6.png" className="h-8 w-auto" alt="DoughLab Pro" />
               <span className="font-medium text-sm"></span>
             </Link>
@@ -77,7 +94,7 @@ const Header: React.FC = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">
-            {user && <NavItems />}
+            <NavItems />
           </nav>
 
           {/* Right side actions */}
@@ -156,7 +173,7 @@ const Header: React.FC = () => {
                   </div>
                   
                   <nav className="flex flex-col space-y-4 mt-6">
-                    {user && <NavItems />}
+                    <NavItems />
                   </nav>
                   
                   <div className="mt-auto py-4">

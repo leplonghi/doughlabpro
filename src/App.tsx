@@ -12,6 +12,7 @@ import NotFound from "./pages/NotFound";
 import Index from "./pages/Index";
 import { AuthGuard } from "./components/auth/AuthGuard";
 import { Toaster } from "sonner";
+import { DoughGuideProvider } from "./context/DoughGuideContext";
 
 // Lazy-loaded components
 const Sauce = lazy(() => import("./pages/Sauce"));
@@ -24,6 +25,8 @@ const Profile = lazy(() => import("./pages/Profile"));
 const Upgrade = lazy(() => import("./pages/Upgrade"));
 const Home = lazy(() => import("./pages/Home"));
 const DoughCalculator = lazy(() => import("./components/DoughCalculator"));
+const Learn = lazy(() => import("./pages/Learn"));
+const School = lazy(() => import("./pages/School"));
 
 // Create query client with optimized settings
 const queryClient = new QueryClient({
@@ -39,7 +42,7 @@ const queryClient = new QueryClient({
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/home" replace />} />
+      <Route path="/" element={<Index />} />
       <Route path="/home" element={
         <Suspense fallback={<LoadingSpinner />}>
           <AuthGuard fallbackPath="/landing">
@@ -69,6 +72,18 @@ const AppRoutes = () => {
         </Suspense>
       } />
       
+      {/* New pages */}
+      <Route path="/learn" element={
+        <Suspense fallback={<LoadingSpinner />}>
+          <Learn />
+        </Suspense>
+      } />
+      <Route path="/school" element={
+        <Suspense fallback={<LoadingSpinner />}>
+          <School />
+        </Suspense>
+      } />
+      
       {/* Protected routes */}
       <Route path="/profile" element={
         <AuthGuard>
@@ -78,11 +93,9 @@ const AppRoutes = () => {
         </AuthGuard>
       } />
       <Route path="/calculator" element={
-        <AuthGuard>
-          <Suspense fallback={<LoadingSpinner />}>
-            <DoughCalculator />
-          </Suspense>
-        </AuthGuard>
+        <Suspense fallback={<LoadingSpinner />}>
+          <DoughCalculator />
+        </Suspense>
       } />
       <Route path="/sauce" element={
         <AuthGuard>
@@ -110,8 +123,10 @@ const App = () => {
         <TooltipProvider>
           <BrowserRouter>
             <AuthProvider>
-              <AppRoutes />
-              <Toaster />
+              <DoughGuideProvider>
+                <AppRoutes />
+                <Toaster />
+              </DoughGuideProvider>
             </AuthProvider>
           </BrowserRouter>
         </TooltipProvider>
