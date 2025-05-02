@@ -25,6 +25,7 @@ const LearnContent: React.FC<LearnContentProps> = ({ doughTypes, recipePresets }
   const [selectedType, setSelectedType] = React.useState<DoughType | null>(null);
   const [step, setStep] = React.useState(1);
   const [selectedRecipe, setSelectedRecipe] = React.useState<string | null>(null);
+  const [numberOfPies, setNumberOfPies] = React.useState(2);
   
   const handleDoughTypeSelect = (type: DoughType) => {
     setSelectedType(type);
@@ -44,6 +45,10 @@ const LearnContent: React.FC<LearnContentProps> = ({ doughTypes, recipePresets }
       setSelectedRecipe(null);
       setStep(2);
     }
+  };
+
+  const handleNumberOfPiesChange = (count: number) => {
+    setNumberOfPies(count);
   };
 
   return (
@@ -69,6 +74,9 @@ const LearnContent: React.FC<LearnContentProps> = ({ doughTypes, recipePresets }
           recipes={recipePresets[selectedType]} 
           onSelectRecipe={handleRecipeSelect}
           onGoBack={handleGoBack}
+          selectedType={selectedType}
+          numberOfPies={numberOfPies}
+          onNumberOfPiesChange={handleNumberOfPiesChange}
         />
       )}
       
@@ -77,6 +85,7 @@ const LearnContent: React.FC<LearnContentProps> = ({ doughTypes, recipePresets }
           selectedType={selectedType} 
           selectedRecipe={selectedRecipe}
           onGoBack={handleGoBack} 
+          numberOfPies={numberOfPies}
         />
       )}
     </div>
