@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import PageLayout from '@/components/layout/PageLayout';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ArrowLeft } from 'lucide-react';
 import AdBanner from '@/components/monetization/AdBanner';
 
 type DoughType = 'pizza' | 'bread' | 'focaccia' | 'sourdough';
@@ -11,6 +11,7 @@ type DoughType = 'pizza' | 'bread' | 'focaccia' | 'sourdough';
 const Learn: React.FC = () => {
   const [selectedType, setSelectedType] = useState<DoughType | null>(null);
   const [step, setStep] = useState(1);
+  const [selectedRecipe, setSelectedRecipe] = useState<string | null>(null);
   
   const doughTypes = [
     { 
@@ -62,6 +63,26 @@ const Learn: React.FC = () => {
     ]
   };
   
+  const handleDoughTypeSelect = (type: DoughType) => {
+    setSelectedType(type);
+    setStep(2);
+  };
+  
+  const handleRecipeSelect = (recipeName: string) => {
+    setSelectedRecipe(recipeName);
+    setStep(3);
+  };
+  
+  const handleGoBack = () => {
+    if (step === 2) {
+      setSelectedType(null);
+      setStep(1);
+    } else if (step === 3) {
+      setSelectedRecipe(null);
+      setStep(2);
+    }
+  };
+  
   const renderStepContent = () => {
     if (step === 1) {
       return (
@@ -72,7 +93,7 @@ const Learn: React.FC = () => {
               className={`border hover:shadow-md transition-all cursor-pointer ${
                 selectedType === type.id ? 'border-amber-500 ring-2 ring-amber-500 bg-amber-50' : ''
               }`}
-              onClick={() => setSelectedType(type.id)}
+              onClick={() => handleDoughTypeSelect(type.id)}
             >
               <CardContent className="p-6 flex flex-col items-center text-center">
                 <div className="text-5xl mb-4">{type.icon}</div>
@@ -94,7 +115,7 @@ const Learn: React.FC = () => {
               <Card 
                 key={index}
                 className="border hover:shadow-md transition-all cursor-pointer"
-                onClick={() => setStep(3)}
+                onClick={() => handleRecipeSelect(recipe.name)}
               >
                 <CardContent className="p-6">
                   <h4 className="font-medium mb-2">{recipe.name}</h4>
@@ -110,6 +131,17 @@ const Learn: React.FC = () => {
               </Card>
             ))}
           </div>
+          
+          <div className="flex justify-start mt-8">
+            <Button 
+              variant="outline" 
+              onClick={handleGoBack}
+              className="flex items-center"
+            >
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Dough Types
+            </Button>
+          </div>
         </div>
       );
     }
@@ -124,11 +156,23 @@ const Learn: React.FC = () => {
               The complete guided journey will include detailed steps with timers, checkpoints,
               in-context help, and visual guides for each stage of the baking process.
             </p>
+            {selectedType && selectedRecipe && (
+              <div className="mt-6 p-4 bg-amber-50 border border-amber-200 rounded-md">
+                <p className="font-medium">You selected:</p>
+                <p className="text-lg">{selectedRecipe}</p>
+                <p className="text-sm text-muted-foreground">Type: {selectedType.charAt(0).toUpperCase() + selectedType.slice(1)}</p>
+              </div>
+            )}
           </div>
           
           <div className="flex justify-center">
-            <Button onClick={() => setStep(1)} variant="outline" className="mr-4">
-              Start Over
+            <Button 
+              onClick={handleGoBack} 
+              variant="outline" 
+              className="mr-4 flex items-center"
+            >
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Recipes
             </Button>
             <Button asChild className="bg-blue-500 hover:bg-blue-600">
               <a href="/calculator">Switch to Pro Mode</a>
