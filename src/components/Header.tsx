@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, LogIn, ChefHat, Flask } from 'lucide-react';
+import { Menu, X, LogIn, ChefHat, FlaskConical } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import { useAuth } from '@/context/AuthContext';

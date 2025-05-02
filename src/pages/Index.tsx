@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PageLayout from '@/components/layout/PageLayout';
 import { Button } from '@/components/ui/button';
-import { ChefHat, Flask, ArrowRight } from 'lucide-react';
+import { ChefHat, FlaskConical, ArrowRight } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import AdBanner from '@/components/monetization/AdBanner';
 import { useAuth } from '@/context/AuthContext';
@@ -50,7 +49,7 @@ const Index: React.FC = () => {
           
           <Card className="border-blue-200 hover:border-blue-300 transition-all hover:shadow-md">
             <CardContent className="p-8 flex flex-col items-center">
-              <Flask className="h-12 w-12 text-blue-500 mb-4" />
+              <FlaskConical className="h-12 w-12 text-blue-500 mb-4" />
               <h2 className="text-xl font-semibold mb-2">I'm Experienced</h2>
               <p className="text-muted-foreground mb-6">
                 Fine-tune hydration, fermentation, and baker's percentages with precision tools.
@@ -120,7 +119,7 @@ const Index: React.FC = () => {
             
             <div className="flex flex-col items-center text-center p-6 rounded-lg bg-blue-50">
               <div className="bg-blue-100 p-4 rounded-full mb-4">
-                <Flask className="h-8 w-8 text-blue-500" />
+                <FlaskConical className="h-8 w-8 text-blue-500" />
               </div>
               <h3 className="text-xl font-semibold mb-2">Pro Mode</h3>
               <ul className="space-y-2 text-left mt-4">
