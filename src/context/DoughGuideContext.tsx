@@ -36,7 +36,7 @@ const DoughGuideContext = createContext<DoughGuideContextType>({
 const generateId = () => Math.random().toString(36).substring(2, 9);
 
 // Provider component
-export const DoughGuideProvider = ({ children }: { children: ReactNode }) => {
+export const DoughGuideProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -45,7 +45,8 @@ export const DoughGuideProvider = ({ children }: { children: ReactNode }) => {
   const closeChat = useCallback(() => setIsOpen(false), []);
   const toggleChat = useCallback(() => setIsOpen(prev => !prev), []);
 
-  const addMessage = useCallback((content: string, sender: 'user' | 'assistant') => {
+  // Create a separate function to add a message
+  const addUserMessage = useCallback((content: string, sender: 'user' | 'assistant') => {
     setMessages(prev => [
       ...prev,
       {
@@ -63,29 +64,29 @@ export const DoughGuideProvider = ({ children }: { children: ReactNode }) => {
 
   // Mock assistant response - in a real app, this would call an API
   const handleUserMessage = useCallback((content: string) => {
-    addMessage(content, 'user');
+    addUserMessage(content, 'user');
     setIsLoading(true);
 
     // Simulate API delay
     setTimeout(() => {
-      addMessage("I'm DoughGuide, your baking assistant! I can help with recipes, techniques, and baking questions.", 'assistant');
+      addUserMessage("I'm DoughGuide, your baking assistant! I can help with recipes, techniques, and baking questions.", 'assistant');
       setIsLoading(false);
     }, 1000);
-  }, [addMessage]);
+  }, [addUserMessage]);
+
+  const contextValue = {
+    messages,
+    isOpen,
+    openChat,
+    closeChat,
+    toggleChat,
+    addMessage: handleUserMessage,
+    clearMessages,
+    isLoading
+  };
 
   return (
-    <DoughGuideContext.Provider
-      value={{
-        messages,
-        isOpen,
-        openChat,
-        closeChat,
-        toggleChat,
-        addMessage: handleUserMessage,
-        clearMessages,
-        isLoading
-      }}
-    >
+    <DoughGuideContext.Provider value={contextValue}>
       {children}
     </DoughGuideContext.Provider>
   );
