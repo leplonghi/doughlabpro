@@ -2,6 +2,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
+import BakingTimer from './BakingTimer';
 
 interface RecipeDetailProps {
   selectedType: string | null;
@@ -14,6 +15,18 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({
   selectedRecipe, 
   onGoBack 
 }) => {
+  // Determine appropriate timer duration based on recipe type
+  const getTimerDuration = () => {
+    if (selectedType === 'bread' || selectedType === 'sourdough') {
+      return 45; // 45 minutes for bread
+    } else if (selectedType === 'pizza') {
+      return 12; // 12 minutes for pizza
+    } else if (selectedType === 'focaccia') {
+      return 20; // 20 minutes for focaccia
+    }
+    return 30; // default timer duration
+  };
+
   return (
     <div className="mt-8 max-w-3xl mx-auto">
       <div className="text-center mb-8">
@@ -34,7 +47,14 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({
         )}
       </div>
       
-      <div className="flex justify-center">
+      {selectedType && selectedRecipe && (
+        <BakingTimer 
+          initialMinutes={getTimerDuration()} 
+          title={`${selectedRecipe} Timer`} 
+        />
+      )}
+      
+      <div className="flex justify-center mt-6">
         <Button 
           onClick={onGoBack} 
           variant="outline" 
