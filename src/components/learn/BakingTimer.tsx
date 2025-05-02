@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Play, Pause, Stop, Clock } from 'lucide-react';
+import { Play, Pause, Square, Clock } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { toast } from 'sonner';
 
@@ -122,7 +122,7 @@ const BakingTimer: React.FC<BakingTimerProps> = ({
             className="flex items-center gap-1 bg-gray-50 text-gray-700 border-gray-200 hover:bg-gray-100 hover:text-gray-800"
             disabled={!hasStarted}
           >
-            <Stop className="h-4 w-4" />
+            <Square className="h-4 w-4" />
             Reset
           </Button>
         </div>
