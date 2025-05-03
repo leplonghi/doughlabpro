@@ -247,8 +247,8 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
             <input
               type="range"
               min="500"
-              max="2000"
-              step="50"
+              max="10000"
+              step="500"
               value={flour}
               onChange={handleFlourChange}
               className="w-full accent-black"
