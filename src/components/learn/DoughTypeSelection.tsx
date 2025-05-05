@@ -8,8 +8,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-
-type DoughType = 'pizza' | 'bread' | 'focaccia' | 'sourdough';
+import { DoughType } from '@/data/learnData';
 
 interface DoughTypeData {
   id: DoughType;
@@ -20,14 +19,12 @@ interface DoughTypeData {
 
 interface DoughTypeSelectionProps {
   doughTypes: DoughTypeData[];
-  selectedType: DoughType | null;
-  onSelectType: (type: DoughType) => void;
+  onSelect: (typeId: DoughType) => void;
 }
 
 const DoughTypeSelection: React.FC<DoughTypeSelectionProps> = ({ 
   doughTypes, 
-  selectedType, 
-  onSelectType 
+  onSelect 
 }) => {
   return (
     <div className="space-y-6">
@@ -39,10 +36,8 @@ const DoughTypeSelection: React.FC<DoughTypeSelectionProps> = ({
         {doughTypes.map((type) => (
           <Card 
             key={type.id}
-            className={`border transition-all cursor-pointer transform hover:scale-105 hover:shadow-md ${
-              selectedType === type.id ? 'border-amber-500 ring-2 ring-amber-500 bg-amber-50' : 'hover:border-amber-300'
-            }`}
-            onClick={() => onSelectType(type.id)}
+            className={`border transition-all cursor-pointer transform hover:scale-105 hover:shadow-md hover:border-amber-300`}
+            onClick={() => onSelect(type.id)}
           >
             <CardContent className="p-6 flex flex-col items-center text-center">
               <div className="text-5xl mb-4">{type.icon}</div>
@@ -72,10 +67,8 @@ const DoughTypeSelection: React.FC<DoughTypeSelectionProps> = ({
                 </TooltipProvider>
               </div>
               <p className="text-sm text-muted-foreground">{type.description}</p>
-              <div className={`mt-4 px-4 py-1.5 rounded-full text-sm font-medium ${
-                selectedType === type.id ? 'bg-amber-500 text-white' : 'bg-gray-100'
-              }`}>
-                {selectedType === type.id ? 'Selected' : 'Select This'}
+              <div className="mt-4 px-4 py-1.5 rounded-full text-sm font-medium bg-gray-100">
+                Select This
               </div>
             </CardContent>
           </Card>
