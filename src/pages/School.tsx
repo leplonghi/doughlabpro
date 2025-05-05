@@ -4,12 +4,14 @@ import PageLayout from '@/components/layout/PageLayout';
 import { Card, CardContent } from '@/components/ui/card';
 import AdBanner from '@/components/monetization/AdBanner';
 import { useDoughGuide } from '@/context/DoughGuideContext';
-import { MessageCircle, ChevronDown, ChevronUp } from 'lucide-react';
+import { MessageCircle, ChevronDown, ChevronUp, ChefHat } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 
 const School: React.FC = () => {
   const { openChat, addMessage } = useDoughGuide();
   const [expandedLessons, setExpandedLessons] = useState<number[]>([]);
+  const [isIntroDialogOpen, setIsIntroDialogOpen] = useState(true);
   
   const toggleLesson = (index: number) => {
     setExpandedLessons(prev => 
@@ -17,6 +19,11 @@ const School: React.FC = () => {
         ? prev.filter(i => i !== index) 
         : [...prev, index]
     );
+  };
+  
+  const handleAskQuestion = (question: string) => {
+    openChat();
+    addMessage(question, 'user');
   };
   
   const lessons = [
@@ -78,20 +85,49 @@ const School: React.FC = () => {
     }
   ];
   
-  const handleAskQuestion = (question: string) => {
-    openChat();
-    addMessage(question, 'user');
-  };
-  
   return (
     <PageLayout>
+      <Dialog open={isIntroDialogOpen} onOpenChange={setIsIntroDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center">
+              <ChefHat className="h-6 w-6 mr-2 text-amber-600" />
+              Meet Doughy, Your Baking Assistant!
+            </DialogTitle>
+            <DialogDescription>
+              Welcome to Dough School! I'm Doughy, your personal baking assistant. 
+              I'm here to answer all your baking questions and help you master the art of dough making.
+              Feel free to ask me anything about recipes, techniques, or troubleshooting.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex justify-end">
+            <Button onClick={() => {
+              setIsIntroDialogOpen(false);
+              openChat();
+              addMessage("Hi Doughy! I'm excited to learn about baking!", 'user');
+            }} className="bg-amber-500 hover:bg-amber-600">
+              Start Chatting with Doughy
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
       <div className="container mx-auto px-4 py-8">
         <AdBanner />
         
         <div className="max-w-5xl mx-auto mt-8">
-          <h1 className="text-3xl font-bold mb-2">Dough School</h1>
+          <div className="flex items-center gap-3 mb-2">
+            <h1 className="text-3xl font-bold">Dough School</h1>
+            <Button variant="outline" size="sm" className="flex items-center gap-2" onClick={() => {
+              openChat();
+              addMessage("Tell me about today's baking lesson", 'user');
+            }}>
+              <ChefHat className="h-4 w-4" />
+              Ask Doughy
+            </Button>
+          </div>
           <p className="text-lg text-muted-foreground mb-8">
-            Master the fundamentals of dough with these bite-sized lessons
+            Master the fundamentals of dough with these bite-sized lessons and Doughy's expert help
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
@@ -133,7 +169,7 @@ const School: React.FC = () => {
                       onClick={() => handleAskQuestion(lesson.askQuestion)}
                     >
                       <MessageCircle className="h-4 w-4 mr-2" />
-                      Ask DoughGuide
+                      Ask Doughy
                     </Button>
                   </div>
                 </CardContent>
@@ -142,11 +178,24 @@ const School: React.FC = () => {
           </div>
           
           <div className="mt-12 bg-amber-50 p-6 rounded-lg border border-amber-100">
-            <h2 className="text-xl font-medium mb-4">Have a specific baking question?</h2>
-            <p className="mb-4">
-              Our DoughGuide AI assistant can help with any baking questions you might have. 
-              Click the assistant icon in the bottom right corner!
-            </p>
+            <div className="flex items-start gap-4">
+              <div className="bg-amber-100 p-3 rounded-full">
+                <ChefHat className="h-8 w-8 text-amber-600" />
+              </div>
+              <div>
+                <h2 className="text-xl font-medium mb-2">Have a specific baking question?</h2>
+                <p className="mb-4">
+                  I'm Doughy, your AI baking assistant. I can help with any baking questions you might have!
+                  Click the assistant icon or the button below to chat with me.
+                </p>
+                <Button 
+                  onClick={() => openChat()} 
+                  className="bg-amber-500 hover:bg-amber-600"
+                >
+                  Chat with Doughy
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

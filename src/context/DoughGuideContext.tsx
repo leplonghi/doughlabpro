@@ -69,7 +69,7 @@ export const DoughGuideProvider: React.FC<{ children: ReactNode }> = ({ children
 
     // Simulate API delay
     setTimeout(() => {
-      addUserMessage("I'm DoughGuide, your baking assistant! I can help with recipes, techniques, and baking questions.", 'assistant');
+      addUserMessage("I'm Doughy, your baking assistant! I can help with recipes, techniques, and baking questions.", 'assistant');
       setIsLoading(false);
     }, 1000);
   }, [addUserMessage]);

@@ -41,7 +41,7 @@ const DoughGuideChat: React.FC = () => {
       <CardHeader className="bg-amber-50 py-2 px-4 border-b border-amber-100 flex flex-row items-center justify-between">
         <CardTitle className="text-lg font-medium flex items-center">
           <ChefHat className="h-5 w-5 mr-2 text-amber-600" />
-          DoughGuide
+          Doughy
         </CardTitle>
         <Button variant="ghost" size="sm" onClick={closeChat} className="h-8 w-8 p-0">
           <X className="h-4 w-4" />
@@ -52,7 +52,7 @@ const DoughGuideChat: React.FC = () => {
         {messages.length === 0 ? (
           <div className="text-center text-muted-foreground h-full flex flex-col items-center justify-center">
             <ChefHat className="h-12 w-12 mb-3 text-amber-300" />
-            <p className="text-sm">Hi! I'm DoughGuide, your baking assistant.</p>
+            <p className="text-sm">Hi! I'm Doughy, your baking assistant.</p>
             <p className="text-sm">How can I help you today?</p>
           </div>
         ) : (
