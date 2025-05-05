@@ -25,10 +25,10 @@ const Learn: React.FC = () => {
           <div className="flex items-start">
             <Info className="h-5 w-5 text-blue-600 mt-0.5 mr-2" />
             <div>
-              <h3 className="font-medium text-blue-800">Beginner's Guide</h3>
+              <h3 className="font-medium text-blue-800">Beginner&apos;s Guide</h3>
               <p className="mt-2 text-blue-700">
                 This guided experience will teach you the basics of making different types of dough.
-                We'll walk you through each step with detailed instructions, tips, and timers to help you achieve perfect results.
+                We&apos;ll walk you through each step with detailed instructions, tips, and timers to help you achieve perfect results.
               </p>
             </div>
           </div>

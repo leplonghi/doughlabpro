@@ -287,7 +287,7 @@ const getStepsForBread = (recipeName: string): BakingStep[] => {
       },
       {
         title: 'Second Rise',
-        description: 'Cover the loaf pan and let the dough rise again until it's about 1 inch above the rim of the pan.',
+        description: 'Cover the loaf pan and let the dough rise again until it is about 1 inch above the rim of the pan.',
         timer: 45,
         tip: 'This second rise is crucial for a light, airy texture in your sandwich bread.'
       },
@@ -337,7 +337,7 @@ const getFocacciaSteps = (recipeName: string): BakingStep[] => {
         title: 'Additional Folding',
         description: 'Perform another series of stretch-and-folds, then let the dough rest for 30 minutes. Repeat this process once more.',
         timer: 30,
-        tip: 'Each time you fold, you'll notice the dough becoming more structured and less sticky.'
+        tip: 'Each time you fold, you will notice the dough becoming more structured and less sticky.'
       },
       {
         title: 'Transfer to Pan',
@@ -346,7 +346,7 @@ const getFocacciaSteps = (recipeName: string): BakingStep[] => {
       },
       {
         title: 'Final Rise',
-        description: 'Cover the pan and let the dough rise once more until it's puffy and nearly doubles in height.',
+        description: 'Cover the pan and let the dough rise once more until it is puffy and nearly doubles in height.',
         timer: 45,
         tip: 'During this final rise, preheat your oven to 425°F (220°C).'
       },
@@ -364,7 +364,7 @@ const getFocacciaSteps = (recipeName: string): BakingStep[] => {
       {
         title: 'Cool & Serve',
         description: 'Let cool slightly before removing from the pan. Serve warm or at room temperature.',
-        tip: 'Focaccia is best enjoyed the day it's made, but can be frozen and reheated successfully.'
+        tip: 'Focaccia is best enjoyed the day it is made, but can be frozen and reheated successfully.'
       }
     ];
   }
@@ -506,7 +506,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({
       return 20; // 20 minutes for focaccia
     }
     return 30; // default timer duration
-  };
+  }
 
   const getItemLabel = () => {
     if (selectedType === 'pizza') return numberOfPies === 1 ? 'pizza' : 'pizzas';
