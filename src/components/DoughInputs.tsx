@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Wheat, Droplets } from 'lucide-react';
@@ -8,7 +9,7 @@ import YeastTypeSelector from './inputs/YeastTypeSelector';
 import TotalDoughWeight from './inputs/TotalDoughWeight';
 import DoughIngredients from './inputs/DoughIngredients';
 import DoughBallSize from './inputs/DoughBallSize';
-import { CustomYeastIcon as YeastIcon } from './inputs/CustomIcons';
+import { YeastIcon } from './inputs/CustomIcons';
 import { YeastType } from '@/types/dough';
 
 type PizzaStyle = 'napoletana' | 'newyork' | 'chicago';

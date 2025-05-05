@@ -5,11 +5,10 @@ import App from './App.tsx';
 import './index.css';
 import './i18n'; // Import i18n configuration
 
-// Create root and render app with proper context
+// Create root and render app without duplicate StrictMode
+// since we already have StrictMode in App.tsx
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <App />
 );
 
 // Register service worker after React has initialized

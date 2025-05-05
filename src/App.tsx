@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
 import { lazy, Suspense } from "react";
@@ -116,22 +115,26 @@ const AppRoutes = () => {
   );
 };
 
+// Make sure React is properly imported for React Query
 const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
-        <TooltipProvider>
-          <BrowserRouter>
-            <AuthProvider>
-              <DoughGuideProvider>
-                <AppRoutes />
-                <Toaster />
-              </DoughGuideProvider>
-            </AuthProvider>
-          </BrowserRouter>
-        </TooltipProvider>
-      </ThemeProvider>
-    </QueryClientProvider>
+    // Use StrictMode to ensure React hooks have the right context
+    <React.StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
+          <TooltipProvider>
+            <BrowserRouter>
+              <AuthProvider>
+                <DoughGuideProvider>
+                  <AppRoutes />
+                  <Toaster />
+                </DoughGuideProvider>
+              </AuthProvider>
+            </BrowserRouter>
+          </TooltipProvider>
+        </ThemeProvider>
+      </QueryClientProvider>
+    </React.StrictMode>
   );
 };
 
