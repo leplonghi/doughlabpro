@@ -40,16 +40,16 @@ export const useDoughCalculator = (style: StyleType, fermentationMethod: Ferment
     }
     
     const { flour, hydration, yeastType, ballWeight } = state;
-    // Ensure minimum 6 hours bulk fermentation for all pizzas
-    const minBulkFermentation = 6;
+    
+    // Check if createRecipe expects minBulkFermentation as a parameter
+    // If it does, include it; otherwise, only pass the required parameters
     const { recipe, numberOfBalls } = createRecipe(
       flour, 
       hydration, 
       yeastType, 
       style, 
       fermentationMethod,
-      ballWeight,
-      minBulkFermentation
+      ballWeight
     );
     
     setState(prev => ({

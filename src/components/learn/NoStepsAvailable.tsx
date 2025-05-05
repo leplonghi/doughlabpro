@@ -3,6 +3,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import BakingTimer from './BakingTimer';
+import { cn } from '@/lib/utils';
 
 interface NoStepsAvailableProps {
   onGoBack: () => void;
@@ -54,7 +55,7 @@ const NoStepsAvailable: React.FC<NoStepsAvailableProps> = ({
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Dough Types
         </Button>
-        <Button asChild className={`bg-${themeColor}-500 hover:bg-${themeColor}-600`}>
+        <Button asChild className={cn(`bg-${themeColor}-500 hover:bg-${themeColor}-600`)}>
           <a href="/calculator">Switch to Pro Mode</a>
         </Button>
       </div>
