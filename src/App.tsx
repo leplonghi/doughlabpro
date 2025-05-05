@@ -1,3 +1,4 @@
+
 import * as React from "react";
 import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
 import { lazy, Suspense } from "react";
@@ -71,7 +72,7 @@ const AppRoutes = () => {
         </Suspense>
       } />
       
-      {/* New pages */}
+      {/* Learn pages */}
       <Route path="/learn" element={
         <Suspense fallback={<LoadingSpinner />}>
           <Learn />
@@ -115,26 +116,23 @@ const AppRoutes = () => {
   );
 };
 
-// Make sure React is properly imported for React Query
+// App component with correct React hooks context
 const App = () => {
   return (
-    // Use StrictMode to ensure React hooks have the right context
-    <React.StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
-          <TooltipProvider>
-            <BrowserRouter>
-              <AuthProvider>
-                <DoughGuideProvider>
-                  <AppRoutes />
-                  <Toaster />
-                </DoughGuideProvider>
-              </AuthProvider>
-            </BrowserRouter>
-          </TooltipProvider>
-        </ThemeProvider>
-      </QueryClientProvider>
-    </React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
+        <TooltipProvider>
+          <BrowserRouter>
+            <AuthProvider>
+              <DoughGuideProvider>
+                <AppRoutes />
+                <Toaster />
+              </DoughGuideProvider>
+            </AuthProvider>
+          </BrowserRouter>
+        </TooltipProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 };
 

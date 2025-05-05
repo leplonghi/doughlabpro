@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import DoughTypeSelection from './DoughTypeSelection';
 import RecipeSelection from './RecipeSelection';
 import RecipeDetail from './RecipeDetail';
@@ -24,10 +24,10 @@ interface LearnContentProps {
 }
 
 const LearnContent: React.FC<LearnContentProps> = ({ doughTypes, recipePresets }) => {
-  const [selectedType, setSelectedType] = React.useState<DoughType | null>(null);
-  const [step, setStep] = React.useState(1);
-  const [selectedRecipe, setSelectedRecipe] = React.useState<string | null>(null);
-  const [numberOfPies, setNumberOfPies] = React.useState(2);
+  const [selectedType, setSelectedType] = useState<DoughType | null>(null);
+  const [step, setStep] = useState(1);
+  const [selectedRecipe, setSelectedRecipe] = useState<string | null>(null);
+  const [numberOfPies, setNumberOfPies] = useState(2);
   
   const handleDoughTypeSelect = (type: DoughType) => {
     setSelectedType(type);
