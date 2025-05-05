@@ -55,7 +55,7 @@ const NoStepsAvailable: React.FC<NoStepsAvailableProps> = ({
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Dough Types
         </Button>
-        <Button asChild className={cn(`bg-${themeColor}-500 hover:bg-${themeColor}-600`)}>
+        <Button asChild className="bg-red-500 hover:bg-red-600">
           <a href="/calculator">Switch to Pro Mode</a>
         </Button>
       </div>

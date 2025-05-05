@@ -1,5 +1,5 @@
 
-import React from 'react';
+import * as React from 'react';
 import { AuthProvider as ContextAuthProvider } from '@/context/AuthContext';
 
 // This component is just a re-export of the main AuthProvider from context
