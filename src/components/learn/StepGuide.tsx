@@ -4,20 +4,27 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 import BakingTimer from './BakingTimer';
-import { BakingStep } from './types';
+import { BakingStep, Ingredient } from './types';
+import IngredientsCard from './IngredientsCard';
 
 interface StepGuideProps {
   steps: BakingStep[];
   currentStepIndex: number;
   setCurrentStepIndex: (index: number) => void;
   onGoBack: () => void;
+  ingredients: Ingredient[];
+  selectedType: string | null;
+  quantity: number;
 }
 
 const StepGuide: React.FC<StepGuideProps> = ({
   steps,
   currentStepIndex,
   setCurrentStepIndex,
-  onGoBack
+  onGoBack,
+  ingredients,
+  selectedType,
+  quantity
 }) => {
   const currentStep = steps[currentStepIndex] || { title: '', description: '' };
   const progress = steps.length > 0 ? (currentStepIndex / steps.length) * 100 : 0;
@@ -44,6 +51,14 @@ const StepGuide: React.FC<StepGuideProps> = ({
       </div>
       
       <Progress value={progress} className="h-2 mb-8" />
+      
+      {/* Always show ingredients in compact form during the step guide */}
+      <IngredientsCard 
+        ingredients={ingredients} 
+        selectedType={selectedType} 
+        quantity={quantity}
+        compact={true}
+      />
       
       <div className="bg-white p-6 rounded-lg border shadow-sm">
         <h3 className="text-xl font-medium mb-3">{currentStep.title}</h3>

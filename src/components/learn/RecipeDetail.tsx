@@ -46,12 +46,6 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({
         onQuantityChange={handleQuantityChange}
       />
       
-      <IngredientsCard 
-        ingredients={ingredients} 
-        selectedType={selectedType}
-        quantity={quantity}
-      />
-      
       {steps.length > 0 ? (
         <StepGuide
           steps={steps}
@@ -63,13 +57,24 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({
             }
           }}
           onGoBack={onGoBack}
+          ingredients={ingredients}
+          selectedType={selectedType}
+          quantity={quantity}
         />
       ) : (
-        <NoStepsAvailable 
-          onGoBack={onGoBack}
-          selectedRecipe={selectedRecipe}
-          timerDuration={timerDuration}
-        />
+        <>
+          <IngredientsCard 
+            ingredients={ingredients} 
+            selectedType={selectedType}
+            quantity={quantity}
+          />
+          
+          <NoStepsAvailable 
+            onGoBack={onGoBack}
+            selectedRecipe={selectedRecipe}
+            timerDuration={timerDuration}
+          />
+        </>
       )}
     </div>
   );
