@@ -16,12 +16,12 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({
 }) => {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
+  const [quantity, setQuantity] = useState(numberOfPies);
   
   // Get steps based on recipe type
   const steps = getSteps(selectedType, selectedRecipe);
   
   // Get ingredients for the current recipe
-  const quantity = selectedType === 'pizza' ? numberOfPies : 1;
   const ingredients = getIngredients(selectedType, selectedRecipe, quantity);
   
   // Get the default timer duration for this recipe type
@@ -33,12 +33,17 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({
     }
   };
 
+  const handleQuantityChange = (newQuantity: number) => {
+    setQuantity(newQuantity);
+  };
+
   return (
     <div className="mt-8 max-w-3xl mx-auto">
       <RecipeHeader 
         selectedType={selectedType} 
         selectedRecipe={selectedRecipe}
-        quantity={quantity} 
+        quantity={quantity}
+        onQuantityChange={handleQuantityChange}
       />
       
       <IngredientsCard 

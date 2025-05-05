@@ -3,6 +3,7 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { ChefHat } from 'lucide-react';
 import { Ingredient } from './types';
+import { getItemLabel } from './recipe-data/recipe-helpers';
 
 interface IngredientsCardProps {
   ingredients: Ingredient[];
@@ -33,11 +34,12 @@ const IngredientsCard: React.FC<IngredientsCardProps> = ({
           ))}
         </div>
         
-        {selectedType === 'pizza' && (
-          <div className="mt-4 text-sm text-muted-foreground">
-            <p>Recipe for {quantity} {quantity === 1 ? 'pizza' : 'pizzas'} (about 10-12 inches each)</p>
-          </div>
-        )}
+        <div className="mt-4 text-sm text-muted-foreground">
+          <p>Recipe for {quantity} {getItemLabel(selectedType, quantity)}</p>
+          {selectedType === 'pizza' && (
+            <p className="mt-1">(about 10-12 inches each)</p>
+          )}
+        </div>
       </CardContent>
     </Card>
   );

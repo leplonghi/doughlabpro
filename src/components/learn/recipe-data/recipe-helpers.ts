@@ -42,9 +42,12 @@ export const getDefaultTimerDuration = (selectedType: string | null): number => 
 };
 
 export const getItemLabel = (selectedType: string | null, quantity: number): string => {
+  if (!selectedType) return quantity === 1 ? 'item' : 'items';
+  
   if (selectedType === 'pizza') return quantity === 1 ? 'pizza' : 'pizzas';
-  if (selectedType === 'bread') return 'loaf';
-  if (selectedType === 'focaccia') return 'focaccia';
-  if (selectedType === 'sourdough') return 'loaf';
-  return 'item';
+  if (selectedType === 'bread') return quantity === 1 ? 'loaf' : 'loaves';
+  if (selectedType === 'focaccia') return quantity === 1 ? 'focaccia' : 'focaccias';
+  if (selectedType === 'sourdough') return quantity === 1 ? 'loaf' : 'loaves';
+  
+  return quantity === 1 ? 'item' : 'items';
 };
