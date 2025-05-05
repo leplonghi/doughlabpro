@@ -4,12 +4,12 @@ import { Card, CardContent } from '@/components/ui/card';
 import DoughTypeSelection from './DoughTypeSelection';
 import RecipeSelection from './RecipeSelection';
 import RecipeDetail from './RecipeDetail';
-import { recipePresets } from '@/data/learnData';
+import { recipePresets, DoughType } from '@/data/learnData';
 import { getItemLabel } from './recipe-data/recipe-helpers';
 
 interface LearnContentProps {
   doughTypes: Array<{
-    id: string;
+    id: DoughType;
     name: string;
     icon: string;
     description: string;
@@ -23,23 +23,23 @@ interface LearnContentProps {
 }
 
 const LearnContent: React.FC<LearnContentProps> = ({ doughTypes, recipePresets }) => {
-  const [selectedType, setSelectedType] = useState<string | null>(null);
+  const [selectedType, setSelectedType] = useState<DoughType | null>(null);
   const [selectedRecipe, setSelectedRecipe] = useState<string | null>(null);
   const [numberOfItems, setNumberOfItems] = useState<number>(2);
   
   // Get recipes for the selected type
   const getRecipesForType = () => {
     if (!selectedType) return [];
-    return recipePresets[selectedType as keyof typeof recipePresets] || [];
+    return recipePresets[selectedType] || [];
   };
 
   // Handle selecting a dough type
-  const handleSelectType = (typeId: string) => {
+  const handleSelectType = (typeId: DoughType) => {
     setSelectedType(typeId);
     setSelectedRecipe(null);
     
     // Set default number of items based on first recipe in the selected type
-    const recipes = recipePresets[typeId as keyof typeof recipePresets] || [];
+    const recipes = recipePresets[typeId] || [];
     if (recipes.length > 0 && recipes[0].defaultQuantity) {
       setNumberOfItems(recipes[0].defaultQuantity);
     } else {
