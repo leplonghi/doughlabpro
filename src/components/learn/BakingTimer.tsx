@@ -1,9 +1,11 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Button } from '@/components/ui/button';
-import { Play, Pause, Square, Clock } from 'lucide-react';
 import { Card } from '@/components/ui/card';
+import { Clock } from 'lucide-react';
 import { toast } from 'sonner';
+import TimerControls from './timer/TimerControls';
+import TimerProgress from './timer/TimerProgress';
+import TimerDisplay from './timer/TimerDisplay';
 
 interface BakingTimerProps {
   initialMinutes?: number;
@@ -84,48 +86,20 @@ const BakingTimer: React.FC<BakingTimerProps> = ({
           <h3 className="text-lg font-medium">{title}</h3>
         </div>
         
-        <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4 mt-2">
-          <div 
-            className="bg-amber-500 h-2.5 rounded-full transition-all duration-1000 ease-linear" 
-            style={{ width: `${hasStarted ? getProgressPercentage() : 0}%` }}
-          ></div>
-        </div>
+        <TimerProgress 
+          hasStarted={hasStarted} 
+          progressPercentage={getProgressPercentage()} 
+        />
         
-        <div className="text-3xl font-bold mb-4 font-mono">
-          {formatTime(timeLeft)}
-        </div>
+        <TimerDisplay formattedTime={formatTime(timeLeft)} />
         
-        <div className="flex gap-2">
-          {!isActive ? (
-            <Button
-              onClick={startTimer}
-              variant="outline"
-              className="flex items-center gap-1 bg-green-50 text-green-700 border-green-200 hover:bg-green-100 hover:text-green-800"
-            >
-              <Play className="h-4 w-4" />
-              {hasStarted ? 'Resume' : 'Start'}
-            </Button>
-          ) : (
-            <Button
-              onClick={pauseTimer}
-              variant="outline"
-              className="flex items-center gap-1 bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-100 hover:text-amber-800"
-            >
-              <Pause className="h-4 w-4" />
-              Pause
-            </Button>
-          )}
-          
-          <Button
-            onClick={resetTimer}
-            variant="outline"
-            className="flex items-center gap-1 bg-gray-50 text-gray-700 border-gray-200 hover:bg-gray-100 hover:text-gray-800"
-            disabled={!hasStarted}
-          >
-            <Square className="h-4 w-4" />
-            Reset
-          </Button>
-        </div>
+        <TimerControls 
+          isActive={isActive}
+          hasStarted={hasStarted}
+          startTimer={startTimer}
+          pauseTimer={pauseTimer}
+          resetTimer={resetTimer}
+        />
       </div>
     </Card>
   );
