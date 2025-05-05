@@ -1,5 +1,6 @@
 
 import React, { createContext, useState, useContext, ReactNode, useCallback } from 'react';
+import { supabase } from '@/lib/supabase';
 
 // Define types for our context
 type Message = {
@@ -62,17 +63,54 @@ export const DoughGuideProvider: React.FC<{ children: ReactNode }> = ({ children
     setMessages([]);
   }, []);
 
-  // Mock assistant response - in a real app, this would call an API
-  const handleUserMessage = useCallback((content: string) => {
+  // Function to call our ChatGPT edge function
+  const callChatGPT = useCallback(async (userMessage: string, previousMessages: Message[]) => {
+    try {
+      // Format the messages for the API
+      const formattedMessages = previousMessages.map((msg) => ({
+        role: msg.sender === 'user' ? 'user' : 'assistant',
+        content: msg.content
+      }));
+      
+      // Add the new user message
+      formattedMessages.push({ role: 'user', content: userMessage });
+      
+      // Call the edge function
+      const { data, error } = await supabase.functions.invoke('connect-chatgpt-to-lovable', {
+        body: { messages: formattedMessages }
+      });
+      
+      if (error) {
+        console.error('Error calling ChatGPT:', error);
+        return "I'm sorry, I'm having trouble connecting to my knowledge base right now. Please try again later.";
+      }
+      
+      return data.message || "I'm Doughy, your baking assistant. How can I help you today?";
+    } catch (error) {
+      console.error('Error in ChatGPT call:', error);
+      return "I'm sorry, something went wrong. Please try again later.";
+    }
+  }, []);
+
+  // Handle user messages - now with real ChatGPT connection
+  const handleUserMessage = useCallback(async (content: string) => {
+    // Add user message immediately
     addUserMessage(content, 'user');
     setIsLoading(true);
-
-    // Simulate API delay
-    setTimeout(() => {
-      addUserMessage("I'm Doughy, your baking assistant! I can help with recipes, techniques, and baking questions.", 'assistant');
+    
+    try {
+      // Get the response from ChatGPT
+      const response = await callChatGPT(content, messages);
+      
+      // Add the assistant's response
+      addUserMessage(response, 'assistant');
+    } catch (error) {
+      console.error('Error handling message:', error);
+      addUserMessage("I'm sorry, I encountered an error. Please try again later.", 'assistant');
+    } finally {
       setIsLoading(false);
-    }, 1000);
-  }, [addUserMessage]);
+    }
+  }, [addUserMessage, callChatGPT, messages]);
 
   const contextValue = {
     messages,
