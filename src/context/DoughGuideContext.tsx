@@ -1,5 +1,5 @@
 
-import React, { createContext, useContext, useState, useCallback } from 'react';
+import { createContext, useContext, useState, useCallback } from 'react';
 import { supabase } from '@/lib/supabase';
 
 // Define types for our context
