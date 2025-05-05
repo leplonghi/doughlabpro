@@ -41,8 +41,6 @@ export const useDoughCalculator = (style: StyleType, fermentationMethod: Ferment
     
     const { flour, hydration, yeastType, ballWeight } = state;
     
-    // Check if createRecipe expects minBulkFermentation as a parameter
-    // If it does, include it; otherwise, only pass the required parameters
     const { recipe, numberOfBalls } = createRecipe(
       flour, 
       hydration, 
