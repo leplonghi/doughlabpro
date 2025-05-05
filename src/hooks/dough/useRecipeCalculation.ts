@@ -34,11 +34,12 @@ export const useRecipeCalculation = () => {
     let oil = 0;
     let sugar = 0;
     let butter = 0;
-    let eggs = 0; // Add missing eggs variable
+    let eggs = 0;
     
     // Adjust oil, sugar, butter based on style
     if (style === 'napoletana') {
-      oil = (flour * 1) / 100;
+      // Authentic Neapolitan doesn't use oil
+      oil = 0;
     } else if (style === 'newyork') {
       oil = (flour * 2) / 100;
       sugar = (flour * 1) / 100;
@@ -50,7 +51,7 @@ export const useRecipeCalculation = () => {
     } else if (style === 'brioche') {
       butter = (flour * 15) / 100;
       sugar = (flour * 8) / 100;
-      eggs = (flour * 25) / 100; // Add eggs for brioche
+      eggs = (flour * 25) / 100;
     } else if (style === 'focaccia') {
       oil = (flour * 8) / 100;
       sugar = (flour * 1) / 100;

@@ -33,7 +33,8 @@ export const getIngredients = (type: string | null, recipe: string | null, quant
   if (type === 'pizza') {
     if (recipe.includes('Simple Neapolitan')) {
       waterPercentage = 60;
-      oilPercentage = 1;
+      // No oil for authentic Neapolitan pizza
+      oilPercentage = 0;
     } else if (recipe.includes('New York Style')) {
       waterPercentage = 65;
       oilPercentage = 2;

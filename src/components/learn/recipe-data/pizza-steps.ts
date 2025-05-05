@@ -6,7 +6,7 @@ export const getPizzaSteps = (recipeName: string): BakingStep[] => {
     return [
       {
         title: 'Prepare Your Ingredients',
-        description: 'Gather all your ingredients: flour, water, salt, and yeast. Make sure they are at room temperature for optimal results.',
+        description: 'Gather all your ingredients: 00 flour, water, salt, and yeast. Make sure they are at room temperature for optimal results.',
         tip: 'Using 00 flour will give you the most authentic Neapolitan texture.'
       },
       {
@@ -44,7 +44,7 @@ export const getPizzaSteps = (recipeName: string): BakingStep[] => {
       },
       {
         title: 'Top Your Pizza',
-        description: 'Add your sauce and toppings. For classic Neapolitan, use San Marzano tomato sauce, fresh mozzarella, basil, and a drizzle of olive oil.',
+        description: 'Add your sauce and toppings. For classic Neapolitan, use San Marzano tomato sauce, fresh mozzarella, and basil - no olive oil in the dough.',
         tip: 'Less is more with Neapolitan pizza - don\'t overload with too many toppings.'
       },
       {
@@ -55,7 +55,7 @@ export const getPizzaSteps = (recipeName: string): BakingStep[] => {
       },
       {
         title: 'Enjoy!',
-        description: 'Remove from oven, add any fresh herbs, slice and enjoy immediately while hot!',
+        description: 'Remove from oven, add fresh basil, slice and enjoy immediately while hot!',
         tip: 'Authentic Neapolitan pizza should have a soft, foldable center and charred, puffy edges.'
       }
     ];
