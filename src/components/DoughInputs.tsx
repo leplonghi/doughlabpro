@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Wheat, Droplets, YeastIcon } from 'lucide-react';
+import { Wheat, Droplets } from 'lucide-react';
 import IngredientSection from './inputs/IngredientSection';
 import RangeInput from './inputs/RangeInput';
 import ErrorMessage from './inputs/ErrorMessage';
@@ -8,7 +8,7 @@ import YeastTypeSelector from './inputs/YeastTypeSelector';
 import TotalDoughWeight from './inputs/TotalDoughWeight';
 import DoughIngredients from './inputs/DoughIngredients';
 import DoughBallSize from './inputs/DoughBallSize';
-import { YeastIcon as CustomYeastIcon } from './inputs/CustomIcons';
+import { CustomYeastIcon as YeastIcon } from './inputs/CustomIcons';
 import { YeastType } from '@/types/dough';
 
 type PizzaStyle = 'napoletana' | 'newyork' | 'chicago';
@@ -197,7 +197,7 @@ const DoughInputs: React.FC<DoughInputsProps> = ({
       {/* Yeast Type */}
       <div className="space-y-3">
         <div className="flex items-center gap-2">
-          <CustomYeastIcon className="h-5 w-5" />
+          <YeastIcon className="h-5 w-5" />
           <span className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
             Yeast Type
           </span>
