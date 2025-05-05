@@ -30,9 +30,31 @@ export const doughTypes = [
 
 export const recipePresets = {
   pizza: [
-    { name: 'Simple Neapolitan Pizza', hydration: 60, difficulty: 'Medium', defaultQuantity: 4, ballWeight: 250 },
-    { name: 'New York Style Pizza', hydration: 65, difficulty: 'Medium', defaultQuantity: 2, ballWeight: 350 },
-    { name: 'Thin Crispy Crust', hydration: 55, difficulty: 'Medium', defaultQuantity: 6, ballWeight: 200 }
+    { 
+      name: 'Simple Neapolitan Pizza', 
+      hydration: 60, 
+      difficulty: 'Medium', 
+      defaultQuantity: 4, 
+      ballWeight: 250,
+      // Fixed flour amount for consistent recipe calculations
+      flourAmount: 1000 
+    },
+    { 
+      name: 'New York Style Pizza', 
+      hydration: 65, 
+      difficulty: 'Medium', 
+      defaultQuantity: 2, 
+      ballWeight: 350,
+      flourAmount: 1000
+    },
+    { 
+      name: 'Thin Crispy Crust', 
+      hydration: 55, 
+      difficulty: 'Medium', 
+      defaultQuantity: 6, 
+      ballWeight: 200,
+      flourAmount: 1000
+    }
   ],
   bread: [
     { name: 'Basic White Sandwich Loaf', hydration: 65, difficulty: 'Medium', defaultQuantity: 1, ballWeight: 800 },

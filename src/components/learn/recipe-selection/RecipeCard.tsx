@@ -16,6 +16,7 @@ interface RecipeCardProps {
     hydration: number;
     difficulty: string;
     ballWeight?: number;
+    flourAmount?: number;
   };
   themeColor: string;
   selectedType: string | null;
@@ -36,6 +37,22 @@ const RecipeCard: React.FC<RecipeCardProps> = ({
   hydrationInfo,
   onSelectRecipe
 }) => {
+  // Calculate total dough weight based on flour and hydration
+  const calculateTotalDoughWeight = (flour: number, hydration: number) => {
+    // Basic dough calculation: flour + water + salt (2%) + yeast (0.5%)
+    const water = (flour * hydration) / 100;
+    const salt = (flour * 0.02);
+    const yeast = (flour * 0.005);
+    return flour + water + salt + yeast;
+  };
+  
+  // If the recipe has flourAmount, calculate the number of balls
+  let calculatedNumberOfItems = numberOfItems;
+  if (recipe.flourAmount && recipe.ballWeight) {
+    const totalDoughWeight = calculateTotalDoughWeight(recipe.flourAmount, recipe.hydration);
+    calculatedNumberOfItems = Math.floor(totalDoughWeight / recipe.ballWeight);
+  }
+  
   // Get ball info if available
   const ballInfo = recipe.ballWeight 
     ? `(${recipe.ballWeight}g dough balls)` 
@@ -49,7 +66,10 @@ const RecipeCard: React.FC<RecipeCardProps> = ({
       <CardContent className="p-6">
         <h4 className="font-medium mb-2 text-lg">
           {recipe.name}
-          {selectedType && numberOfItems > 0 && (
+          {selectedType === 'pizza' && recipe.ballWeight && (
+            <span className="text-gray-500 font-normal"> ({calculatedNumberOfItems} {itemLabel})</span>
+          )}
+          {selectedType !== 'pizza' && numberOfItems > 0 && (
             <span className="text-gray-500 font-normal"> ({numberOfItems} {itemLabel})</span>
           )}
         </h4>
