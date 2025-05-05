@@ -22,8 +22,9 @@ interface RecipeSelectionProps {
   onSelectRecipe: (recipeName: string) => void;
   onGoBack: () => void;
   selectedType?: string | null;
-  numberOfPies?: number;
-  onNumberOfPiesChange?: (count: number) => void;
+  numberOfItems?: number;
+  onNumberOfItemsChange?: (count: number) => void;
+  itemLabel?: string;
 }
 
 const difficultyInfo = {
@@ -39,16 +40,20 @@ const RecipeSelection: React.FC<RecipeSelectionProps> = ({
   onSelectRecipe, 
   onGoBack,
   selectedType,
-  numberOfPies = 2,
-  onNumberOfPiesChange
+  numberOfItems = 2,
+  onNumberOfItemsChange,
+  itemLabel = 'items'
 }) => {
   const handleNumberChange = (newCount: number) => {
-    if (onNumberOfPiesChange) {
+    if (onNumberOfItemsChange) {
       if (newCount >= 1 && newCount <= 12) {
-        onNumberOfPiesChange(newCount);
+        onNumberOfItemsChange(newCount);
       }
     }
   };
+
+  // Determine if we should show the quantity selector
+  const showQuantitySelector = selectedType && onNumberOfItemsChange;
   
   return (
     <div className="mt-8 space-y-6">
@@ -63,25 +68,27 @@ const RecipeSelection: React.FC<RecipeSelectionProps> = ({
         </p>
       </div>
 
-      {selectedType === 'pizza' && onNumberOfPiesChange && (
+      {showQuantitySelector && (
         <div className="mb-8 p-6 bg-amber-50 rounded-lg border border-amber-200">
-          <h4 className="text-lg font-medium mb-3 flex items-center">How many pizzas do you want to make?</h4>
+          <h4 className="text-lg font-medium mb-3 flex items-center">
+            How many {itemLabel} do you want to make?
+          </h4>
           <p className="text-muted-foreground mb-4">
-            This will calculate the right amount of ingredients for your pizzas.
+            This will calculate the right amount of ingredients for your {itemLabel}.
           </p>
           <div className="flex items-center">
             <Button 
               variant="outline" 
               size="icon"
-              onClick={() => handleNumberChange(numberOfPies - 1)}
-              disabled={numberOfPies <= 1}
+              onClick={() => handleNumberChange(numberOfItems - 1)}
+              disabled={numberOfItems <= 1}
             >
               <Minus className="h-4 w-4" />
             </Button>
             <Input 
               type="number" 
               className="w-16 mx-2 text-center"
-              value={numberOfPies}
+              value={numberOfItems}
               onChange={(e) => handleNumberChange(parseInt(e.target.value) || 2)}
               min={1}
               max={12}
@@ -89,13 +96,13 @@ const RecipeSelection: React.FC<RecipeSelectionProps> = ({
             <Button 
               variant="outline" 
               size="icon"
-              onClick={() => handleNumberChange(numberOfPies + 1)}
-              disabled={numberOfPies >= 12}
+              onClick={() => handleNumberChange(numberOfItems + 1)}
+              disabled={numberOfItems >= 12}
             >
               <Plus className="h-4 w-4" />
             </Button>
             <span className="ml-3 text-gray-600">
-              {numberOfPies === 1 ? 'pizza' : 'pizzas'}
+              {numberOfItems === 1 ? itemLabel.slice(0, -1) : itemLabel}
             </span>
           </div>
         </div>

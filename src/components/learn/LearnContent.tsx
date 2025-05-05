@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import DoughTypeSelection from './DoughTypeSelection';
 import RecipeSelection from './RecipeSelection';
@@ -26,7 +27,7 @@ const LearnContent: React.FC<LearnContentProps> = ({ doughTypes, recipePresets }
   const [selectedType, setSelectedType] = useState<DoughType | null>(null);
   const [step, setStep] = useState(1);
   const [selectedRecipe, setSelectedRecipe] = useState<string | null>(null);
-  const [numberOfPies, setNumberOfPies] = useState(2);
+  const [numberOfItems, setNumberOfItems] = useState(2);
   
   const handleDoughTypeSelect = (type: DoughType) => {
     setSelectedType(type);
@@ -48,8 +49,8 @@ const LearnContent: React.FC<LearnContentProps> = ({ doughTypes, recipePresets }
     }
   };
 
-  const handleNumberOfPiesChange = (count: number) => {
-    setNumberOfPies(count);
+  const handleNumberOfItemsChange = (count: number) => {
+    setNumberOfItems(count);
   };
 
   const getCurrentStepHeading = () => {
@@ -63,6 +64,17 @@ const LearnContent: React.FC<LearnContentProps> = ({ doughTypes, recipePresets }
     }
     if (step === 3) return "Let's start baking!";
     return "";
+  };
+
+  const getItemLabel = () => {
+    if (!selectedType) return "items";
+    
+    if (selectedType === 'pizza') return "pizzas";
+    if (selectedType === 'bread') return "loaves";
+    if (selectedType === 'focaccia') return "focaccias";
+    if (selectedType === 'sourdough') return "loaves";
+    
+    return "items";
   };
 
   const renderHelperBox = () => {
@@ -121,8 +133,9 @@ const LearnContent: React.FC<LearnContentProps> = ({ doughTypes, recipePresets }
           onSelectRecipe={handleRecipeSelect}
           onGoBack={handleGoBack}
           selectedType={selectedType}
-          numberOfPies={numberOfPies}
-          onNumberOfPiesChange={handleNumberOfPiesChange}
+          numberOfItems={numberOfItems}
+          onNumberOfItemsChange={handleNumberOfItemsChange}
+          itemLabel={getItemLabel()}
         />
       )}
       
@@ -131,7 +144,7 @@ const LearnContent: React.FC<LearnContentProps> = ({ doughTypes, recipePresets }
           selectedType={selectedType} 
           selectedRecipe={selectedRecipe}
           onGoBack={handleGoBack} 
-          numberOfPies={numberOfPies}
+          numberOfPies={numberOfItems}
         />
       )}
     </div>
