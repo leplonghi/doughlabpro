@@ -48,7 +48,8 @@ export const useDoughCalculator = (style: StyleType, fermentationMethod: Ferment
       yeastType, 
       style, 
       fermentationMethod,
-      ballWeight
+      ballWeight,
+      minBulkFermentation
     );
     
     setState(prev => ({
