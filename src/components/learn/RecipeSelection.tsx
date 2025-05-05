@@ -6,6 +6,7 @@ import { getItemLabel } from './recipe-data/recipe-helpers';
 import RecipeCard from './recipe-selection/RecipeCard';
 import QuantitySelector from './recipe-selection/QuantitySelector';
 import RecipeInfoBanner from './recipe-selection/RecipeInfoBanner';
+import { cn } from '@/lib/utils';
 
 interface RecipeData {
   name: string;
@@ -13,6 +14,7 @@ interface RecipeData {
   difficulty: string;
   defaultQuantity?: number;
   ballWeight?: number;
+  flourAmount?: number;
   fermentationHours?: number;
 }
 

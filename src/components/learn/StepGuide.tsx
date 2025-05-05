@@ -7,6 +7,7 @@ import BakingTimer from './BakingTimer';
 import { BakingStep, Ingredient } from './types';
 import IngredientsCard from './IngredientsCard';
 import { Separator } from '@/components/ui/separator';
+import { cn } from '@/lib/utils';
 
 interface StepGuideProps {
   steps: BakingStep[];
@@ -59,7 +60,7 @@ const StepGuide: React.FC<StepGuideProps> = ({
         </p>
       </div>
       
-      <Progress value={progress} className={`h-2 mb-8 bg-${themeColor}-100`} />
+      <Progress value={progress} className={cn(`h-2 mb-8`, themeColor === 'green' ? 'bg-green-100' : 'bg-blue-100')} />
       
       {/* Always show ingredients in compact form during the step guide */}
       <IngredientsCard 
@@ -117,7 +118,10 @@ const StepGuide: React.FC<StepGuideProps> = ({
           {currentStepIndex < steps.length - 1 ? (
             <Button 
               onClick={nextStep}
-              className={`bg-${themeColor}-500 hover:bg-${themeColor}-600 flex items-center`}
+              className={cn(
+                "flex items-center",
+                themeColor === 'green' ? 'bg-green-500 hover:bg-green-600' : 'bg-blue-500 hover:bg-blue-600'
+              )}
             >
               Next Step
               <ArrowRight className="ml-2 h-4 w-4" />

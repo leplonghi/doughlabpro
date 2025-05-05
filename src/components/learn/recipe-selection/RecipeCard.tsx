@@ -46,12 +46,17 @@ const RecipeCard: React.FC<RecipeCardProps> = ({
     return flour + water + salt + yeast;
   };
   
-  // If the recipe has flourAmount, calculate the number of balls
-  let calculatedNumberOfItems = numberOfItems;
-  if (recipe.flourAmount && recipe.ballWeight) {
-    const totalDoughWeight = calculateTotalDoughWeight(recipe.flourAmount, recipe.hydration);
-    calculatedNumberOfItems = Math.floor(totalDoughWeight / recipe.ballWeight);
-  }
+  // Calculate number of balls based on total dough weight and ball weight
+  const calculateNumberOfBalls = () => {
+    if (recipe.flourAmount && recipe.ballWeight && recipe.ballWeight > 0) {
+      const totalDoughWeight = calculateTotalDoughWeight(recipe.flourAmount, recipe.hydration);
+      return Math.floor(totalDoughWeight / recipe.ballWeight);
+    }
+    return numberOfItems;
+  };
+  
+  // Get the calculated number of items
+  const calculatedNumberOfItems = calculateNumberOfBalls();
   
   // Get ball info if available
   const ballInfo = recipe.ballWeight 

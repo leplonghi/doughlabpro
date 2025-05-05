@@ -36,7 +36,6 @@ export const recipePresets = {
       difficulty: 'Medium', 
       defaultQuantity: 4, 
       ballWeight: 250,
-      // Fixed flour amount for consistent recipe calculations
       flourAmount: 1000 
     },
     { 
@@ -57,18 +56,84 @@ export const recipePresets = {
     }
   ],
   bread: [
-    { name: 'Basic White Sandwich Loaf', hydration: 65, difficulty: 'Medium', defaultQuantity: 1, ballWeight: 800 },
-    { name: 'Crusty Artisan Bread', hydration: 75, difficulty: 'Medium', defaultQuantity: 1, ballWeight: 900 },
-    { name: 'Multigrain Bread', hydration: 70, difficulty: 'Medium', defaultQuantity: 1, ballWeight: 850 }
+    { 
+      name: 'Basic White Sandwich Loaf', 
+      hydration: 65, 
+      difficulty: 'Medium', 
+      defaultQuantity: 1, 
+      ballWeight: 800,
+      flourAmount: 500 
+    },
+    { 
+      name: 'Crusty Artisan Bread', 
+      hydration: 75, 
+      difficulty: 'Medium', 
+      defaultQuantity: 1, 
+      ballWeight: 900,
+      flourAmount: 500
+    },
+    { 
+      name: 'Multigrain Bread', 
+      hydration: 70, 
+      difficulty: 'Medium', 
+      defaultQuantity: 1, 
+      ballWeight: 850,
+      flourAmount: 500
+    }
   ],
   focaccia: [
-    { name: 'Classic Rosemary Focaccia', hydration: 65, difficulty: 'Medium', defaultQuantity: 1, ballWeight: 700, fermentationHours: 12 },
-    { name: 'Cherry Tomato & Herb Focaccia', hydration: 65, difficulty: 'Medium', defaultQuantity: 1, ballWeight: 700, fermentationHours: 12 },
-    { name: 'Olive & Garlic Focaccia', hydration: 65, difficulty: 'Medium', defaultQuantity: 1, ballWeight: 700, fermentationHours: 12 }
+    { 
+      name: 'Classic Rosemary Focaccia', 
+      hydration: 65, 
+      difficulty: 'Medium', 
+      defaultQuantity: 1, 
+      ballWeight: 700,
+      flourAmount: 500,
+      fermentationHours: 12 
+    },
+    { 
+      name: 'Cherry Tomato & Herb Focaccia', 
+      hydration: 65, 
+      difficulty: 'Medium', 
+      defaultQuantity: 1, 
+      ballWeight: 700,
+      flourAmount: 500,
+      fermentationHours: 12 
+    },
+    { 
+      name: 'Olive & Garlic Focaccia', 
+      hydration: 65, 
+      difficulty: 'Medium', 
+      defaultQuantity: 1, 
+      ballWeight: 700,
+      flourAmount: 500,
+      fermentationHours: 12 
+    }
   ],
   sourdough: [
-    { name: 'Beginner\'s Sourdough Loaf', hydration: 70, difficulty: 'Medium', defaultQuantity: 1, ballWeight: 850 },
-    { name: 'Rustic Country Loaf', hydration: 75, difficulty: 'Medium', defaultQuantity: 1, ballWeight: 900 },
-    { name: 'Sourdough Sandwich Bread', hydration: 65, difficulty: 'Medium', defaultQuantity: 1, ballWeight: 800 }
+    { 
+      name: 'Beginner\'s Sourdough Loaf', 
+      hydration: 70, 
+      difficulty: 'Medium', 
+      defaultQuantity: 1, 
+      ballWeight: 850,
+      flourAmount: 500
+    },
+    { 
+      name: 'Rustic Country Loaf', 
+      hydration: 75, 
+      difficulty: 'Medium', 
+      defaultQuantity: 1, 
+      ballWeight: 900,
+      flourAmount: 500
+    },
+    { 
+      name: 'Sourdough Sandwich Bread', 
+      hydration: 65, 
+      difficulty: 'Medium', 
+      defaultQuantity: 1, 
+      ballWeight: 800,
+      flourAmount: 500
+    }
   ]
 };
