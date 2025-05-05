@@ -107,8 +107,8 @@ const AppRoutes = () => {
 
 // App component with correct React hooks context
 const App = () => {
-  // Move queryClient inside the component to ensure it's created in the React context
-  const queryClient = new QueryClient({
+  // Create queryClient explicitly before rendering
+  const queryClient = React.useMemo(() => new QueryClient({
     defaultOptions: {
       queries: {
         refetchOnWindowFocus: false,
@@ -116,23 +116,25 @@ const App = () => {
         staleTime: 5 * 60 * 1000, // 5 minutes
       },
     },
-  });
+  }), []);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
-        <TooltipProvider>
-          <BrowserRouter>
-            <AuthProvider>
-              <DoughGuideProvider>
-                <AppRoutes />
-                <Toaster />
-              </DoughGuideProvider>
-            </AuthProvider>
-          </BrowserRouter>
-        </TooltipProvider>
-      </ThemeProvider>
-    </QueryClientProvider>
+    <React.StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
+          <TooltipProvider>
+            <BrowserRouter>
+              <AuthProvider>
+                <DoughGuideProvider>
+                  <AppRoutes />
+                  <Toaster />
+                </DoughGuideProvider>
+              </AuthProvider>
+            </BrowserRouter>
+          </TooltipProvider>
+        </ThemeProvider>
+      </QueryClientProvider>
+    </React.StrictMode>
   );
 };
 
