@@ -28,17 +28,6 @@ const DoughCalculator = lazy(() => import("./components/DoughCalculator"));
 const Learn = lazy(() => import("./pages/Learn"));
 const School = lazy(() => import("./pages/School"));
 
-// Create query client with optimized settings
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      retry: 1,
-      staleTime: 5 * 60 * 1000, // 5 minutes
-    },
-  },
-});
-
 const AppRoutes = () => {
   return (
     <Routes>
@@ -118,6 +107,17 @@ const AppRoutes = () => {
 
 // App component with correct React hooks context
 const App = () => {
+  // Move queryClient inside the component to ensure it's created in the React context
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+        retry: 1,
+        staleTime: 5 * 60 * 1000, // 5 minutes
+      },
+    },
+  });
+
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">

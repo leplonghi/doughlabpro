@@ -47,7 +47,7 @@ export const useDoughCalculator = (style: StyleType, fermentationMethod: Ferment
       hydration, 
       yeastType, 
       style, 
-      fermentationMethod, 
+      fermentationMethod,
       ballWeight,
       minBulkFermentation
     );
