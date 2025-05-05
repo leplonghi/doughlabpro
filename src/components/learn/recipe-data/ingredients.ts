@@ -1,6 +1,6 @@
 
 import { Ingredient } from '../types';
-import { getIndividualWeight, roundIngredientAmounts } from './ingredients/common';
+import { getIndividualWeight, roundIngredientAmounts, getPizzaDoughBallWeight } from './ingredients/common';
 import { getPizzaIngredients } from './ingredients/pizza-ingredients';
 import { getBreadIngredients } from './ingredients/bread-ingredients';
 import { getFocacciaIngredients } from './ingredients/focaccia-ingredients';
@@ -9,8 +9,16 @@ import { getSourdoughIngredients } from './ingredients/sourdough-ingredients';
 export const getIngredients = (type: string | null, recipe: string | null, quantity: number = 1): Ingredient[] => {
   if (!type || !recipe) return [];
 
-  // Total dough weight based on quantity
-  const totalDoughWeight = getIndividualWeight(type) * quantity;
+  let totalDoughWeight: number;
+  
+  // Calculate total dough weight based on type and recipe
+  if (type === 'pizza') {
+    // Use specific pizza weight based on recipe
+    totalDoughWeight = getPizzaDoughBallWeight(recipe) * quantity;
+  } else {
+    // Use standard weight for other dough types
+    totalDoughWeight = getIndividualWeight(type) * quantity;
+  }
   
   // For all recipes, we'll use baker's percentages to calculate ingredients
   // Default flour percentage

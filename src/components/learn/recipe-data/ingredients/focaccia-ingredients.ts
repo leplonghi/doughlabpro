@@ -16,26 +16,11 @@ export const getFocacciaIngredients = (
   } 
 } => {
   // Set default percentages
-  let waterPercentage = 0;
+  let waterPercentage = 65; // Standard 65% hydration for all focaccias
   let saltPercentage = 2.5; // Standard 2.5% salt
   let yeastPercentage = 0.1; // Standard dry yeast percentage
-  let oilPercentage = 0;
+  let oilPercentage = 8;    // Standard olive oil for focaccia
   let sugarPercentage = 0;
-  
-  // Set hydration based on recipe type
-  if (recipe?.includes('Rosemary')) {
-    waterPercentage = 75;
-    oilPercentage = 8;
-    yeastPercentage = 0.5;
-  } else if (recipe?.includes('Cherry Tomato')) {
-    waterPercentage = 80;
-    oilPercentage = 8;
-    yeastPercentage = 0.5;
-  } else if (recipe?.includes('Olive & Garlic')) {
-    waterPercentage = 78;
-    oilPercentage = 8;
-    yeastPercentage = 0.5;
-  }
   
   // Start with flour
   let ingredients = createBaseIngredients(flourAmount, recipe);

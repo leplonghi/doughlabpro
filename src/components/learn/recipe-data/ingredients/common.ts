@@ -11,10 +11,18 @@ export const roundIngredientAmounts = (ingredients: Ingredient[]): Ingredient[] 
 
 // Calculate base dough weight
 export const getIndividualWeight = (type: string | null): number => {
-  if (type === 'pizza') return 250; // 250g per pizza dough ball
+  if (type === 'pizza') return 250; // Default for pizza
   if (type === 'bread') return 500; // 500g per bread loaf
   if (type === 'focaccia') return 500; // 500g for focaccia
   if (type === 'sourdough') return 800; // 800g for sourdough loaf
+  return 250; // Default
+};
+
+// Get specific pizza dough ball weight based on recipe name
+export const getPizzaDoughBallWeight = (recipeName: string | null): number => {
+  if (recipeName?.includes('Neapolitan')) return 250;
+  if (recipeName?.includes('New York')) return 350;
+  if (recipeName?.includes('Thin Crispy')) return 200;
   return 250; // Default
 };
 

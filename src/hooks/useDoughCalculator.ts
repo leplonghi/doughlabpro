@@ -78,6 +78,8 @@ export const useDoughCalculator = (style: StyleType, fermentationMethod: Ferment
     setState,
     validateField: validateAndUpdateErrors,
     calculateRecipe,
-    resetForm
+    resetForm,
+    // Add theme color info for the advanced calculator
+    themeColor: 'red'
   };
 };

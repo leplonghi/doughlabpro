@@ -1,11 +1,12 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Image } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 import BakingTimer from './BakingTimer';
 import { BakingStep, Ingredient } from './types';
 import IngredientsCard from './IngredientsCard';
+import { Separator } from '@/components/ui/separator';
 
 interface StepGuideProps {
   steps: BakingStep[];
@@ -62,22 +63,38 @@ const StepGuide: React.FC<StepGuideProps> = ({
       
       <div className="bg-white p-6 rounded-lg border shadow-sm">
         <h3 className="text-xl font-medium mb-3">{currentStep.title}</h3>
+        
+        {currentStep.image && (
+          <div className="mb-6 rounded-lg overflow-hidden">
+            <img 
+              src={currentStep.image} 
+              alt={currentStep.title} 
+              className="w-full h-auto object-cover rounded-lg"
+            />
+          </div>
+        )}
+        
         <p className="mb-6 text-gray-700">{currentStep.description}</p>
         
         {currentStep.tip && (
-          <div className="bg-blue-50 p-3 rounded-md mb-6 border border-blue-100">
-            <p className="text-blue-800 text-sm font-medium">Tip: {currentStep.tip}</p>
+          <div className="bg-green-50 p-4 rounded-md mb-6 border border-green-100">
+            <p className="text-green-800 text-sm font-medium flex items-start">
+              <span className="mr-2">💡</span>
+              <span>{currentStep.tip}</span>
+            </p>
           </div>
         )}
         
         {currentStep.timer && (
-          <div className="my-6">
+          <div className="my-6 p-4 bg-amber-50 rounded-lg border border-amber-100">
             <BakingTimer 
               initialMinutes={currentStep.timer} 
               title={`${currentStep.title} Timer`} 
             />
           </div>
         )}
+        
+        <Separator className="my-6" />
         
         <div className="flex justify-between mt-6">
           <Button 
@@ -92,13 +109,13 @@ const StepGuide: React.FC<StepGuideProps> = ({
           {currentStepIndex < steps.length - 1 ? (
             <Button 
               onClick={nextStep}
-              className="bg-amber-500 hover:bg-amber-600 flex items-center"
+              className="bg-green-500 hover:bg-green-600 flex items-center"
             >
               Next Step
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           ) : (
-            <Button asChild className="bg-blue-500 hover:bg-blue-600">
+            <Button asChild className="bg-red-500 hover:bg-red-600">
               <a href="/calculator">Switch to Pro Mode</a>
             </Button>
           )}
