@@ -17,6 +17,8 @@ interface RecipeData {
   hydration: number;
   difficulty: string;
   defaultQuantity?: number;
+  ballWeight?: number;
+  fermentationHours?: number;
 }
 
 interface RecipeSelectionProps {
@@ -27,6 +29,7 @@ interface RecipeSelectionProps {
   numberOfItems?: number;
   onNumberOfItemsChange?: (count: number) => void;
   itemLabel?: string;
+  themeColor?: string;
 }
 
 const difficultyInfo = {
@@ -44,7 +47,8 @@ const RecipeSelection: React.FC<RecipeSelectionProps> = ({
   selectedType,
   numberOfItems = 2,
   onNumberOfItemsChange,
-  itemLabel = 'items'
+  itemLabel = 'items',
+  themeColor = 'green'
 }) => {
   const handleNumberChange = (newCount: number) => {
     if (onNumberOfItemsChange) {
@@ -133,6 +137,8 @@ const RecipeSelection: React.FC<RecipeSelectionProps> = ({
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {recipes.map((recipe, index) => {
           const itemLabel = getProperItemLabel(selectedType, numberOfItems);
+          // Get ball info if available
+          const ballInfo = recipe.ballWeight ? `(${recipe.ballWeight}g balls)` : '';
           
           return (
             <Card 
@@ -147,6 +153,9 @@ const RecipeSelection: React.FC<RecipeSelectionProps> = ({
                     <span className="text-gray-500 font-normal"> ({numberOfItems} {itemLabel})</span>
                   )}
                 </h4>
+                {ballInfo && (
+                  <p className="text-sm text-gray-500 mb-2">{ballInfo}</p>
+                )}
                 
                 <div className="space-y-3 mb-4">
                   <div className="flex justify-between text-sm">
@@ -188,7 +197,7 @@ const RecipeSelection: React.FC<RecipeSelectionProps> = ({
                   </div>
                 </div>
                 
-                <Button className="w-full bg-amber-500 hover:bg-amber-600">
+                <Button className={`w-full bg-${themeColor}-500 hover:bg-${themeColor}-600`}>
                   Select Recipe
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>

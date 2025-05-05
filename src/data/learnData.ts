@@ -30,9 +30,9 @@ export const doughTypes = [
 
 export const recipePresets = {
   pizza: [
-    { name: 'Simple Neapolitan Pizza', hydration: 60, difficulty: 'Medium', defaultQuantity: 4 },
-    { name: 'New York Style Pizza', hydration: 65, difficulty: 'Medium', defaultQuantity: 2 },
-    { name: 'Thin Crispy Crust', hydration: 55, difficulty: 'Medium', defaultQuantity: 6 }
+    { name: 'Simple Neapolitan Pizza', hydration: 60, difficulty: 'Medium', defaultQuantity: 4, ballWeight: 250 },
+    { name: 'New York Style Pizza', hydration: 65, difficulty: 'Medium', defaultQuantity: 2, ballWeight: 350 },
+    { name: 'Thin Crispy Crust', hydration: 55, difficulty: 'Medium', defaultQuantity: 6, ballWeight: 200 }
   ],
   bread: [
     { name: 'Basic White Sandwich Loaf', hydration: 65, difficulty: 'Medium', defaultQuantity: 1 },
@@ -40,9 +40,9 @@ export const recipePresets = {
     { name: 'Multigrain Bread', hydration: 70, difficulty: 'Medium', defaultQuantity: 1 }
   ],
   focaccia: [
-    { name: 'Classic Rosemary Focaccia', hydration: 65, difficulty: 'Medium', defaultQuantity: 1 },
-    { name: 'Cherry Tomato & Herb Focaccia', hydration: 65, difficulty: 'Medium', defaultQuantity: 1 },
-    { name: 'Olive & Garlic Focaccia', hydration: 65, difficulty: 'Medium', defaultQuantity: 1 }
+    { name: 'Classic Rosemary Focaccia', hydration: 65, difficulty: 'Medium', defaultQuantity: 1, fermentationHours: 12 },
+    { name: 'Cherry Tomato & Herb Focaccia', hydration: 65, difficulty: 'Medium', defaultQuantity: 1, fermentationHours: 12 },
+    { name: 'Olive & Garlic Focaccia', hydration: 65, difficulty: 'Medium', defaultQuantity: 1, fermentationHours: 12 }
   ],
   sourdough: [
     { name: 'Beginner\'s Sourdough Loaf', hydration: 70, difficulty: 'Medium', defaultQuantity: 1 },

@@ -12,7 +12,8 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({
   selectedType, 
   selectedRecipe, 
   onGoBack,
-  numberOfPies = 2
+  numberOfPies = 2,
+  themeColor = 'green'
 }) => {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
@@ -60,6 +61,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({
           ingredients={ingredients}
           selectedType={selectedType}
           quantity={quantity}
+          themeColor={themeColor}
         />
       ) : (
         <>
@@ -73,6 +75,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({
             onGoBack={onGoBack}
             selectedRecipe={selectedRecipe}
             timerDuration={timerDuration}
+            themeColor={themeColor}
           />
         </>
       )}

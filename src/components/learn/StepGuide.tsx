@@ -16,6 +16,7 @@ interface StepGuideProps {
   ingredients: Ingredient[];
   selectedType: string | null;
   quantity: number;
+  themeColor?: string;
 }
 
 const StepGuide: React.FC<StepGuideProps> = ({
@@ -25,7 +26,8 @@ const StepGuide: React.FC<StepGuideProps> = ({
   onGoBack,
   ingredients,
   selectedType,
-  quantity
+  quantity,
+  themeColor = 'green'
 }) => {
   const currentStep = steps[currentStepIndex] || { title: '', description: '' };
   const progress = steps.length > 0 ? (currentStepIndex / steps.length) * 100 : 0;
@@ -57,7 +59,7 @@ const StepGuide: React.FC<StepGuideProps> = ({
         </p>
       </div>
       
-      <Progress value={progress} className="h-2 mb-8" />
+      <Progress value={progress} className={`h-2 mb-8 bg-${themeColor}-100`} />
       
       {/* Always show ingredients in compact form during the step guide */}
       <IngredientsCard 
@@ -115,7 +117,7 @@ const StepGuide: React.FC<StepGuideProps> = ({
           {currentStepIndex < steps.length - 1 ? (
             <Button 
               onClick={nextStep}
-              className="bg-green-500 hover:bg-green-600 flex items-center"
+              className={`bg-${themeColor}-500 hover:bg-${themeColor}-600 flex items-center`}
             >
               Next Step
               <ArrowRight className="ml-2 h-4 w-4" />

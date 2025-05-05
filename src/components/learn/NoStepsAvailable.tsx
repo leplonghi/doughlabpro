@@ -8,13 +8,20 @@ interface NoStepsAvailableProps {
   onGoBack: () => void;
   selectedRecipe: string | null;
   timerDuration: number;
+  themeColor?: string;
 }
 
 const NoStepsAvailable: React.FC<NoStepsAvailableProps> = ({
   onGoBack,
   selectedRecipe,
-  timerDuration
+  timerDuration,
+  themeColor = 'green'
 }) => {
+  // Function to handle going back to dough types
+  const handleBackToDoughTypes = () => {
+    window.location.href = '/learn';
+  };
+
   return (
     <div className="text-center mb-8">
       <p className="text-sm text-muted-foreground mb-2">No steps available for this recipe yet.</p>
@@ -39,7 +46,15 @@ const NoStepsAvailable: React.FC<NoStepsAvailableProps> = ({
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Recipes
         </Button>
-        <Button asChild className="bg-blue-500 hover:bg-blue-600">
+        <Button
+          variant="outline"
+          onClick={handleBackToDoughTypes}
+          className="mr-4 flex items-center"
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back to Dough Types
+        </Button>
+        <Button asChild className={`bg-red-500 hover:bg-red-600`}>
           <a href="/calculator">Switch to Pro Mode</a>
         </Button>
       </div>

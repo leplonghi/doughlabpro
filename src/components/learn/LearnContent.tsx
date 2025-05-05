@@ -19,6 +19,8 @@ interface LearnContentProps {
     hydration: number;
     difficulty: string;
     defaultQuantity?: number;
+    ballWeight?: number;
+    fermentationHours?: number;
   }>>;
 }
 
@@ -67,6 +69,9 @@ const LearnContent: React.FC<LearnContentProps> = ({ doughTypes, recipePresets }
   // Item label based on selected type
   const itemLabel = getItemLabel(selectedType, numberOfItems);
 
+  // Theme color for beginners page (green)
+  const themeColor = 'green';
+
   return (
     <Card className="mt-4">
       <CardContent className="p-6">
@@ -81,6 +86,7 @@ const LearnContent: React.FC<LearnContentProps> = ({ doughTypes, recipePresets }
             numberOfItems={numberOfItems}
             onNumberOfItemsChange={setNumberOfItems}
             itemLabel={itemLabel}
+            themeColor={themeColor}
           />
         ) : (
           <RecipeDetail 
@@ -88,6 +94,7 @@ const LearnContent: React.FC<LearnContentProps> = ({ doughTypes, recipePresets }
             selectedRecipe={selectedRecipe}
             onGoBack={handleBackToRecipes}
             numberOfPies={numberOfItems}
+            themeColor={themeColor}
           />
         )}
       </CardContent>

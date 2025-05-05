@@ -19,6 +19,7 @@ export interface RecipeDetailProps {
   selectedRecipe: string | null;
   onGoBack: () => void;
   numberOfPies?: number;
+  themeColor?: string;
 }
 
 export interface RecipeHeaderProps {
