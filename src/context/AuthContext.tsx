@@ -1,5 +1,5 @@
 
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import * as React from 'react';
 import { toast } from 'sonner';
 import { useTranslation } from 'react-i18next';
 import { supabase } from '@/lib/supabase';
@@ -17,7 +17,7 @@ type AuthContextType = {
 };
 
 // Create the auth context with default values
-const AuthContext = createContext<AuthContextType>({
+const AuthContext = React.createContext<AuthContextType>({
   user: null,
   session: null,
   loading: true,
@@ -29,7 +29,7 @@ const AuthContext = createContext<AuthContextType>({
 
 // Hook to use the auth context
 export const useAuth = () => {
-  const context = useContext(AuthContext);
+  const context = React.useContext(AuthContext);
   if (!context) {
     throw new Error('useAuth must be used within an AuthProvider');
   }
@@ -38,15 +38,15 @@ export const useAuth = () => {
 
 // Provider component to wrap the app with auth context
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
-  const [session, setSession] = useState<Session | null>(null);
-  const [loading, setLoading] = useState(false); // Set to false for quick loading
-  const [isPro, setIsPro] = useState(false);
-  const [bypassAuth, setBypassAuth] = useState(true); // Set to true to bypass auth
+  const [user, setUser] = React.useState<User | null>(null);
+  const [session, setSession] = React.useState<Session | null>(null);
+  const [loading, setLoading] = React.useState(false); // Set to false for quick loading
+  const [isPro, setIsPro] = React.useState(false);
+  const [bypassAuth, setBypassAuth] = React.useState(true); // Set to true to bypass auth
   const { t } = useTranslation();
 
   // Check for session on mount and setup auth listener
-  useEffect(() => {
+  React.useEffect(() => {
     if (bypassAuth) {
       // Skip auth checks if we're bypassing
       setLoading(false);
