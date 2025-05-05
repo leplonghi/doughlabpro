@@ -30,12 +30,12 @@ export const doughTypes = [
 
 export const recipePresets = {
   pizza: [
-    { name: 'Simple Neapolitan Pizza', hydration: 60, difficulty: 'Medium', defaultQuantity: 2 },
+    { name: 'Simple Neapolitan Pizza', hydration: 60, difficulty: 'Medium', defaultQuantity: 4 },
     { name: 'New York Style Pizza', hydration: 65, difficulty: 'Medium', defaultQuantity: 2 },
-    { name: 'Thin Crispy Crust', hydration: 55, difficulty: 'Medium', defaultQuantity: 4 }
+    { name: 'Thin Crispy Crust', hydration: 55, difficulty: 'Medium', defaultQuantity: 6 }
   ],
   bread: [
-    { name: 'Basic White Sandwich Loaf', hydration: 65, difficulty: 'Easy', defaultQuantity: 1 },
+    { name: 'Basic White Sandwich Loaf', hydration: 65, difficulty: 'Medium', defaultQuantity: 1 },
     { name: 'Crusty Artisan Bread', hydration: 75, difficulty: 'Medium', defaultQuantity: 1 },
     { name: 'Multigrain Bread', hydration: 70, difficulty: 'Medium', defaultQuantity: 1 }
   ],
@@ -46,7 +46,7 @@ export const recipePresets = {
   ],
   sourdough: [
     { name: 'Beginner\'s Sourdough Loaf', hydration: 70, difficulty: 'Medium', defaultQuantity: 1 },
-    { name: 'Rustic Country Loaf', hydration: 75, difficulty: 'Hard', defaultQuantity: 1 },
+    { name: 'Rustic Country Loaf', hydration: 75, difficulty: 'Medium', defaultQuantity: 1 },
     { name: 'Sourdough Sandwich Bread', hydration: 65, difficulty: 'Medium', defaultQuantity: 1 }
   ]
 };

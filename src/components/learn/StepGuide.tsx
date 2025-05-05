@@ -42,6 +42,12 @@ const StepGuide: React.FC<StepGuideProps> = ({
     }
   };
 
+  // Function to handle going back to dough types
+  const handleBackToDoughTypes = () => {
+    // This will navigate back to the beginning
+    window.location.href = '/learn';
+  };
+
   return (
     <div className="space-y-8">
       <div className="flex items-center justify-between mb-4">
@@ -115,9 +121,19 @@ const StepGuide: React.FC<StepGuideProps> = ({
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           ) : (
-            <Button asChild className="bg-red-500 hover:bg-red-600">
-              <a href="/calculator">Switch to Pro Mode</a>
-            </Button>
+            <div className="flex space-x-4">
+              <Button 
+                variant="outline" 
+                onClick={handleBackToDoughTypes}
+                className="flex items-center"
+              >
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                Back to Dough Types
+              </Button>
+              <Button asChild className="bg-red-500 hover:bg-red-600">
+                <a href="/calculator">Switch to Pro Mode</a>
+              </Button>
+            </div>
           )}
         </div>
       </div>

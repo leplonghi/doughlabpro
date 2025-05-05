@@ -20,3 +20,10 @@ export interface RecipeDetailProps {
   onGoBack: () => void;
   numberOfPies?: number;
 }
+
+export interface RecipeHeaderProps {
+  selectedType: string | null;
+  selectedRecipe: string | null;
+  quantity: number;
+  onQuantityChange?: (quantity: number) => void;
+}

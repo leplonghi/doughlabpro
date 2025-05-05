@@ -1,4 +1,3 @@
-
 import { BakingStep } from '../types';
 
 export const getPizzaSteps = (recipeName: string): BakingStep[] => {
@@ -25,8 +24,8 @@ export const getPizzaSteps = (recipeName: string): BakingStep[] => {
       },
       {
         title: 'Bulk Fermentation',
-        description: 'Shape the dough into a smooth ball and place it in a lightly oiled bowl. Cover with plastic wrap or a damp cloth to prevent a skin from forming. Allow the dough to rise at room temperature (around 75°F/24°C) for 2 hours. This is when fermentation begins, creating flavor and improving structure.',
-        timer: 120,
+        description: 'Shape the dough into a smooth ball and place it in a lightly oiled bowl. Cover with plastic wrap or a damp cloth to prevent a skin from forming. Allow the dough to rise at room temperature (around 75°F/24°C) for at least 6 hours. This bulk fermentation is crucial for flavor development and improved structure.',
+        timer: 360,
         tip: 'During this bulk fermentation, enzymes break down complex starches into simpler sugars for the yeast to feed on, while bacteria produce flavorful acids that give sourdough-like complexity.',
         image: '/lovable-uploads/af799f78-d4b3-47c9-a194-0885a14c4753.png'
       },
@@ -53,9 +52,9 @@ export const getPizzaSteps = (recipeName: string): BakingStep[] => {
       },
       {
         title: 'High-Heat Baking',
-        description: 'Neapolitan pizza traditionally bakes in a wood-fired oven at 850-900°F (450-485°C) for just 60-90 seconds. For home ovens, use the highest possible setting (usually 500-550°F/260-290°C) with a preheated pizza stone or steel. Bake until the crust develops charred spots and the cheese is melted.',
+        description: 'Neapolitan pizza traditionally bakes in a wood-fired oven at 850-900°F (450-485°C) for just 60-90 seconds. For home ovens, use the highest possible setting (usually 500-550°F/260-290°C) with a preheated pizza stone or steel. Turn on the top grill/broiler element to mimic the heat from above. Bake for about 7 minutes until the crust develops charred spots and the cheese is melted.',
         timer: 7,
-        tip: 'Place your pizza stone or steel in the top third of your oven for the best heat reflection. The hotter your oven, the better your crust will be - preheat for at least 45-60 minutes before baking.'
+        tip: 'For home ovens, it\'s essential to use the grill/broiler on top to properly cook the pizza from above. Place your pizza stone or steel in the top third of your oven for the best heat reflection. Preheat for at least 45-60 minutes before baking.',
       },
       {
         title: 'Rest and Serve',
@@ -78,8 +77,8 @@ export const getPizzaSteps = (recipeName: string): BakingStep[] => {
       },
       {
         title: 'Bulk Fermentation',
-        description: 'Form the dough into a ball and place in an oiled bowl. Cover and let rise at room temperature (around 75°F/24°C) until doubled in size, about 1.5-2 hours. The oil in NY dough helps create a more tender crumb while still allowing good structure.',
-        timer: 120,
+        description: 'Form the dough into a ball and place in an oiled bowl. Cover and let rise at room temperature (around 75°F/24°C) until doubled in size, about 6 hours minimum. The oil in NY dough helps create a more tender crumb while still allowing good structure.',
+        timer: 360,
         tip: 'For best flavor, after the initial rise, punch down the dough, reshape into a ball, and cold-ferment in the refrigerator for 24-72 hours. This slow fermentation develops the complex flavor that defines great NY pizza.'
       },
       {

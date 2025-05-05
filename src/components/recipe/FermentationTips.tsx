@@ -40,7 +40,7 @@ const FermentationTips: React.FC<FermentationTipsProps> = ({ method, pizzaStyle 
                 <strong>1. Mix and knead:</strong> Combine flour, salt, and yeast in a large bowl. Add water and mix until no dry flour remains. Knead until the dough is smooth and elastic.
               </p>
               <p className="mb-2">
-                <strong>2. Bulk fermentation:</strong> Cover the bowl and let the dough rise at room temperature (approximately 70°F/21°C) for 8 to 12 hours, or until doubled in size.
+                <strong>2. Bulk fermentation:</strong> Cover the bowl and let the dough rise at room temperature (approximately 70°F/21°C) for at least 6 hours minimum, or until doubled in size.
               </p>
               <p className="mb-2">
                 <strong>3. Divide and shape:</strong> Turn the dough onto a floured surface, divide into equal portions, and shape into balls.
@@ -60,7 +60,7 @@ const FermentationTips: React.FC<FermentationTipsProps> = ({ method, pizzaStyle 
                 <strong>2. Mix and knead:</strong> Combine the poolish with the remaining flour, water, salt, and a small amount of yeast. Mix until incorporated and knead until smooth.
               </p>
               <p className="mb-2">
-                <strong>3. Bulk fermentation:</strong> Cover and let the dough rise at room temperature for 1 to 2 hours, or until doubled in size.
+                <strong>3. Bulk fermentation:</strong> Cover and let the dough rise at room temperature for at least 6 hours minimum, or until doubled in size.
               </p>
               <p>
                 <strong>4. Final proof:</strong> Divide and shape the dough into balls. Place them in covered containers and refrigerate for 24 to 48 hours. Allow to rest at room temperature for at least 2 hours before baking.
@@ -77,7 +77,7 @@ const FermentationTips: React.FC<FermentationTipsProps> = ({ method, pizzaStyle 
                 <strong>2. Mix and knead:</strong> Tear the biga into pieces and combine with the remaining flour, water, salt, and yeast. Mix until incorporated and knead until smooth.
               </p>
               <p className="mb-2">
-                <strong>3. Bulk fermentation:</strong> Cover and let the dough rise at room temperature for 1 to 2 hours, or until doubled in size.
+                <strong>3. Bulk fermentation:</strong> Cover and let the dough rise at room temperature for at least 6 hours minimum, or until doubled in size.
               </p>
               <p>
                 <strong>4. Final proof:</strong> Divide and shape the dough into balls. Place them in covered containers and refrigerate for 24 to 48 hours. Allow to rest at room temperature for at least 2 hours before baking.
@@ -98,7 +98,7 @@ const FermentationTips: React.FC<FermentationTipsProps> = ({ method, pizzaStyle 
           )}
           {pizzaStyle === 'napoletana' && (
             <p>
-              <strong>Neapolitan Tips:</strong> Stretch the dough to 10-12 inches, keeping the edges thicker. Bake at the highest possible temperature (ideally 800-900°F / 425-485°C) in a wood-fired oven for 60-90 seconds.
+              <strong>Neapolitan Tips:</strong> Stretch the dough to 10-12 inches, keeping the edges thicker. Bake at the highest possible temperature (ideally 800-900°F / 425-485°C) in a wood-fired oven for 60-90 seconds. For home ovens, use the highest setting with the grill/broiler on and bake for about 7 minutes.
             </p>
           )}
           {pizzaStyle === 'chicago' && (
