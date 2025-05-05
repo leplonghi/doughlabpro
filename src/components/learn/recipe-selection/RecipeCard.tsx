@@ -37,7 +37,9 @@ const RecipeCard: React.FC<RecipeCardProps> = ({
   onSelectRecipe
 }) => {
   // Get ball info if available
-  const ballInfo = recipe.ballWeight ? `(${recipe.ballWeight}g balls)` : '';
+  const ballInfo = recipe.ballWeight 
+    ? `(${recipe.ballWeight}g dough balls)` 
+    : '';
 
   return (
     <Card 

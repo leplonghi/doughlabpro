@@ -35,18 +35,18 @@ export const recipePresets = {
     { name: 'Thin Crispy Crust', hydration: 55, difficulty: 'Medium', defaultQuantity: 6, ballWeight: 200 }
   ],
   bread: [
-    { name: 'Basic White Sandwich Loaf', hydration: 65, difficulty: 'Medium', defaultQuantity: 1 },
-    { name: 'Crusty Artisan Bread', hydration: 75, difficulty: 'Medium', defaultQuantity: 1 },
-    { name: 'Multigrain Bread', hydration: 70, difficulty: 'Medium', defaultQuantity: 1 }
+    { name: 'Basic White Sandwich Loaf', hydration: 65, difficulty: 'Medium', defaultQuantity: 1, ballWeight: 800 },
+    { name: 'Crusty Artisan Bread', hydration: 75, difficulty: 'Medium', defaultQuantity: 1, ballWeight: 900 },
+    { name: 'Multigrain Bread', hydration: 70, difficulty: 'Medium', defaultQuantity: 1, ballWeight: 850 }
   ],
   focaccia: [
-    { name: 'Classic Rosemary Focaccia', hydration: 65, difficulty: 'Medium', defaultQuantity: 1, fermentationHours: 12 },
-    { name: 'Cherry Tomato & Herb Focaccia', hydration: 65, difficulty: 'Medium', defaultQuantity: 1, fermentationHours: 12 },
-    { name: 'Olive & Garlic Focaccia', hydration: 65, difficulty: 'Medium', defaultQuantity: 1, fermentationHours: 12 }
+    { name: 'Classic Rosemary Focaccia', hydration: 65, difficulty: 'Medium', defaultQuantity: 1, ballWeight: 700, fermentationHours: 12 },
+    { name: 'Cherry Tomato & Herb Focaccia', hydration: 65, difficulty: 'Medium', defaultQuantity: 1, ballWeight: 700, fermentationHours: 12 },
+    { name: 'Olive & Garlic Focaccia', hydration: 65, difficulty: 'Medium', defaultQuantity: 1, ballWeight: 700, fermentationHours: 12 }
   ],
   sourdough: [
-    { name: 'Beginner\'s Sourdough Loaf', hydration: 70, difficulty: 'Medium', defaultQuantity: 1 },
-    { name: 'Rustic Country Loaf', hydration: 75, difficulty: 'Medium', defaultQuantity: 1 },
-    { name: 'Sourdough Sandwich Bread', hydration: 65, difficulty: 'Medium', defaultQuantity: 1 }
+    { name: 'Beginner\'s Sourdough Loaf', hydration: 70, difficulty: 'Medium', defaultQuantity: 1, ballWeight: 850 },
+    { name: 'Rustic Country Loaf', hydration: 75, difficulty: 'Medium', defaultQuantity: 1, ballWeight: 900 },
+    { name: 'Sourdough Sandwich Bread', hydration: 65, difficulty: 'Medium', defaultQuantity: 1, ballWeight: 800 }
   ]
 };
