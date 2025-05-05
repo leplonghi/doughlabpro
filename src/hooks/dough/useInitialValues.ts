@@ -4,7 +4,7 @@ import { StyleType } from '@/types/dough';
 export const useInitialValues = (style: StyleType) => {
   // Set initial ball weight based on style
   const getInitialBallWeight = () => {
-    // Standard dough ball size for learning path is 250g
+    // Standard dough ball size for learning path is 250g total weight (not just flour)
     if (['napoletana', 'newyork', 'chicago'].includes(style)) {
       return 250; // Default pizza ball weight
     } else if (style === 'baguette') {

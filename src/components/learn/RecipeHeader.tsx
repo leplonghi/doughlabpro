@@ -1,83 +1,77 @@
 
 import React from 'react';
-import { getItemLabel } from './recipe-data/recipe-helpers';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Minus, Plus } from 'lucide-react';
-
-interface RecipeHeaderProps {
-  selectedType: string | null;
-  selectedRecipe: string | null;
-  quantity: number;
-  onQuantityChange?: (newQuantity: number) => void;
-}
+import { Input } from '@/components/ui/input';
+import { getItemLabel } from './recipe-data/recipe-helpers';
+import { RecipeHeaderProps } from './types';
 
 const RecipeHeader: React.FC<RecipeHeaderProps> = ({ 
   selectedType, 
-  selectedRecipe, 
+  selectedRecipe,
   quantity,
-  onQuantityChange
+  onQuantityChange 
 }) => {
-  if (!selectedType || !selectedRecipe) return null;
-
-  const handleQuantityChange = (delta: number) => {
-    if (!onQuantityChange) return;
-    
-    // Calculate new quantity, ensuring it's between 1-12
-    const newQuantity = Math.max(1, Math.min(12, quantity + delta));
-    onQuantityChange(newQuantity);
+  const handleQuantityChange = (newQuantity: number) => {
+    if (onQuantityChange && newQuantity >= 1 && newQuantity <= 12) {
+      onQuantityChange(newQuantity);
+    }
   };
-
+  
+  const itemLabel = getItemLabel(selectedType, quantity);
+  
   return (
-    <div className="p-4 bg-amber-50 border border-amber-200 rounded-md mb-8">
-      <p className="font-medium text-lg">{selectedRecipe}</p>
-      <div className="flex justify-between items-center mt-2">
-        <p className="text-muted-foreground">
-          Type: {selectedType.charAt(0).toUpperCase() + selectedType.slice(1)}
-        </p>
-        
-        <div className="flex items-center">
-          <p className="text-muted-foreground mr-2">
-            Making:
-          </p>
-          
-          {onQuantityChange && (
-            <div className="flex items-center">
-              <Button 
-                variant="outline" 
-                size="icon" 
-                className="h-7 w-7"
-                onClick={() => handleQuantityChange(-1)}
-                disabled={quantity <= 1}
-              >
-                <Minus className="h-3 w-3" />
-              </Button>
-              
-              <span className="mx-2 min-w-[20px] text-center">
-                {quantity}
-              </span>
-              
-              <Button 
-                variant="outline"
-                size="icon"
-                className="h-7 w-7"
-                onClick={() => handleQuantityChange(1)}
-                disabled={quantity >= 12}
-              >
-                <Plus className="h-3 w-3" />
-              </Button>
-              
-              <span className="ml-1 text-muted-foreground">
-                {getItemLabel(selectedType, quantity)}
-              </span>
-            </div>
-          )}
-          
-          {!onQuantityChange && (
-            <p className="text-muted-foreground">
-              {quantity} {getItemLabel(selectedType, quantity)}
-            </p>
-          )}
+    <div className="mb-6">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
+        <div>
+          <h1 className="text-2xl font-bold">{selectedRecipe}</h1>
+          <p className="text-muted-foreground">{selectedType} dough</p>
         </div>
+        
+        {onQuantityChange && (
+          <div className="flex items-center bg-gray-50 p-2 rounded-lg border border-gray-200">
+            <span className="text-sm font-medium mr-2">Quantity:</span>
+            <Button 
+              variant="outline" 
+              size="icon"
+              className="h-8 w-8"
+              onClick={() => handleQuantityChange(quantity - 1)}
+              disabled={quantity <= 1}
+            >
+              <Minus className="h-3 w-3" />
+            </Button>
+            <Input 
+              type="number" 
+              className="w-12 mx-1 h-8 text-center p-1"
+              value={quantity}
+              onChange={(e) => handleQuantityChange(parseInt(e.target.value) || 1)}
+              min={1}
+              max={12}
+            />
+            <Button 
+              variant="outline" 
+              size="icon"
+              className="h-8 w-8"
+              onClick={() => handleQuantityChange(quantity + 1)}
+              disabled={quantity >= 12}
+            >
+              <Plus className="h-3 w-3" />
+            </Button>
+            <span className="ml-2 text-sm">{itemLabel}</span>
+          </div>
+        )}
+      </div>
+      
+      <div className="flex flex-wrap gap-2">
+        <Badge variant="outline" className="bg-blue-50 hover:bg-blue-50">
+          {selectedType === 'pizza' ? `${quantity} ${quantity === 1 ? 'pizza' : 'pizzas'} • ~250g each` : 
+            selectedType === 'bread' ? `${quantity} ${quantity === 1 ? 'loaf' : 'loaves'} • ~500g each` :
+            selectedType === 'focaccia' ? `${quantity} focaccia • ~500g ${quantity === 1 ? 'sheet' : 'sheets'}` :
+            selectedType === 'sourdough' ? `${quantity} ${quantity === 1 ? 'loaf' : 'loaves'} • ~800g each` :
+            `${quantity} ${quantity === 1 ? 'item' : 'items'}`
+          }
+        </Badge>
       </div>
     </div>
   );
