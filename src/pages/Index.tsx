@@ -31,14 +31,14 @@ const Index: React.FC = () => {
         </p>
         
         <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          <Card className="border-green-200 hover:border-green-300 transition-all hover:shadow-md">
+          <Card className="border-green-600 hover:border-green-600 transition-all hover:shadow-md">
             <CardContent className="p-8 flex flex-col items-center">
               <ChefHat className="h-12 w-12 text-green-500 mb-4" />
               <h2 className="text-xl font-semibold mb-2">I'm a Beginner</h2>
               <p className="text-muted-foreground mb-6">
                 Learn step-by-step with guided recipes and timers. Perfect for your first few bakes.
               </p>
-              <Button asChild className="bg-green-500 hover:bg-amber-600">
+              <Button asChild className="bg-green-500 hover:bg-green-700">
                 <Link to="/learn">
                   Start Learning
                   <ArrowRight className="ml-2 h-4 w-4" />
@@ -47,14 +47,14 @@ const Index: React.FC = () => {
             </CardContent>
           </Card>
           
-          <Card className="border-red-200 hover:border-red-300 transition-all hover:shadow-md">
+          <Card className="border-red-600 hover:border-red-600 transition-all hover:shadow-md">
             <CardContent className="p-8 flex flex-col items-center">
               <FlaskConical className="h-12 w-12 text-red-500 mb-4" />
               <h2 className="text-xl font-semibold mb-2">I'm Experienced</h2>
               <p className="text-muted-foreground mb-6">
                 Fine-tune hydration, fermentation, and baker's percentages with precision tools.
               </p>
-              <Button asChild className="bg-red-500 hover:bg-red-600">
+              <Button asChild className="bg-red-500 hover:bg-red-700">
                 <Link to="/calculator">
                   To The Calculator
                   <ArrowRight className="ml-2 h-4 w-4" />
