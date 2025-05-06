@@ -47,14 +47,14 @@ const Index: React.FC = () => {
             </CardContent>
           </Card>
           
-          <Card className="border-blue-200 hover:border-blue-300 transition-all hover:shadow-md">
+          <Card className="border-red-200 hover:border-red-300 transition-all hover:shadow-md">
             <CardContent className="p-8 flex flex-col items-center">
-              <FlaskConical className="h-12 w-12 text-blue-500 mb-4" />
+              <FlaskConical className="h-12 w-12 text-red-500 mb-4" />
               <h2 className="text-xl font-semibold mb-2">I'm Experienced</h2>
               <p className="text-muted-foreground mb-6">
                 Fine-tune hydration, fermentation, and baker's percentages with precision tools.
               </p>
-              <Button asChild className="bg-blue-500 hover:bg-blue-600">
+              <Button asChild className="bg-red-500 hover:bg-red-600">
                 <Link to="/calculator">
                   To The Calculator
                   <ArrowRight className="ml-2 h-4 w-4" />
