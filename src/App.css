@@ -25,6 +25,26 @@
     page-break-inside: avoid;
   }
   
+  /* Recipe title styling for print */
+  h1, h2, h3 {
+    page-break-after: avoid;
+  }
+  
+  /* Set text color to black for better printing */
+  p, div, span, li {
+    color: black !important;
+  }
+  
+  /* Hide navigation elements and buttons */
+  button, [role="button"], nav, .print\:hidden {
+    display: none !important;
+  }
+  
+  /* Show all content that might be hidden in the UI */
+  .print\:block {
+    display: block !important;
+  }
+  
   /* Ensure each step starts on a new page if desired */
   /* Uncomment below if you want each step on a new page */
   /* 
@@ -33,4 +53,3 @@
   }
   */
 }
-

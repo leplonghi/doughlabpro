@@ -7,6 +7,8 @@ import IngredientsCard from './IngredientsCard';
 import StepGuide from './StepGuide';
 import NoStepsAvailable from './NoStepsAvailable';
 import { RecipeDetailProps } from './types';
+import { Button } from '@/components/ui/button';
+import { Printer } from 'lucide-react';
 
 const RecipeDetail: React.FC<RecipeDetailProps> = ({ 
   selectedType, 
@@ -30,14 +32,32 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({
     setQuantity(newQuantity);
   };
 
+  // Function to handle printing the recipe
+  const handlePrintRecipe = () => {
+    window.print();
+  };
+
   return (
     <div className="mt-8 max-w-4xl mx-auto">
-      <RecipeHeader 
-        selectedType={selectedType} 
-        selectedRecipe={selectedRecipe}
-        quantity={quantity}
-        onQuantityChange={handleQuantityChange}
-      />
+      <div className="flex justify-between items-center mb-4">
+        <RecipeHeader 
+          selectedType={selectedType} 
+          selectedRecipe={selectedRecipe}
+          quantity={quantity}
+          onQuantityChange={handleQuantityChange}
+        />
+        
+        {/* Print Recipe Button */}
+        <Button 
+          variant="outline" 
+          size="sm" 
+          onClick={handlePrintRecipe} 
+          className="print:hidden"
+        >
+          <Printer className="mr-2 h-4 w-4" />
+          Print Recipe
+        </Button>
+      </div>
       
       {steps.length > 0 ? (
         <StepGuide
