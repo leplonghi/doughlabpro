@@ -1,80 +1,77 @@
 
-const enTranslations = {
+const translations = {
   translation: {
-    header: {
-      devMode: 'Development Mode - Authentication Bypassed'
-    },
-    calculator: {
-      title: 'DoughLab Pro Calculator',
-      subtitle: 'Create pizza and bread dough recipes',
-      flour: 'Flour',
-      hydration: 'Hydration',
-      ingredients: {
-        amountDescription: 'The total amount of flour in grams',
-        hydrationDescription: 'The water to flour ratio percentage',
-        yeastType: 'Yeast Type',
-        yeastDescription: 'Select the type of yeast you are using',
-        freshYeast: 'Fresh Yeast',
-        dryYeast: 'Dry Yeast',
-        ballWeight: 'Dough Ball Weight',
-        ballWeightDescription: 'Weight of each individual dough ball',
-        ballCountResult: 'Makes approximately {{count}} dough ball(s)'
-      },
-      steps: {
-        doughType: 'Dough Type',
-        doughTypeDesc: 'Choose between pizza dough or bread dough to customize your recipe.',
-        pizzaStyle: 'Pizza Style',
-        pizzaStyleDesc: 'Select a pizza style to determine hydration and ingredients.',
-        breadStyle: 'Bread Style',
-        breadStyleDesc: 'Choose a bread style to determine the optimal recipe formulation.',
-        fermentation: 'Fermentation Method',
-        fermentationDesc: 'Choose a fermentation method to affect flavor development and timing.',
-        ingredients: 'Ingredients',
-        ingredientsDesc: 'Adjust flour amount, hydration, and other ingredients to customize your recipe.'
-      },
-      actions: {
-        calculate: 'Calculate Recipe',
-        reset: 'Reset'
-      }
-    },
-    auth: {
-      signIn: 'Sign In',
-      signInToAccess: 'Sign in to access all features',
-      continueWithGoogle: 'Continue with Google',
-      signInFailed: 'Sign in failed',
-      unexpectedError: 'An unexpected error occurred',
-      unlockProFeatures: 'Sign in to unlock premium features',
-      continueWith: 'Continue with',
-      continueAsGuest: 'Continue as Guest',
-      signInSuccess: 'Successfully signed in',
-      redirecting: 'Redirecting you to homepage',
-      signInWithGoogle: 'Sign in'
-    },
     common: {
-      pleaseWait: 'Please wait...',
+      home: 'Home',
+      calculator: 'Calculator',
+      learn: 'Learn',
+      school: 'School',
+      login: 'Login',
+      signup: 'Sign Up',
+      profile: 'Profile',
+      logout: 'Logout',
+      save: 'Save',
+      cancel: 'Cancel',
+      submit: 'Submit',
       loading: 'Loading...',
+      back: 'Back',
+      next: 'Next',
+      printRecipe: 'Print Recipe',
+      download: 'Download',
+      share: 'Share',
+      edit: 'Edit',
+      delete: 'Delete',
+      settings: 'Settings',
+      language: 'Language',
+      theme: 'Theme',
+      dark: 'Dark',
+      light: 'Light',
+      search: 'Search',
+      results: 'Results',
       error: 'Error',
       success: 'Success',
-      warning: 'Warning',
-      info: 'Information',
-      printRecipe: 'Print Recipe'
+      clear: 'Clear'
+    },
+    seo: {
+      defaultTitle: 'DoughLab Pro - Your Perfect Dough Calculator',
+      defaultDescription: 'Calculate perfect pizza dough recipes, learn baking techniques, and master the art of dough making with DoughLab Pro.',
+      defaultKeywords: 'dough calculator, pizza dough, bread recipe, baking, fermentation, hydration calculator',
+      homeTitle: 'Home - DoughLab Pro',
+      homeDescription: 'Your comprehensive tool for creating perfect dough recipes for pizza, bread, focaccia and more.',
+      calculatorTitle: 'Dough Calculator - DoughLab Pro',
+      calculatorDescription: 'Calculate the perfect recipe for any type of dough with customizable hydration, fermentation methods, and more.',
+      learnTitle: 'Learn to Bake - DoughLab Pro',
+      learnDescription: 'Step-by-step guides to master the art of making pizza, bread, and other dough-based recipes.',
+      schoolTitle: 'Baking School - DoughLab Pro',
+      schoolDescription: 'Advanced techniques and in-depth knowledge about the science of dough making and baking.',
+    },
+    calculator: {
+      title: 'Advanced Dough Calculator',
+      subtitle: 'Create the perfect dough recipe for your baking needs',
+      actions: {
+        calculate: 'Calculate Recipe',
+        reset: 'Reset Form'
+      }
+    },
+    pizzaStyles: {
+      neapolitan: 'Neapolitan',
+      newYork: 'New York'
     },
     recipe: {
+      stepByStep: 'Step by Step Guide',
       ingredients: 'Ingredients',
-      stepByStep: 'Step-by-Step Guide',
-      quickNavigation: 'Quick Navigation',
-      learningNotes: 'Learning Notes',
-      backToRecipes: 'Back to Recipes',
-      backToDoughTypes: 'Back to Dough Types',
-      switchToPro: 'Switch to Pro Mode'
-    },
-    doughTypes: {
-      pizza: 'Pizza',
-      bread: 'Bread',
-      focaccia: 'Focaccia',
-      sourdough: 'Sourdough'
+      instructions: 'Instructions',
+      tips: 'Tips & Tricks',
+      notes: 'Notes',
+      difficulty: 'Difficulty',
+      prepTime: 'Prep Time',
+      cookTime: 'Cook Time',
+      totalTime: 'Total Time',
+      servings: 'Servings',
+      yield: 'Yield'
     }
+    // More translation categories and keys...
   }
 };
 
-export default enTranslations;
+export default translations;

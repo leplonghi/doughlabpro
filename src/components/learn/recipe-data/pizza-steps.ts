@@ -50,7 +50,7 @@ const getPizzaStepsEn = (recipeName: string): BakingStep[] => {
         description: 'Place the dough balls on a lightly floured tray, cover, and let proof for 4-6 hours at room temperature or 24-48 hours in the refrigerator.',
         didacticInfo: 'During this final rise, the flavor compounds continue to develop through fermentation. A longer, colder proof generally results in more complex flavors and better texture.',
         image: '/lovable-uploads/dough-proofing.jpg',
-        tip: 'The dough balls are ready when they've grown to about 1.5-2 times their original size and are soft and pillowy.'
+        tip: 'The dough balls are ready when they have grown to about 1.5-2 times their original size and are soft and pillowy.'
       },
       {
         title: 'Shape the Pizza',
@@ -88,7 +88,7 @@ const getPizzaStepsEn = (recipeName: string): BakingStep[] => {
         description: 'Transfer to a floured surface and knead for 10-12 minutes until smooth and elastic. You should be able to stretch a small piece into a thin "windowpane".',
         didacticInfo: 'Proper gluten development is crucial for NY style pizza. The dough needs to be strong enough to be stretched very thin while still supporting toppings.',
         image: '/lovable-uploads/dough-kneading.jpg',
-        tip: 'The dough should be tacky but not sticky. If it's sticking to your hands too much, add a little more flour, but be careful not to add too much.'
+        tip: 'The dough should be tacky but not sticky. If it is sticking to your hands too much, add a little more flour, but be careful not to add too much.'
       },
       {
         title: 'Bulk Fermentation',
@@ -107,7 +107,7 @@ const getPizzaStepsEn = (recipeName: string): BakingStep[] => {
       {
         title: 'Cold Fermentation',
         description: 'Place dough balls in sealed containers or on a tray covered with plastic wrap. Refrigerate for at least 24 hours, or up to 72 hours for best flavor.',
-        didacticInfo: 'Long, cold fermentation is the secret to NY pizza dough's flavor. During this time, the yeast works slowly while enzymes break down complex carbohydrates into simpler sugars, creating depth of flavor.',
+        didacticInfo: 'Long, cold fermentation is the secret to NY pizza dough\'s flavor. During this time, the yeast works slowly while enzymes break down complex carbohydrates into simpler sugars, creating depth of flavor.',
         image: '/lovable-uploads/dough-cold-fermentation.jpg',
         tip: 'If refrigerated, allow dough to warm up for 1-2 hours before stretching.'
       },
@@ -123,7 +123,7 @@ const getPizzaStepsEn = (recipeName: string): BakingStep[] => {
         description: 'Add a moderate layer of sauce, generous low-moisture mozzarella, and desired toppings. Bake on a preheated stone or steel at 550°F (290°C) for 6-8 minutes.',
         didacticInfo: 'NY style pizza uses more cheese than Neapolitan and is cooked longer at a lower temperature. This creates the characteristic browned cheese and crisp-yet-bendable crust.',
         image: '/lovable-uploads/pizza-toppings.jpg',
-        tip: 'Grate the cheese rather than slice it for more even melting. And don't overload with toppings - NY style works best with a reasonable amount of toppings.'
+        tip: 'Grate the cheese rather than slice it for more even melting. And don\'t overload with toppings - NY style works best with a reasonable amount of toppings.'
       },
       {
         title: 'Finish and Serve',

@@ -3,34 +3,46 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/pizza-logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>napoli-dough-calculator</title>
-    <meta name="description" content="Pizza Dough Calculator - Calculate perfect pizza dough recipes" />
-    <meta name="author" content="Lovable" />
-    <meta name="google-adsense-account" content="ca-pub-8653595934786167">
-
-    <meta property="og:title" content="Pizza Dough Calculator" />
-    <meta property="og:description" content="Calculate perfect pizza dough recipes with our easy-to-use calculator" />
+    <meta name="theme-color" content="#ea384d" />
+    <meta name="description" content="DoughLab Pro - Calculate perfect pizza dough recipes, learn baking techniques, and master the art of dough making" />
+    
+    <!-- Progressive Web App support -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/icon-192x192.png" />
+    
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta property="og:url" content="https://doughlabpro.lovable.app/" />
+    <meta property="og:title" content="DoughLab Pro - Your Perfect Dough Calculator" />
+    <meta property="og:description" content="Calculate perfect pizza dough recipes, learn baking techniques, and master the art of dough making" />
+    <meta property="og:image" content="/lovable-uploads/15936b17-7234-47a3-a949-d72c0d2932e6.png" />
     
-    <link rel="manifest" href="/manifest.webmanifest">
-    <link rel="icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://doughlabpro.lovable.app/" />
+    <meta property="twitter:title" content="DoughLab Pro - Your Perfect Dough Calculator" />
+    <meta property="twitter:description" content="Calculate perfect pizza dough recipes, learn baking techniques, and master the art of dough making" />
+    <meta property="twitter:image" content="/lovable-uploads/15936b17-7234-47a3-a949-d72c0d2932e6.png" />
     
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8653595934786167"
-     crossorigin="anonymous"></script>
+    <title>DoughLab Pro</title>
   </head>
-
   <body>
     <div id="root"></div>
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+              console.log('ServiceWorker registration successful');
+            })
+            .catch(error => {
+              console.log('ServiceWorker registration failed:', error);
+            });
+        });
+      }
+    </script>
   </body>
 </html>

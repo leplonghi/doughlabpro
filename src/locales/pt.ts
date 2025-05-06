@@ -1,80 +1,77 @@
 
-const ptTranslations = {
+const translations = {
   translation: {
-    header: {
-      devMode: 'Modo de Desenvolvimento - Autenticação Ignorada'
-    },
-    calculator: {
-      title: 'Calculadora DoughLab Pro',
-      subtitle: 'Crie receitas de massa de pizza e pão',
-      flour: 'Farinha',
-      hydration: 'Hidratação',
-      ingredients: {
-        amountDescription: 'A quantidade total de farinha em gramas',
-        hydrationDescription: 'Porcentagem da proporção de água para farinha',
-        yeastType: 'Tipo de Fermento',
-        yeastDescription: 'Selecione o tipo de fermento que você está usando',
-        freshYeast: 'Fermento Fresco',
-        dryYeast: 'Fermento Seco',
-        ballWeight: 'Peso da Bola de Massa',
-        ballWeightDescription: 'Peso de cada bola de massa individual',
-        ballCountResult: 'Faz aproximadamente {{count}} bola(s) de massa'
-      },
-      steps: {
-        doughType: 'Tipo de Massa',
-        doughTypeDesc: 'Escolha entre massa de pizza ou pão para personalizar sua receita.',
-        pizzaStyle: 'Estilo de Pizza',
-        pizzaStyleDesc: 'Selecione um estilo de pizza para determinar a hidratação e ingredientes.',
-        breadStyle: 'Estilo de Pão',
-        breadStyleDesc: 'Escolha um estilo de pão para determinar a formulação ideal da receita.',
-        fermentation: 'Método de Fermentação',
-        fermentationDesc: 'Escolha um método de fermentação para afetar o desenvolvimento do sabor e o tempo.',
-        ingredients: 'Ingredientes',
-        ingredientsDesc: 'Ajuste a quantidade de farinha, hidratação e outros ingredientes para personalizar sua receita.'
-      },
-      actions: {
-        calculate: 'Calcular Receita',
-        reset: 'Reiniciar'
-      }
-    },
-    auth: {
-      signIn: 'Entrar',
-      signInToAccess: 'Entre para acessar todos os recursos',
-      continueWithGoogle: 'Continuar com Google',
-      signInFailed: 'Falha no login',
-      unexpectedError: 'Ocorreu um erro inesperado',
-      unlockProFeatures: 'Entre para desbloquear recursos premium',
-      continueWith: 'Continuar com',
-      continueAsGuest: 'Continuar como Convidado',
-      signInSuccess: 'Login realizado com sucesso',
-      redirecting: 'Redirecionando para a página inicial',
-      signInWithGoogle: 'Entrar'
-    },
     common: {
-      pleaseWait: 'Por favor, aguarde...',
+      home: 'Início',
+      calculator: 'Calculadora',
+      learn: 'Aprender',
+      school: 'Escola',
+      login: 'Entrar',
+      signup: 'Cadastrar',
+      profile: 'Perfil',
+      logout: 'Sair',
+      save: 'Salvar',
+      cancel: 'Cancelar',
+      submit: 'Enviar',
       loading: 'Carregando...',
+      back: 'Voltar',
+      next: 'Próximo',
+      printRecipe: 'Imprimir Receita',
+      download: 'Baixar',
+      share: 'Compartilhar',
+      edit: 'Editar',
+      delete: 'Excluir',
+      settings: 'Configurações',
+      language: 'Idioma',
+      theme: 'Tema',
+      dark: 'Escuro',
+      light: 'Claro',
+      search: 'Buscar',
+      results: 'Resultados',
       error: 'Erro',
       success: 'Sucesso',
-      warning: 'Aviso',
-      info: 'Informação',
-      printRecipe: 'Imprimir Receita'
+      clear: 'Limpar'
+    },
+    seo: {
+      defaultTitle: 'DoughLab Pro - Sua Calculadora Perfeita de Massa',
+      defaultDescription: 'Calcule receitas perfeitas de massa de pizza, aprenda técnicas de panificação e domine a arte de fazer massa com o DoughLab Pro.',
+      defaultKeywords: 'calculadora de massa, massa de pizza, receita de pão, panificação, fermentação, calculadora de hidratação',
+      homeTitle: 'Início - DoughLab Pro',
+      homeDescription: 'Sua ferramenta completa para criar receitas perfeitas de massas para pizza, pão, focaccia e mais.',
+      calculatorTitle: 'Calculadora de Massa - DoughLab Pro',
+      calculatorDescription: 'Calcule a receita perfeita para qualquer tipo de massa com hidratação personalizável, métodos de fermentação e mais.',
+      learnTitle: 'Aprenda a Assar - DoughLab Pro',
+      learnDescription: 'Guias passo a passo para dominar a arte de fazer pizza, pão e outras receitas à base de massa.',
+      schoolTitle: 'Escola de Panificação - DoughLab Pro',
+      schoolDescription: 'Técnicas avançadas e conhecimento aprofundado sobre a ciência da fabricação de massa e panificação.',
+    },
+    calculator: {
+      title: 'Calculadora Avançada de Massa',
+      subtitle: 'Crie a receita de massa perfeita para suas necessidades de panificação',
+      actions: {
+        calculate: 'Calcular Receita',
+        reset: 'Redefinir Formulário'
+      }
+    },
+    pizzaStyles: {
+      neapolitan: 'Napolitana',
+      newYork: 'Nova York'
     },
     recipe: {
-      ingredients: 'Ingredientes',
       stepByStep: 'Guia Passo a Passo',
-      quickNavigation: 'Navegação Rápida',
-      learningNotes: 'Notas de Aprendizagem',
-      backToRecipes: 'Voltar para Receitas',
-      backToDoughTypes: 'Voltar para Tipos de Massa',
-      switchToPro: 'Mudar para Modo Pro'
-    },
-    doughTypes: {
-      pizza: 'Pizza',
-      bread: 'Pão',
-      focaccia: 'Focaccia',
-      sourdough: 'Pão de Fermentação Natural'
+      ingredients: 'Ingredientes',
+      instructions: 'Instruções',
+      tips: 'Dicas e Truques',
+      notes: 'Notas',
+      difficulty: 'Dificuldade',
+      prepTime: 'Tempo de Preparo',
+      cookTime: 'Tempo de Cozimento',
+      totalTime: 'Tempo Total',
+      servings: 'Porções',
+      yield: 'Rendimento'
     }
+    // More translation categories and keys...
   }
 };
 
-export default ptTranslations;
+export default translations;

@@ -1,8 +1,8 @@
 
 {
-  "name": "DoughLab Pro",
+  "name": "DoughLab Pro - Your Perfect Dough Calculator",
   "short_name": "DoughLab Pro",
-  "description": "Calculate your perfect pizza dough recipes with adjustable hydration and fermentation methods",
+  "description": "Calculate perfect pizza dough recipes, learn baking techniques, and master the art of dough making with DoughLab Pro",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
