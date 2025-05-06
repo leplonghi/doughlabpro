@@ -10,6 +10,8 @@ interface SEOProps {
   ogType?: 'website' | 'article';
   pathname?: string;
   locales?: { [key: string]: string };
+  canonicalUrl?: string;
+  structuredData?: Record<string, any>;
   children?: React.ReactNode;
 }
 
@@ -21,6 +23,8 @@ const SEO: React.FC<SEOProps> = ({
   ogType = 'website',
   pathname,
   locales,
+  canonicalUrl,
+  structuredData,
   children
 }) => {
   const { t, i18n } = useTranslation();
@@ -48,8 +52,12 @@ const SEO: React.FC<SEOProps> = ({
     updateMetaTag('description', seoDescription);
     updateMetaTag('keywords', seoKeywords);
     
+    // Set viewport for mobile devices
+    updateMetaTag('viewport', 'width=device-width, initial-scale=1.0, maximum-scale=5.0');
+    
     // Update canonical link
-    updateLink('canonical', seoUrl);
+    const canonicalHref = canonicalUrl || seoUrl;
+    updateLink('canonical', canonicalHref);
     
     // Set language attribute on HTML tag
     document.documentElement.setAttribute('lang', currentLanguage);
@@ -59,14 +67,14 @@ const SEO: React.FC<SEOProps> = ({
     updateMetaTag('og:title', seoTitle, 'property');
     updateMetaTag('og:description', seoDescription, 'property');
     updateMetaTag('og:type', ogType, 'property');
-    updateMetaTag('og:image', `${baseUrl}${ogImage}`, 'property');
+    updateMetaTag('og:image', ogImage.startsWith('http') ? ogImage : `${baseUrl}${ogImage}`, 'property');
     updateMetaTag('og:site_name', 'DoughLab Pro', 'property');
     
     // Set Twitter meta tags
     updateMetaTag('twitter:card', 'summary_large_image', 'name');
     updateMetaTag('twitter:title', seoTitle, 'name');
     updateMetaTag('twitter:description', seoDescription, 'name');
-    updateMetaTag('twitter:image', `${baseUrl}${ogImage}`, 'name');
+    updateMetaTag('twitter:image', ogImage.startsWith('http') ? ogImage : `${baseUrl}${ogImage}`, 'name');
     
     // Set alternate language links
     if (locales) {
@@ -77,16 +85,26 @@ const SEO: React.FC<SEOProps> = ({
       Object.entries(locales).forEach(([lang, url]) => {
         const link = document.createElement('link');
         link.rel = 'alternate';
-        link.hreflang = lang; // Fixed: changed from hrefLang to hreflang
+        link.hreflang = lang;
         link.href = `${baseUrl}${url}`;
         document.head.appendChild(link);
       });
+    }
+    
+    // Add structured data if provided
+    if (structuredData) {
+      addStructuredData(structuredData);
     }
     
     return () => {
       // Cleanup function to remove alternate links when component unmounts
       if (locales) {
         removeExistingAlternateLinks();
+      }
+      
+      // Remove structured data if it was added
+      if (structuredData) {
+        removeStructuredData();
       }
     };
   }, [
@@ -98,7 +116,9 @@ const SEO: React.FC<SEOProps> = ({
     ogType,
     ogImage,
     baseUrl,
-    locales
+    locales,
+    canonicalUrl,
+    structuredData
   ]);
   
   // Helper function to update meta tags
@@ -139,6 +159,27 @@ const SEO: React.FC<SEOProps> = ({
     alternateLinks.forEach(link => {
       document.head.removeChild(link);
     });
+  };
+  
+  // Helper function to add structured data
+  const addStructuredData = (data: Record<string, any>) => {
+    // Remove any existing structured data first
+    removeStructuredData();
+    
+    // Add new structured data
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify(data);
+    script.id = 'structured-data';
+    document.head.appendChild(script);
+  };
+  
+  // Helper function to remove structured data
+  const removeStructuredData = () => {
+    const existingScript = document.getElementById('structured-data');
+    if (existingScript) {
+      document.head.removeChild(existingScript);
+    }
   };
   
   // This component doesn't render anything visible

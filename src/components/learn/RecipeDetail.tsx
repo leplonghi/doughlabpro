@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { getIngredients } from './recipe-data/ingredients';
 import { getSteps, getDefaultTimerDuration } from './recipe-data/recipe-helpers';
 import RecipeHeader from './RecipeHeader';
@@ -30,60 +30,34 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({
   
   // Get the default timer duration for this recipe type
   const timerDuration = getDefaultTimerDuration(selectedType);
+  
+  // Create structured data for this specific recipe
+  const recipeIngredientsFormatted = ingredients.map(ing => 
+    `${ing.amount} ${ing.unit} ${t(`ingredients.${ing.name.toLowerCase().replace(' ', '')}`, ing.name)}`
+  );
 
-  // Add structured data for this specific recipe
-  useEffect(() => {
-    if (!selectedType || !selectedRecipe) return;
+  const stepsFormatted = steps.map((step, index) => ({
+    '@type': 'HowToStep',
+    'name': step.title,
+    'text': step.description,
+    'position': index + 1,
+    'image': step.image || ''
+  }));
 
-    const recipeIngredientsFormatted = ingredients.map(ing => 
-      `${ing.amount} ${ing.unit} ${t(`ingredients.${ing.name.toLowerCase().replace(' ', '')}`, ing.name)}`
-    );
-
-    const stepsFormatted = steps.map((step, index) => ({
-      '@type': 'HowToStep',
-      'name': step.title,
-      'text': step.description,
-      'position': index + 1,
-      'image': step.image || ''
-    }));
-
-    const recipeSchema = {
-      '@context': 'https://schema.org/',
-      '@type': 'Recipe',
-      'name': `${selectedRecipe} ${selectedType} dough`,
-      'description': `Learn how to make perfect ${selectedRecipe} ${selectedType} dough with this detailed recipe`,
-      'recipeIngredient': recipeIngredientsFormatted,
-      'recipeInstructions': stepsFormatted,
-      'recipeCategory': selectedType,
-      'recipeCuisine': selectedType === 'pizza' ? 'Italian' : 'Baking',
-      'author': {
-        '@type': 'Organization',
-        'name': 'DoughLab Pro'
-      }
-    };
-
-    // Add structured data to page
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.text = JSON.stringify(recipeSchema);
-    script.id = 'specific-recipe-structured-data';
-    
-    // Remove any existing structured data first
-    const existingScript = document.getElementById('specific-recipe-structured-data');
-    if (existingScript) {
-      document.head.removeChild(existingScript);
+  const recipeSchema = {
+    '@context': 'https://schema.org/',
+    '@type': 'Recipe',
+    'name': `${selectedRecipe} ${selectedType} dough`,
+    'description': `Learn how to make perfect ${selectedRecipe} ${selectedType} dough with this detailed recipe`,
+    'recipeIngredient': recipeIngredientsFormatted,
+    'recipeInstructions': stepsFormatted,
+    'recipeCategory': selectedType,
+    'recipeCuisine': selectedType === 'pizza' ? 'Italian' : 'Baking',
+    'author': {
+      '@type': 'Organization',
+      'name': 'DoughLab Pro'
     }
-    
-    document.head.appendChild(script);
-    
-    // Clean up when component unmounts
-    return () => {
-      const script = document.getElementById('specific-recipe-structured-data');
-      if (script) {
-        document.head.removeChild(script);
-      }
-    };
-  }, [selectedType, selectedRecipe, ingredients, steps, t]);
+  };
 
   const handleQuantityChange = (newQuantity: number) => {
     setQuantity(newQuantity);
@@ -106,6 +80,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({
         title={recipeTitle}
         description={recipeDescription}
         ogType="article"
+        structuredData={recipeSchema}
       />
       
       <div className="flex justify-between items-center mb-4">

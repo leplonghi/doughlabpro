@@ -32,6 +32,7 @@ const Auth: React.FC = () => {
       <PageSEO 
         title={t('auth.signIn', 'Sign In')} 
         description={t('auth.pageDescription', 'Sign in to DoughLab Pro to access all features')}
+        ogType="website"
       />
       
       <div className="flex-grow flex flex-col items-center justify-center py-10 px-4">

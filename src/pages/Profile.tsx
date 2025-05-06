@@ -28,6 +28,7 @@ const ProfilePage = () => {
       <PageSEO 
         title={t('profile.title', 'Profile')} 
         description={t('profile.description', 'Manage your account settings')}
+        ogType="website"
       />
       <Header />
       

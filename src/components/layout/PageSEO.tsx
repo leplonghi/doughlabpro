@@ -10,6 +10,7 @@ interface PageSEOProps {
   keywords?: string;
   ogImage?: string;
   ogType?: 'website' | 'article';
+  structuredData?: Record<string, any>;
   children?: React.ReactNode;
 }
 
@@ -19,12 +20,13 @@ const PageSEO: React.FC<PageSEOProps> = ({
   keywords,
   ogImage,
   ogType = 'website',
+  structuredData,
   children
 }) => {
   const location = useLocation();
   const { t, i18n } = useTranslation();
   
-  // Define alternate language URLs
+  // Define alternate language URLs based on current path
   const currentPath = location.pathname;
   const alternateLanguages = {
     en: currentPath,
@@ -41,6 +43,7 @@ const PageSEO: React.FC<PageSEOProps> = ({
       ogType={ogType}
       pathname={currentPath}
       locales={alternateLanguages}
+      structuredData={structuredData}
     >
       {children}
     </SEO>
