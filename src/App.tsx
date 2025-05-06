@@ -35,9 +35,7 @@ const AppRoutes = () => {
       <Route path="/" element={<Index />} />
       <Route path="/home" element={
         <Suspense fallback={<LoadingSpinner />}>
-          <AuthGuard fallbackPath="/landing">
-            <Home />
-          </AuthGuard>
+          <Home />
         </Suspense>
       } />
       <Route path="/landing" element={<Index />} />

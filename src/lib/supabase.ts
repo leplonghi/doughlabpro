@@ -8,8 +8,8 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
     persistSession: true,
     autoRefreshToken: true,
-    storage: localStorage, 
-    storageKey: 'pizza-auth',
     detectSessionInUrl: true,
+    storage: localStorage,
+    storageKey: 'doughlab-auth',
   }
 });

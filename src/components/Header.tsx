@@ -1,6 +1,5 @@
 
 import React, { useState } from 'react';
-import { useAuth } from '@/context/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { MobileMenu } from '@/components/header/MobileMenu';
 import { DesktopNavigation } from '@/components/header/DesktopNavigation';
@@ -11,16 +10,10 @@ import LanguageSelector from '@/components/header/LanguageSelector';
 
 const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { bypassAuth, loading } = useAuth();
   const { t } = useTranslation();
 
   return (
     <header className="w-full border-b border-border bg-background sticky top-0 z-50">
-      {bypassAuth && (
-        <div className="bg-amber-500 text-black text-center py-1 text-sm font-medium">
-          {t('header.devMode')}
-        </div>
-      )}
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -35,7 +28,7 @@ const Header: React.FC = () => {
             <LanguageSelector />
             
             {/* Auth Actions */}
-            {!loading && <UserMenu />}
+            <UserMenu />
             
             {/* Mobile Menu */}
             <MobileMenu 

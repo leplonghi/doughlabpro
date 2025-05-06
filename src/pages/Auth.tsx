@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { useAuth } from '@/context/AuthContext';
 import { useTranslation } from 'react-i18next';
-import { AuthForm } from '@/components/auth/AuthForm';
+import { GoogleSignInButton } from '@/components/auth/GoogleSignInButton';
 import PageSEO from '@/components/layout/PageSEO';
 
 interface LocationState {
@@ -56,8 +56,18 @@ const Auth: React.FC = () => {
               {t('auth.signInToAccess')}
             </p>
             
-            {/* Auth Form */}
-            <AuthForm returnUrl={returnUrl} />
+            {/* Google Sign In Button */}
+            <GoogleSignInButton />
+            
+            <div className="text-xs text-gray-500 text-center mt-6">
+              {t('auth.bySigningIn')} {t('auth.youAgree')} 
+              <a href="/privacy" className="text-blue-500 hover:underline ml-1">
+                {t('common.privacyPolicy')}
+              </a> {t('common.and')} 
+              <a href="/terms" className="text-blue-500 hover:underline">
+                {t('common.termsOfService')}
+              </a>
+            </div>
           </div>
         </Card>
       </div>

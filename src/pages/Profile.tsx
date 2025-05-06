@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { useProfile } from '@/hooks/useProfile';
 import { useAuth } from '@/context/AuthContext';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { User, Loader2 } from 'lucide-react';
@@ -15,8 +14,7 @@ import PageSEO from '@/components/layout/PageSEO';
 const ProfilePage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { profile, loading } = useProfile();
-  const { signOut } = useAuth();
+  const { user, loading, signOut } = useAuth();
 
   const handleSignOut = async () => {
     await signOut();
@@ -47,22 +45,22 @@ const ProfilePage = () => {
               <div className="flex justify-center py-6">
                 <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
               </div>
-            ) : profile ? (
+            ) : user ? (
               <div className="space-y-6">
                 <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
                   <Avatar className="h-24 w-24">
-                    {profile.avatar_url ? (
-                      <AvatarImage src={profile.avatar_url} alt={profile.full_name || 'User'} />
+                    {user.user_metadata?.avatar_url ? (
+                      <AvatarImage src={user.user_metadata.avatar_url} alt={user.user_metadata?.full_name || 'User'} />
                     ) : (
                       <AvatarFallback className="bg-primary text-primary-foreground text-xl">
-                        {profile.full_name ? profile.full_name.charAt(0) : <User />}
+                        {user.user_metadata?.full_name ? user.user_metadata.full_name.charAt(0) : <User />}
                       </AvatarFallback>
                     )}
                   </Avatar>
                   
                   <div className="space-y-2 text-center sm:text-left">
-                    <h3 className="font-medium text-lg">{profile.full_name || t('profile.unnamed')}</h3>
-                    <p className="text-muted-foreground">{profile.username || profile.id}</p>
+                    <h3 className="font-medium text-lg">{user.user_metadata?.full_name || t('profile.unnamed')}</h3>
+                    <p className="text-muted-foreground">{user.email}</p>
                   </div>
                 </div>
 

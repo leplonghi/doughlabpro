@@ -5,29 +5,22 @@ import { useTranslation } from 'react-i18next';
 import { supabase } from '@/lib/supabase';
 import { Session, User } from '@supabase/supabase-js';
 
-// Define the AuthContext type with needed properties
 type AuthContextType = {
   user: User | null;
   session: Session | null;
   loading: boolean;
-  signInWithGoogle: (returnUrl?: string) => Promise<{error: any | null}>;
-  signOut: () => Promise<{error: any | null}>;
-  isPro: boolean;
-  bypassAuth: boolean; 
+  signInWithGoogle: () => Promise<{ error: any | null }>;
+  signOut: () => Promise<{ error: any | null }>;
 };
 
-// Create the auth context with default values
 const AuthContext = React.createContext<AuthContextType>({
   user: null,
   session: null,
   loading: true,
-  signInWithGoogle: async () => ({error: null}),
-  signOut: async () => ({error: null}),
-  isPro: false,
-  bypassAuth: false, // Authentication enabled
+  signInWithGoogle: async () => ({ error: null }),
+  signOut: async () => ({ error: null }),
 });
 
-// Hook to use the auth context
 export const useAuth = () => {
   const context = React.useContext(AuthContext);
   if (!context) {
@@ -36,36 +29,25 @@ export const useAuth = () => {
   return context;
 };
 
-// Provider component to wrap the app with auth context
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = React.useState<User | null>(null);
   const [session, setSession] = React.useState<Session | null>(null);
   const [loading, setLoading] = React.useState(true);
-  const [isPro, setIsPro] = React.useState(false);
-  const [bypassAuth, setBypassAuth] = React.useState(false); // Authentication enabled
   const { t } = useTranslation();
 
-  // Check for session on mount and setup auth listener
+  // Set up auth state listener and check for existing session
   React.useEffect(() => {
-    // Regular authentication flow
+    // First set up the auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, currentSession) => {
         console.log('Auth state changed:', event, currentSession?.user?.id);
         setSession(currentSession);
         setUser(currentSession?.user ?? null);
         setLoading(false);
-
-        // Check pro status whenever auth state changes
-        if (currentSession?.user) {
-          // This is where you'd check for pro status in a real app
-          setIsPro(false);
-        } else {
-          setIsPro(false);
-        }
       }
     );
 
-    // Check for existing session
+    // Then check for existing session
     supabase.auth.getSession().then(({ data: { session: currentSession } }) => {
       console.log('Initial session check:', currentSession?.user?.id);
       setSession(currentSession);
@@ -79,17 +61,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   // Google Sign In
-  const signInWithGoogle = async (returnUrl = '/home') => {
+  const signInWithGoogle = async () => {
     setLoading(true);
     try {
-      // Ensure returnUrl has the origin prefix
-      const redirectTo = `${window.location.origin}${returnUrl.startsWith('/') ? returnUrl : '/' + returnUrl}`;
-      console.log('Signing in with Google, redirect to:', redirectTo);
-      
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo
+          redirectTo: `${window.location.origin}/home`
         }
       });
       
@@ -132,8 +110,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     loading,
     signInWithGoogle,
     signOut,
-    isPro,
-    bypassAuth,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
