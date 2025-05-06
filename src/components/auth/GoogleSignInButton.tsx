@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
-import { useTranslation } from 'react-i18next';
 import { Loader2 } from 'lucide-react';
 
 interface GoogleSignInButtonProps {
@@ -12,7 +11,6 @@ interface GoogleSignInButtonProps {
 export function GoogleSignInButton({ className = '' }: GoogleSignInButtonProps) {
   const { signInWithGoogle } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
-  const { t } = useTranslation();
 
   const handleGoogleSignIn = async () => {
     try {
@@ -38,7 +36,7 @@ export function GoogleSignInButton({ className = '' }: GoogleSignInButtonProps) 
       {isLoading ? (
         <span className="flex items-center gap-2">
           <Loader2 className="h-5 w-5 animate-spin" />
-          {t('common.pleaseWait', 'Please wait...')}
+          Please wait...
         </span>
       ) : (
         <>
@@ -50,7 +48,7 @@ export function GoogleSignInButton({ className = '' }: GoogleSignInButtonProps) 
               <path fill="#EA4335" d="M -14.754 43.989 C -12.984 43.989 -11.404 44.599 -10.154 45.789 L -6.734 42.369 C -8.804 40.429 -11.514 39.239 -14.754 39.239 C -19.444 39.239 -23.494 41.939 -25.464 45.859 L -21.484 48.949 C -20.534 46.099 -17.884 43.989 -14.754 43.989 Z" />
             </g>
           </svg>
-          {t('auth.continueWithGoogle', 'Continue with Google')}
+          Continue with Google
         </>
       )}
     </Button>

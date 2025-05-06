@@ -6,11 +6,8 @@ import LearnContent from '@/components/learn/LearnContent';
 import AdBanner from '@/components/monetization/AdBanner';
 import { BookOpen, Info } from 'lucide-react';
 import PageSEO from '@/components/layout/PageSEO';
-import { useTranslation } from 'react-i18next';
 
 const Learn: React.FC = () => {
-  const { t } = useTranslation();
-  
   // Create structured data for recipes
   const recipeStructuredData = {
     '@context': 'https://schema.org/',
@@ -39,8 +36,8 @@ const Learn: React.FC = () => {
   return (
     <PageLayout>
       <PageSEO
-        title={t('seo.learnTitle', 'Learn to Bake')}
-        description={t('seo.learnDescription', 'Step-by-step guides to master the art of making pizza, bread, and other dough-based recipes.')}
+        title="Learn to Bake"
+        description="Step-by-step guides to master the art of making pizza, bread, and other dough-based recipes."
         ogType="article"
         structuredData={recipeStructuredData}
       />

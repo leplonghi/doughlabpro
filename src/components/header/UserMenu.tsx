@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { LogIn } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/context/AuthContext';
-import { useTranslation } from 'react-i18next';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,7 +15,6 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 export const UserMenu: React.FC = () => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
-  const { t } = useTranslation();
   
   // Handle sign out
   const handleSignOut = async () => {
@@ -34,7 +32,7 @@ export const UserMenu: React.FC = () => {
         onClick={() => navigate('/auth')}
       >
         <LogIn size={18} />
-        <span className="hidden md:inline">{t('auth.signIn', 'Sign in')}</span>
+        <span className="hidden md:inline">Sign in</span>
       </Button>
     );
   }
@@ -65,7 +63,7 @@ export const UserMenu: React.FC = () => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuItem onClick={() => navigate('/profile')}>
-            {t('profile.title', 'Profile')}
+            Profile
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => navigate('/calculator')}>
             Dough Calculator
@@ -75,7 +73,7 @@ export const UserMenu: React.FC = () => {
             onClick={handleSignOut}
             className="text-red-600 focus:text-red-600"
           >
-            {t('auth.signOut', 'Sign out')}
+            Sign out
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

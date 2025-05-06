@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 
 const Sauce: React.FC = () => {
   const { user } = useAuth();
-  const isPro = user?.user_metadata?.isPro || false;
+  const isPro = false; // Hardcoded since we removed internationalization
   
   const sauces = [
     {

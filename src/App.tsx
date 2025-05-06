@@ -13,7 +13,6 @@ import Index from "./pages/Index";
 import { AuthGuard } from "./components/auth/AuthGuard";
 import { Toaster } from "sonner";
 import { DoughGuideProvider } from "./context/DoughGuideContext";
-import { LanguageProvider } from "./context/LanguageContext";
 
 // Lazy-loaded components
 const Sauce = lazy(() => import("./pages/Sauce"));
@@ -123,14 +122,12 @@ const App = () => {
         <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
           <TooltipProvider>
             <BrowserRouter>
-              <LanguageProvider>
-                <AuthProvider>
-                  <DoughGuideProvider>
-                    <AppRoutes />
-                    <Toaster />
-                  </DoughGuideProvider>
-                </AuthProvider>
-              </LanguageProvider>
+              <AuthProvider>
+                <DoughGuideProvider>
+                  <AppRoutes />
+                  <Toaster />
+                </DoughGuideProvider>
+              </AuthProvider>
             </BrowserRouter>
           </TooltipProvider>
         </ThemeProvider>

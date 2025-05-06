@@ -1,106 +1,97 @@
 
-import * as React from 'react';
-import { toast } from 'sonner';
-import { useTranslation } from 'react-i18next';
-import { supabase } from '@/lib/supabase';
-import { Session, User } from '@supabase/supabase-js';
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
+import { Session, User } from "@supabase/supabase-js";
+import { supabase } from "@/lib/supabase";
+import { toast } from "sonner";
 
-type AuthContextType = {
+export interface AuthContextType {
   user: User | null;
   session: Session | null;
   loading: boolean;
-  signInWithGoogle: () => Promise<{ error: any | null }>;
-  signOut: () => Promise<{ error: any | null }>;
-};
+  signInWithGoogle: () => Promise<{ error: any }>;
+  signOut: () => Promise<void>;
+}
 
-const AuthContext = React.createContext<AuthContextType>({
+export const AuthContext = createContext<AuthContextType>({
   user: null,
   session: null,
   loading: true,
   signInWithGoogle: async () => ({ error: null }),
-  signOut: async () => ({ error: null }),
+  signOut: async () => {},
 });
 
-export const useAuth = () => {
-  const context = React.useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
-};
+export const useAuth = () => useContext(AuthContext);
 
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = React.useState<User | null>(null);
-  const [session, setSession] = React.useState<Session | null>(null);
-  const [loading, setLoading] = React.useState(true);
-  const { t } = useTranslation();
+interface AuthProviderProps {
+  children: ReactNode;
+}
 
-  // Set up auth state listener and check for existing session
-  React.useEffect(() => {
-    // First set up the auth state listener
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, currentSession) => {
-        console.log('Auth state changed:', event, currentSession?.user?.id);
-        setSession(currentSession);
-        setUser(currentSession?.user ?? null);
-        setLoading(false);
+const AuthProvider = ({ children }: AuthProviderProps) => {
+  const [user, setUser] = useState<User | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Set up auth state listener
+    const { data } = supabase.auth.onAuthStateChange(async (event, session) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+      setLoading(false);
+
+      if (event === 'SIGNED_IN') {
+        toast.success('Signed in successfully');
       }
-    );
+      if (event === 'SIGNED_OUT') {
+        toast.success('Signed out successfully');
+      }
+    });
 
-    // Then check for existing session
-    supabase.auth.getSession().then(({ data: { session: currentSession } }) => {
-      console.log('Initial session check:', currentSession?.user?.id);
-      setSession(currentSession);
-      setUser(currentSession?.user ?? null);
+    // Get initial session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setUser(session?.user ?? null);
       setLoading(false);
     });
 
     return () => {
-      subscription.unsubscribe();
+      data.subscription.unsubscribe();
     };
   }, []);
 
-  // Google Sign In
+  // Sign in with Google
   const signInWithGoogle = async () => {
-    setLoading(true);
     try {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/home`
-        }
+          redirectTo: `${window.location.origin}/home`,
+        },
       });
-      
-      if (error) throw error;
+
+      if (error) {
+        toast.error(`Failed to sign in: ${error.message}`);
+        return { error };
+      }
+
       return { error: null };
     } catch (error: any) {
-      console.error('Google Sign In Error:', error);
-      toast.error(t('auth.signInFailed'), {
-        description: error.message || t('auth.unexpectedError'),
-      });
-      setLoading(false);
+      toast.error(`Unexpected error during sign in: ${error.message}`);
       return { error };
     }
   };
 
   // Sign out
   const signOut = async () => {
-    setLoading(true);
     try {
-      const { error } = await supabase.auth.signOut();
-      if (error) throw error;
-      
-      toast.success(t('auth.signOutSuccess'), {
-        description: t('auth.signedOut'),
-      });
-      
-      return { error: null };
+      await supabase.auth.signOut();
     } catch (error: any) {
-      toast.error(t('auth.signOutFailed'), {
-        description: error.message || t('auth.unexpectedError'),
-      });
-      setLoading(false);
-      return { error };
+      toast.error(`Error signing out: ${error.message}`);
     }
   };
 
@@ -114,3 +105,5 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
+
+export default AuthProvider;

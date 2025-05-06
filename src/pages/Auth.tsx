@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { useAuth } from '@/context/AuthContext';
-import { useTranslation } from 'react-i18next';
 import { GoogleSignInButton } from '@/components/auth/GoogleSignInButton';
 import PageSEO from '@/components/layout/PageSEO';
 
@@ -15,7 +14,6 @@ const Auth: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, loading } = useAuth();
-  const { t } = useTranslation();
   
   const state = location.state as LocationState;
   const returnUrl = state?.returnUrl || '/home';
@@ -30,8 +28,8 @@ const Auth: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen bg-white">
       <PageSEO 
-        title={t('auth.signIn', 'Sign In')} 
-        description={t('auth.pageDescription', 'Sign in to DoughLab Pro to access all features')}
+        title="Sign In" 
+        description="Sign in to DoughLab Pro to access all features"
         ogType="website"
       />
       
@@ -49,23 +47,23 @@ const Auth: React.FC = () => {
           <div className="space-y-6">
             {/* Heading */}
             <h1 className="text-2xl font-bold text-center text-gray-900">
-              {t('auth.welcomeTo')} DoughLab Pro
+              Welcome to DoughLab Pro
             </h1>
             
             <p className="text-center text-muted-foreground">
-              {t('auth.signInToAccess')}
+              Sign in to access your account and recipes
             </p>
             
             {/* Google Sign In Button */}
             <GoogleSignInButton />
             
             <div className="text-xs text-gray-500 text-center mt-6">
-              {t('auth.bySigningIn')} {t('auth.youAgree')} 
+              By signing in, you agree to our 
               <a href="/privacy" className="text-blue-500 hover:underline ml-1">
-                {t('common.privacyPolicy')}
-              </a> {t('common.and')} 
-              <a href="/terms" className="text-blue-500 hover:underline">
-                {t('common.termsOfService')}
+                Privacy Policy
+              </a> and 
+              <a href="/terms" className="text-blue-500 hover:underline ml-1">
+                Terms of Service
               </a>
             </div>
           </div>

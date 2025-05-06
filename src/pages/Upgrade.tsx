@@ -7,7 +7,6 @@ import { Check, Loader2 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 
 const PricingTier = ({ 
   title, 
@@ -75,10 +74,10 @@ const PricingTier = ({
 );
 
 const Upgrade: React.FC = () => {
-  const { user, isPro } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = React.useState(false);
-  const { t } = useTranslation();
+  const isPro = false; // Hardcoded for now since we removed localization
 
   // If not logged in, redirect to auth page
   React.useEffect(() => {
@@ -109,9 +108,9 @@ const Upgrade: React.FC = () => {
       <main className="flex-grow py-10 px-4 bg-gradient-to-br from-white to-pizza-cream/30">
         <div className="container max-w-6xl mx-auto">
           <div className="text-center mb-10">
-            <h1 className="text-3xl font-bold mb-2">{t('upgrade.title', 'Upgrade Your Pizza Experience')}</h1>
+            <h1 className="text-3xl font-bold mb-2">Upgrade Your Pizza Experience</h1>
             <p className="text-muted-foreground">
-              {t('upgrade.subtitle', 'Choose the plan that best fits your dough-making needs')}
+              Choose the plan that best fits your dough-making needs
             </p>
           </div>
           

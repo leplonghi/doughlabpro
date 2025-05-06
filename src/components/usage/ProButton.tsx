@@ -1,84 +1,30 @@
 
-import React from "react";
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Badge } from "@/components/ui/badge";
-import { useAuth } from "@/context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { Button } from '../ui/button';
+import { useNavigate } from 'react-router-dom';
+import { Sparkles } from 'lucide-react';
 
-const ProButton: React.FC = () => {
-  const { user, isPro } = useAuth();
+interface ProButtonProps {
+  label?: string;
+  className?: string;
+}
+
+export const ProButton: React.FC<ProButtonProps> = ({ label = 'Upgrade to Pro', className = '' }) => {
   const navigate = useNavigate();
-  const [open, setOpen] = React.useState(false);
+  const isPro = false; // Hardcoded since we removed internationalization
 
-  // If user is already Pro, don't show the button
-  if (isPro) {
-    return null;
-  }
+  if (isPro) return null;
 
-  const handleClick = () => {
-    if (!user) {
-      // If not logged in, redirect to auth page first
-      navigate('/auth');
-    } else {
-      // If logged in, open dialog or navigate to upgrade page
-      setOpen(true);
-    }
-  };
-
-  const handleUpgradeClick = () => {
-    setOpen(false);
-    navigate('/upgrade');
-  };
-
-  return <Dialog open={open} onOpenChange={setOpen}>
-      <Button 
-        variant="outline" 
-        className="border-red-400 text-white py-0 px-[5px] rounded-xl mx-0 bg-red-500 hover:bg-red-400"
-        onClick={handleClick}
-      >
-        <span className="mr-1">Upgrade to</span> 
-        <Badge className="text-white bg-red-700">PRO</Badge>
-      </Button>
-      
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle>Subscribe to DoughLab Pro</DialogTitle>
-          <DialogDescription>Unlock unlimited recipes, traditional and new types os sauces and toppings, and more with DoughLab Pro.</DialogDescription>
-        </DialogHeader>
-
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-1 gap-3">
-            <div className="flex items-start">
-              <div className="mr-2 h-5 w-5 text-red-500">✓</div>
-              <p>Unlimited dough calculations</p>
-            </div>
-            <div className="flex items-start">
-              <div className="mr-2 h-5 w-5 text-red-500">✓</div>
-              <p>Advanced fermentation methods</p>
-            </div>
-            <div className="flex items-start">
-              <div className="mr-2 h-5 w-5 text-red-500">✓</div>
-              <p>Recipe saving and sharing</p>
-            </div>
-            <div className="flex items-start">
-              <div className="mr-2 h-5 w-5 text-red-500">✓</div>
-              <p>No ads ever</p>
-            </div>
-          </div>
-        </div>
-        
-        <DialogFooter>
-          <Button 
-            type="button" 
-            className="w-full bg-red-500 hover:bg-red-600 text-white"
-            onClick={handleUpgradeClick}
-          >
-            Subscribe Now - $3.99/month
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>;
+  return (
+    <Button
+      size="sm"
+      className={`bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white group ${className}`}
+      onClick={() => navigate('/upgrade')}
+    >
+      <Sparkles className="w-4 h-4 mr-2 group-hover:animate-pulse" />
+      {label}
+    </Button>
+  );
 };
 
 export default ProButton;

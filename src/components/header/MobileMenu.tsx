@@ -10,7 +10,6 @@ import {
   SheetClose
 } from '@/components/ui/sheet';
 import { useAuth } from '@/context/AuthContext';
-import { useTranslation } from 'react-i18next';
 
 type MenuItem = {
   title: string;
@@ -29,9 +28,8 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
   isOpen, 
   setIsOpen 
 }) => {
-  const { user, signOut, bypassAuth, loading } = useAuth();
+  const { user, signOut, loading } = useAuth();
   const navigate = useNavigate();
-  const { t } = useTranslation();
 
   // Handle sign out
   const handleSignOut = async () => {
@@ -76,7 +74,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
           </nav>
           
           <div className="mt-auto py-4">
-            {!bypassAuth && !loading && !user && (
+            {!loading && !user && (
               <Button 
                 className="w-full"
                 onClick={() => {
@@ -85,10 +83,10 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                 }}
               >
                 <LogIn className="mr-2 h-4 w-4" />
-                {t('auth.signIn', 'Sign in')}
+                Sign in
               </Button>
             )}
-            {!bypassAuth && user && (
+            {user && (
               <Button 
                 variant="outline"
                 className="w-full text-red-600 border-red-200 hover:bg-red-50"
@@ -97,7 +95,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
                   setIsOpen(false);
                 }}
               >
-                {t('auth.signOut', 'Sign out')}
+                Sign out
               </Button>
             )}
           </div>
