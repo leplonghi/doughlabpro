@@ -77,7 +77,7 @@ const SEO: React.FC<SEOProps> = ({
       Object.entries(locales).forEach(([lang, url]) => {
         const link = document.createElement('link');
         link.rel = 'alternate';
-        link.hrefLang = lang;
+        link.hreflang = lang; // Fixed: changed from hrefLang to hreflang
         link.href = `${baseUrl}${url}`;
         document.head.appendChild(link);
       });
