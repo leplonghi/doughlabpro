@@ -31,7 +31,7 @@ const NavigationButtons: React.FC<NavigationButtonsProps> = ({
         Back to Dough Types
       </Button>
       <Button asChild className="bg-red-500 hover:bg-red-600">
-        <a href="/calculator">Switch to Pro Mode</a>
+        <a href="/calculator">Switch to Advanced Calculator</a>
       </Button>
     </div>
   );
