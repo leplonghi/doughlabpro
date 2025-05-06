@@ -43,7 +43,7 @@ const ProButton: React.FC = () => {
       
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Upgrade to DoughLab Pro</DialogTitle>
+          <DialogTitle>Subscribe to DoughLab Pro</DialogTitle>
           <DialogDescription>Unlock unlimited recipes, traditional and new types os sauces and toppings, and more with DoughLab Pro.</DialogDescription>
         </DialogHeader>
 
@@ -74,7 +74,7 @@ const ProButton: React.FC = () => {
             className="w-full bg-amber-500 hover:bg-amber-600 text-white"
             onClick={handleUpgradeClick}
           >
-            Subscribe Now - $4.99/month
+            Subscribe Now - $3.99/month
           </Button>
         </DialogFooter>
       </DialogContent>
