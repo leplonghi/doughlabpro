@@ -15,8 +15,6 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({
   numberOfPies = 2,
   themeColor = 'green'
 }) => {
-  const [currentStepIndex, setCurrentStepIndex] = useState(0);
-  const [completedSteps, setCompletedSteps] = useState<number[]>([]);
   const [quantity, setQuantity] = useState(numberOfPies);
   
   // Get steps based on recipe type
@@ -28,18 +26,12 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({
   // Get the default timer duration for this recipe type
   const timerDuration = getDefaultTimerDuration(selectedType);
 
-  const handleStepComplete = (stepIndex: number) => {
-    if (!completedSteps.includes(stepIndex)) {
-      setCompletedSteps([...completedSteps, stepIndex]);
-    }
-  };
-
   const handleQuantityChange = (newQuantity: number) => {
     setQuantity(newQuantity);
   };
 
   return (
-    <div className="mt-8 max-w-3xl mx-auto">
+    <div className="mt-8 max-w-4xl mx-auto">
       <RecipeHeader 
         selectedType={selectedType} 
         selectedRecipe={selectedRecipe}
@@ -50,13 +42,6 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({
       {steps.length > 0 ? (
         <StepGuide
           steps={steps}
-          currentStepIndex={currentStepIndex}
-          setCurrentStepIndex={(index) => {
-            setCurrentStepIndex(index);
-            if (index > currentStepIndex) {
-              handleStepComplete(currentStepIndex);
-            }
-          }}
           onGoBack={onGoBack}
           ingredients={ingredients}
           selectedType={selectedType}

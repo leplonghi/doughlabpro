@@ -5,7 +5,7 @@ export interface BakingStep {
   image?: string;
   tip?: string;
   timer?: number; // Keeping this for backward compatibility
-  didacticInfo?: string; // New field for didactic information
+  didacticInfo?: string; // Field for didactic information
 }
 
 export interface Ingredient {
