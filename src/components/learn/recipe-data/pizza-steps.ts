@@ -35,7 +35,7 @@ export const getPizzaSteps = (recipeName: string): BakingStep[] => {
       {
         title: 'Bulk Fermentation',
         description: 'Place the dough in an oiled container, cover, and let ferment at room temperature for 1-2 hours, or until doubled in size.',
-        didacticInfo: 'During bulk fermentation, yeast consumes sugars and produces carbon dioxide and alcohol. This creates flavor compounds and begins building the dough's structure. The longer and cooler the fermentation, the more complex the flavor development will be.',
+        didacticInfo: 'During bulk fermentation, yeast consumes sugars and produces carbon dioxide and alcohol. This creates flavor compounds and begins building the dough\'s structure. The longer and cooler the fermentation, the more complex the flavor development will be.',
         image: '/lovable-uploads/bulk-ferment.jpg',
         tip: 'For best flavor development, consider refrigerating the dough for a slow fermentation after the initial rise.'
       },
@@ -72,7 +72,7 @@ export const getPizzaSteps = (recipeName: string): BakingStep[] => {
         description: 'Transfer the shaped dough to a floured pizza peel. Add a thin layer of sauce and toppings. Slide onto the preheated stone/steel and bake for 5-7 minutes until the crust is charred in spots.',
         didacticInfo: 'Authentic Neapolitan pizza uses minimal toppings: San Marzano tomatoes, fresh mozzarella, basil, and olive oil. The quick baking time creates the signature leopard-spotted char while keeping the center slightly soft - a hallmark of true Neapolitan style.',
         image: '/lovable-uploads/pizza-baking.jpg',
-        tip: 'Work quickly when transferring the topped pizza to avoid it sticking to the peel. A slight shake of the peel will tell you if it's sticking.'
+        tip: 'Work quickly when transferring the topped pizza to avoid it sticking to the peel. A slight shake of the peel will tell you if it\'s sticking.'
       },
       {
         title: 'Rest and Serve',
