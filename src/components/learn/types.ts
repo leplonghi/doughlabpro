@@ -12,6 +12,7 @@ export interface Ingredient {
   name: string;
   amount: number;
   unit: string;
+  scalable?: boolean; // Adding this property to fix build errors
 }
 
 export interface RecipeDetailProps {
@@ -20,4 +21,11 @@ export interface RecipeDetailProps {
   onGoBack: () => void;
   numberOfPies?: number;
   themeColor?: string;
+}
+
+export interface RecipeHeaderProps {
+  selectedType: string | null;
+  selectedRecipe: string | null;
+  quantity: number;
+  onQuantityChange?: (newQuantity: number) => void;
 }

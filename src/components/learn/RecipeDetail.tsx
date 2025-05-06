@@ -15,7 +15,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({
   numberOfPies = 2,
   themeColor = 'green'
 }) => {
-  const [quantity, setQuantity] = useState(numberOfPies);
+  const [quantity, setQuantity] = useState<number>(numberOfPies);
   
   // Get steps based on recipe type
   const steps = getSteps(selectedType, selectedRecipe);
