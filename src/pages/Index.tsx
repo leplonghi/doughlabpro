@@ -38,7 +38,7 @@ const Index: React.FC = () => {
               <p className="text-muted-foreground mb-6">
                 Learn step-by-step with guided recipes and timers. Perfect for your first few bakes.
               </p>
-              <Button asChild className="bg-amber-500 hover:bg-amber-600">
+              <Button asChild className="bg-green-500 hover:bg-amber-600">
                 <Link to="/learn">
                   Start Learning
                   <ArrowRight className="ml-2 h-4 w-4" />
