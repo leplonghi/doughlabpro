@@ -31,9 +31,9 @@ const Index: React.FC = () => {
         </p>
         
         <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          <Card className="border-amber-200 hover:border-amber-300 transition-all hover:shadow-md">
+          <Card className="border-green-200 hover:border-green-300 transition-all hover:shadow-md">
             <CardContent className="p-8 flex flex-col items-center">
-              <ChefHat className="h-12 w-12 text-amber-500 mb-4" />
+              <ChefHat className="h-12 w-12 text-green-500 mb-4" />
               <h2 className="text-xl font-semibold mb-2">I'm a Beginner</h2>
               <p className="text-muted-foreground mb-6">
                 Learn step-by-step with guided recipes and timers. Perfect for your first few bakes.
