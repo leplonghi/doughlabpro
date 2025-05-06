@@ -4,8 +4,12 @@ import { useToast } from "@/hooks/use-toast";
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Loader2, Camera, User } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
-import { Profile } from '@/hooks/useProfile';
+
+// Define Profile type directly since useProfile is removed
+export interface Profile {
+  username?: string;
+  avatar_url?: string;
+}
 
 interface AvatarUploadProps {
   profile: Profile | null;
@@ -14,7 +18,6 @@ interface AvatarUploadProps {
 
 const AvatarUpload = ({ profile, onUploadComplete }: AvatarUploadProps) => {
   const { toast } = useToast();
-  const { t } = useTranslation();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
 
@@ -28,14 +31,14 @@ const AvatarUpload = ({ profile, onUploadComplete }: AvatarUploadProps) => {
       // Just simulate upload since we're not using auth
       await new Promise(resolve => setTimeout(resolve, 1000)); 
       toast({
-        title: t('profile.info'),
-        description: t('profile.authDisabled', 'Profile features are currently disabled'),
+        title: 'Info',
+        description: 'Profile features are currently disabled',
       });
       onUploadComplete();
     } catch (error) {
       toast({
-        title: t('profile.error'),
-        description: t('profile.errorUploadingAvatar'),
+        title: 'Error',
+        description: 'Error uploading avatar',
         variant: "destructive",
       });
     } finally {

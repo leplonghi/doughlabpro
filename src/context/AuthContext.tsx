@@ -18,7 +18,7 @@ export interface AuthContextType {
   signOut: () => Promise<void>;
 }
 
-export const AuthContext = createContext<AuthContextType>({
+const AuthContext = createContext<AuthContextType>({
   user: null,
   session: null,
   loading: true,
