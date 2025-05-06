@@ -213,24 +213,24 @@ const getNeapolitanSteps = (lang: string): BakingStep[] => {
         },
         {
           title: 'Divide and Shape',
-          description: 'Turn dough onto a floured surface. Divide into equal portions and shape into tight balls.',
-          didacticInfo: 'Creating tight dough balls promotes even fermentation and maintains a uniform shape when stretching later.',
+          description: 'Vuelca la masa sobre una superficie enharinada. Divide en porciones iguales y forma bolas apretadas.',
+          didacticInfo: 'Crear bolas de masa apretadas favorece una fermentación uniforme y mantiene una forma uniforme al estirar más tarde.',
           image: '/lovable-uploads/dividing-dough.jpg',
-          tip: 'Handle gently to retain air bubbles. Use a scraper to help lift and divide dough cleanly.'
+          tip: 'Manipula con cuidado para retener las burbujas de aire. Utiliza un raspador para ayudarte a levantar y dividir la masa limpiamente.'
         },
         {
           title: 'Final Proof',
-          description: 'Place dough balls on a tray or in a proofing box. Cover and let rest for 4-6 hours at room temp or up to 48 hours in the fridge.',
-          didacticInfo: 'Proofing allows dough to relax and ferment further. Cold proofing promotes superior flavor and digestibility.',
+          description: 'Coloca las bolas de masa en una bandeja o en una caja de fermentación. Cubre y deja reposar durante 4-6 horas a temperatura ambiente o hasta 48 horas en el frigorífico.',
+          didacticInfo: 'La prueba permite que la masa se relaje y fermente aún más. La prueba en frío favorece un sabor y una digestibilidad superiores.',
           image: '/lovable-uploads/dough-proofing.jpg',
-          tip: 'If cold-proofing, bring dough to room temp at least 1 hour before baking.'
+          tip: 'Si vas a probar en frío, lleva la masa a temperatura ambiente al menos 1 hora antes de hornear.'
         },
         {
           title: 'Prepare for Baking',
           description: 'Preheat your oven to 500°F (260°C) or higher with a stone or steel for 45-60 minutes.',
           didacticInfo: 'A high heat environment simulates a wood-fired oven, critical for achieving fast oven spring and proper crust charring.',
           image: '/lovable-uploads/preheating-oven.jpg',
-          tip: 'Position your baking surface in the top third of the oven for even heat distribution.'
+          tip: 'Coloca la superficie de horneado en el tercio superior del horno para una distribución uniforme del calor.'
         },
         {
           title: 'Shape the Pizza',
@@ -251,7 +251,7 @@ const getNeapolitanSteps = (lang: string): BakingStep[] => {
           description: 'Let pizza rest 1-2 minutes after baking. Add fresh basil and drizzle with olive oil before serving.',
           didacticInfo: 'Resting sets the cheese and crust. Herbs added post-bake retain aroma and taste better.',
           image: '/lovable-uploads/finished-pizza.jpg',
-          tip: 'Serve uncut for tradition—allow diners to slice their own.'
+          tip: 'Serve uncut for tradition: allow diners to slice their own.'
         }
       ];
   }
@@ -292,7 +292,7 @@ const getNewYorkSteps = (lang: string): BakingStep[] => {
         {
           title: 'Prova Final',
           description: 'Deixe as bolas de massa crescerem por 1-2 horas em temperatura ambiente ou durante a noite na geladeira.',
-          didacticInfo: 'A fermentação a frio ajuda a desenvolver a complexidade de sabor pela qual a pizza de Nova York é conhecida e torna a massa mais fácil de manusear e esticar sem rasgar.',
+          didacticInfo: 'A fermentação a frio ajuda a desenvolver a complexidade de sabor pela qual a pizza de Nova York é conhecida e torna a massa mais fácil de manusear e estirar sem que se rompa.',
           image: '/lovable-uploads/ny-proofing.jpg',
           tip: 'Se refrigerada, deixe a massa aquecer por 1-2 horas antes de esticar.'
         },
@@ -366,7 +366,7 @@ const getNewYorkSteps = (lang: string): BakingStep[] => {
         {
           title: 'Precalentar el Horno',
           description: 'Coloca una piedra para pizza o acero en el horno y precalienta a 260°C durante al menos 45 minutos.',
-          didacticInfo: 'La piedra o el acero actúan como un disipador de calor, proporcionando un calor inferior intenso que imita los hornos de cubierta utilizados en las pizzerías clásicas de Nueva York, creando la corteza crujiente pero flexible característica.',
+          didacticInfo: 'La piedra o el acero actúan como un disipador de calor, proporcionando un calor inferior intenso que imita los hornos de cubierta utilizados en las pizzerías clássicas de Nueva York, creando la corteza crujiente pero flexible característica.',
           image: '/lovable-uploads/ny-preheating.jpg',
           tip: 'Para los hornos domésticos, un precalentamiento más prolongado garantiza una saturación de calor adecuada en tu piedra o acero.'
         },
@@ -430,3 +430,34 @@ const getNewYorkSteps = (lang: string): BakingStep[] => {
           image: '/lovable-uploads/ny-proofing.jpg',
           tip: 'If refrigerated, allow dough to warm up for 1-2 hours before stretching.'
         },
+        {
+          title: 'Preheat Oven',
+          description: 'Place a pizza stone or steel in the oven and preheat to 500°F (260°C) for at least 45 minutes.',
+          didacticInfo: 'The stone or steel acts as a heat sink, providing intense bottom heat that mimics deck ovens used in classic New York pizzerias, creating the characteristic crisp yet flexible crust.',
+          image: '/lovable-uploads/ny-preheating.jpg',
+          tip: 'For home ovens, longer preheating ensures proper heat saturation in your stone or steel.'
+        },
+        {
+          title: 'Shape the Pizza',
+          description: 'Stretch the dough to a 16-18 inch diameter, aiming for a thin center with slightly thicker edges.',
+          didacticInfo: 'The thin and wide characteristic crust of New York pizza comes from hand stretching. The dough should be thin enough to be foldable but strong enough not to tear under the weight of toppings.',
+          image: '/lovable-uploads/ny-stretching.jpg',
+          tip: 'Use your knuckles and gravity to stretch the dough, allowing its weight to naturally thin it.'
+        },
+        {
+          title: 'Top and Bake',
+          description: 'Top with tomato sauce, low-moisture mozzarella, and desired toppings. Bake for 7-10 minutes until the cheese bubbles and the crust is golden.',
+          didacticInfo: 'New York pizza traditionally uses cooked tomato sauce, low-moisture mozzarella (unlike fresh mozzarella on Neapolitan) and is often finished with dried oregano. The longer cooking time creates a crisper crust than Neapolitan style.',
+          image: '/lovable-uploads/ny-baking.jpg',
+          tip: 'Place the pizza in the top third of the oven for even cheese melting.'
+        },
+        {
+          title: 'Finish and Serve',
+          description: 'Remove from the oven, let cool slightly, slice into large triangular pieces, and serve.',
+          didacticInfo: 'The classic New York slice is large and triangular, designed to be folded lengthwise to eat on the go. This folding technique is practically a cultural institution in New York City.',
+          image: '/lovable-uploads/ny-finished.jpg',
+          tip: 'For authentic NY flavor, sprinkle with grated parmesan and red pepper flakes before serving.'
+        }
+      ];
+  }
+};
