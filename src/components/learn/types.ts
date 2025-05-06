@@ -1,17 +1,17 @@
 
+export interface BakingStep {
+  title: string;
+  description: string;
+  image?: string;
+  tip?: string;
+  timer?: number; // Keeping this for backward compatibility
+  didacticInfo?: string; // New field for didactic information
+}
+
 export interface Ingredient {
   name: string;
   amount: number;
   unit: string;
-  scalable: boolean;
-}
-
-export interface BakingStep {
-  title: string;
-  description: string;
-  tip?: string;
-  timer?: number; // in minutes
-  image?: string; // URL to the image for this step
 }
 
 export interface RecipeDetailProps {
@@ -20,11 +20,4 @@ export interface RecipeDetailProps {
   onGoBack: () => void;
   numberOfPies?: number;
   themeColor?: string;
-}
-
-export interface RecipeHeaderProps {
-  selectedType: string | null;
-  selectedRecipe: string | null;
-  quantity: number;
-  onQuantityChange?: (quantity: number) => void;
 }
