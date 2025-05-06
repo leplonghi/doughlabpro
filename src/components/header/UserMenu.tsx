@@ -14,18 +14,18 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 export const UserMenu: React.FC = () => {
-  const { user, signOut, bypassAuth } = useAuth();
+  const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const { t } = useTranslation();
   
   // Handle sign out
   const handleSignOut = async () => {
     await signOut();
-    navigate('/landing');
+    navigate('/');
   };
 
-  // If bypassing auth or not logged in, show login button
-  if (bypassAuth && !user) {
+  // If not logged in, show login button
+  if (!user) {
     return (
       <Button 
         variant="ghost" 
@@ -39,8 +39,9 @@ export const UserMenu: React.FC = () => {
     );
   }
 
-  // Get the user's name
-  const userName = user?.user_metadata?.full_name || user?.email || 'User';
+  // Get the user's name and avatar from Google auth
+  const userName = user.user_metadata?.full_name || user.email || 'User';
+  const avatarUrl = user.user_metadata?.avatar_url;
 
   // Otherwise, show user avatar with dropdown
   return (
@@ -53,14 +54,11 @@ export const UserMenu: React.FC = () => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Avatar className="h-8 w-8 cursor-pointer">
-            {user?.user_metadata?.avatar_url ? (
-              <AvatarImage src={user.user_metadata.avatar_url} alt={userName} />
+            {avatarUrl ? (
+              <AvatarImage src={avatarUrl} alt={userName} />
             ) : (
               <AvatarFallback className="bg-black text-white">
-                {user?.user_metadata?.full_name ? 
-                  `${user.user_metadata.full_name.charAt(0)}` : 
-                  'U'
-                }
+                {userName.charAt(0)}
               </AvatarFallback>
             )}
           </Avatar>

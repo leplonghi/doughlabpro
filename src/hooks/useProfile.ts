@@ -1,7 +1,9 @@
 
-import { useState, useCallback } from 'react';
-import { toast } from "@/hooks/use-toast";
+import { useState, useCallback, useEffect } from 'react';
+import { toast } from '@/hooks/use-toast';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '@/context/AuthContext';
+import { supabase } from '@/lib/supabase';
 
 export interface Profile {
   id: string;
@@ -13,25 +15,29 @@ export interface Profile {
 
 export const useProfile = () => {
   const { t } = useTranslation();
+  const { user } = useAuth();
   
   const [loading, setLoading] = useState(false);
   const [profile, setProfile] = useState<Profile | null>(null);
 
   const fetchProfile = useCallback(async () => {
+    if (!user) {
+      setProfile(null);
+      return;
+    }
+
     setLoading(true);
     try {
-      // Simulate profile data since auth is disabled
-      await new Promise(resolve => setTimeout(resolve, 500));
+      // Create a profile object from user data
+      const userProfile: Profile = {
+        id: user.id,
+        username: user.email || null,
+        full_name: user.user_metadata?.full_name || null,
+        avatar_url: user.user_metadata?.avatar_url || null,
+        updated_at: user.updated_at || null
+      };
       
-      // Mock profile data
-      setProfile({
-        id: '123',
-        username: 'guest_user',
-        full_name: 'Guest User',
-        avatar_url: null,
-        updated_at: new Date().toISOString()
-      });
-      
+      setProfile(userProfile);
     } catch (error: any) {
       console.error('Error fetching profile:', error);
       toast({
@@ -42,20 +48,38 @@ export const useProfile = () => {
     } finally {
       setLoading(false);
     }
-  }, [t]);
+  }, [user, t]);
+
+  // Fetch profile when user changes
+  useEffect(() => {
+    if (user) {
+      fetchProfile();
+    } else {
+      setProfile(null);
+    }
+  }, [user, fetchProfile]);
 
   const updateProfile = useCallback(async (updates: Partial<Profile>) => {
+    if (!user) return;
+    
     setLoading(true);
     try {
-      // Simulate profile update since auth is disabled
-      await new Promise(resolve => setTimeout(resolve, 500));
+      // Update user metadata through Supabase auth
+      const { error } = await supabase.auth.updateUser({
+        data: {
+          full_name: updates.full_name,
+          // Add other fields as needed
+        }
+      });
       
-      // Mock updated profile
+      if (error) throw error;
+      
+      // Update the local profile state
       setProfile(prev => prev ? { ...prev, ...updates } : null);
       
       toast({
-        title: t('profile.info'),
-        description: t('profile.authDisabled', 'Profile updates are currently disabled'),
+        title: t('profile.success'),
+        description: t('profile.profileUpdated'),
       });
     } catch (error: any) {
       console.error('Error updating profile:', error);
@@ -67,7 +91,7 @@ export const useProfile = () => {
     } finally {
       setLoading(false);
     }
-  }, [t]);
+  }, [user, t]);
 
   return {
     profile,

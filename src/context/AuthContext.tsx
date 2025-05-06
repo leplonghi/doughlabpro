@@ -13,7 +13,7 @@ type AuthContextType = {
   signInWithGoogle: (returnUrl?: string) => Promise<{error: any | null}>;
   signOut: () => Promise<{error: any | null}>;
   isPro: boolean;
-  bypassAuth: boolean; // Added for development
+  bypassAuth: boolean; 
 };
 
 // Create the auth context with default values
@@ -24,7 +24,7 @@ const AuthContext = React.createContext<AuthContextType>({
   signInWithGoogle: async () => ({error: null}),
   signOut: async () => ({error: null}),
   isPro: false,
-  bypassAuth: true, // Set to true to bypass auth by default
+  bypassAuth: false, // Authentication enabled
 });
 
 // Hook to use the auth context
@@ -40,20 +40,14 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = React.useState<User | null>(null);
   const [session, setSession] = React.useState<Session | null>(null);
-  const [loading, setLoading] = React.useState(false); // Set to false for quick loading
+  const [loading, setLoading] = React.useState(true);
   const [isPro, setIsPro] = React.useState(false);
-  const [bypassAuth, setBypassAuth] = React.useState(true); // Set to true to bypass auth
+  const [bypassAuth, setBypassAuth] = React.useState(false); // Authentication enabled
   const { t } = useTranslation();
 
   // Check for session on mount and setup auth listener
   React.useEffect(() => {
-    if (bypassAuth) {
-      // Skip auth checks if we're bypassing
-      setLoading(false);
-      return () => {};
-    }
-
-    // Regular authentication flow when not bypassed
+    // Regular authentication flow
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, currentSession) => {
         console.log('Auth state changed:', event, currentSession?.user?.id);
@@ -63,7 +57,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
         // Check pro status whenever auth state changes
         if (currentSession?.user) {
-          setIsPro(false); // Remove pro status check for now
+          // This is where you'd check for pro status in a real app
+          setIsPro(false);
         } else {
           setIsPro(false);
         }
@@ -81,16 +76,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return () => {
       subscription.unsubscribe();
     };
-  }, [bypassAuth]);
+  }, []);
 
   // Google Sign In
   const signInWithGoogle = async (returnUrl = '/home') => {
-    if (bypassAuth) {
-      // Skip actual auth if bypassing
-      console.log('Auth bypassed, simulating sign in');
-      return { error: null };
-    }
-
     setLoading(true);
     try {
       // Ensure returnUrl has the origin prefix
@@ -118,16 +107,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   // Sign out
   const signOut = async () => {
-    if (bypassAuth) {
-      // Skip actual auth if bypassing
-      console.log('Auth bypassed, simulating sign out');
-      return { error: null };
-    }
-
     setLoading(true);
     try {
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
+      
+      toast.success(t('auth.signOutSuccess'), {
+        description: t('auth.signedOut'),
+      });
       
       return { error: null };
     } catch (error: any) {
@@ -140,13 +127,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const value = {
-    user: bypassAuth ? ({ 
-      id: 'bypass-user-id',
-      app_metadata: {},
-      user_metadata: { full_name: 'Development User', avatar_url: null },
-      aud: 'authenticated',
-      created_at: new Date().toISOString()
-    } as User) : user,
+    user,
     session,
     loading,
     signInWithGoogle,
