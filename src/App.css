@@ -28,6 +28,7 @@
   /* Recipe title styling for print */
   h1, h2, h3 {
     page-break-after: avoid;
+    color: #ea384c !important;
   }
   
   /* Set text color to black for better printing */

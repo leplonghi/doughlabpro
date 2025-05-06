@@ -34,11 +34,11 @@ const ProButton: React.FC = () => {
   return <Dialog open={open} onOpenChange={setOpen}>
       <Button 
         variant="outline" 
-        className="border-amber-400 text-gray-950 py-0 px-[5px] rounded-xl mx-0 bg-amber-500 hover:bg-amber-400"
+        className="border-red-400 text-white py-0 px-[5px] rounded-xl mx-0 bg-red-500 hover:bg-red-400"
         onClick={handleClick}
       >
         <span className="mr-1">Upgrade to</span> 
-        <Badge className="text-black bg-orange-200">PRO</Badge>
+        <Badge className="text-white bg-red-700">PRO</Badge>
       </Button>
       
       <DialogContent className="sm:max-w-md">
@@ -50,19 +50,19 @@ const ProButton: React.FC = () => {
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-1 gap-3">
             <div className="flex items-start">
-              <div className="mr-2 h-5 w-5 text-amber-500">✓</div>
+              <div className="mr-2 h-5 w-5 text-red-500">✓</div>
               <p>Unlimited dough calculations</p>
             </div>
             <div className="flex items-start">
-              <div className="mr-2 h-5 w-5 text-amber-500">✓</div>
+              <div className="mr-2 h-5 w-5 text-red-500">✓</div>
               <p>Advanced fermentation methods</p>
             </div>
             <div className="flex items-start">
-              <div className="mr-2 h-5 w-5 text-amber-500">✓</div>
+              <div className="mr-2 h-5 w-5 text-red-500">✓</div>
               <p>Recipe saving and sharing</p>
             </div>
             <div className="flex items-start">
-              <div className="mr-2 h-5 w-5 text-amber-500">✓</div>
+              <div className="mr-2 h-5 w-5 text-red-500">✓</div>
               <p>No ads ever</p>
             </div>
           </div>
@@ -71,7 +71,7 @@ const ProButton: React.FC = () => {
         <DialogFooter>
           <Button 
             type="button" 
-            className="w-full bg-amber-500 hover:bg-amber-600 text-white"
+            className="w-full bg-red-500 hover:bg-red-600 text-white"
             onClick={handleUpgradeClick}
           >
             Subscribe Now - $3.99/month

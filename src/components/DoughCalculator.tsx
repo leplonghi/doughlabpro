@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import DoughResults from './DoughResults';
@@ -107,7 +108,7 @@ const DoughCalculator: React.FC = () => {
         
         <AdBanner />
         
-        <Card className="mb-8 shadow-sm border-border overflow-hidden rounded-xl">
+        <Card className="mb-8 shadow-sm border-red-100 overflow-hidden rounded-xl">
           <DoughCalculatorHeader />
           <CardContent className="p-0 space-y-0">
             {/* Dough Type Section */}
@@ -210,9 +211,9 @@ const DoughCalculator: React.FC = () => {
                     onBallWeightChange={handleBallWeightChange} 
                   />
                   
-                  <div className="p-4 border border-blue-100 bg-blue-50 rounded-md flex items-start mt-6">
-                    <Info className="h-5 w-5 text-black-600 mt-0.5 mr-3 flex-shrink-0" />
-                    <p className="text-sm text-blue-800">
+                  <div className="p-4 border border-red-100 bg-red-50 rounded-md flex items-start mt-6">
+                    <Info className="h-5 w-5 text-red-600 mt-0.5 mr-3 flex-shrink-0" />
+                    <p className="text-sm text-red-800">
                       Detailed instructions for handling and fermenting your dough will appear on the results page after calculation.
                     </p>
                   </div>

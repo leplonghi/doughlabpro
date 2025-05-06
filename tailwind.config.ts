@@ -25,7 +25,7 @@ export default {
         background: '#FFFFFF',
         foreground: '#222222',
         primary: {
-          DEFAULT: '#000000',
+          DEFAULT: '#ea384c',
           foreground: '#FFFFFF'
         },
         secondary: {
@@ -55,7 +55,7 @@ export default {
         sidebar: {
           DEFAULT: '#FFFFFF',
           foreground: '#222222',
-          primary: '#222222',
+          primary: '#ea384c',
           'primary-foreground': '#FFFFFF',
           accent: '#f5f5f5',
           'accent-foreground': '#222222',
@@ -63,10 +63,10 @@ export default {
           ring: '#888888'
         },
         pizza: {
-          DEFAULT: '#222222',
+          DEFAULT: '#ea384c',
           light: '#f5f5f5',
-          dark: '#000000',
-          accent: '#666666',
+          dark: '#c42838',
+          accent: '#e66d7a',
           cream: '#FFFFFF',
         },
       },

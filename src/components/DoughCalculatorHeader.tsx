@@ -4,11 +4,11 @@ import { CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 
 const DoughCalculatorHeader: React.FC = () => {
   return (
-    <CardHeader className="space-y-3 p-6 bg-primary/10 rounded-t-xl border-b">
-      <CardTitle className="text-2xl font-sans text-center">
+    <CardHeader className="space-y-3 p-6 bg-red-500/90 rounded-t-xl border-b">
+      <CardTitle className="text-2xl font-sans text-center text-white">
         DoughLab Pro Calculator
       </CardTitle>
-      <CardDescription className="text-base text-center">
+      <CardDescription className="text-base text-center text-white/80">
         Create pizza and bread dough recipes
       </CardDescription>
     </CardHeader>

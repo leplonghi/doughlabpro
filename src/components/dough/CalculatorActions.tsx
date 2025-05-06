@@ -13,7 +13,7 @@ const CalculatorActions: React.FC<CalculatorActionsProps> = ({ onCalculate, onRe
     <div className="flex justify-between gap-3 mt-6">
       <Button 
         variant="outline" 
-        className="flex-1 h-12 font-medium bg-white hover:bg-primary hover:text-white"
+        className="flex-1 h-12 font-medium bg-white hover:bg-red-500 hover:text-white border-red-300"
         onClick={onCalculate}
       >
         <Calculator className="mr-2 h-5 w-5" />
