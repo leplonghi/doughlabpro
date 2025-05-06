@@ -6,80 +6,80 @@ export const getPizzaSteps = (recipeName: string): BakingStep[] => {
     return [
       {
         title: 'Prepare Ingredients',
-        description: 'Measure out all ingredients accurately using a digital scale. For Neapolitan pizza, you\'ll need high-protein flour (preferably Italian 00), water, salt, and a small amount of yeast.',
-        didacticInfo: 'Neapolitan pizza dough is traditionally made with just four ingredients: flour, water, salt, and yeast. The simplicity highlights the importance of quality ingredients and proper technique. Tipo 00 flour is finely milled and has a protein content of around 12.5%, perfect for creating the characteristic chewy yet tender crust.',
+        description: 'Gather high-protein flour (Tipo 00), room temperature water, fine sea salt, and fresh or instant yeast.',
+        didacticInfo: 'Neapolitan pizza dough is traditionally made with just four ingredients: flour, water, salt, and yeast. Tipo 00 flour, known for its fine texture and high protein content (~12.5%), is critical for achieving the soft and elastic dough typical of this style.',
         image: '/lovable-uploads/pizza-ingredients.jpg',
-        tip: 'Use filtered water at room temperature for best results with Neapolitan dough.'
+        tip: 'Use filtered water at room temperature (around 20-22°C) for consistent hydration and yeast activity.'
       },
       {
         title: 'Mix Flour and Water',
-        description: 'In a large bowl, combine flour and water. Mix until no dry flour remains, then cover and let rest for 20-30 minutes. This rest period is called autolyse.',
-        didacticInfo: 'The autolyse process allows the flour to fully hydrate and begins gluten development without kneading. During this rest, enzymes in the flour break down complex carbohydrates, making the dough more extensible and easier to work with later.',
+        description: 'Combine the flour and water in a mixing bowl until no dry bits remain. Cover and let rest for 20-30 minutes (autolyse phase).',
+        didacticInfo: 'Autolyse helps flour hydrate and initiates gluten formation. This step improves dough extensibility and results in a more manageable dough later during kneading.',
         image: '/lovable-uploads/dough-mixing.jpg',
-        tip: 'Mix just until combined - overmixing at this stage can lead to a tough dough.'
+        tip: 'Avoid overmixing—this stage should be minimal to allow enzymes to work effectively.'
       },
       {
         title: 'Add Salt and Yeast',
-        description: 'After the rest period, sprinkle the salt and yeast over the dough and mix thoroughly until fully incorporated.',
-        didacticInfo: 'Salt strengthens the gluten network and controls fermentation rate. Adding it after the autolyse prevents it from inhibiting initial water absorption. Fresh yeast creates more complex flavors, but instant dry yeast is more consistent and convenient.',
+        description: 'Sprinkle salt and yeast over the dough and mix until fully incorporated.',
+        didacticInfo: 'Salt controls yeast activity and strengthens gluten. Adding salt and yeast after autolyse enhances hydration efficiency and gluten structure.',
         image: '/lovable-uploads/adding-salt-yeast.jpg',
-        tip: 'If using active dry yeast, dissolve it in a small amount of warm water before adding to the dough.'
+        tip: 'If using active dry yeast, dissolve it in a small amount of warm water (not hot) before mixing.'
       },
       {
         title: 'Knead the Dough',
-        description: 'Knead the dough on a clean surface for about 5-10 minutes until smooth and elastic. The dough should pass the windowpane test.',
-        didacticInfo: 'Kneading develops the gluten structure by organizing the proteins into chains, creating the elasticity and strength needed to trap gas bubbles during fermentation. The windowpane test is when you can stretch a small piece of dough thin enough to see light through it without tearing.',
+        description: 'Knead on a clean surface for 5-10 minutes until smooth and elastic.',
+        didacticInfo: 'Proper kneading aligns gluten strands and helps create a stretchy and strong dough. Use the windowpane test to check readiness: stretch a small piece until it becomes translucent without tearing.',
         image: '/lovable-uploads/kneading-dough.jpg',
-        tip: 'Use a dough scraper to help manage sticky dough and keep your work surface clean.'
+        tip: 'Use a bench scraper to help handle sticky dough and keep the workspace clean.'
       },
       {
         title: 'Bulk Fermentation',
-        description: 'Place the dough in an oiled container, cover, and let ferment at room temperature for 1-2 hours, or until doubled in size.',
-        didacticInfo: 'During bulk fermentation, yeast consumes sugars and produces carbon dioxide and alcohol. This creates flavor compounds and begins building the dough\'s structure. The longer and cooler the fermentation, the more complex the flavor development will be.',
+        description: 'Transfer dough to an oiled container, cover, and let rise at room temperature for 1-2 hours until doubled.',
+        didacticInfo: 'During this stage, yeast metabolizes sugars to produce gas and alcohol, enhancing flavor and structure. Cooler and longer fermentation (e.g., overnight in the fridge) yields even better flavor.',
         image: '/lovable-uploads/bulk-ferment.jpg',
-        tip: 'For best flavor development, consider refrigerating the dough for a slow fermentation after the initial rise.'
+        tip: 'Consider retarding the dough in the fridge overnight after initial rise for improved flavor and texture.'
       },
       {
         title: 'Divide and Shape',
-        description: 'Gently turn the dough onto a lightly floured surface. Divide into equal portions (about 250g each) and shape into tight balls.',
-        didacticInfo: 'Dividing and pre-shaping helps organize the gluten structure and creates surface tension, which helps the dough maintain its shape. The tight ball shape will result in a more uniform rise and circular pizza shape.',
+        description: 'Turn dough onto a floured surface. Divide into equal portions and shape into tight balls.',
+        didacticInfo: 'Creating tight dough balls promotes even fermentation and maintains a uniform shape when stretching later.',
         image: '/lovable-uploads/dividing-dough.jpg',
-        tip: 'Use a bench scraper to divide the dough and avoid degassing it too much during handling.'
+        tip: 'Handle gently to retain air bubbles. Use a scraper to help lift and divide dough cleanly.'
       },
       {
         title: 'Final Proof',
-        description: 'Place dough balls in a proofing box or on a floured tray, cover with plastic wrap or a damp cloth, and let proof for 4-6 hours at room temperature or 24-48 hours in the refrigerator.',
-        didacticInfo: 'The final proofing stage allows the yeast to create more gas bubbles and develop deeper flavors. Cold fermentation slows down yeast activity but enhances enzymatic activity, resulting in a more flavorful dough with improved digestibility.',
+        description: 'Place dough balls on a tray or in a proofing box. Cover and let rest for 4-6 hours at room temp or up to 48 hours in the fridge.',
+        didacticInfo: 'Proofing allows dough to relax and ferment further. Cold proofing promotes superior flavor and digestibility.',
         image: '/lovable-uploads/dough-proofing.jpg',
-        tip: 'If proofing in the refrigerator, bring the dough to room temperature for 1-2 hours before shaping.'
+        tip: 'If cold-proofing, bring dough to room temp at least 1 hour before baking.'
       },
       {
         title: 'Prepare for Baking',
-        description: 'Preheat your oven to the maximum temperature (ideally 500°F/260°C or higher) with a pizza stone or steel for at least 45-60 minutes.',
-        didacticInfo: 'The high temperature mimics a traditional wood-fired oven, creating rapid rise (oven spring) and proper charring. A preheated stone or steel conducts intense heat directly to the dough, creating a crisp bottom and airy edge.',
+        description: 'Preheat your oven to 500°F (260°C) or higher with a stone or steel for 45-60 minutes.',
+        didacticInfo: 'A high heat environment simulates a wood-fired oven, critical for achieving fast oven spring and proper crust charring.',
         image: '/lovable-uploads/preheating-oven.jpg',
-        tip: 'Place your pizza stone or steel in the upper third of the oven for optimal top and bottom heating.'
+        tip: 'Position your baking surface in the top third of the oven for even heat distribution.'
       },
       {
         title: 'Shape the Pizza',
-        description: 'On a floured surface, gently press the dough ball from the center outward, creating a flat disk with a slightly thicker edge. Stretch the dough to about 10-12 inches in diameter.',
-        didacticInfo: 'Traditional Neapolitan pizza dough is stretched entirely by hand, never with a rolling pin which would crush the air bubbles. The characteristic cornicione (rim) forms naturally when the edges remain less stretched than the center.',
+        description: 'On a floured surface, press dough from center outward, forming a disk with a thicker rim. Stretch to 10-12 inches.',
+        didacticInfo: 'Hand-stretching preserves the internal structure and air bubbles, essential for the light and airy crust of Neapolitan pizza.',
         image: '/lovable-uploads/shaping-pizza.jpg',
-        tip: 'Avoid using a rolling pin, which will remove the gas bubbles that create a light, airy crust.'
+        tip: 'Never use a rolling pin. It removes trapped gas needed for a puffy rim (cornicione).' 
       },
       {
         title: 'Top and Bake',
-        description: 'Transfer the shaped dough to a floured pizza peel. Add a thin layer of sauce and toppings. Slide onto the preheated stone/steel and bake for 5-7 minutes until the crust is charred in spots.',
-        didacticInfo: 'Authentic Neapolitan pizza uses minimal toppings: San Marzano tomatoes, fresh mozzarella, basil, and olive oil. The quick baking time creates the signature leopard-spotted char while keeping the center slightly soft - a hallmark of true Neapolitan style.',
+        description: 'Add sauce and toppings lightly. Bake on the preheated stone/steel for 5-7 minutes until charred spots appear.',
+        didacticInfo: 'Authentic toppings include San Marzano tomatoes, fresh mozzarella, basil, and olive oil. Quick baking ensures a soft center with a crisp crust.',
         image: '/lovable-uploads/pizza-baking.jpg',
-        tip: 'Work quickly when transferring the topped pizza to avoid it sticking to the peel. A slight shake of the peel will tell you if it\'s sticking.'
+        tip: 'Slide pizza quickly onto the stone to prevent sticking. Use a dusting of semolina on the peel for easy transfer.'
       },
       {
         title: 'Rest and Serve',
-        description: 'Remove pizza from the oven, drizzle with olive oil, add fresh basil, and let rest for 1-2 minutes before slicing and serving.',
-        didacticInfo: 'The brief resting period allows the molten cheese to set slightly and the crust structure to stabilize. Adding fresh herbs after baking preserves their flavor and aroma that would otherwise be lost in the intense heat.',
+        description: 'Let pizza rest 1-2 minutes after baking. Add fresh basil and drizzle with olive oil before serving.',
+        didacticInfo: 'Resting sets the cheese and crust. Herbs added post-bake retain aroma and taste better.',
         image: '/lovable-uploads/finished-pizza.jpg',
-        tip: 'For true Neapolitan tradition, pizza is often served uncut - each diner uses a knife and fork to cut their own portions.'
+        tip: 'Serve uncut for tradition—allow diners to slice their own.'
       }
     ];
   } else if (recipeName.includes('New York')) {
@@ -107,7 +107,7 @@ export const getPizzaSteps = (recipeName: string): BakingStep[] => {
       },
       {
         title: 'Divide and Shape',
-        description: 'Divide the dough into 350g portions for large NY slices. Shape into balls and place in containers.',
+        description: 'Divide the dough into portions for large NY slices. Shape into balls and place in containers.',
         didacticInfo: 'The larger dough portions are characteristic of New York pizza, which typically has a 16-18 inch diameter, allowing for the classic wide slice that folds without breaking.',
         image: '/lovable-uploads/ny-dividing.jpg',
         tip: 'Oil the containers to prevent sticking during the final proof.'
@@ -149,6 +149,5 @@ export const getPizzaSteps = (recipeName: string): BakingStep[] => {
       }
     ];
   }
-  // Return an empty array if the recipe name doesn't match
   return [];
 };
