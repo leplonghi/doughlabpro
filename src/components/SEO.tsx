@@ -1,6 +1,5 @@
 
-import React from 'react';
-import { Helmet } from 'react-helmet';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface SEOProps {
@@ -40,43 +39,110 @@ const SEO: React.FC<SEOProps> = ({
   const baseUrl = 'https://doughlabpro.lovable.app';
   const seoUrl = pathname ? `${baseUrl}${pathname}` : baseUrl;
   const currentLanguage = i18n.language;
+
+  useEffect(() => {
+    // Set document title
+    document.title = seoTitle;
+    
+    // Update or create meta tags
+    updateMetaTag('description', seoDescription);
+    updateMetaTag('keywords', seoKeywords);
+    
+    // Update canonical link
+    updateLink('canonical', seoUrl);
+    
+    // Set language attribute on HTML tag
+    document.documentElement.setAttribute('lang', currentLanguage);
+    
+    // Set Open Graph meta tags
+    updateMetaTag('og:url', seoUrl, 'property');
+    updateMetaTag('og:title', seoTitle, 'property');
+    updateMetaTag('og:description', seoDescription, 'property');
+    updateMetaTag('og:type', ogType, 'property');
+    updateMetaTag('og:image', `${baseUrl}${ogImage}`, 'property');
+    updateMetaTag('og:site_name', 'DoughLab Pro', 'property');
+    
+    // Set Twitter meta tags
+    updateMetaTag('twitter:card', 'summary_large_image', 'name');
+    updateMetaTag('twitter:title', seoTitle, 'name');
+    updateMetaTag('twitter:description', seoDescription, 'name');
+    updateMetaTag('twitter:image', `${baseUrl}${ogImage}`, 'name');
+    
+    // Set alternate language links
+    if (locales) {
+      // Remove any existing alternate links first
+      removeExistingAlternateLinks();
+      
+      // Add new alternate language links
+      Object.entries(locales).forEach(([lang, url]) => {
+        const link = document.createElement('link');
+        link.rel = 'alternate';
+        link.hrefLang = lang;
+        link.href = `${baseUrl}${url}`;
+        document.head.appendChild(link);
+      });
+    }
+    
+    return () => {
+      // Cleanup function to remove alternate links when component unmounts
+      if (locales) {
+        removeExistingAlternateLinks();
+      }
+    };
+  }, [
+    seoTitle,
+    seoDescription,
+    seoKeywords,
+    seoUrl,
+    currentLanguage,
+    ogType,
+    ogImage,
+    baseUrl,
+    locales
+  ]);
   
-  return (
-    <Helmet>
-      {/* Basic meta tags */}
-      <html lang={currentLanguage} />
-      <title>{seoTitle}</title>
-      <meta name="description" content={seoDescription} />
-      <meta name="keywords" content={seoKeywords} />
-      <link rel="canonical" href={seoUrl} />
-      
-      {/* Open Graph meta tags */}
-      <meta property="og:url" content={seoUrl} />
-      <meta property="og:title" content={seoTitle} />
-      <meta property="og:description" content={seoDescription} />
-      <meta property="og:type" content={ogType} />
-      <meta property="og:image" content={`${baseUrl}${ogImage}`} />
-      <meta property="og:site_name" content="DoughLab Pro" />
-      
-      {/* Twitter meta tags */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={seoTitle} />
-      <meta name="twitter:description" content={seoDescription} />
-      <meta name="twitter:image" content={`${baseUrl}${ogImage}`} />
-      
-      {/* Alternate language versions */}
-      {locales && Object.entries(locales).map(([lang, url]) => (
-        <link 
-          rel="alternate" 
-          hrefLang={lang} 
-          href={`${baseUrl}${url}`} 
-          key={lang} 
-        />
-      ))}
-      
-      {children}
-    </Helmet>
-  );
+  // Helper function to update meta tags
+  const updateMetaTag = (name: string, content: string, attributeName = 'name') => {
+    let metaTag = document.querySelector(`meta[${attributeName}="${name}"]`);
+    
+    if (metaTag) {
+      // Update existing tag
+      metaTag.setAttribute('content', content);
+    } else {
+      // Create new tag
+      metaTag = document.createElement('meta');
+      metaTag.setAttribute(attributeName, name);
+      metaTag.setAttribute('content', content);
+      document.head.appendChild(metaTag);
+    }
+  };
+  
+  // Helper function to update link tags
+  const updateLink = (rel: string, href: string) => {
+    let linkTag = document.querySelector(`link[rel="${rel}"]`);
+    
+    if (linkTag) {
+      // Update existing link
+      linkTag.setAttribute('href', href);
+    } else {
+      // Create new link
+      linkTag = document.createElement('link');
+      linkTag.setAttribute('rel', rel);
+      linkTag.setAttribute('href', href);
+      document.head.appendChild(linkTag);
+    }
+  };
+  
+  // Helper function to remove existing alternate links
+  const removeExistingAlternateLinks = () => {
+    const alternateLinks = document.querySelectorAll('link[rel="alternate"]');
+    alternateLinks.forEach(link => {
+      document.head.removeChild(link);
+    });
+  };
+  
+  // This component doesn't render anything visible
+  return <>{children}</>;
 };
 
 export default SEO;

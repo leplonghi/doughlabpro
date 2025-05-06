@@ -1,9 +1,8 @@
 
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { useAuth } from '@/context/AuthContext';
-import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AuthForm } from '@/components/auth/AuthForm';
 import PageSEO from '@/components/layout/PageSEO';

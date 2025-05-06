@@ -3,7 +3,6 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
-import { splitVendorChunkPlugin } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -15,7 +14,6 @@ export default defineConfig(({ mode }) => ({
     react(),
     mode === 'development' &&
     componentTagger(),
-    splitVendorChunkPlugin(),
   ].filter(Boolean),
   resolve: {
     alias: {
@@ -31,15 +29,18 @@ export default defineConfig(({ mode }) => ({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'ui-components': [
-            '@radix-ui/react-label',
-            '@radix-ui/react-radio-group',
-            '@radix-ui/react-separator',
-            '@radix-ui/react-tooltip',
-            '@radix-ui/react-slot',
-          ],
+        manualChunks: (id) => {
+          // Create different chunks for different types of dependencies
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'react-vendor';
+            }
+            if (id.includes('@radix-ui')) {
+              return 'ui-components';
+            }
+            // Default chunk for other node modules
+            return 'vendor';
+          }
         }
       }
     }

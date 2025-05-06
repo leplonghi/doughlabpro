@@ -1,14 +1,73 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import PageLayout from '@/components/layout/PageLayout';
 import { doughTypes, recipePresets } from '@/data/learnData';
 import LearnContent from '@/components/learn/LearnContent';
 import AdBanner from '@/components/monetization/AdBanner';
 import { BookOpen, Info } from 'lucide-react';
+import PageSEO from '@/components/layout/PageSEO';
+import { useTranslation } from 'react-i18next';
 
 const Learn: React.FC = () => {
+  const { t } = useTranslation();
+  
+  // Add structured data for recipes
+  useEffect(() => {
+    const recipeStructuredData = {
+      '@context': 'https://schema.org/',
+      '@type': 'HowTo',
+      'name': 'Learn to Make Perfect Dough',
+      'description': 'Master the art of dough making with our comprehensive visual guides',
+      'step': [
+        {
+          '@type': 'HowToStep',
+          'name': 'Select a Dough Type',
+          'text': 'Choose from pizza, bread, focaccia, or sourdough dough types.'
+        },
+        {
+          '@type': 'HowToStep',
+          'name': 'Pick a Recipe',
+          'text': 'Select a specific recipe with the hydration level and difficulty that suits your needs.'
+        },
+        {
+          '@type': 'HowToStep',
+          'name': 'Follow the Step-by-Step Guide',
+          'text': 'Follow our detailed instructions with photos, tips, and educational content.'
+        }
+      ]
+    };
+
+    // Add structured data to page
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(recipeStructuredData);
+    script.id = 'recipe-structured-data';
+    
+    // Remove any existing structured data first
+    const existingScript = document.getElementById('recipe-structured-data');
+    if (existingScript) {
+      document.head.removeChild(existingScript);
+    }
+    
+    document.head.appendChild(script);
+    
+    // Clean up when component unmounts
+    return () => {
+      const script = document.getElementById('recipe-structured-data');
+      if (script) {
+        document.head.removeChild(script);
+      }
+    };
+  }, []);
+
   return (
     <PageLayout>
+      <PageSEO
+        title={t('seo.learnTitle', 'Learn to Bake')}
+        description={t('seo.learnDescription', 'Step-by-step guides to master the art of making pizza, bread, and other dough-based recipes.')}
+        ogType="article"
+      />
+      
       <div className="container mx-auto px-4 py-8">
         <AdBanner />
         
