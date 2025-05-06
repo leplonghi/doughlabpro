@@ -429,3 +429,4 @@ const getNewYorkSteps = (lang: string): BakingStep[] => {
           didacticInfo: 'The cold fermentation helps develop the flavor complexity that New York pizza is known for, and makes the dough easier to handle and stretch without tearing.',
           image: '/lovable-uploads/ny-proofing.jpg',
           tip: 'If refrigerated, allow dough to warm up for 1-2 hours before stretching.'
+        },
