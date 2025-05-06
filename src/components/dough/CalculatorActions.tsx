@@ -2,6 +2,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Calculator, RotateCcw } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface CalculatorActionsProps {
   onCalculate: () => void;
@@ -9,6 +10,8 @@ interface CalculatorActionsProps {
 }
 
 const CalculatorActions: React.FC<CalculatorActionsProps> = ({ onCalculate, onReset }) => {
+  const { t } = useTranslation();
+  
   return (
     <div className="flex justify-between gap-3 mt-6">
       <Button 
@@ -17,7 +20,7 @@ const CalculatorActions: React.FC<CalculatorActionsProps> = ({ onCalculate, onRe
         onClick={onCalculate}
       >
         <Calculator className="mr-2 h-5 w-5" />
-        Calculate Recipe
+        {t('calculator.actions.calculate')}
       </Button>
       <Button 
         variant="outline" 
@@ -25,7 +28,7 @@ const CalculatorActions: React.FC<CalculatorActionsProps> = ({ onCalculate, onRe
         onClick={onReset}
       >
         <RotateCcw className="mr-2 h-5 w-5" />
-        Reset
+        {t('calculator.actions.reset')}
       </Button>
     </div>
   );

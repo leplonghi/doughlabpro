@@ -9,6 +9,7 @@ import NoStepsAvailable from './NoStepsAvailable';
 import { RecipeDetailProps } from './types';
 import { Button } from '@/components/ui/button';
 import { Printer } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const RecipeDetail: React.FC<RecipeDetailProps> = ({ 
   selectedType, 
@@ -18,9 +19,10 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({
   themeColor = 'green'
 }) => {
   const [quantity, setQuantity] = useState<number>(numberOfPies);
+  const { t, i18n } = useTranslation();
   
-  // Get steps based on recipe type
-  const steps = getSteps(selectedType, selectedRecipe);
+  // Get steps based on recipe type, passing current language
+  const steps = getSteps(selectedType, selectedRecipe, i18n.language);
   
   // Get ingredients for the current recipe
   const ingredients = getIngredients(selectedType, selectedRecipe, quantity);
@@ -55,7 +57,7 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({
           className="print:hidden"
         >
           <Printer className="mr-2 h-4 w-4" />
-          Print Recipe
+          {t('common.printRecipe')}
         </Button>
       </div>
       

@@ -1,53 +1,59 @@
-
 import { BakingStep } from '../types';
 import { getPizzaSteps } from './pizza-steps';
 import { getBreadSteps } from './bread-steps';
 import { getFocacciaSteps } from './focaccia-steps';
 import { getSourdoughSteps } from './sourdough-steps';
 
-export const getSteps = (selectedType: string | null, selectedRecipe: string | null): BakingStep[] => {
-  if (!selectedType || !selectedRecipe) return [];
+export const getSteps = (type: string | null, recipe: string | null, language: string = 'en'): BakingStep[] => {
+  if (!type || !recipe) return [];
   
-  if (selectedType === 'pizza') {
-    return getPizzaSteps(selectedRecipe);
-  } else if (selectedType === 'bread') {
-    return getBreadSteps(selectedRecipe);
-  } else if (selectedType === 'focaccia') {
-    return getFocacciaSteps(selectedRecipe);
-  } else if (selectedType === 'sourdough') {
-    return getSourdoughSteps(selectedRecipe);
+  // Get steps based on dough type
+  switch (type) {
+    case 'pizza':
+      return getPizzaSteps(recipe, language);
+    case 'bread':
+      return getBreadSteps(recipe, language);
+    case 'focaccia':
+      return getFocacciaSteps(recipe, language);
+    case 'sourdough':
+      return getSourdoughSteps(recipe, language);
+    default:
+      return [];
   }
-  
-  // For other types, return placeholder steps
-  return [
-    { title: "Preparation", description: "Prepare your workspace and ingredients." },
-    { title: "Mix the dough", description: "Combine all ingredients and mix until incorporated." },
-    { title: "Knead", description: "Develop the gluten structure through kneading.", timer: 10 },
-    { title: "First rise", description: "Allow the dough to ferment and rise.", timer: 60 },
-    { title: "Shape", description: "Shape the dough according to your recipe." },
-    { title: "Second rise", description: "Let the shaped dough proof.", timer: 45 },
-    { title: "Bake", description: "Bake until golden brown and delicious.", timer: getDefaultTimerDuration(selectedType) },
-  ];
 };
 
-export const getDefaultTimerDuration = (selectedType: string | null): number => {
-  if (selectedType === 'bread' || selectedType === 'sourdough') {
-    return 45; // 45 minutes for bread
-  } else if (selectedType === 'pizza') {
-    return 12; // 12 minutes for pizza
-  } else if (selectedType === 'focaccia') {
-    return 20; // 20 minutes for focaccia
+// The rest of the existing helper functions...
+export const getItemLabel = (type: string | null, count: number): string => {
+  if (!type) return count === 1 ? 'item' : 'items';
+  
+  switch (type) {
+    case 'pizza':
+      return count === 1 ? 'pizza' : 'pizzas';
+    case 'bread':
+      return count === 1 ? 'loaf' : 'loaves';
+    case 'focaccia':
+      return count === 1 ? 'focaccia' : 'focaccias';
+    case 'sourdough':
+      return count === 1 ? 'loaf' : 'loaves';
+    default:
+      return count === 1 ? 'item' : 'items';
   }
-  return 30; // default timer duration
 };
 
-export const getItemLabel = (selectedType: string | null, quantity: number): string => {
-  if (!selectedType) return quantity === 1 ? 'item' : 'items';
+// Get default timer duration based on recipe type
+export const getDefaultTimerDuration = (type: string | null): number => {
+  if (!type) return 60 * 60; // 1 hour default
   
-  if (selectedType === 'pizza') return quantity === 1 ? 'pizza' : 'pizzas';
-  if (selectedType === 'bread') return quantity === 1 ? 'loaf' : 'loaves';
-  if (selectedType === 'focaccia') return quantity === 1 ? 'focaccia' : 'focaccias';
-  if (selectedType === 'sourdough') return quantity === 1 ? 'loaf' : 'loaves';
-  
-  return quantity === 1 ? 'item' : 'items';
+  switch (type) {
+    case 'pizza':
+      return 60 * 60; // 1 hour for pizza
+    case 'bread':
+      return 2 * 60 * 60; // 2 hours for bread
+    case 'focaccia':
+      return 90 * 60; // 90 minutes for focaccia
+    case 'sourdough':
+      return 4 * 60 * 60; // 4 hours for sourdough
+    default:
+      return 60 * 60; // 1 hour default
+  }
 };

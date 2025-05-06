@@ -7,6 +7,7 @@ import IngredientsCard from './IngredientsCard';
 import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { useTranslation } from 'react-i18next';
 
 interface StepGuideProps {
   steps: BakingStep[];
@@ -25,6 +26,8 @@ const StepGuide: React.FC<StepGuideProps> = ({
   quantity,
   themeColor = 'green'
 }) => {
+  const { t } = useTranslation();
+  
   // Function to handle going back to dough types
   const handleBackToDoughTypes = () => {
     window.location.href = '/learn';
@@ -58,11 +61,11 @@ const StepGuide: React.FC<StepGuideProps> = ({
   return (
     <div className="space-y-8">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-2xl font-bold">Step-by-Step Guide</h2>
+        <h2 className="text-2xl font-bold">{t('recipe.stepByStep')}</h2>
         <div className="flex gap-2">
           <Button variant="outline" size="sm" onClick={printSteps}>
             <Printer className="mr-1 h-4 w-4" />
-            Print Steps
+            {t('common.printRecipe')}
           </Button>
         </div>
       </div>
@@ -79,7 +82,7 @@ const StepGuide: React.FC<StepGuideProps> = ({
       <div className="bg-white p-4 rounded-lg border shadow-sm print:hidden">
         <div className="flex items-center mb-3">
           <List className="h-5 w-5 mr-2 text-gray-600" />
-          <h3 className="text-lg font-medium">Quick Navigation</h3>
+          <h3 className="text-lg font-medium">{t('recipe.quickNavigation')}</h3>
         </div>
         <ScrollArea className="h-auto max-h-48">
           <ul className="space-y-1">
@@ -136,7 +139,7 @@ const StepGuide: React.FC<StepGuideProps> = ({
               <div className="flex items-start">
                 <BookOpen className="h-5 w-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" />
                 <div>
-                  <h4 className="font-medium text-blue-800 mb-2">Learning Notes</h4>
+                  <h4 className="font-medium text-blue-800 mb-2">{t('recipe.learningNotes')}</h4>
                   {step.didacticInfo ? (
                     <p className="text-blue-700">{step.didacticInfo}</p>
                   ) : (
@@ -173,7 +176,7 @@ const StepGuide: React.FC<StepGuideProps> = ({
           className="flex items-center"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to Recipes
+          {t('recipe.backToRecipes')}
         </Button>
         
         <div className="flex space-x-4">
@@ -183,10 +186,10 @@ const StepGuide: React.FC<StepGuideProps> = ({
             className="flex items-center"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Dough Types
+            {t('recipe.backToDoughTypes')}
           </Button>
           <Button asChild className="bg-red-500 hover:bg-red-600">
-            <a href="/calculator">Switch to Pro Mode</a>
+            <a href="/calculator">{t('recipe.switchToPro')}</a>
           </Button>
         </div>
       </div>

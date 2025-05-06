@@ -2,6 +2,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { PizzaStyle } from '@/components/PizzaStyleSelect';
+import { useTranslation } from 'react-i18next';
 
 interface PizzaStyleSelectorProps {
   pizzaStyle: PizzaStyle;
@@ -14,6 +15,8 @@ const PizzaStyleSelector: React.FC<PizzaStyleSelectorProps> = ({
   setPizzaStyle,
   onProceed
 }) => {
+  const { t } = useTranslation();
+  
   return (
     <div className="grid grid-cols-2 gap-3">
       <Button 
@@ -24,7 +27,7 @@ const PizzaStyleSelector: React.FC<PizzaStyleSelectorProps> = ({
           onProceed();
         }}
       >
-        Neapolitan
+        {t('pizzaStyles.neapolitan')}
       </Button>
       <Button 
         variant={pizzaStyle === 'newyork' ? 'default' : 'outline'} 
@@ -34,7 +37,7 @@ const PizzaStyleSelector: React.FC<PizzaStyleSelectorProps> = ({
           onProceed();
         }}
       >
-        New York
+        {t('pizzaStyles.newYork')}
       </Button>
     </div>
   );
