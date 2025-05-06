@@ -20,7 +20,7 @@ const QuantitySelector: React.FC<QuantitySelectorProps> = ({
   return (
     <div className="mb-8 p-6 bg-amber-50 rounded-lg border border-amber-200">
       <h4 className="text-lg font-medium mb-3 flex items-center">
-        How many {itemLabel} do you want to make?
+        How many {itemLabel} do you want to make today?
       </h4>
       <p className="text-muted-foreground mb-4">
         This will calculate the right amount of ingredients for your {itemLabel}.
